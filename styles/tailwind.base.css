@@ -3,3 +3,7 @@
 html {
   font-size: 10px;
 }
+
+.graphcms-image-outer-wrapper {
+  position: unset !important;
+}
