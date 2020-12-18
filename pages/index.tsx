@@ -61,11 +61,13 @@ const Index = ({ homes }) => {
             <div
               style={{
                 gridArea: 'body',
-                minHeight: 'calc(100vh - 90px)',
+                height: 'calc(100vh - 90px)',
               }}
               css={xw`relative`}
             >
-              <div css={xw`absolute pointer-events-none h-full w-full`}>
+              <div
+                css={xw`absolute pointer-events-none h-full w-full overflow-hidden`}
+              >
                 <GraphImg
                   image={{ handle, width, height }}
                   withWebp={true}
@@ -74,11 +76,7 @@ const Index = ({ homes }) => {
                 />
               </div>
 
-              <div css={xw`relative`}>
-                <h1 css={xw`text-blue-900 text-9xl`}>
-                  The window size {windowWidthSize}x{windowHeightSize} pixels
-                </h1>
-              </div>
+              <main css={xw`relative`}></main>
             </div>
           </div>
         )
