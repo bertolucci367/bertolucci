@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import xw from 'xwind'
-import Image from 'next/image'
 import { GraphQLClient } from 'graphql-request'
 import GraphImg from 'graphcms-image'
 import { css } from '@emotion/react'
@@ -44,20 +43,6 @@ const Index = ({ homes }) => {
                 'body';
             `}
           >
-            <div
-              css={css`
-                grid-area: header;
-              `}
-            >
-              <Image
-                src="/logo.svg"
-                layout="fixed"
-                height="19"
-                width="90"
-                alt="bertolucci"
-              />
-            </div>
-
             <div
               style={{
                 gridArea: 'body',
