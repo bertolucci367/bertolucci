@@ -10,21 +10,13 @@ const menu = [
   { name: 'Contato', url: '/contact' },
 ]
 
-const style = {
-  gridArea: 'm',
-}
-
 const Menu = () => (
-  <nav css={xw`text-18px`} style={style}>
-    <ul>
+  <nav css={xw`text-18px`}>
+    <ul css={xw`lg:flex justify-around`}>
       {menu.map((m, i) => (
         <li key={i}>
           <Link href={m.url}>
-            <a
-              css={xw`block mt-4 lg:inline-block lg:mt-0 hover:text-black mr-4`}
-            >
-              {m.name}
-            </a>
+            <a css={xw`block py-4 font-bold px-4`}>{m.name}</a>
           </Link>
         </li>
       ))}

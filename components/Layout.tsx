@@ -21,21 +21,24 @@ const Layout = ({ children }) => {
         grid-template-columns: 1px repeat(2, 1fr) 1px;
         grid-gap: 15px;
         grid-template-areas:
-          '. l mb .'
+          '. l b .'
           '. c c .';
 
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
           grid-template-rows: 90px 1fr;
-          grid-template-columns: repeat(12, 1fr);
+          grid-template-columns: 210px auto 210px;
           grid-gap: 15px;
           grid-template-areas:
-            'l . tc'
+            'l m tc'
             '. c .'
             '. c .';
         }
       `}
     >
-      <div css={xw`flex items-center`} style={{ gridArea: 'l' }}>
+      <div
+        css={xw`flex items-center lg:justify-center`}
+        style={{ gridArea: 'l' }}
+      >
         <Logo />
       </div>
       <MenuButton>
@@ -51,14 +54,21 @@ const Layout = ({ children }) => {
         </button>
       </MenuButton>
       <div
-        css={xw`fixed top-0 bottom-0 left-0 right-0
-        p-8 w-11/12 h-5/6 m-auto
-        bg-white border border-solid border-black`}
-        style={{ display: isOpenMenu ? 'block' : 'none' }}
+        css={[
+          `display: ${isOpenMenu ? 'flex' : 'none'}`,
+          xw`fixed top-0 bottom-0 left-0 right-0 lg:relative lg:flex
+        justify-between items-center lg:justify-center
+        p-8 w-11/12 h-3/4 m-auto
+        bg-white
+        border border-solid border-black lg:border-0`,
+        ]}
       >
         <Menu />
       </div>
-      <div css={xw`hidden text-13px`} style={{ gridArea: 'tc' }}>
+      <div
+        css={xw`hidden text-13px lg:flex flex-col justify-center items-end pr-4`}
+        style={{ gridArea: 'tc' }}
+      >
         {contact.map((value, i) => (
           <p key={i}>{value}</p>
         ))}
@@ -71,7 +81,7 @@ const Layout = ({ children }) => {
 const MenuButton = ({ children }) => {
   return (
     <div
-      style={{ gridArea: 'mb' }}
+      style={{ gridArea: 'b' }}
       css={xw`flex items-center justify-end lg:hidden`}
     >
       {children}
