@@ -29,7 +29,7 @@ const Products = () => {
 
   return (
     <Layout>
-      <h1 css={xw`h-0`}>Produtos</h1>
+      <h1 css={xw`h-0 opacity-0`}>Produtos</h1>
       <ul
         css={[
           `grid-template-columns: repeat(auto-fill, minmax(225px, 1fr))`,

@@ -3,6 +3,7 @@ import xw from 'xwind'
 import { GraphQLClient } from 'graphql-request'
 import GraphImg from 'graphcms-image'
 import { css } from '@emotion/react'
+import Layout from '../components/Layout'
 
 const Index = ({ homes }) => {
   const [windowWidthSize, setWindowWidthSize] = useState(0)
@@ -25,7 +26,7 @@ const Index = ({ homes }) => {
     windowWidthSize > windowHeightSize ? photoCover : photoCoverMobile
 
   return (
-    <>
+    <Layout>
       {homes.map(({ id, photoCover, photoCoverMobile }) => {
         const { handle, width, height } = getImageByResolution({
           photoCover,
@@ -33,22 +34,16 @@ const Index = ({ homes }) => {
         })
 
         return (
-          <div
-            key={id}
-            css={css`
-              display: grid;
-              grid-template-rows: 90px 1fr;
-              grid-template-areas:
-                'header'
-                'body';
-            `}
-          >
+          <div key={id} css={xw`row-start-2 col-start-1 col-end-4`}>
             <div
-              style={{
-                gridArea: 'body',
-                height: 'calc(100vh - 90px)',
-              }}
-              css={xw`relative`}
+              css={[
+                xw`relative`,
+                {
+                  height: `calc(100vh - ${
+                    windowWidthSize >= windowHeightSize ? 90 : 70
+                  }px)`,
+                },
+              ]}
             >
               <div
                 css={xw`absolute pointer-events-none h-full w-full overflow-hidden`}
@@ -66,7 +61,7 @@ const Index = ({ homes }) => {
           </div>
         )
       })}
-    </>
+    </Layout>
   )
 }
 

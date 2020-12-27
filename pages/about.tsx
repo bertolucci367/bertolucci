@@ -2,11 +2,9 @@ import Layout from '../components/Layout'
 
 const About = () => {
   return (
-    <>
-      <Layout>
-        <h1>About</h1>
-      </Layout>
-    </>
+    <Layout>
+      <h1>About</h1>
+    </Layout>
   )
 }
 
