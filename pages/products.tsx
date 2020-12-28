@@ -21,6 +21,64 @@ const Card = styled.li({
   height: '270px',
 })
 
+const SubMenu = styled.ul([
+  xw`lg:opacity-0 w-full bg-red-100 absolute left-0 flex lg:justify-center py-4`,
+  {
+    transition: 'opacity 350ms ease',
+  },
+])
+
+const MenuItem = styled.li({
+  [`:hover ${SubMenu}`]: {
+    opacity: 1,
+    cursor: 'pointer',
+    zIndex: 50,
+  },
+})
+
+const typologies = ['abajur', 'arandela', 'coluna', 'pendente', 'plafom']
+const materials = [
+  'acrílico',
+  'cerâmica',
+  'cortiça',
+  'fibras naturais',
+  'madeira',
+  'metal',
+  'tecido',
+  'vidro',
+]
+
+const subMenu = (
+  <nav css={xw`w-full`}>
+    <ul css={xw`flex justify-evenly`}>
+      <MenuItem>
+        tipologia+
+        <SubMenu>
+          {typologies.map((t) => (
+            <li key={t} css={xw`px-4 py-2 w-1/5`}>
+              {t}
+            </li>
+          ))}
+        </SubMenu>
+      </MenuItem>
+      <MenuItem>
+        materiais+
+        <SubMenu>
+          {materials.map((v) => (
+            <li key={v} css={xw`px-4 py-2`}>
+              {v}
+            </li>
+          ))}
+        </SubMenu>
+      </MenuItem>
+      <li>designers+</li>
+      <li>linhas+</li>
+      <li>busca</li>
+      <li>baixar catalago</li>
+    </ul>
+  </nav>
+)
+
 const Products = () => {
   const products = []
 
@@ -28,32 +86,9 @@ const Products = () => {
     products.push({ id: i, name: `Product ${i}`, design: `oficina bertolucci` })
   }
 
-  const subMenu = (
-    <nav css={xw`w-full`}>
-      <ul css={xw`flex justify-around`}>
-        <li>
-          tipologia+
-          <ul css={xw`flex justify-around w-full`}>
-            <li>abajur</li>
-            <li>arandela</li>
-            <li>coluna</li>
-          </ul>
-        </li>
-        <li>materiais+</li>
-        <li>designers+</li>
-        <li>linhas+</li>
-        <li>busca</li>
-        <li>baixar catalago</li>
-      </ul>
-    </nav>
-  )
-
   return (
     <Layout subMenu={subMenu}>
       <h1 css={xw`h-0 opacity-0`}>Produtos</h1>
-      {/* <Portal id="subMenu">
-        <p>Thinking with portals</p>
-      </Portal> */}
       <ul
         css={[
           `grid-template-columns: repeat(auto-fill, minmax(225px, 1fr))`,

@@ -1,5 +1,5 @@
 import xw from 'xwind'
-import Link from 'next/link'
+import Link from './Link'
 
 const menu = [
   { name: 'Produtos', url: '/products' },
@@ -11,12 +11,12 @@ const menu = [
 ]
 
 const Menu = () => (
-  <nav css={xw`text-18px`}>
+  <nav css={xw`text-18px leading-none`}>
     <ul css={xw`lg:flex justify-around`}>
       {menu.map((m, i) => (
         <li key={i}>
           <Link href={m.url}>
-            <a css={xw`block font-bold px-4 py-3 hover:cursor-pointer`}>
+            <a css={xw`block font-bold mx-4 pb-1 my-3 hover:cursor-pointer`}>
               {m.name}
             </a>
           </Link>

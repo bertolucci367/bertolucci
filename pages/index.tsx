@@ -46,7 +46,7 @@ const Index = ({ homes }) => {
               ]}
             >
               <div
-                css={xw`absolute pointer-events-none h-full w-full overflow-hidden bg-red-300`}
+                css={xw`absolute pointer-events-none h-full w-full overflow-hidden`}
               >
                 <GraphImg
                   image={{ handle, width, height }}
