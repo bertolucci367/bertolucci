@@ -1,9 +1,10 @@
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import Layout from '../components/Layout'
+import Portal from '../components/Portal'
 
 const Hover = styled.div([
-  xw`opacity-0`,
+  xw`lg:opacity-0`,
   {
     transition: 'opacity 350ms ease',
   },
@@ -27,9 +28,32 @@ const Products = () => {
     products.push({ id: i, name: `Product ${i}`, design: `oficina bertolucci` })
   }
 
+  const subMenu = (
+    <nav css={xw`w-full`}>
+      <ul css={xw`flex justify-around`}>
+        <li>
+          tipologia+
+          <ul css={xw`flex justify-around w-full`}>
+            <li>abajur</li>
+            <li>arandela</li>
+            <li>coluna</li>
+          </ul>
+        </li>
+        <li>materiais+</li>
+        <li>designers+</li>
+        <li>linhas+</li>
+        <li>busca</li>
+        <li>baixar catalago</li>
+      </ul>
+    </nav>
+  )
+
   return (
-    <Layout>
+    <Layout subMenu={subMenu}>
       <h1 css={xw`h-0 opacity-0`}>Produtos</h1>
+      {/* <Portal id="subMenu">
+        <p>Thinking with portals</p>
+      </Portal> */}
       <ul
         css={[
           `grid-template-columns: repeat(auto-fill, minmax(225px, 1fr))`,

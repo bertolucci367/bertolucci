@@ -16,7 +16,7 @@ const Menu = () => (
       {menu.map((m, i) => (
         <li key={i}>
           <Link href={m.url}>
-            <a css={xw`block py-4 font-bold px-4 hover:cursor-pointer`}>
+            <a css={xw`block font-bold px-4 py-3 hover:cursor-pointer`}>
               {m.name}
             </a>
           </Link>

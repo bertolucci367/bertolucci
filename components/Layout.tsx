@@ -6,7 +6,7 @@ import Menu from '../components/Menu'
 import MenuButton from '../components/MenuButton'
 import { Logo, LogoFooter } from '../components/Logo'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, subMenu }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
 
   const handleClick = () => {
@@ -49,14 +49,15 @@ const Layout = ({ children }) => {
         <div
           css={[
             `display: ${isOpenMenu ? 'flex' : 'none'}`,
-            xw`fixed top-0 bottom-0 left-0 right-0 lg:relative lg:flex
-        justify-between items-center lg:justify-center
-        p-8 w-11/12 h-3/4 m-auto z-50 bg-white
-        border border-solid border-black lg:border-0
-        col-start-2`,
+            xw`fixed top-0 bottom-0 left-0 right-0 flex-wrap lg:relative lg:flex
+              justify-between items-start lg:justify-center
+              p-8 w-11/12 m-auto bg-white
+              border border-solid border-black lg:border-0
+              col-start-2`,
           ]}
         >
           <Menu />
+          {subMenu}
         </div>
 
         <MenuButton>
