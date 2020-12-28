@@ -1,22 +1,22 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-const Logo = () => {
+export const Logo = () => {
   return (
-    <>
-      <Link href="/">
-        <a>
-          <Image
-            src="/logo.svg"
-            layout="fixed"
-            height="19"
-            width="90"
-            alt="bertolucci"
-          />
-        </a>
-      </Link>
-    </>
+    <Link href="/">
+      <a>
+        <Image
+          src="/logo.svg"
+          layout="fixed"
+          height="19"
+          width="90"
+          alt="bertolucci"
+        />
+      </a>
+    </Link>
   )
 }
 
-export default Logo
+export const LogoFooter = () => (
+  <Image src="/logo-footer.svg" layout="fixed" height="84" width="33" alt="" />
+)

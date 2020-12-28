@@ -33,7 +33,7 @@ const Products = () => {
       <ul
         css={[
           `grid-template-columns: repeat(auto-fill, minmax(225px, 1fr))`,
-          xw`grid gap-x-1`,
+          xw`grid gap-x-1 col-start-1 col-end-4 lg:col-start-2 lg:col-end-3 row-start-2`,
         ]}
       >
         {products.map((product) => (
