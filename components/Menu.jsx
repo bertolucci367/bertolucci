@@ -2,11 +2,11 @@ import xw from 'xwind'
 import Link from './Link'
 
 const menu = [
-  { name: 'Produtos', url: '/products' },
-  { name: 'Ambientes', url: '/' },
+  { name: 'Produtos', url: '/produtos' },
+  { name: 'Ambientes', url: '/ambientes' },
   { name: 'Sobre', url: '/about' },
-  { name: 'Imprensa', url: '/' },
-  { name: 'Blog', url: '/' },
+  { name: 'Imprensa', url: '/news' },
+  { name: 'Blog', url: '/blog' },
   { name: 'Contato', url: '/contact' },
 ]
 

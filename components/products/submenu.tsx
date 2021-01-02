@@ -1,24 +1,5 @@
 import xw from 'xwind'
 import styled from '@emotion/styled'
-import Layout from '../components/Layout'
-
-const Hover = styled.div([
-  xw`lg:opacity-0`,
-  {
-    transition: 'opacity 350ms ease',
-  },
-])
-
-const NameStyled = styled.h2(xw`text-14px`)
-
-const DesignStyled = styled.p(xw`text-12px`)
-
-const Card = styled.li({
-  [`:hover ${Hover}`]: {
-    opacity: 1,
-  },
-  height: '270px',
-})
 
 const SubMenu = styled.ul([
   xw`lg:opacity-0 lg:hidden w-full bg-red-100 absolute left-0 flex lg:justify-center py-4`,
@@ -49,6 +30,7 @@ const typologies = [
   { name: 'pendente' },
   { name: 'plafom' },
 ]
+
 const materials = [
   { name: 'acrílico' },
   { name: 'cerâmica' },
@@ -59,6 +41,7 @@ const materials = [
   { name: 'tecido' },
   { name: 'vidro' },
 ]
+
 const designers = [
   {
     img:
@@ -129,21 +112,21 @@ const designers = [
 ]
 
 const families = [
-  '2050',
-  '3D de luxo',
-  '85g',
-  'abaeté',
-  'alma',
-  'apoena',
-  'araucária',
-  'atman',
-  'batuque',
-  'bella',
-  'berimbau',
-  'berloque',
-  'beto galvez e nórea de vitto',
-  'bionda',
-  'canoa',
+  { name: '2050' },
+  { name: '3D de luxo' },
+  { name: '85g' },
+  { name: 'abaeté' },
+  { name: 'alma' },
+  { name: 'apoena' },
+  { name: 'araucária' },
+  { name: 'atman' },
+  { name: 'batuque' },
+  { name: 'bella' },
+  { name: 'berimbau' },
+  { name: 'berloque' },
+  { name: 'beto galvez e nórea de vitto' },
+  { name: 'bionda' },
+  { name: 'canoa' },
 ]
 
 interface MenuItemProps {
@@ -171,7 +154,7 @@ const MenuItem = ({ name, subItems, children }: MenuItemProps) => {
   )
 }
 
-const subMenu = (
+const subMenuProducts = (
   <nav css={xw`w-full`}>
     <ul css={xw`flex justify-center`}>
       <MenuItem name="tipologia+" subItems={typologies} />
@@ -186,39 +169,4 @@ const subMenu = (
   </nav>
 )
 
-const Products = () => {
-  const products = []
-
-  for (let i = 0, l = 83; i < l; i++) {
-    products.push({ id: i, name: `Product ${i}`, design: `oficina bertolucci` })
-  }
-
-  return (
-    <Layout subMenu={subMenu}>
-      <h1 css={xw`h-0 opacity-0`}>Produtos</h1>
-      <ul
-        css={[
-          `grid-template-columns: repeat(auto-fill, minmax(225px, 1fr))`,
-          xw`grid gap-x-1 col-start-1 col-end-4 lg:col-start-2 lg:col-end-3 row-start-2`,
-        ]}
-      >
-        {products.map((product) => (
-          <Card key={product.id}>
-            <div
-              css={[
-                `width: 100%; height: 200px; background: url('${`https://placedog.net/360/280`}')`,
-                xw`bg-gray-200 bg-center bg-cover`,
-              ]}
-            ></div>
-            <Hover>
-              <NameStyled>{product.name}</NameStyled>
-              <DesignStyled>{product.design}</DesignStyled>
-            </Hover>
-          </Card>
-        ))}
-      </ul>
-    </Layout>
-  )
-}
-
-export default Products
+export { subMenuProducts }

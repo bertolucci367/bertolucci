@@ -3,13 +3,18 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import xw from 'xwind'
 
-export default ({ href, children }) => {
+const isActive = ({ path, href }) => {
+  const re = new RegExp(`^${href}`, 'i')
+  return re.test(path)
+}
+
+const ActiveLink = ({ href, children }) => {
   const router = useRouter()
   const {
     props: { className },
   } = children
   let style = {}
-  if (router.pathname === href) {
+  if (isActive({ path: router.pathname, href })) {
     style = xw`border-b border-solid border-black`
   }
 
@@ -19,3 +24,5 @@ export default ({ href, children }) => {
     </Link>
   )
 }
+
+export default ActiveLink
