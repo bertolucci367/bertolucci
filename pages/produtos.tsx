@@ -1,6 +1,6 @@
 import xw from 'xwind'
 import styled from '@emotion/styled'
-import LayoutProduct from '../components/LayoutProduct'
+import LayoutProduct from '~/components/LayoutProduct'
 
 const Hover = styled.div([
   xw`lg:opacity-0`,

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import LayoutProduct from '../../components/LayoutProduct'
+import LayoutProduct from '~/components/LayoutProduct'
 
 const Product = () => {
   const router = useRouter()

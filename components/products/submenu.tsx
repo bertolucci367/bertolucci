@@ -1,5 +1,6 @@
 import xw from 'xwind'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 
 const SubMenu = styled.ul([
   xw`lg:opacity-0 lg:hidden w-full bg-red-100 absolute left-0 flex lg:justify-center py-4`,
@@ -129,13 +130,34 @@ const families = [
   { name: 'canoa' },
 ]
 
+const slugify = (text) => {
+  const from = 'ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;'
+  const to = 'aaaaaeeeeeiiiiooooouuuunc------'
+
+  const newText = text
+    .split('')
+    .map((letter, i) =>
+      letter.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i)),
+    )
+
+  return newText
+    .toString() // Cast to string
+    .toLowerCase() // Convert the string to lowercase letters
+    .trim() // Remove whitespace from both sides of a string
+    .replace(/\s+/g, '-') // Replace spaces with -
+    .replace(/&/g, '-y-') // Replace & with 'and'
+    .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+    .replace(/\-\-+/g, '-') // Replace multiple - with single -
+}
+
 interface MenuItemProps {
   name?: string
   subItems?: any
+  path?: string
   children?: React.ReactNode
 }
 
-const MenuItem = ({ name, subItems, children }: MenuItemProps) => {
+const MenuItem = ({ name, subItems, path, children }: MenuItemProps) => {
   return (
     <MenuItemStyled>
       <SubMenuLabel>{name}</SubMenuLabel>
@@ -143,8 +165,12 @@ const MenuItem = ({ name, subItems, children }: MenuItemProps) => {
         <SubMenu>
           {subItems.map(({ name, img }) => (
             <li key={name} css={xw`px-4 py-2 w-1/5`}>
-              {img && <img src={img} />}
-              {name}
+              <Link href={`/produtos/${path}/${slugify(name)}`}>
+                <a>
+                  {img && <img src={img} />}
+                  {name}
+                </a>
+              </Link>
             </li>
           ))}
         </SubMenu>
@@ -157,10 +183,10 @@ const MenuItem = ({ name, subItems, children }: MenuItemProps) => {
 const subMenuProducts = (
   <nav css={xw`w-full`}>
     <ul css={xw`flex justify-center`}>
-      <MenuItem name="tipologia+" subItems={typologies} />
-      <MenuItem name="materiais+" subItems={materials} />
-      <MenuItem name="designers+" subItems={designers} />
-      <MenuItem name="linhas+" subItems={families} />
+      <MenuItem name="tipologia+" subItems={typologies} path="tipologias" />
+      <MenuItem name="materiais+" subItems={materials} path="materiais" />
+      <MenuItem name="designers+" subItems={designers} path="designers" />
+      <MenuItem name="linhas+" subItems={families} path="linhas" />
       <MenuItem name="busca">
         <input type="search" css={xw`border border-gray-500 ml-2`} />
       </MenuItem>

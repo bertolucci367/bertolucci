@@ -3,7 +3,7 @@ import xw from 'xwind'
 import { GraphQLClient } from 'graphql-request'
 import GraphImg from 'graphcms-image'
 import { css } from '@emotion/react'
-import Layout from '../components/Layout'
+import Layout from '~/components/Layout'
 
 const Index = ({ homes }) => {
   const [windowWidthSize, setWindowWidthSize] = useState(0)

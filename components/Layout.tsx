@@ -2,11 +2,16 @@ import { useState } from 'react'
 import { css } from '@emotion/react'
 import xw from 'xwind'
 
-import Menu from '../components/Menu'
-import MenuButton from '../components/MenuButton'
-import { Logo, LogoFooter } from '../components/Logo'
+import Menu from '~/components/Menu'
+import MenuButton from '~/components/MenuButton'
+import { Logo, LogoFooter } from '~/components/Logo'
 
-const Layout = ({ children, subMenu }) => {
+interface LayoutProps {
+  subMenu?: any
+  children?: React.ReactNode
+}
+
+const Layout = ({ children, subMenu }: LayoutProps) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
 
   const handleClick = () => {
