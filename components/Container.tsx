@@ -1,0 +1,25 @@
+import xw from 'xwind'
+
+interface ContainerProps {
+  children?: React.ReactNode
+}
+
+function Container({ children }: ContainerProps) {
+  return (
+    <div
+      css={[
+        `
+          grid-template-columns: 12px 1fr 12px;
+          @media (min-width: 1024px) {
+            grid-template-columns: 210px 1fr 210px;
+          }
+        `,
+        xw`col-start-1 col-end-4 bg-white sticky top-0 grid z-50`,
+      ]}
+    >
+      <div css={xw`col-start-2`}>{children}</div>
+    </div>
+  )
+}
+
+export default Container

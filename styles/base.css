@@ -546,6 +546,17 @@ video {
   height: auto;
 }
 
+body {
+  font-family: FuturaStdLight, Helvetica, Arial, Sans-serif;
+}
+
+/* h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  } */
+
 html {
   font-size: 10px;
 }

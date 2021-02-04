@@ -1,5 +1,18 @@
 @tailwind base;
 
+@layer base {
+  body {
+    @apply font-body;
+  }
+
+  /* h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  } */
+}
+
 html {
   font-size: 10px;
 }

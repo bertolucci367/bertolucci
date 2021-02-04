@@ -4,6 +4,11 @@ module.exports = {
   purge: ['./pages/**/*.tsx'],
   darkMode: 'class',
   theme: {
+    fontFamily: {
+      body: ['FuturaStdLight', 'Helvetica', 'Arial', 'Sans-serif'],
+      'futura-m': 'FuturaStdMedium',
+    },
+
     fontSize: {
       '12px': '1.2rem',
       '13px': '1.3rem',
