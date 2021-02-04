@@ -8,6 +8,22 @@ const Index = ({ homes }) => {
   const [windowWidthSize, setWindowWidthSize] = useState(0)
   const [windowHeightSize, setWindowHeightSize] = useState(0)
 
+  const getImageByResolution = ({ photoCover, photoCoverMobile }) =>
+    windowWidthSize > windowHeightSize ? photoCover : photoCoverMobile
+
+  const getImages = ({ photoCover, photoCoverMobile }) =>
+    getImageByResolution({
+      photoCover,
+      photoCoverMobile,
+    }).map(({ handle, width, height }) => (
+      <GraphImg
+        image={{ handle, width, height }}
+        withWebp={true}
+        style={{ position: 'unset' }}
+        maxWidth={windowWidthSize > windowHeightSize ? 1920 : 768}
+      />
+    ))
+
   useEffect(() => {
     function handleResize() {
       const { width, height } = document.body.getBoundingClientRect()
@@ -21,12 +37,10 @@ const Index = ({ homes }) => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  const getImageByResolution = ({ photoCover, photoCoverMobile }) =>
-    windowWidthSize > windowHeightSize ? photoCover : photoCoverMobile
-
   return (
     <Layout>
       {homes.map(({ id, photoCover, photoCoverMobile }) => {
+        const images = getImages({ photoCover, photoCoverMobile })
         return (
           <div key={id} css={xw`row-start-2 col-start-1 col-end-4`}>
             <div
@@ -39,28 +53,53 @@ const Index = ({ homes }) => {
                 },
               ]}
             >
-              {getImageByResolution({ photoCover, photoCoverMobile }).map(
-                ({ handle, width, height }, i) => (
-                  <div
-                    key={i}
-                    css={xw`absolute pointer-events-none h-full w-full overflow-hidden`}
-                  >
-                    <GraphImg
-                      image={{ handle, width, height }}
-                      withWebp={true}
-                      style={{ position: 'unset' }}
-                      maxWidth={windowWidthSize > windowHeightSize ? 1920 : 768}
-                    />
-                  </div>
-                ),
-              )}
-
+              <Slider slides={images} />
               <main css={xw`relative`}></main>
             </div>
           </div>
         )
       })}
     </Layout>
+  )
+}
+
+const Slider = ({ slides }) => {
+  const [curr, setCurr] = useState(0)
+  const { length } = slides
+
+  const goToNext = () => {
+    setCurr(curr >= length - 1 ? 0 : curr + 1)
+  }
+
+  useEffect(() => {
+    const timer: ReturnType<typeof setTimeout> = setTimeout(goToNext, 5000)
+    return function () {
+      clearTimeout(timer)
+    }
+  })
+
+  useEffect(() => {
+    if (length === 1) {
+      setCurr(0)
+    }
+  }, [length])
+
+  if (!Array.isArray(slides) || length <= 0) {
+    return null
+  }
+
+  return (
+    <section className="slider">
+      {slides.map((s, i) => (
+        <div className={i === curr ? 'slide active' : 'slide'} key={i}>
+          <div
+            css={xw`absolute pointer-events-none h-full w-full overflow-hidden`}
+          >
+            {s}
+          </div>
+        </div>
+      ))}
+    </section>
   )
 }
 
