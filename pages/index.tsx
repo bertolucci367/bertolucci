@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import xw from 'xwind'
 import { GraphQLClient } from 'graphql-request'
 import GraphImg from 'graphcms-image'
-import { css } from '@emotion/react'
 import Layout from '~/components/Layout'
 
 const Index = ({ homes }) => {
@@ -28,11 +27,6 @@ const Index = ({ homes }) => {
   return (
     <Layout>
       {homes.map(({ id, photoCover, photoCoverMobile }) => {
-        const { handle, width, height } = getImageByResolution({
-          photoCover,
-          photoCoverMobile,
-        })
-
         return (
           <div key={id} css={xw`row-start-2 col-start-1 col-end-4`}>
             <div
@@ -45,16 +39,21 @@ const Index = ({ homes }) => {
                 },
               ]}
             >
-              <div
-                css={xw`absolute pointer-events-none h-full w-full overflow-hidden`}
-              >
-                <GraphImg
-                  image={{ handle, width, height }}
-                  withWebp={true}
-                  style={{ position: 'unset' }}
-                  maxWidth={windowWidthSize > windowHeightSize ? 1920 : 768}
-                />
-              </div>
+              {getImageByResolution({ photoCover, photoCoverMobile }).map(
+                ({ handle, width, height }, i) => (
+                  <div
+                    key={i}
+                    css={xw`absolute pointer-events-none h-full w-full overflow-hidden`}
+                  >
+                    <GraphImg
+                      image={{ handle, width, height }}
+                      withWebp={true}
+                      style={{ position: 'unset' }}
+                      maxWidth={windowWidthSize > windowHeightSize ? 1920 : 768}
+                    />
+                  </div>
+                ),
+              )}
 
               <main css={xw`relative`}></main>
             </div>
