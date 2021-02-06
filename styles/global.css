@@ -14,12 +14,21 @@
   font-display: swap;
 }
 
-.slide {
+.carousel {
+  visibility: hidden;
   opacity: 0;
-  transition: 1s ease;
+  height: 0;
+  width: 0;
+  transition: visibility 0s, opacity 0.5s linear;
 }
 
-.slide.active {
+.carousel.active {
+  visibility: visible;
   opacity: 1;
-  transition-duration: 1s;
+  height: auto;
+  width: auto;
+}
+
+.carousel img {
+  max-height: 80vh;
 }

@@ -6,17 +6,19 @@ module.exports = {
   theme: {
     fontFamily: {
       body: ['FuturaStdLight', 'Helvetica', 'Arial', 'Sans-serif'],
-      'futura-m': 'FuturaStdMedium',
+      medium: 'FuturaStdMedium',
     },
-
     fontSize: {
       '12px': '1.2rem',
       '13px': '1.3rem',
       '14px': '1.4rem',
       '18px': '1.8rem',
     },
+
     extend: {
       colors,
+      height: { '90vh': '90vh' },
+      maxHeight: { '90vh': '90vh' },
     },
   },
   variants: {

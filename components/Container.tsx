@@ -14,10 +14,10 @@ function Container({ children }: ContainerProps) {
             grid-template-columns: 210px 1fr 210px;
           }
         `,
-        xw`col-start-1 col-end-4 bg-white sticky top-0 grid z-50`,
+        xw`col-start-1 col-end-4 bg-white sticky top-0 grid z-40`,
       ]}
     >
-      <div css={xw`col-start-2`}>{children}</div>
+      <div css={xw`col-start-2 relative`}>{children}</div>
     </div>
   )
 }

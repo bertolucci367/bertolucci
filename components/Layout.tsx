@@ -22,8 +22,12 @@ const Layout = ({ children, subMenu }: LayoutProps) => {
     <div
       css={css`
         display: grid;
-        grid-template-rows: 75px 1fr;
+        grid-template-rows: 70px 1fr;
         grid-template-columns: repeat(2, 1fr);
+
+        @media (orientation: landscape) {
+          grid-template-rows: 40px 1fr;
+        }
 
         @media (min-width: 1024px) {
           grid-template-rows: 90px auto;
@@ -45,7 +49,7 @@ const Layout = ({ children, subMenu }: LayoutProps) => {
           css={xw`
             sticky top-0
             flex items-center lg:justify-center
-            px-4 lg:px-4
+            px-5 lg:px-4
             col-start-1 row-start-1`}
         >
           <Logo />
