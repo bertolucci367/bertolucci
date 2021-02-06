@@ -14,6 +14,7 @@
   font-display: swap;
 }
 
+.slide,
 .carousel {
   visibility: hidden;
   opacity: 0;
@@ -22,6 +23,7 @@
   transition: visibility 0s, opacity 0.5s linear;
 }
 
+.slide.active,
 .carousel.active {
   visibility: visible;
   opacity: 1;
