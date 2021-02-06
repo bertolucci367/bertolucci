@@ -1,17 +1,28 @@
 import { useEffect, useState, useRef } from 'react'
 import xw from 'xwind'
-import styled from '@emotion/styled'
 import Image from 'next/image'
 
-interface SliderProps {
+import {
+  SectionStyled,
+  ListWrapStyled,
+  ListStyled,
+  NavBtnStyled,
+  CloseStyled,
+  SectionInfoStyled,
+} from '~/components/CarouselStyled'
+
+interface Props {
   slides: any
   close?: boolean
   nav?: boolean
-  autoPlay?: boolean
   children?: React.ReactNode
 }
 
-const Slider = ({ slides, close, nav, autoPlay, children }: SliderProps) => {
+const handleClose = () => {
+  console.log('close')
+}
+
+const Carousel = ({ slides, close, nav, children }: Props) => {
   const [curr, setCurr] = useState(0)
   const [textWrapWidth, setTextWrapWidth] = useState(null)
   const { length } = slides
@@ -24,17 +35,6 @@ const Slider = ({ slides, close, nav, autoPlay, children }: SliderProps) => {
   const goToPrev = () => {
     setCurr(curr === 0 ? length - 1 : curr - 1)
   }
-
-  useEffect(() => {
-    if (!autoPlay) {
-      return
-    }
-
-    const timer: ReturnType<typeof setTimeout> = setTimeout(goToNext, 5000)
-    return function () {
-      clearTimeout(timer)
-    }
-  })
 
   useEffect(() => {
     if (length === 1) {
@@ -65,7 +65,7 @@ const Slider = ({ slides, close, nav, autoPlay, children }: SliderProps) => {
       <ListWrapStyled>
         <div css={xw`relative flex items-center`}>
           {close && (
-            <CloseStyled onClick={handlerClose}>
+            <CloseStyled onClick={handleClose}>
               <Image
                 src="/close.svg"
                 layout="fixed"
@@ -132,45 +132,4 @@ const Slider = ({ slides, close, nav, autoPlay, children }: SliderProps) => {
   )
 }
 
-type NavProps = {
-  dir?: string
-}
-
-const SectionStyled = styled.section([
-  xw`relative lg:flex lg:flex-col lg:overflow-hidden`,
-  `
-    @media (min-width: 1024px) {
-      height: calc(100vh - 90px);
-    }
-  `,
-])
-
-const ListWrapStyled = styled.div(xw`flex justify-center`)
-
-const ListStyled = styled.ol(xw`relative flex`)
-
-const NavBtnStyled = styled.a<NavProps>([
-  xw`
-  flex items-center px-2 z-20
-  lg:relative
-  `,
-])
-
-const CloseStyled = styled.a(xw`absolute top-1 left-0 bg-white z-30`)
-
-const SectionInfoStyled = styled.div({
-  ['@media(min-width: 1024px)']: {
-    [`:hover`]: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-    },
-  },
-})
-
-const handlerClose = () => {
-  console.log('close')
-}
-
-export default Slider
+export default Carousel

@@ -46,11 +46,17 @@ const Index = ({ homes }) => {
             <div
               css={[
                 xw`relative`,
-                {
-                  height: `calc(100vh - ${
-                    windowWidthSize >= windowHeightSize ? 90 : 70
-                  }px)`,
-                },
+                `
+                height: calc(100vh - 70px);
+
+                @media (orientation: landscape) {
+                  height: calc(100vh - 40px);
+                }
+
+                @media (min-width: 1024px) {
+                  height: calc(100vh - 90px);
+                }
+                `,
               ]}
             >
               <Slider slides={images} />
