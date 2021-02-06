@@ -3,11 +3,7 @@ import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
 
 const Lines = ({ products }) => {
-  return (
-    <LayoutProduct>
-      <List products={products} />
-    </LayoutProduct>
-  )
+  return <LayoutProduct>{/* <List products={products} /> */}</LayoutProduct>
 }
 
 const graph = {
@@ -56,6 +52,8 @@ export async function getStaticProps({ params, preview = false }) {
 export async function getStaticPaths() {
   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
 
+  console.log('blah')
+
   const { materials, lines } = await gcms.request(
     `
     {
@@ -73,7 +71,7 @@ export async function getStaticPaths() {
   )
 
   const res = []
-  const setParams = (name, items) => {
+  const setParams = (name: string, items: any) => {
     return items.map((item) => {
       res.push({
         params: {
@@ -85,6 +83,7 @@ export async function getStaticPaths() {
 
   setParams('materiais', materials)
   setParams('linhas', lines)
+  setParams('tipologias', lines)
 
   return {
     paths: res,
