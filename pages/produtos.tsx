@@ -21,21 +21,30 @@ const Card = styled.li({
   height: '270px',
 })
 
-const Products = () => {
-  const products = []
-
-  console.log('bla2')
-
-  for (let i = 0, l = 83; i < l; i++) {
-    products.push({ id: i, name: `Product ${i}`, design: `oficina bertolucci` })
-  }
-
+const Products = ({ products = [] }) => {
   return (
     <LayoutProduct>
       <h1 css={xw`h-0 opacity-0`}>Produtos</h1>
       <List products={products} href="/produtos/linhas/nitens/C870" />
     </LayoutProduct>
   )
+}
+
+export async function getStaticProps({ params, preview = false }) {
+  const res = await fetch(
+    `http://bertolucci.com.br/api/produtos/novolayout.json`,
+  )
+  const data = await res.json()
+
+  if (!data) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: data, // will be passed to the page component as props
+  }
 }
 
 export default Products

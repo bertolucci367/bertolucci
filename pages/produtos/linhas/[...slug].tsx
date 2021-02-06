@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import LayoutProduct from '~/components/LayoutProduct'
+import List from '~/components/products/List'
 
 const Lines = () => {
   const router = useRouter()

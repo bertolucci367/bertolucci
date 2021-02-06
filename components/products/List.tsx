@@ -33,7 +33,10 @@ const List = ({ products = [], href = '/' }) => {
       ]}
     >
       {products.map((product) => (
-        <Link href={href} key={product.id}>
+        <Link
+          href={`/produtos/linhas/${product.family_slug}/${product.code}`}
+          key={product.code}
+        >
           <Card>
             <div
               css={[
