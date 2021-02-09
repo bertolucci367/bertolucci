@@ -1,19 +1,10 @@
-import { useRouter } from 'next/router'
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
 
 const Lines = ({ products, product }) => {
-  const router = useRouter()
-  const { slug } = router.query
-
   return (
     <LayoutProduct>
-      Lines: {slug}
-      <p>
-        <a onClick={router.back}>BACK</a>
-      </p>
-      <hr />
-      <List products={product} show />
+      <List products={product} show close="/produtos" />
       <List products={products} show />
     </LayoutProduct>
   )

@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import LayoutProduct from '~/components/LayoutProduct'
@@ -30,42 +29,36 @@ const url = [
 
 const images = [<img src={url[0]} />, <img src={url[1]} />]
 
-const Product = () => {
-  const router = useRouter()
-  const { slug } = router.query
-
+const Product = ({ product }) => {
   return (
     <LayoutProduct>
       <Container>
-        <Carousel slides={images} close nav>
+        <Carousel
+          slides={images}
+          close={`/produtos/linhas/${product?.family_slug}/${product?.code}`}
+          nav
+        >
           <InfoStyled>
             <hgroup className="itemInfo">
-              <h2 css={xw`text-14px mb-1 font-medium`}>ju.ab - A920</h2>
+              <h2 css={xw`text-14px mb-1 font-medium`}>
+                {product.name} - {product.code}
+              </h2>
               <h3></h3>
             </hgroup>
 
             <InfoBody>
-              <InfoTextBlock>
-                <p>
-                  O designer Zanini de Zanine, possuidor de um trabalho
-                  consolidado em madeira, assina a linha Ju em homenagem à sua
-                  avó, cujas luminárias serviram de inspiração. A coleção possui
-                  como diferencial a forma e o uso de duas longas hastes que
-                  sustentam os refletores: “Quis fugir do tradicional, por isso,
-                  as cúpulas não são redondas nem quadradas. Elas são elegantes
-                  e funcionais, com o emprego de um ótimo material e
-                  acabamento”, explica o designer.
-                </p>
-              </InfoTextBlock>
+              <InfoTextBlock
+                dangerouslySetInnerHTML={{
+                  __html: product.description_formatted,
+                }}
+              ></InfoTextBlock>
 
               <InfoTextBlock css={xw`lg:ml-5`}>
-                <span>
-                  <p>
-                    Abajur de madeira Imbuia ou Louro Preto. Estrutura metálica
-                    em latão polido, cobre polido ou latão cromado. Interruptor
-                    embutido na base.
-                  </p>
-                </span>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: product.text_formatted,
+                  }}
+                ></div>
 
                 <p>
                   <span>
@@ -99,6 +92,23 @@ const Product = () => {
       </Container>
     </LayoutProduct>
   )
+}
+
+export async function getServerSideProps({ params }) {
+  const res = await fetch(
+    `http://bertolucci.com.br/api/produtos/${params.slug}.json`,
+  )
+  const data = await res.json()
+
+  if (!data) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: { product: data?.products[0] }, // will be passed to the page component as props
+  }
 }
 
 export default Product

@@ -29,7 +29,7 @@ export const NavBtnStyled = styled.a<NavProps>([
   `,
 ])
 
-export const CloseStyled = styled.a(xw`absolute top-1 left-0 bg-white z-30`)
+export const CloseStyled = styled.div(xw`absolute top-1 left-0 bg-white z-30`)
 
 export const SectionInfoStyled = styled.div({
   ['@media(min-width: 1024px)']: {

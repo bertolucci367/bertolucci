@@ -14,15 +14,10 @@ import {
 
 interface Props {
   slides: any
-  close?: boolean
+  close?: string
   nav?: boolean
   children?: React.ReactNode
 }
-
-// const handleClose = () => {
-//   console.log('close')
-//   ()
-// }
 
 const Carousel = ({ slides, close, nav, children }: Props) => {
   const [curr, setCurr] = useState(0)
@@ -68,14 +63,16 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
         <div css={xw`relative flex items-center`}>
           {close && (
             <CloseStyled>
-              <Link href={`/produtos/linhas/ju/P920`}>
-                <Image
-                  src="/close.svg"
-                  layout="fixed"
-                  height="16"
-                  width="16"
-                  alt="close icon"
-                />
+              <Link href={close}>
+                <a>
+                  <Image
+                    src="/close.svg"
+                    layout="fixed"
+                    height="16"
+                    width="16"
+                    alt="close icon"
+                  />
+                </a>
               </Link>
             </CloseStyled>
           )}
