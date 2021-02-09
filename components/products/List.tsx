@@ -9,7 +9,7 @@ const Hover = styled.div([
   },
 ])
 
-const NameStyled = styled.h2(xw`text-14px`)
+const NameStyled = styled.h2(xw`text-14px font-medium mt-2`)
 
 const DesignStyled = styled.p(xw`text-12px`)
 
@@ -54,8 +54,12 @@ const List = ({ products = [], href = '/', show = false, close = '' }) => {
                 ]}
               ></div>
               <Hover>
-                <NameStyled>{product.name}</NameStyled>
-                <DesignStyled>{product.design}</DesignStyled>
+                <NameStyled>
+                  {show
+                    ? `${product.name} - ${product.code}`
+                    : product.family_name}
+                </NameStyled>
+                <DesignStyled>{product.designer_name}</DesignStyled>
               </Hover>
             </a>
           </Link>
