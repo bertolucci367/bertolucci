@@ -5,7 +5,6 @@ import LayoutProduct from '~/components/LayoutProduct'
 import Container from '~/components/Container'
 import Carousel from '~/components/Carousel'
 
-// lg:absolute lg:bottom-0 lg:h-40
 const InfoStyled = styled.div([
   xw`bg-white text-center py-6
     overflow-hidden

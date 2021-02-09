@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import xw from 'xwind'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import {
   SectionStyled,
@@ -18,9 +19,10 @@ interface Props {
   children?: React.ReactNode
 }
 
-const handleClose = () => {
-  console.log('close')
-}
+// const handleClose = () => {
+//   console.log('close')
+//   ()
+// }
 
 const Carousel = ({ slides, close, nav, children }: Props) => {
   const [curr, setCurr] = useState(0)
@@ -65,14 +67,16 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
       <ListWrapStyled>
         <div css={xw`relative flex items-center`}>
           {close && (
-            <CloseStyled onClick={handleClose}>
-              <Image
-                src="/close.svg"
-                layout="fixed"
-                height="16"
-                width="16"
-                alt="close icon"
-              />
+            <CloseStyled>
+              <Link href={`/produtos/linhas/ju/P920`}>
+                <Image
+                  src="/close.svg"
+                  layout="fixed"
+                  height="16"
+                  width="16"
+                  alt="close icon"
+                />
+              </Link>
             </CloseStyled>
           )}
           {nav && (

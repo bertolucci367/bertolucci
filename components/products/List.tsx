@@ -21,7 +21,7 @@ const Card = styled.li({
   height: '270px',
 })
 
-const List = ({ products = [], href = '/' }) => {
+const List = ({ products = [], href = '/', show = false }) => {
   return (
     <ul
       css={[
@@ -29,18 +29,22 @@ const List = ({ products = [], href = '/' }) => {
         grid-template-columns: repeat(auto-fit, minmax(225px, max-content));
         justify-content: center;
         `,
-        xw`grid gap-x-1 col-start-1 col-end-4 lg:col-start-2 lg:col-end-3 row-start-2`,
+        xw`grid gap-x-1 col-start-1 col-end-4 lg:col-start-2 lg:col-end-3 `,
       ]}
     >
       {products.map((product) => (
         <Link
-          href={`/produtos/linhas/${product.family_slug}/${product.code}`}
+          href={
+            show
+              ? `/produtos/${product.slug}`
+              : `/produtos/linhas/${product.family_slug}/${product.code}`
+          }
           key={product.code}
         >
           <Card>
             <div
               css={[
-                `width: 100%; height: 200px; background: url('${`https://placedog.net/360/280`}')`,
+                `width: 100%; height: 200px; background: url('http://bertolucci.com.br${product.cover_image_url}')`,
                 xw`bg-gray-200 bg-center bg-cover`,
               ]}
             ></div>

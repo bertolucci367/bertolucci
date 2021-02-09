@@ -25,7 +25,7 @@ function App({ Component, pageProps }) {
       </Head>
       <Global
         //keyframes + ring and shadow classes variables  ... to global styles
-        styles={xw`XWIND_GLOBAL`}
+        styles={xw`XWIND_BASE XWIND_GLOBAL`}
       />
       <Component {...pageProps} />
     </>
