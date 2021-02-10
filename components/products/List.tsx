@@ -1,6 +1,7 @@
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const Hover = styled.div([
   xw`lg:opacity-0`,
@@ -13,37 +14,35 @@ const NameStyled = styled.h2(xw`text-14px font-medium mt-2`)
 
 const DesignStyled = styled.p(xw`text-12px`)
 
-const CardStyled = styled.li({
-  [':hover']: { cursor: 'pointer' },
-  [`:hover ${Hover}`]: {
-    opacity: 1,
+const CardStyled = styled.li([
+  xw`min-w-full sm:min-w-card`,
+  {
+    [':hover']: { cursor: 'pointer' },
+    [`:hover ${Hover}`]: {
+      opacity: 1,
+    },
+    height: '270px',
+    margin: '0 2px',
   },
-  height: '270px',
-})
+])
 
-const List = ({ products = [], href = '/', show = false, close = '' }) => {
+const List = ({ products = [], show = false, close = {} }) => {
+  const router = useRouter()
+
   return (
     <ul
       css={[
-        `
-          grid-template-columns: repeat(auto-fit, minmax(225px, max-content));
-        justify-content: center;
-        `,
-        xw`grid gap-x-1 col-start-1 col-end-4 lg:col-start-2 lg:col-end-3 `,
+        xw`flex flex-wrap justify-center col-start-1 col-end-4 lg:col-start-2 lg:col-end-3`,
       ]}
     >
-      {products.map((product) => (
-        <CardStyled key={product.code}>
-          {close && (
-            <Link href={close}>
-              <a>X</a>
-            </Link>
-          )}
+      {products.map((product, i) => (
+        <CardStyled key={i}>
+          {Object.keys(close).length > 0 && <Link href={close}>Close</Link>}
           <Link
             href={
               show
                 ? `/produtos/${product.slug}`
-                : `/produtos/linhas/${product.family_slug}/${product.code}`
+                : `${router.asPath}/linhas/${product.family_slug}/${product.code}`
             }
           >
             <a>

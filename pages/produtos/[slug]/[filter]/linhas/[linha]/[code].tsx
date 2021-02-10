@@ -1,13 +1,16 @@
+import { useRouter } from 'next/router'
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
 import { useAppContext } from '~/components/context/AppContext'
-import { useRouter } from 'next/router'
 
-const Lines = ({ products, product }) => {
+const ProductTypeCode = ({ product, products }) => {
   const router = useRouter()
-  const shared = useAppContext()
 
-  shared.productClosePath = `/produtos/linhas`
+  const { slug, filter } = router.query
+
+  const shared = useAppContext()
+  shared.goToLines = true
+  shared.productClosePath = `/produtos/${slug}/${filter}/linhas`
 
   return (
     <LayoutProduct>
@@ -15,7 +18,8 @@ const Lines = ({ products, product }) => {
         products={product}
         show
         close={{
-          pathname: '/produtos',
+          pathname: '/produtos/[slug]/[filter]',
+          query: { slug, filter },
         }}
       />
       <List products={products} show />
@@ -23,13 +27,11 @@ const Lines = ({ products, product }) => {
   )
 }
 
-export async function getStaticProps({ params, preview = false }) {
-  const { slug } = params
-
-  const code = slug[1]
+export async function getServerSideProps({ params }) {
+  const { linha, code } = params
 
   const res = await fetch(
-    `http://bertolucci.com.br/api/produtos/linhas/${slug[0]}.json`,
+    `http://bertolucci.com.br/api/produtos/linhas/${linha}.json`,
   )
   const data = await res.json()
 
@@ -54,18 +56,4 @@ export async function getStaticProps({ params, preview = false }) {
   }
 }
 
-export async function getStaticPaths() {
-  const res = await fetch(
-    `http://bertolucci.com.br/api/produtos/novolayout.json`,
-  )
-  const data = await res.json()
-
-  // Get the paths we want to pre-render based on posts
-  const paths = data.products.map((p: any) => ({
-    params: { slug: [p.family_slug, p.code] },
-  }))
-
-  return { paths, fallback: 'blocking' }
-}
-
-export default Lines
+export default ProductTypeCode

@@ -76,7 +76,7 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
               </Link>
             </CloseStyled>
           )}
-          {nav && (
+          {nav && slides.length > 1 && (
             <NavBtnStyled
               href="#"
               role="button"
@@ -103,7 +103,7 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
           ))}
         </ListStyled>
 
-        {nav && (
+        {nav && slides.length > 1 && (
           <NavBtnStyled
             href="#"
             role="button"

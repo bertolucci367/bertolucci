@@ -25,7 +25,7 @@ const MenuItemStyled = styled.li(xw`mx-4`, {
 })
 
 const typologies = [
-  { name: 'abajur' },
+  { name: 'lampshade' },
   { name: 'arandela' },
   { name: 'coluna' },
   { name: 'pendente' },
@@ -33,8 +33,8 @@ const typologies = [
 ]
 
 const materials = [
-  { name: 'acrílico' },
-  { name: 'cerâmica' },
+  { name: 'acrilico' },
+  { name: 'ceramica' },
   { name: 'cortiça' },
   { name: 'fibras naturais' },
   { name: 'madeira' },

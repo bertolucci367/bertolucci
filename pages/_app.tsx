@@ -2,12 +2,14 @@ import Head from 'next/head'
 import { Global } from '@emotion/react'
 import xw from 'xwind'
 
+import { AppWrapper } from '~/components/context/AppContext'
+
 import '../styles/global.css'
 import '../styles/base.css'
 
 function App({ Component, pageProps }) {
   return (
-    <>
+    <AppWrapper>
       <Head>
         <title>Bertolucci</title>
         <link
@@ -28,7 +30,7 @@ function App({ Component, pageProps }) {
         styles={xw`XWIND_BASE XWIND_GLOBAL`}
       />
       <Component {...pageProps} />
-    </>
+    </AppWrapper>
   )
 }
 

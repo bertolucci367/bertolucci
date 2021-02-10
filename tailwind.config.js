@@ -19,6 +19,7 @@ module.exports = {
       colors,
       height: { '90vh': '90vh' },
       maxHeight: { '90vh': '90vh' },
+      minWidth: { card: '225px' },
     },
   },
   variants: {

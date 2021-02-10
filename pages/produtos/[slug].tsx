@@ -1,11 +1,14 @@
+import { useEffect, useState } from 'react'
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import LayoutProduct from '~/components/LayoutProduct'
 import Container from '~/components/Container'
 import Carousel from '~/components/Carousel'
+import { useAppContext } from '~/components/context/AppContext'
 
 const InfoStyled = styled.div([
-  xw`bg-white text-center py-6
+  xw`
+    bg-white text-center py-6
     overflow-hidden
     transition-all
     `,
@@ -22,22 +25,23 @@ const FinishingCategoryStyled = styled.li({
   },
 })
 
-const url = [
-  'http://bertolucci.com.br/uploads/product_images/image/5dcc16fba7ab754bba000098/hires_atelier_bam_ab-umbu_7_.jpg',
-  'http://bertolucci.com.br//uploads/product_images/image/58d2cd7ca7ab75b5c5000007/hires_atelier_bam_ab-ju-movimento_web.jpg',
-]
-
-const images = [<img src={url[0]} />, <img src={url[1]} />]
-
 const Product = ({ product }) => {
+  const shared = useAppContext()
+
+  let path = `${shared.productClosePath}/${product.family_slug}/${product.code}`
+
+  if (!shared.goToLines) {
+    path = shared.productClosePath
+  }
+
+  const images = product.images.map((img: any) => {
+    return <img src={`http://bertolucci.com.br${img.image.image.url}`} />
+  })
+
   return (
     <LayoutProduct>
       <Container>
-        <Carousel
-          slides={images}
-          close={`/produtos/linhas/${product?.family_slug}/${product?.code}`}
-          nav
-        >
+        <Carousel slides={images} close={path} nav>
           <InfoStyled>
             <hgroup className="itemInfo">
               <h2 css={xw`text-14px mb-1 font-medium`}>
