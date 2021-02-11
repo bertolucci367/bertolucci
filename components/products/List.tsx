@@ -47,14 +47,18 @@ const List = ({ products = [], show = false, close = {} }) => {
   }
 
   useEffect(() => {
+    const res = [...shared.compare]
+
     Object.entries(state).forEach(([key, value]) => {
-      const idx = shared.compare.findIndex((val) => val === key)
+      const idx = res.findIndex((val) => val === key)
       if (value && idx === -1) {
-        shared.compare.push(key)
+        res.push(key)
       } else if (!value && idx >= 0) {
-        shared.compare.splice(idx, 1)
+        res.splice(idx, 1)
       }
     })
+
+    shared.addData({ compare: res })
   }, [state])
 
   return (

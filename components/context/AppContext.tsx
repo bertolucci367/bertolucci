@@ -1,16 +1,29 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 const sharedState = {
   goToLines: true,
   productClosePath: '/produtos',
   compare: [],
+  addData: (obj: any) => {},
 }
 
 const AppContext = createContext(sharedState)
 
 export function AppWrapper({ children }) {
+  const [data, setData] = useState(sharedState)
+
   return (
-    <AppContext.Provider value={sharedState}>{children}</AppContext.Provider>
+    <AppContext.Provider
+      value={{
+        ...data,
+        addData: (obj) =>
+          setData((prev: any) => {
+            return { ...prev, ...obj }
+          }),
+      }}
+    >
+      {children}
+    </AppContext.Provider>
   )
 }
 
