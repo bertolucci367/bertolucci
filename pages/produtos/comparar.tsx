@@ -7,9 +7,11 @@ const ComparePage = () => {
 
   return (
     <LayoutProduct>
-      <List products={shared.compare} />
+      <List products={[]} />
     </LayoutProduct>
   )
 }
+
+// TODO: needs get product data from shared.compare slugs
 
 export default ComparePage

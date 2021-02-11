@@ -1,11 +1,11 @@
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 import Checkbox from '~/components/products/Checkbox'
-import { add, remove } from '~/components/products/compare'
+import { add, remove, has } from '~/components/products/compare'
 
 const Hover = styled.div([
   xw`lg:opacity-0`,
@@ -34,18 +34,7 @@ const List = ({ products = [], show = false, close = {} }) => {
   const router = useRouter()
   const shared = useAppContext()
 
-  const initialState = products.reduce((acc, p) => {
-    return { ...acc, [`${p.slug}`]: shared.compare.includes(p.slug) }
-  }, {})
-
-  const [state, setState] = useState(initialState)
-
   const handleCheckbox = ({ isChecked, product }) => {
-    setState((prevState) => ({
-      ...prevState,
-      [`${product.slug}`]: isChecked,
-    }))
-
     isChecked ? add({ product, shared }) : remove({ product, shared })
   }
 
@@ -79,7 +68,7 @@ const List = ({ products = [], show = false, close = {} }) => {
                   <Checkbox
                     name={product.slug}
                     fnChange={(v) => handleCheckbox({ isChecked: v, product })}
-                    checked={state[`${product.slug}`]}
+                    checked={has({ product, shared })}
                   />
                 </Hover>
               </div>
