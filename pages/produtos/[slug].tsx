@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import LayoutProduct from '~/components/LayoutProduct'

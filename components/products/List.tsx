@@ -1,10 +1,11 @@
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 import Checkbox from '~/components/products/Checkbox'
+import { add, remove } from '~/components/products/compare'
 
 const Hover = styled.div([
   xw`lg:opacity-0`,
@@ -13,9 +14,9 @@ const Hover = styled.div([
   },
 ])
 
-const NameStyled = styled.h2(xw`text-14px font-medium mt-2`)
+const NameStyled = styled.h2(xw`text-14px font-medium mt-2 px-2`)
 
-const DesignStyled = styled.p(xw`text-12px`)
+const DesignStyled = styled.p(xw`text-12px px-2`)
 
 const CardStyled = styled.li([
   xw`min-w-full sm:min-w-card relative`,
@@ -39,27 +40,14 @@ const List = ({ products = [], show = false, close = {} }) => {
 
   const [state, setState] = useState(initialState)
 
-  const handleCheckbox = ({ v, product }) => {
+  const handleCheckbox = ({ isChecked, product }) => {
     setState((prevState) => ({
       ...prevState,
-      [`${product.slug}`]: v,
+      [`${product.slug}`]: isChecked,
     }))
+
+    isChecked ? add({ product, shared }) : remove({ product, shared })
   }
-
-  useEffect(() => {
-    const res = [...shared.compare]
-
-    Object.entries(state).forEach(([key, value]) => {
-      const idx = res.findIndex((val) => val === key)
-      if (value && idx === -1) {
-        res.push(key)
-      } else if (!value && idx >= 0) {
-        res.splice(idx, 1)
-      }
-    })
-
-    shared.addData({ compare: res })
-  }, [state])
 
   return (
     <ul
@@ -87,13 +75,13 @@ const List = ({ products = [], show = false, close = {} }) => {
                   xw`relative bg-gray-200 bg-center bg-cover`,
                 ]}
               >
-                <div css={xw`absolute bottom-1 left-2 z-20`}>
+                <Hover css={xw`absolute bottom-1 left-2 z-20`}>
                   <Checkbox
                     name={product.slug}
-                    fnChange={(v) => handleCheckbox({ v, product })}
+                    fnChange={(v) => handleCheckbox({ isChecked: v, product })}
                     checked={state[`${product.slug}`]}
                   />
-                </div>
+                </Hover>
               </div>
               <Hover>
                 <NameStyled>

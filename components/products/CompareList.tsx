@@ -1,17 +1,21 @@
-import { useEffect, useState, useCallback } from 'react'
 import { useAppContext } from '~/components/context/AppContext'
 import xw from 'xwind'
+import Link from 'next/link'
 
 const CompareList = () => {
   const shared = useAppContext()
   return (
-    <div css={xw`text-12px`}>
-      <h2 css={xw`font-medium mb-2`}>
-        Acessar seleção de produtos: {shared.compare.length}
-      </h2>
+    <div css={xw`text-13px`}>
+      <Link href="/produtos/comparar">
+        <a css={xw`font-medium mb-2 hover:cursor-pointer`}>
+          Acessar seleção de produtos:
+        </a>
+      </Link>
       <ul>
-        {shared.compare.map((val) => (
-          <li key={val}>{val}</li>
+        {shared.compare.map((prod, i) => (
+          <li key={i} css={xw`font-light`}>
+            {prod.name} ({prod.code})
+          </li>
         ))}
       </ul>
     </div>
