@@ -26,7 +26,7 @@ const Products = ({ products = [] }) => {
   return (
     <LayoutProduct>
       <h1 css={xw`h-0 opacity-0`}>Produtos</h1>
-      <List products={products} href="/produtos/linhas/nitens/C870" />
+      <List products={products} />
     </LayoutProduct>
   )
 }

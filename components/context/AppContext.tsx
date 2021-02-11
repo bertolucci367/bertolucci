@@ -3,6 +3,7 @@ import { createContext, useContext } from 'react'
 const sharedState = {
   goToLines: true,
   productClosePath: '/produtos',
+  compare: [],
 }
 
 const AppContext = createContext(sharedState)
