@@ -2,7 +2,6 @@ import { GraphQLClient } from 'graphql-request'
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
 import { useAppContext } from '~/components/context/AppContext'
-import { useRouter } from 'next/router'
 
 const Materials = ({ products }) => {
   const shared = useAppContext()

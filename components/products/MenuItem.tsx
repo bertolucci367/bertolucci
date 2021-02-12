@@ -2,7 +2,7 @@ import xw from 'xwind'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 
-const SubMenu = styled.ul([
+const SubMenuStyled = styled.ul([
   xw`lg:opacity-0 lg:hidden w-full bg-red-100 absolute left-0 flex lg:justify-center py-4`,
   {
     transition: 'opacity 350ms ease',
@@ -12,7 +12,7 @@ const SubMenu = styled.ul([
 const SubMenuLabel = styled.span(xw``)
 
 const MenuItemStyled = styled.li(xw`mx-4`, {
-  [`:hover ${SubMenu}`]: {
+  [`:hover ${SubMenuStyled}`]: {
     opacity: 1,
     cursor: 'pointer',
     zIndex: 50,
@@ -24,7 +24,7 @@ const MenuItemStyled = styled.li(xw`mx-4`, {
   },
 })
 
-const typologies = [
+export const typologies = [
   { name: 'lampshade' },
   { name: 'arandela' },
   { name: 'coluna' },
@@ -32,7 +32,7 @@ const typologies = [
   { name: 'plafom' },
 ]
 
-const materials = [
+export const materials = [
   { name: 'acrilico' },
   { name: 'ceramica' },
   { name: 'cortiça' },
@@ -43,7 +43,7 @@ const materials = [
   { name: 'vidro' },
 ]
 
-const designers = [
+export const designers = [
   {
     img:
       'http://assets2.bertolucci.com.br/uploads/designer_images/image/517ed6eb43493b7e4600009d/thumb_ana-strumpf.jpg',
@@ -112,7 +112,7 @@ const designers = [
   },
 ]
 
-const families = [
+export const families = [
   { name: '2050' },
   { name: '3D de luxo' },
   { name: '85g' },
@@ -157,12 +157,12 @@ interface MenuItemProps {
   children?: React.ReactNode
 }
 
-const MenuItem = ({ name, subItems, path, children }: MenuItemProps) => {
+export const MenuItem = ({ name, subItems, path, children }: MenuItemProps) => {
   return (
     <MenuItemStyled>
       <SubMenuLabel>{name}</SubMenuLabel>
       {subItems && (
-        <SubMenu>
+        <SubMenuStyled>
           {subItems.map(({ name, img }) => (
             <li key={name} css={xw`px-4 py-2 w-1/5`}>
               <Link href={`/produtos/${path}/${slugify(name)}`}>
@@ -173,26 +173,9 @@ const MenuItem = ({ name, subItems, path, children }: MenuItemProps) => {
               </Link>
             </li>
           ))}
-        </SubMenu>
+        </SubMenuStyled>
       )}
       {children}
     </MenuItemStyled>
   )
 }
-
-const subMenuProducts = (
-  <nav css={xw`w-full`}>
-    <ul css={xw`flex justify-center`}>
-      <MenuItem name="tipologia+" subItems={typologies} path="tipologias" />
-      <MenuItem name="materiais+" subItems={materials} path="materiais" />
-      <MenuItem name="designers+" subItems={designers} path="designers" />
-      <MenuItem name="linhas+" subItems={families} path="linhas" />
-      <MenuItem name="busca">
-        <input type="search" css={xw`border border-gray-500 ml-2`} />
-      </MenuItem>
-      <MenuItem name="baixar o catálogo" />
-    </ul>
-  </nav>
-)
-
-export { subMenuProducts }

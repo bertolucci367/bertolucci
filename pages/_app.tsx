@@ -1,7 +1,4 @@
 import Head from 'next/head'
-import { Global } from '@emotion/react'
-import xw from 'xwind'
-
 import { AppWrapper } from '~/components/context/AppContext'
 
 import '../styles/global.css'
@@ -25,10 +22,6 @@ function App({ Component, pageProps }) {
           crossOrigin=""
         />
       </Head>
-      <Global
-        //keyframes + ring and shadow classes variables  ... to global styles
-        styles={xw`XWIND_BASE XWIND_GLOBAL`}
-      />
       <Component {...pageProps} />
     </AppWrapper>
   )

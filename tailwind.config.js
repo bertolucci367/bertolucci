@@ -4,10 +4,6 @@ module.exports = {
   purge: ['./pages/**/*.tsx'],
   darkMode: 'class',
   theme: {
-    fontFamily: {
-      body: ['FuturaStdLight', 'Helvetica', 'Arial', 'Sans-serif'],
-      medium: 'FuturaStdMedium',
-    },
     fontSize: {
       '12px': '1.2rem',
       '13px': '1.3rem',
@@ -17,6 +13,10 @@ module.exports = {
 
     extend: {
       colors,
+      fontFamily: {
+        body: ['FuturaStdLight', 'Helvetica', 'Arial', 'Sans-serif'],
+        medium: 'FuturaStdMedium',
+      },
       height: { '90vh': '90vh' },
       maxHeight: { '90vh': '90vh' },
       minWidth: { card: '225px' },
