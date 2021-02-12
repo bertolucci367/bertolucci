@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { css } from '@emotion/react'
 import xw from 'xwind'
+import Image from 'next/image'
 
 import Menu from '~/components/Menu'
 import MenuButton from '~/components/MenuButton'
@@ -74,14 +75,26 @@ const Layout = ({ children, subMenu }: LayoutProps) => {
 
         <MenuButton>
           <button onClick={handleClick} css={xw`flex items-center px-4 py-3`}>
-            <svg
-              css={xw`h-8`}
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Menu</title>
-              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-            </svg>
+            {!isOpenMenu && (
+              <svg
+                css={xw`h-8`}
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+              </svg>
+            )}
+
+            {isOpenMenu && (
+              <Image
+                src="/close.svg"
+                layout="fixed"
+                height="16"
+                width="16"
+                alt="close icon"
+              />
+            )}
           </button>
         </MenuButton>
         <div
