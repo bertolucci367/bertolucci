@@ -22,7 +22,12 @@ const SubMenuStyled = styled.ul<SubMenuProps>(({ show }) => [
   },
 ])
 
-const SubMenuItemStyled = styled.li(xw`py-5 lg:py-0`)
+const SubMenuItemStyled = styled.li<SubMenuProps>(({ show }) => [
+  xw`py-5 lg:py-0`,
+  {
+    display: show ? 'block' : 'none',
+  },
+])
 
 const SubMenuLabel = styled.span<SubMenuProps>(({ show }) => [
   xw`inline-block text-13px`,
@@ -37,6 +42,59 @@ const SubMenuLabel = styled.span<SubMenuProps>(({ show }) => [
 ])
 
 const MenuItemStyled = styled.li(xw`mx-4 my-10 lg:my-0`)
+
+interface MenuItemProps {
+  name?: string
+  subItems?: any
+  path?: string
+  children?: React.ReactNode
+  plus?: boolean
+}
+
+export const MenuItem = ({
+  name,
+  subItems,
+  path,
+  children,
+  plus,
+}: MenuItemProps) => {
+  const shared = useAppContext()
+  const [open, setOpen] = useState(false)
+
+  const handleToggle = (name: string) => {
+    if (!plus) return
+    setOpen(!open)
+    shared.addData({ menuOpen: name })
+  }
+
+  useEffect(() => {
+    if (!plus) return
+    if (shared.menuOpen !== name) setOpen(false)
+  }, [shared.menuOpen])
+
+  return (
+    <MenuItemStyled>
+      <SubMenuLabel show={open} onClick={(e) => handleToggle(name)}>
+        {name}
+      </SubMenuLabel>
+      {subItems && (
+        <SubMenuStyled show={open}>
+          {subItems.map(({ name, img }) => (
+            <SubMenuItemStyled key={name} show={open}>
+              <Link href={`/produtos/${path}/${slugify(name)}`}>
+                <a css={xw`flex`}>
+                  {img && <img src={img} css={xw`float-left mr-4`} />}
+                  {name}
+                </a>
+              </Link>
+            </SubMenuItemStyled>
+          ))}
+        </SubMenuStyled>
+      )}
+      {children}
+    </MenuItemStyled>
+  )
+}
 
 export const typologies = [
   { name: 'lampshade' },
@@ -162,58 +220,4 @@ const slugify = (text) => {
     .replace(/&/g, '-y-') // Replace & with 'and'
     .replace(/[^\w\-]+/g, '') // Remove all non-word chars
     .replace(/\-\-+/g, '-') // Replace multiple - with single -
-}
-
-interface MenuItemProps {
-  name?: string
-  subItems?: any
-  path?: string
-  children?: React.ReactNode
-  plus?: boolean
-}
-
-export const MenuItem = ({
-  name,
-  subItems,
-  path,
-  children,
-  plus,
-}: MenuItemProps) => {
-  const shared = useAppContext()
-  const [open, setOpen] = useState(false)
-  const [curr, _] = useState(name)
-
-  const handleToggle = (name: string) => {
-    if (!plus) return
-    setOpen(!open)
-    shared.addData({ menuOpen: name })
-  }
-
-  useEffect(() => {
-    if (!plus) return
-    if (shared.menuOpen !== name) setOpen(false)
-  }, [shared.menuOpen])
-
-  return (
-    <MenuItemStyled>
-      <SubMenuLabel show={open} onClick={(e) => handleToggle(name)}>
-        {name}
-      </SubMenuLabel>
-      {subItems && (
-        <SubMenuStyled show={open}>
-          {subItems.map(({ name, img }) => (
-            <SubMenuItemStyled key={name}>
-              <Link href={`/produtos/${path}/${slugify(name)}`}>
-                <a css={xw`flex`}>
-                  {img && <img src={img} css={xw`float-left mr-4`} />}
-                  {name}
-                </a>
-              </Link>
-            </SubMenuItemStyled>
-          ))}
-        </SubMenuStyled>
-      )}
-      {children}
-    </MenuItemStyled>
-  )
 }
