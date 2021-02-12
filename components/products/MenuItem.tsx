@@ -3,15 +3,17 @@ import styled from '@emotion/styled'
 import Link from 'next/link'
 
 const SubMenuStyled = styled.ul([
-  xw`lg:opacity-0 lg:hidden w-full bg-red-100 absolute left-0 flex lg:justify-center py-4`,
+  xw`hidden w-full bg-red-100 absolute left-0 lg:flex lg:flex-col
+  py-4
+  lg:opacity-0 lg:hidden lg:flex lg:justify-center`,
   {
     transition: 'opacity 350ms ease',
   },
 ])
 
-const SubMenuLabel = styled.span(xw``)
+const SubMenuLabel = styled.a(xw`inline-block text-13px`)
 
-const MenuItemStyled = styled.li(xw`mx-4`, {
+const MenuItemStyled = styled.li(xw`mx-4 my-10 lg:my-0`, {
   [`:hover ${SubMenuStyled}`]: {
     opacity: 1,
     cursor: 'pointer',

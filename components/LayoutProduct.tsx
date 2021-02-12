@@ -19,8 +19,8 @@ const subMenuProducts = ({ router, search = '' }) => {
   }, [])
 
   return (
-    <nav css={xw`w-full`}>
-      <ul css={xw`flex justify-center`}>
+    <nav css={xw`flex lg:w-full lg:justify-center`}>
+      <ul css={xw`lg:flex lg:flex-row lg:justify-center lg:justify-evenly`}>
         <MenuItem name="tipologia+" subItems={typologies} path="tipologias" />
         <MenuItem name="materiais+" subItems={materials} path="materiais" />
         <MenuItem name="designers+" subItems={designers} path="designers" />
@@ -65,7 +65,12 @@ const LayoutProduct = ({ children, search }: LayoutProductProps) => {
   return (
     <Layout subMenu={subMenuProducts({ router, search })}>
       <div css={[xw`col-start-1 col-end-2 row-start-2 row-end-2 h-full`]}>
-        <div css={[xw`sticky text-center`, `top: calc(50% - 45px);`]}>
+        <div
+          css={[
+            xw`sticky text-center hidden lg:block`,
+            `top: calc(50% - 45px);`,
+          ]}
+        >
           <CompareList />
         </div>
       </div>

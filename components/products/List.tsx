@@ -19,7 +19,7 @@ const NameStyled = styled.h2(xw`text-14px font-medium mt-2 px-2`)
 const DesignStyled = styled.p(xw`text-12px px-2`)
 
 const CardStyled = styled.li([
-  xw`min-w-full sm:min-w-card relative`,
+  xw`sm:min-w-card relative`,
   {
     [':hover']: { cursor: 'pointer' },
     [`:hover ${Hover}`]: {
@@ -27,6 +27,7 @@ const CardStyled = styled.li([
     },
     height: '270px',
     margin: '0 2px',
+    minWidth: '48%',
   },
 ])
 

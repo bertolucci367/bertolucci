@@ -23,7 +23,7 @@ const Layout = ({ children, subMenu }: LayoutProps) => {
       css={css`
         display: grid;
         grid-template-rows: 70px 1fr;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 12px repeat(1, 1fr) 12px;
 
         @media (orientation: landscape) {
           grid-template-rows: 40px 1fr;
@@ -58,10 +58,12 @@ const Layout = ({ children, subMenu }: LayoutProps) => {
         <div
           css={[
             `display: ${isOpenMenu ? 'flex' : 'none'}`,
-            xw`fixed top-0 bottom-0 left-0 right-0 flex-wrap lg:relative lg:flex
-              justify-between items-start lg:justify-center
-              p-8 w-11/12 lg:w-full m-auto bg-white
-              border border-solid border-black lg:border-0
+            xw`
+              fixed top-0 bottom-0 left-0 right-0
+              flex-nowrap items-center
+              lg:flex lg:flex-wrap lg:relative lg:justify-center
+              p-8 m-auto bg-white border border-solid border-black lg:border-0
+              w-11/12 lg:w-full h-2/3 lg:h-auto
               col-start-2`,
           ]}
         >
