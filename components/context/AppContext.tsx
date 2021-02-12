@@ -4,6 +4,7 @@ const sharedState = {
   goToLines: true,
   productClosePath: '/produtos',
   compare: [],
+  menuOpen: '',
   addData: (obj: any) => {},
 }
 

@@ -19,12 +19,17 @@ const subMenuProducts = ({ router, search = '' }) => {
   }, [])
 
   return (
-    <nav css={xw`flex lg:w-full lg:justify-center`}>
+    <nav css={xw`flex max-h-full overflow-y-auto w-full lg:justify-center`}>
       <ul css={xw`lg:flex lg:flex-row lg:justify-center lg:justify-evenly`}>
-        <MenuItem name="tipologia+" subItems={typologies} path="tipologias" />
-        <MenuItem name="materiais+" subItems={materials} path="materiais" />
-        <MenuItem name="designers+" subItems={designers} path="designers" />
-        <MenuItem name="linhas+" subItems={families} path="linhas" />
+        <MenuItem
+          name="tipologia"
+          subItems={typologies}
+          path="tipologias"
+          plus
+        />
+        <MenuItem name="materiais" subItems={materials} path="materiais" plus />
+        <MenuItem name="designers" subItems={designers} path="designers" plus />
+        <MenuItem name="linhas" subItems={families} path="linhas" plus />
         <MenuItem name="busca">
           <input
             ref={searchRef}

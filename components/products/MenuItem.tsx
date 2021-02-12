@@ -1,30 +1,42 @@
+import { useEffect, useState } from 'react'
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import Link from 'next/link'
+import { useAppContext } from '~/components/context/AppContext'
 
-const SubMenuStyled = styled.ul([
-  xw`hidden w-full bg-red-100 absolute left-0 lg:flex lg:flex-col
-  py-4
-  lg:opacity-0 lg:hidden lg:flex lg:justify-center`,
+type SubMenuProps = {
+  show?: boolean
+}
+
+const SubMenuStyled = styled.ul<SubMenuProps>(({ show }) => [
+  xw`w-full
+  pl-8 lg:pl-0
+  lg:absolute lg:left-0
+  lg:flex flex-col
+  lg:flex lg:justify-center`,
   {
     transition: 'opacity 350ms ease',
+    opacity: show ? '1' : '0',
+    visibility: show ? 'visible' : 'hidden',
+    height: show ? 'auto' : '0',
   },
 ])
 
-const SubMenuLabel = styled.a(xw`inline-block text-13px`)
+const SubMenuItemStyled = styled.li(xw`py-5 lg:py-0`)
 
-const MenuItemStyled = styled.li(xw`mx-4 my-10 lg:my-0`, {
-  [`:hover ${SubMenuStyled}`]: {
-    opacity: 1,
-    cursor: 'pointer',
-    zIndex: 50,
-    display: 'flex',
+const SubMenuLabel = styled.span<SubMenuProps>(({ show }) => [
+  xw`inline-block text-13px`,
+  {
+    fontFamily: show ? 'FuturaStdMedium' : 'FuturaStdLight',
   },
-  [`:hover ${SubMenuLabel}`]: {
-    color: 'red',
-    cursor: 'pointer',
-  },
-})
+  `
+  &:after {
+    content: ${show ? '"-"' : '"+"'};
+  }
+  `,
+])
+
+const MenuItemStyled = styled.li(xw`mx-4 my-10 lg:my-0`)
 
 export const typologies = [
   { name: 'lampshade' },
@@ -157,23 +169,47 @@ interface MenuItemProps {
   subItems?: any
   path?: string
   children?: React.ReactNode
+  plus?: boolean
 }
 
-export const MenuItem = ({ name, subItems, path, children }: MenuItemProps) => {
+export const MenuItem = ({
+  name,
+  subItems,
+  path,
+  children,
+  plus,
+}: MenuItemProps) => {
+  const shared = useAppContext()
+  const [open, setOpen] = useState(false)
+  const [curr, _] = useState(name)
+
+  const handleToggle = (name: string) => {
+    if (!plus) return
+    setOpen(!open)
+    shared.addData({ menuOpen: name })
+  }
+
+  useEffect(() => {
+    if (!plus) return
+    if (shared.menuOpen !== name) setOpen(false)
+  }, [shared.menuOpen])
+
   return (
     <MenuItemStyled>
-      <SubMenuLabel>{name}</SubMenuLabel>
+      <SubMenuLabel show={open} onClick={(e) => handleToggle(name)}>
+        {name}
+      </SubMenuLabel>
       {subItems && (
-        <SubMenuStyled>
+        <SubMenuStyled show={open}>
           {subItems.map(({ name, img }) => (
-            <li key={name} css={xw`px-4 py-2 w-1/5`}>
+            <SubMenuItemStyled key={name}>
               <Link href={`/produtos/${path}/${slugify(name)}`}>
-                <a>
-                  {img && <img src={img} />}
+                <a css={xw`flex`}>
+                  {img && <img src={img} css={xw`float-left mr-4`} />}
                   {name}
                 </a>
               </Link>
-            </li>
+            </SubMenuItemStyled>
           ))}
         </SubMenuStyled>
       )}
