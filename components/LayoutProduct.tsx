@@ -20,7 +20,7 @@ const subMenuProducts = ({ router, search = '' }) => {
 
   return (
     <nav css={xw`flex max-h-full overflow-y-auto w-full lg:justify-center`}>
-      <ul css={xw`lg:flex lg:flex-row lg:justify-center lg:justify-evenly`}>
+      <ul css={xw`lg:flex lg:flex-row lg:justify-center`}>
         <MenuItem
           name="tipologia"
           subItems={typologies}

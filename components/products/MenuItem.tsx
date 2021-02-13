@@ -2,25 +2,16 @@ import { useEffect, useState } from 'react'
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useAppContext } from '~/components/context/AppContext'
 
 type SubMenuProps = {
   show?: boolean
+  plus?: boolean
+  name?: string
 }
 
-const SubMenuStyled = styled.ul<SubMenuProps>(({ show }) => [
-  xw`w-full
-  pl-8 lg:pl-0
-  lg:absolute lg:left-0
-  lg:flex flex-col
-  lg:flex lg:justify-center`,
-  {
-    transition: 'opacity 350ms ease',
-    opacity: show ? '1' : '0',
-    visibility: show ? 'visible' : 'hidden',
-    height: show ? 'auto' : '0',
-  },
-])
+const MenuItemStyled = styled.li(xw`mx-4 my-10 lg:my-0`)
 
 const SubMenuItemStyled = styled.li<SubMenuProps>(({ show }) => [
   xw`py-5 lg:py-0`,
@@ -29,19 +20,55 @@ const SubMenuItemStyled = styled.li<SubMenuProps>(({ show }) => [
   },
 ])
 
-const SubMenuLabel = styled.span<SubMenuProps>(({ show }) => [
-  xw`inline-block text-13px`,
+const custom = {
+  designers: [
+    xw`justify-items-start lg:justify-start lg:max-w-screen-lg lg:mx-auto`,
+    {
+      [`${SubMenuItemStyled}`]: xw`lg:w-1/6 mb-3.5`,
+    },
+  ],
+}
+
+const SubMenuStyled = styled.ul<SubMenuProps>(({ show, name }) => [
+  xw`w-full bg-white
+  pl-8 lg:pl-0 lg:mt-5 lg:pb-5
+  flex-col
+  lg:absolute lg:left-0 lg:right-0 lg:max-w-screen-lg lg:mx-auto
+  lg:flex lg:flex-wrap lg:flex-row lg:justify-center`,
+  {
+    transition: 'opacity 350ms ease',
+    opacity: show ? '1' : '0',
+    visibility: show ? 'visible' : 'hidden',
+    height: show ? 'auto' : '0',
+  },
+  custom[name],
+  `
+  &:hover {
+    li {
+      opacity: 0.5;
+
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+  }
+  `,
+])
+
+const SubMenuLabel = styled.span<SubMenuProps>(({ show, plus }) => [
+  xw`inline-block text-13px hover:cursor-pointer`,
   {
     fontFamily: show ? 'FuturaStdMedium' : 'FuturaStdLight',
   },
   `
   &:after {
-    content: ${show ? '"-"' : '"+"'};
+    content: ${plus ? (show ? '"-"' : '"+"') : ''};
   }
   `,
 ])
 
-const MenuItemStyled = styled.li(xw`mx-4 my-10 lg:my-0`)
+const SubMenuLink = styled.a(xw`flex lg:px-5`)
 
 interface MenuItemProps {
   name?: string
@@ -74,18 +101,21 @@ export const MenuItem = ({
 
   return (
     <MenuItemStyled>
-      <SubMenuLabel show={open} onClick={(e) => handleToggle(name)}>
+      <SubMenuLabel show={open} plus={plus} onClick={(e) => handleToggle(name)}>
         {name}
       </SubMenuLabel>
       {subItems && (
-        <SubMenuStyled show={open}>
-          {subItems.map(({ name, img }) => (
+        <SubMenuStyled show={open} name={name}>
+          {subItems.map(({ name, img, thumb }) => (
             <SubMenuItemStyled key={name} show={open}>
               <Link href={`/produtos/${path}/${slugify(name)}`}>
-                <a css={xw`flex`}>
-                  {img && <img src={img} css={xw`float-left mr-4`} />}
+                <SubMenuLink>
+                  {img && (
+                    <img src={img} css={[xw`mr-2.5`, { float: 'left' }]} />
+                  )}
+                  {thumb && thumb}
                   {name}
-                </a>
+                </SubMenuLink>
               </Link>
             </SubMenuItemStyled>
           ))}
@@ -96,12 +126,36 @@ export const MenuItem = ({
   )
 }
 
+const Thumb = ({ pos }) => {
+  return (
+    <div css={[xw`overflow-hidden`, { height: '32px' }]}>
+      <div
+        css={{
+          marginTop: `-${32 * pos}px`,
+          marginRight: '4px',
+          // ':hover': { marginTop: `-${32 * (pos + 1)}px` },
+        }}
+      >
+        <Image src="/pic_thumbs.png" layout="fixed" height={448} width={32} />
+      </div>
+    </div>
+  )
+}
+
 export const typologies = [
-  { name: 'lampshade' },
-  { name: 'arandela' },
-  { name: 'coluna' },
-  { name: 'pendente' },
-  { name: 'plafom' },
+  {
+    slug: 'lampshade',
+    name: 'abajur',
+    thumb: <Thumb pos={0} />,
+  },
+  {
+    slug: 'sconce',
+    name: 'arandela',
+    thumb: <Thumb pos={2} />,
+  },
+  { name: 'coluna', thumb: <Thumb pos={4} /> },
+  { name: 'pendente', thumb: <Thumb pos={6} /> },
+  { name: 'plafom', thumb: <Thumb pos={8} /> },
 ]
 
 export const materials = [

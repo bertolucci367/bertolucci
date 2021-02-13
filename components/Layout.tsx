@@ -61,7 +61,7 @@ const Layout = ({ children, subMenu }: LayoutProps) => {
             `display: ${isOpenMenu ? 'flex' : 'none'}`,
             xw`
               fixed top-0 bottom-0 left-0 right-0
-              overflow-y-scroll
+              overflow-y-scroll lg:overflow-y-visible
               flex-nowrap items-center
               lg:flex lg:flex-wrap lg:relative lg:justify-center
               p-8 m-auto bg-white border border-solid border-black lg:border-0

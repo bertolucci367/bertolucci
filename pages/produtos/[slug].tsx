@@ -27,7 +27,7 @@ const FinishingCategoryStyled = styled.li({
 const Product = ({ product }) => {
   const shared = useAppContext()
 
-  let path = `${shared.productClosePath}/${product.family_slug}/${product.code}`
+  let path = `${shared.productClosePath}/linhas/${product.family_slug}/${product.code}`
 
   if (!shared.goToLines) {
     path = shared.productClosePath
