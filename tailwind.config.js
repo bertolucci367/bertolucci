@@ -18,6 +18,7 @@ module.exports = {
         medium: 'FuturaStdMedium',
       },
       height: {
+        '32px': '32px',
         '90vh': '90vh',
         card: '200px',
         cardImg: '130px',
@@ -26,6 +27,9 @@ module.exports = {
       },
       maxHeight: { '90vh': '90vh' },
       minWidth: { card: '225px' },
+      width: {
+        '32px': '32px',
+      },
     },
   },
   variants: {

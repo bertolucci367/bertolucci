@@ -1,7 +1,7 @@
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 import Checkbox from '~/components/products/Checkbox'
@@ -50,7 +50,21 @@ const List = ({ products = [], show = false, close = {} }) => {
     >
       {products.map((product, i) => (
         <CardStyled key={i}>
-          {Object.keys(close).length > 0 && <Link href={close}>Close</Link>}
+          {Object.keys(close).length > 0 && (
+            <div css={xw`absolute z-20 -ml-8`}>
+              <Link href={close}>
+                <a>
+                  <Image
+                    src="/close.svg"
+                    layout="fixed"
+                    height="16"
+                    width="16"
+                    alt="close icon"
+                  />
+                </a>
+              </Link>
+            </div>
+          )}
           <Link
             href={
               show
