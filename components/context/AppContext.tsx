@@ -5,6 +5,7 @@ const sharedState = {
   productClosePath: '/produtos',
   compare: [],
   menuOpen: '',
+  menuIsOpen: false,
   addData: (obj: any) => {},
 }
 

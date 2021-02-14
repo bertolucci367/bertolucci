@@ -12,9 +12,17 @@ type SubMenuProps = {
 }
 
 const MenuItemStyled = styled.li(xw`mx-4 my-10 lg:my-0`)
+const SubMenuWrapStyled = styled.div<SubMenuProps>(({ show }) => [
+  xw`bg-white lg:mt-2.5 lg:absolute lg:left-0 lg:right-0`,
+  {
+    display: show ? 'block' : 'none',
+  },
+])
+const SubMenuTitle = styled.span(xw`text-12px lg:px-5`)
+const SubMenuLink = styled.a(xw`flex text-13px lg:px-5`)
 
-const SubMenuItemStyled = styled.li<SubMenuProps>(({ show }) => [
-  xw`py-5 lg:py-0`,
+const SubMenuItemStyled = styled.li<SubMenuProps>(({ show = true }) => [
+  xw`my-5 lg:my-0`,
   {
     display: show ? 'block' : 'none',
   },
@@ -27,19 +35,28 @@ const custom = {
       [`${SubMenuItemStyled}`]: xw`lg:w-1/6 mb-3.5`,
     },
   ],
+  linhas: [
+    `
+    @media (min-width: 1024px) {
+      display: block;
+      column-width: 142px;
+      column-gap: 4px;
+      column-count: 6;
+    }
+  `,
+  ],
 }
 
-const SubMenuStyled = styled.ul<SubMenuProps>(({ show, name }) => [
-  xw`w-full bg-white
+const SubMenuStyled = styled.ul<SubMenuProps>(({ name }) => [
+  xw`
+  w-full bg-white
   pl-8 lg:pl-0 lg:mt-5 lg:pb-5
   flex-col
-  lg:absolute lg:left-0 lg:right-0 lg:max-w-screen-lg lg:mx-auto
-  lg:flex lg:flex-wrap lg:flex-row lg:justify-center`,
+  lg:max-w-screen-lg lg:mx-auto
+  lg:flex lg:flex-wrap lg:flex-row lg:justify-center
+  `,
   {
     transition: 'opacity 350ms ease',
-    opacity: show ? '1' : '0',
-    visibility: show ? 'visible' : 'hidden',
-    height: show ? 'auto' : '0',
   },
   custom[name],
   `
@@ -49,9 +66,16 @@ const SubMenuStyled = styled.ul<SubMenuProps>(({ show, name }) => [
 
       &:hover {
         opacity: 1;
-        cursor: pointer;
       }
     }
+  }
+
+  span:hover {
+    cursor: default;
+  }
+
+  a:hover {
+    cursor: pointer;
   }
   `,
 ])
@@ -68,14 +92,13 @@ const SubMenuLabel = styled.span<SubMenuProps>(({ show, plus }) => [
   `,
 ])
 
-const SubMenuLink = styled.a(xw`flex lg:px-5`)
-
 interface MenuItemProps {
   name?: string
   subItems?: any
   path?: string
   children?: React.ReactNode
   plus?: boolean
+  lines?: boolean
 }
 
 export const MenuItem = ({
@@ -84,42 +107,71 @@ export const MenuItem = ({
   path,
   children,
   plus,
+  lines,
 }: MenuItemProps) => {
   const shared = useAppContext()
-  const [open, setOpen] = useState(false)
+  let _subItems = subItems
+
+  if (lines) {
+    let dic = {}
+    let subLines = []
+    subItems.forEach((item) => {
+      const char = item.name.charAt(0)
+      dic[char] = dic[char] ? [...dic[char], item] : [item]
+    })
+
+    for (var [key, value] of Object.entries(dic)) {
+      subLines.push({ name: key, title: true })
+
+      const arr: any = value
+      arr.map((item: any) => subLines.push(item))
+    }
+
+    _subItems = subLines
+  }
 
   const handleToggle = (name: string) => {
     if (!plus) return
-    setOpen(!open)
-    shared.addData({ menuOpen: name })
+    const _isOpen = shared.menuOpen === name ? !shared.menuIsOpen : true
+    shared.addData({ menuOpen: name, menuIsOpen: _isOpen })
   }
 
-  useEffect(() => {
-    if (!plus) return
-    if (shared.menuOpen !== name) setOpen(false)
-  }, [shared.menuOpen])
+  const isOpenMenu = (name: string) => {
+    return shared.menuOpen === name && shared.menuIsOpen
+  }
 
   return (
     <MenuItemStyled>
-      <SubMenuLabel show={open} plus={plus} onClick={(e) => handleToggle(name)}>
+      <SubMenuLabel
+        show={isOpenMenu(name)}
+        plus={plus}
+        onClick={(e) => handleToggle(name)}
+      >
         {name}
       </SubMenuLabel>
-      {subItems && (
-        <SubMenuStyled show={open} name={name}>
-          {subItems.map(({ name, img, thumb }) => (
-            <SubMenuItemStyled key={name} show={open}>
-              <Link href={`/produtos/${path}/${slugify(name)}`}>
-                <SubMenuLink>
-                  {img && (
-                    <img src={img} css={[xw`mr-2.5`, { float: 'left' }]} />
-                  )}
-                  {thumb && thumb}
-                  {name}
-                </SubMenuLink>
-              </Link>
-            </SubMenuItemStyled>
-          ))}
-        </SubMenuStyled>
+      {_subItems && (
+        <SubMenuWrapStyled show={isOpenMenu(name)}>
+          <SubMenuStyled show={isOpenMenu(name)} name={name}>
+            {_subItems.map(({ name, img, thumb, title }) => (
+              <SubMenuItemStyled key={name}>
+                {title && (
+                  <SubMenuTitle css={xw`font-medium`}>{name}</SubMenuTitle>
+                )}
+                {!title && (
+                  <Link href={`/produtos/${path}/${slugify(name)}`}>
+                    <SubMenuLink>
+                      {img && (
+                        <img src={img} css={[xw`mr-2.5`, { float: 'left' }]} />
+                      )}
+                      {thumb && thumb}
+                      {name}
+                    </SubMenuLink>
+                  </Link>
+                )}
+              </SubMenuItemStyled>
+            ))}
+          </SubMenuStyled>
+        </SubMenuWrapStyled>
       )}
       {children}
     </MenuItemStyled>
@@ -244,8 +296,10 @@ export const families = [
   { name: '85g' },
   { name: 'abaeté' },
   { name: 'alma' },
+  { name: 'anamórfica' },
   { name: 'apoena' },
   { name: 'araucária' },
+  { name: 'arco' },
   { name: 'atman' },
   { name: 'batuque' },
   { name: 'bella' },
@@ -254,6 +308,72 @@ export const families = [
   { name: 'beto galvez e nórea de vitto' },
   { name: 'bionda' },
   { name: 'canoa' },
+  { name: 'cantante' },
+  { name: 'carimbó' },
+  { name: 'cesta' },
+  { name: 'címbalo' },
+  { name: 'cine' },
+  { name: 'ciranda' },
+  { name: 'cresça e apareça' },
+  { name: 'débora aguiar' },
+  { name: 'deborah roig' },
+  { name: 'dendê' },
+  { name: 'dórica' },
+  { name: 'drum' },
+  { name: 'fernando piva' },
+  { name: 'flash' },
+  { name: 'fractus' },
+  { name: 'francisco cálio' },
+  { name: 'galeão' },
+  { name: 'gras' },
+  { name: 'guará' },
+  { name: 'herba' },
+  { name: 'ibira' },
+  { name: 'ju' },
+  { name: 'king size' },
+  { name: 'leonardo' },
+  { name: 'liana' },
+  { name: 'lótus' },
+  { name: 'luz ecológica' },
+  { name: 'maracatu' },
+  { name: 'marcelo rosenbaum' },
+  { name: 'marina linhares' },
+  { name: 'maxixe' },
+  { name: 'minimum' },
+  { name: 'mix print' },
+  { name: 'mix simples e dupla' },
+  { name: 'mube' },
+  { name: 'mube coluna' },
+  { name: 'nitens' },
+  { name: 'nonno' },
+  { name: 'nuvem' },
+  { name: 'oito' },
+  { name: 'olegário de sá e gilberto cioni' },
+  { name: 'orecchiette' },
+  { name: 'oscar mikail' },
+  { name: 'otto' },
+  { name: 'pequim' },
+  { name: 'piá' },
+  { name: 'poste' },
+  { name: 'quadrados' },
+  { name: 'queen size' },
+  { name: 'raízes' },
+  { name: 'ramy' },
+  { name: 'realejo' },
+  { name: 'roberto negrete' },
+  { name: 'se vira!' },
+  { name: 'siricutico' },
+  { name: 'súber' },
+  { name: 'taboa' },
+  { name: 'tifa' },
+  { name: 'tramas' },
+  { name: 'tríade' },
+  { name: 'tunga' },
+  { name: 'umbu' },
+  { name: 'universo' },
+  { name: 'urucum' },
+  { name: 'volta' },
+  { name: 'zumbi' },
 ]
 
 const slugify = (text) => {
