@@ -14,20 +14,23 @@ const Hover = styled.div([
   },
 ])
 
-const NameStyled = styled.h2(xw`text-14px font-medium mt-2 px-2`)
-
-const DesignStyled = styled.p(xw`text-12px px-2`)
+const NameStyled = styled.h2(xw`text-14px font-medium mt-2 px-2 truncate`)
+const DesignStyled = styled.p(xw`text-12px px-2 truncate`)
 
 const CardStyled = styled.li([
-  xw`sm:min-w-card relative`,
+  xw`
+  relative h-card
+  sm:min-w-card
+  lg:h-cardD
+  `,
   {
     [':hover']: { cursor: 'pointer' },
     [`:hover ${Hover}`]: {
       opacity: 1,
     },
-    height: '270px',
     margin: '0 2px',
     minWidth: '48%',
+    maxWidth: '48%',
   },
 ])
 
@@ -60,9 +63,11 @@ const List = ({ products = [], show = false, close = {} }) => {
                 css={[
                   `
                   width: 100%;
-                  height: 200px;
                   background: url('http://bertolucci.com.br${product.cover_image_url}')`,
-                  xw`relative bg-gray-200 bg-center bg-cover`,
+                  xw`
+                  relative bg-gray-200 bg-center bg-cover h-cardImg
+                  lg:h-cardImgD
+                  `,
                 ]}
               >
                 <Hover css={xw`absolute bottom-1 left-2 z-20`}>
