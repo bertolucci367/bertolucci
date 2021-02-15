@@ -102,9 +102,51 @@ const Layout = ({ children, subMenu }: LayoutProps) => {
         <div
           css={xw`hidden text-13px lg:flex flex-col justify-center items-end pr-4 col-start-3`}
         >
-          {contact.map((value, i) => (
-            <p key={i}>{value}</p>
-          ))}
+          <div css={xw`text-right relative w-full`}>
+            <div css={xw`lg:flex absolute left-0 top-2`}>
+              <a
+                href="https://www.facebook.com/iluminacao.bertolucci"
+                className="facebook icon"
+                target="_blank"
+              >
+                <Image
+                  src="/facebook.svg"
+                  layout="fixed"
+                  height="18"
+                  width="18"
+                  alt="facebook icon"
+                />
+              </a>
+              <a
+                href="https://instagram.com/bertolucci.iluminacao/"
+                className="instagram icon"
+                target="_blank"
+                css={xw`ml-5`}
+              >
+                <Image
+                  src="/instagram.svg"
+                  layout="fixed"
+                  height="18"
+                  width="18"
+                  alt="instagram icon"
+                />
+              </a>
+              <span css={xw`ml-5`} className="whatsapp icon">
+                <Image
+                  src="/whatsapp.svg"
+                  layout="fixed"
+                  height="18"
+                  width="18"
+                  alt="whatsapp icon"
+                />
+              </span>
+            </div>
+            {contact.map((value, i) => (
+              <span css={xw`block`} key={i}>
+                {value}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
