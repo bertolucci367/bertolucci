@@ -10,7 +10,7 @@ const Designer = ({ designer, products }) => {
   shared.productClosePath = `/produtos/designers/${designer.slug}`
 
   return (
-    <LayoutProduct>
+    <LayoutProduct designer={designer}>
       <List products={products} show />
     </LayoutProduct>
   )

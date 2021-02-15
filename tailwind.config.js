@@ -27,6 +27,7 @@ module.exports = {
       },
       maxHeight: { '90vh': '90vh' },
       minWidth: { card: '225px' },
+      maxWidth: { card: '225px', '48%': '48%', '49%': '49%' },
       width: {
         '32px': '32px',
       },

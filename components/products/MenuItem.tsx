@@ -152,13 +152,13 @@ export const MenuItem = ({
       {_subItems && (
         <SubMenuWrapStyled show={isOpenMenu(name)}>
           <SubMenuStyled show={isOpenMenu(name)} name={name}>
-            {_subItems.map(({ name, img, thumb, title }) => (
+            {_subItems.map(({ slug, name, img, thumb, title }) => (
               <SubMenuItemStyled key={name}>
                 {title && (
                   <SubMenuTitle css={xw`font-medium`}>{name}</SubMenuTitle>
                 )}
                 {!title && (
-                  <Link href={`/produtos/${path}/${slugify(name)}`}>
+                  <Link href={`/produtos/${path}/${slugify(slug || name)}`}>
                     <SubMenuLink>
                       {img && <img src={img} css={xw`mr-2.5 h-32px w-32px`} />}
                       {thumb && thumb}
@@ -203,9 +203,9 @@ export const typologies = [
     name: 'arandela',
     thumb: <Thumb pos={2} />,
   },
-  { name: 'coluna', thumb: <Thumb pos={4} /> },
-  { name: 'pendente', thumb: <Thumb pos={6} /> },
-  { name: 'plafom', thumb: <Thumb pos={8} /> },
+  { slug: 'column', name: 'coluna', thumb: <Thumb pos={4} /> },
+  { slug: 'pending', name: 'pendente', thumb: <Thumb pos={6} /> },
+  { slug: 'plafom', name: 'plafom', thumb: <Thumb pos={8} /> },
 ]
 
 export const materials = [
@@ -374,22 +374,24 @@ export const families = [
   { name: 'zumbi' },
 ]
 
-const slugify = (text) => {
-  const from = 'ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;'
-  const to = 'aaaaaeeeeeiiiiooooouuuunc------'
+const slugify = (str) => {
+  str = str.replace(/^\s+|\s+$/g, '') // trim
+  str = str.toLowerCase()
 
-  const newText = text
-    .split('')
-    .map((letter, i) =>
-      letter.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i)),
-    )
+  // remove accents, swap ñ for n, etc
+  const from = 'àáãäâèéëêìíïîòóöôùúüûñç·/_,:;'
+  const to = 'aaaaaeeeeiiiioooouuuunc------'
 
-  return newText
-    .toString() // Cast to string
-    .toLowerCase() // Convert the string to lowercase letters
-    .trim() // Remove whitespace from both sides of a string
-    .replace(/\s+/g, '-') // Replace spaces with -
-    .replace(/&/g, '-y-') // Replace & with 'and'
-    .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-    .replace(/\-\-+/g, '-') // Replace multiple - with single -
+  for (let i = 0, l = from.length; i < l; i++) {
+    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i))
+  }
+
+  str = str
+    .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+    .replace(/\s+/g, '-') // collapse whitespace and replace by -
+    .replace(/-+/g, '-') // collapse dashes
+    .replace(/^-+/, '') // trim - from start of text
+    .replace(/-+$/, '') // trim - from end of text
+
+  return str
 }

@@ -17,20 +17,26 @@ const Hover = styled.div([
 const NameStyled = styled.h2(xw`text-14px font-medium mt-2 px-2 truncate`)
 const DesignStyled = styled.p(xw`text-12px px-2 truncate`)
 
+const ListUL = styled.ul(
+  xw`
+  col-start-1 col-end-4 lg:col-start-2 lg:col-end-3
+  flex flex-wrap justify-between
+  lg:justify-center
+
+  `,
+)
+
 const CardStyled = styled.li([
   xw`
-  relative h-card
-  sm:min-w-card
-  lg:h-cardD
+  relative h-card w-1/2 pr-2
+  sm:min-w-card sm:w-1/3
+  lg:h-cardD lg:w-1/6 lg:max-w-card
   `,
   {
     [':hover']: { cursor: 'pointer' },
     [`:hover ${Hover}`]: {
       opacity: 1,
     },
-    margin: '0 2px',
-    minWidth: '48%',
-    maxWidth: '48%',
   },
 ])
 
@@ -43,11 +49,7 @@ const List = ({ products = [], show = false, close = {} }) => {
   }
 
   return (
-    <ul
-      css={[
-        xw`flex flex-wrap justify-center col-start-1 col-end-4 lg:col-start-2 lg:col-end-3`,
-      ]}
-    >
+    <ListUL>
       {products.map((product, i) => (
         <CardStyled key={i}>
           {Object.keys(close).length > 0 && (
@@ -104,7 +106,7 @@ const List = ({ products = [], show = false, close = {} }) => {
           </Link>
         </CardStyled>
       ))}
-    </ul>
+    </ListUL>
   )
 }
 

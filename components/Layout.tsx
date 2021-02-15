@@ -32,7 +32,7 @@ const Layout = ({ children, subMenu }: LayoutProps) => {
 
         @media (min-width: 1024px) {
           grid-template-rows: 90px auto;
-          grid-template-columns: 210px 1fr 210px;
+          grid-template-columns: 220px 1fr 220px;
         }
       `}
     >
