@@ -115,7 +115,7 @@ export const MenuItem = ({
   if (lines) {
     let dic = {}
     let subLines = []
-    subItems.forEach((item) => {
+    subItems.forEach(item => {
       const char = item.name.charAt(0)
       dic[char] = dic[char] ? [...dic[char], item] : [item]
     })
@@ -145,7 +145,7 @@ export const MenuItem = ({
       <SubMenuLabel
         show={isOpenMenu(name)}
         plus={plus}
-        onClick={(e) => handleToggle(name)}
+        onClick={e => handleToggle(name)}
       >
         {name}
       </SubMenuLabel>
@@ -160,7 +160,13 @@ export const MenuItem = ({
                 {!title && (
                   <Link href={`/produtos/${path}/${slugify(slug || name)}`}>
                     <SubMenuLink>
-                      {img && <img src={img} css={xw`mr-2.5 h-32px w-32px`} />}
+                      {img && (
+                        <img
+                          src={img}
+                          css={xw`mr-2.5 h-32px w-32px`}
+                          alt={name}
+                        />
+                      )}
                       {thumb && thumb}
                       {name}
                     </SubMenuLink>
@@ -374,7 +380,7 @@ export const families = [
   { name: 'zumbi' },
 ]
 
-const slugify = (str) => {
+const slugify = str => {
   str = str.replace(/^\s+|\s+$/g, '') // trim
   str = str.toLowerCase()
 

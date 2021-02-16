@@ -2,10 +2,11 @@ import xw from 'xwind'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+import React, { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 import Checkbox from '~/components/products/Checkbox'
 import { add, remove, has } from '~/components/products/compare'
+import ListLink from '~/components/products/ListLink'
 
 const Hover = styled.div([
   xw`lg:opacity-0`,
@@ -40,7 +41,11 @@ const CardStyled = styled.li([
   },
 ])
 
-const List = ({ products = [], show = false, close = {} }) => {
+const getImage = ({ cover_image_url, images }) => {
+  return cover_image_url || images[0]?.image.image.tooltip.url
+}
+
+const List = ({ products = [], show = false, compare = false, close = {} }) => {
   const router = useRouter()
   const shared = useAppContext()
 
@@ -67,19 +72,22 @@ const List = ({ products = [], show = false, close = {} }) => {
               </Link>
             </div>
           )}
-          <Link
+          <ListLink
             href={
               show
                 ? `/produtos/${product.slug}`
                 : `${router.asPath}/linhas/${product.family_slug}/${product.code}`
             }
+            compare={compare}
           >
             <a>
               <div
                 css={[
                   `
                   width: 100%;
-                  background: url('http://bertolucci.com.br${product.cover_image_url}')`,
+                  background: url('http://bertolucci.com.br${getImage(
+                    product,
+                  )}')`,
                   xw`
                   relative bg-gray-200 bg-center bg-cover h-cardImg
                   lg:h-cardImgD
@@ -89,7 +97,7 @@ const List = ({ products = [], show = false, close = {} }) => {
                 <Hover css={xw`absolute bottom-1 left-2 z-20`}>
                   <Checkbox
                     name={product.slug}
-                    fnChange={(v) => handleCheckbox({ isChecked: v, product })}
+                    fnChange={v => handleCheckbox({ isChecked: v, product })}
                     checked={has({ product, shared })}
                   />
                 </Hover>
@@ -103,7 +111,7 @@ const List = ({ products = [], show = false, close = {} }) => {
                 <DesignStyled>{product.designer_name}</DesignStyled>
               </Hover>
             </a>
-          </Link>
+          </ListLink>
         </CardStyled>
       ))}
     </ListUL>

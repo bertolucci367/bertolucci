@@ -108,6 +108,7 @@ const Layout = ({ children, subMenu }: LayoutProps) => {
                 href="https://www.facebook.com/iluminacao.bertolucci"
                 className="facebook icon"
                 target="_blank"
+                rel="noopener"
               >
                 <Image
                   src="/facebook.svg"
@@ -121,6 +122,7 @@ const Layout = ({ children, subMenu }: LayoutProps) => {
                 href="https://instagram.com/bertolucci.iluminacao/"
                 className="instagram icon"
                 target="_blank"
+                rel="noopener"
                 css={xw`ml-5`}
               >
                 <Image
