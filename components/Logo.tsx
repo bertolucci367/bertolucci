@@ -11,6 +11,7 @@ export const Logo = () => {
           height="19"
           width="90"
           alt="bertolucci"
+          loading="eager"
         />
       </a>
     </Link>

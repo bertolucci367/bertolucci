@@ -3,13 +3,7 @@ import xw from 'xwind'
 import { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 
-import {
-  MenuItem,
-  typologies,
-  materials,
-  designers,
-  families,
-} from '~/components/products/MenuItem'
+import { MenuItem } from '~/components/products/MenuItem'
 
 interface SubMenuProductProps {
   search?: string
@@ -47,13 +41,29 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
       <ul css={xw`lg:flex lg:flex-row lg:justify-center`}>
         <MenuItem
           name="tipologia"
-          subItems={typologies}
+          subItems={'typologies'}
           path="tipologias"
           plus
         />
-        <MenuItem name="materiais" subItems={materials} path="materiais" plus />
-        <MenuItem name="designers" subItems={designers} path="designers" plus />
-        <MenuItem name="linhas" subItems={families} path="linhas" plus lines />
+        <MenuItem
+          name="materiais"
+          subItems={'materials'}
+          path="materiais"
+          plus
+        />
+        <MenuItem
+          name="designers"
+          subItems={'designers'}
+          path="designers"
+          plus
+        />
+        <MenuItem
+          name="linhas"
+          subItems={'families'}
+          path="linhas"
+          plus
+          lines
+        />
         <MenuItem name="busca">
           <input
             ref={searchRef}
