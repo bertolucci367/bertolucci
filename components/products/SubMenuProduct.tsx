@@ -62,7 +62,7 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
               { lineHeight: '19px' },
               xw`border border-gray-500 ml-2 outline-none px-1.5 -mt-2`,
             ]}
-            onKeyPress={(event) => {
+            onKeyPress={event => {
               if (event.key !== 'Enter') {
                 return
               }

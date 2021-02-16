@@ -21,6 +21,8 @@ const Designer = ({ designer }) => {
         <img
           src={`http://bertolucci.com.br${designer.images[0].image.image.url}`}
           css={xw`w-full`}
+          height={200}
+          width={200}
         />
       </Photo>
       <h1 css={xw`leading-tight font-medium text-18px mb-5 lg:mb-2`}>

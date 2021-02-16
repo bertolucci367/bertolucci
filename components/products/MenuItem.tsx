@@ -57,27 +57,22 @@ const SubMenuStyled = styled.ul<SubMenuProps>(({ name }) => [
   `,
   {
     transition: 'opacity 350ms ease',
+    [':hover']: {
+      ['li']: {
+        opacity: '.5',
+        [':hover']: {
+          opacity: 1,
+        },
+      },
+    },
+    ['span:hover']: {
+      cursor: 'default',
+    },
+    ['a:hover']: {
+      cursor: 'pointer',
+    },
   },
   custom[name],
-  `
-  &:hover {
-    li {
-      opacity: 0.5;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-  }
-
-  span:hover {
-    cursor: default;
-  }
-
-  a:hover {
-    cursor: pointer;
-  }
-  `,
 ])
 
 const SubMenuLabel = styled.span<SubMenuProps>(({ show, plus }) => [
@@ -158,13 +153,18 @@ export const MenuItem = ({
                   <SubMenuTitle css={xw`font-medium`}>{name}</SubMenuTitle>
                 )}
                 {!title && (
-                  <Link href={`/produtos/${path}/${slugify(slug || name)}`}>
+                  <Link
+                    href={`/produtos/${path}/${slugify(slug || name)}`}
+                    prefetch={false}
+                  >
                     <SubMenuLink>
                       {img && (
                         <img
                           src={img}
                           css={xw`mr-2.5 h-32px w-32px`}
                           alt={name}
+                          height={32}
+                          width={32}
                         />
                       )}
                       {thumb && thumb}
@@ -189,7 +189,6 @@ const Thumb = ({ pos }) => {
         css={{
           marginTop: `-${32 * pos}px`,
           marginRight: '4px',
-          // ':hover': { marginTop: `-${32 * (pos + 1)}px` },
         }}
       >
         <Image src="/pic_thumbs.png" layout="fixed" height={448} width={32} />

@@ -13,13 +13,13 @@ function App({ Component, pageProps }) {
           rel="preload"
           href="/fonts/futura-light-bt.ttf"
           as="font"
-          crossOrigin=""
+          crossOrigin="anonymous"
         />
         <link
           rel="preload"
           href="/fonts/futura-medium-bt.ttf"
           as="font"
-          crossOrigin=""
+          crossOrigin="anonymous"
         />
       </Head>
       <Component {...pageProps} />
