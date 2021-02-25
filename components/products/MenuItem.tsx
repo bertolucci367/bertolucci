@@ -195,7 +195,7 @@ const Thumb = ({ slug }) => {
   )
 }
 
-const slugify = str => {
+export const slugify = str => {
   str = str.replace(/^\s+|\s+$/g, '') // trim
   str = str.toLowerCase()
 

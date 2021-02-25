@@ -15,14 +15,14 @@ const ProductTypeCode = ({ product, products }) => {
   return (
     <LayoutProduct>
       <List
-        products={product}
+        items={product}
         show
         close={{
           pathname: '/produtos/[slug]/[filter]',
           query: { slug, filter },
         }}
       />
-      <List products={products} show />
+      <List items={products} show />
     </LayoutProduct>
   )
 }
@@ -46,7 +46,7 @@ export async function getServerSideProps({ params }) {
   let idx = 0
 
   if (code) {
-    idx = products.findIndex((p) => p.code === code)
+    idx = products.findIndex(p => p.code === code)
   }
 
   product = products.splice(idx, 1)

@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import { GraphQLClient } from 'graphql-request'
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import LayoutProduct from '~/components/LayoutProduct'
@@ -22,29 +23,51 @@ const Card = styled.li({
   height: '270px',
 })
 
-const Products = ({ products = [] }) => {
+const Products = ({ page }) => {
   return (
     <LayoutProduct>
       <h1 css={xw`h-0 opacity-0`}>Produtos</h1>
-      <List products={products} />
+      <List items={page.items} />
     </LayoutProduct>
   )
 }
 
-export async function getStaticProps({ params, preview = false }) {
-  const res = await fetch(
-    `http://bertolucci.com.br/api/produtos/novolayout.json`,
-  )
-  const data = await res.json()
+export async function getStaticProps({ preview = false }) {
+  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
 
-  if (!data) {
-    return {
-      notFound: true,
+  const { page } = await gcms.request(
+    `
+    query ProductPage {
+      page(where: {slug: "produtos"}) {
+        items {
+          ... on Line {
+            __typename
+            id
+            name
+            products(first: 1) {
+              name
+              code
+              slug
+              designer {
+                name
+              }
+              photo {
+                handle
+                height
+                width
+                alt
+              }
+            }
+          }
+        }
+      }
     }
-  }
+
+    `,
+  )
 
   return {
-    props: data, // will be passed to the page component as props
+    props: { page, preview },
   }
 }
 

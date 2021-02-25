@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import LayoutProduct from '~/components/LayoutProduct'
 import Container from '~/components/Container'
 import Carousel from '~/components/Carousel'
+import { GraphQLClient } from 'graphql-request'
 import { useAppContext } from '~/components/context/AppContext'
 
 const InfoStyled = styled.div([
@@ -33,8 +34,8 @@ const Product = ({ product }) => {
     path = shared.productClosePath
   }
 
-  const images = product.images.map((img: any) => {
-    return <img src={`http://bertolucci.com.br${img.image.image.url}`} />
+  const images = product.photo.map((img: any) => {
+    return <img src={img.url} />
   })
 
   return (
@@ -52,16 +53,16 @@ const Product = ({ product }) => {
             <InfoBody>
               <InfoTextBlock
                 dangerouslySetInnerHTML={{
-                  __html: product.description_formatted,
+                  __html: product?.description?.html,
                 }}
               ></InfoTextBlock>
 
               <InfoTextBlock css={xw`lg:ml-5`}>
-                <div
+                {/* <div
                   dangerouslySetInnerHTML={{
                     __html: product.text_formatted,
                   }}
-                ></div>
+                ></div> */}
 
                 <p>
                   <span>
@@ -97,21 +98,62 @@ const Product = ({ product }) => {
   )
 }
 
-export async function getServerSideProps({ params }) {
-  const res = await fetch(
-    `http://bertolucci.com.br/api/produtos/${params.slug}.json`,
-  )
-  const data = await res.json()
+const query = `
+  query Product($id: String!) {
+    values: product (where: { slug: $id}, stage: PUBLISHED) {
 
-  if (!data) {
+      name
+      code
+      slug
+      description {
+        html
+      }
+      designer {
+        name
+      }
+      photo(skip: 1) {
+        url
+        alt
+      }
+    }
+
+  }
+`
+
+export async function getStaticProps({ params, preview = false }) {
+  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
+  const { slug } = params
+  const { values } = await gcms.request(query, { id: slug })
+
+  if (!values) {
     return {
       notFound: true,
     }
   }
 
   return {
-    props: { product: data?.products[0] }, // will be passed to the page component as props
+    props: {
+      product: values,
+    }, // will be passed to the page component as props
   }
+}
+
+const _paths = `
+query Products {
+  values: products {
+    slug
+  }
+}
+`
+
+export async function getStaticPaths() {
+  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
+  const { values } = await gcms.request(_paths)
+
+  // Get the paths we want to pre-render based on posts
+  const paths = values.map(el => ({ params: { slug: el.slug } }))
+
+  return { paths, fallback: 'blocking' }
 }
 
 export default Product

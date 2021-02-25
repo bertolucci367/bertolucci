@@ -4,7 +4,7 @@ import { GraphQLClient } from 'graphql-request'
 import GraphImg from 'graphcms-image'
 import Layout from '~/components/Layout'
 
-const Index = ({ homes }) => {
+const Index = ({ data }) => {
   const [windowWidthSize, setWindowWidthSize] = useState(0)
   const [windowHeightSize, setWindowHeightSize] = useState(0)
 
@@ -39,7 +39,7 @@ const Index = ({ homes }) => {
 
   return (
     <Layout>
-      {homes.map(({ id, photoCover, photoCoverMobile }) => {
+      {data.items.map(({ id, photoCover, photoCoverMobile }) => {
         const images = getImages({ photoCover, photoCoverMobile })
         return (
           <div key={id} css={xw`row-start-2 col-start-1 col-end-4`}>
@@ -112,29 +112,44 @@ const Slider = ({ slides }) => {
 export async function getStaticProps({ preview = false }) {
   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
 
-  const { homes } = await gcms.request(
+  const { values } = await gcms.request(
     `
-    {
-      homes {
+    query {
+      values: page (where: { slug: "home"}) {
+
         id
-        textPhoto
-        photoCoverMobile {
-          handle
-          height
-          width
+        stage
+        updatedAt
+        createdAt
+        description
+        id
+        items {
+          ... on Slider {
+            id
+            textPhoto
+            photoCoverMobile {
+              handle
+              height
+              width
+            }
+            photoCover {
+              handle
+              height
+              width
+            }
+          }
+
         }
-        photoCover {
-          handle
-          height
-          width
-        }
+        slug
+        title
       }
     }
+
     `,
   )
 
   return {
-    props: { homes, preview },
+    props: { data: values, preview },
   }
 }
 

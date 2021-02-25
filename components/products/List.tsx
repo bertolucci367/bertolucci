@@ -2,11 +2,13 @@ import xw from 'xwind'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import Image from 'next/image'
+import GraphImg from 'graphcms-image'
 import React, { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 import Checkbox from '~/components/products/Checkbox'
 import { add, remove, has } from '~/components/products/compare'
 import ListLink from '~/components/products/ListLink'
+import { slugify } from '~/components/products/MenuItem'
 
 const Hover = styled.div([
   xw`lg:opacity-0`,
@@ -29,9 +31,10 @@ const ListUL = styled.ul(
 
 const CardStyled = styled.li([
   xw`
-  relative h-card w-1/2 pr-2
+  relative w-1/2
+  pr-2 mb-8
   sm:min-w-card sm:w-1/3
-  lg:h-cardD lg:w-1/6 lg:max-w-card
+  lg:w-1/6 lg:max-w-card
   `,
   {
     [':hover']: { cursor: 'pointer' },
@@ -45,7 +48,7 @@ const getImage = ({ cover_image_url, images }) => {
   return cover_image_url || images[0]?.image.image.tooltip.url
 }
 
-const List = ({ products = [], show = false, compare = false, close = {} }) => {
+const List = ({ items = [], show = false, compare = false, close = {} }) => {
   const router = useRouter()
   const shared = useAppContext()
 
@@ -53,69 +56,69 @@ const List = ({ products = [], show = false, compare = false, close = {} }) => {
     isChecked ? add({ product, shared }) : remove({ product, shared })
   }
 
-  return (
-    <ListUL>
-      {products.map((product, i) => (
-        <CardStyled key={i}>
-          {Object.keys(close).length > 0 && (
-            <div css={xw`absolute z-20 -ml-8`}>
-              <Link href={close}>
-                <a>
-                  <Image
-                    src="/close.svg"
-                    layout="fixed"
-                    height="16"
-                    width="16"
-                    alt="close icon"
-                  />
-                </a>
-              </Link>
-            </div>
-          )}
-          <ListLink
-            href={
-              show
-                ? `/produtos/${product.slug}`
-                : `${router.asPath}/linhas/${product.family_slug}/${product.code}`
-            }
-            compare={compare}
-          >
-            <a>
-              <div
-                css={[
-                  `
-                  width: 100%;
-                  background: url('http://bertolucci.com.br${getImage(
-                    product,
-                  )}')`,
-                  xw`
-                  relative bg-gray-200 bg-center bg-cover h-cardImg
-                  lg:h-cardImgD
-                  `,
-                ]}
-              >
-                <Hover css={xw`absolute bottom-1 left-2 z-20`}>
-                  <Checkbox
-                    name={product.slug}
-                    fnChange={v => handleCheckbox({ isChecked: v, product })}
-                    checked={has({ product, shared })}
-                  />
-                </Hover>
-              </div>
-              <Hover>
-                <NameStyled>
-                  {show
-                    ? `${product.name} - ${product.code}`
-                    : product.family_name}
-                </NameStyled>
-                <DesignStyled>{product.designer_name}</DesignStyled>
+  const listItems = items.map(({ products, ...rest }, i) => {
+    const [product] = products
+
+    if (!product) return
+    const [photo] = product.photo
+
+    return [
+      <CardStyled key={i}>
+        {Object.keys(close).length > 0 && (
+          <div css={xw`absolute z-20 -ml-8`}>
+            <Link href={close}>
+              <a>
+                <Image
+                  src="/close.svg"
+                  layout="fixed"
+                  height="16"
+                  width="16"
+                  alt="close icon"
+                />
+              </a>
+            </Link>
+          </div>
+        )}
+        <ListLink
+          href={
+            show
+              ? `/produtos/${product.slug}`
+              : `${router.asPath}/linhas/${slugify(rest.name)}/${product.code}`
+          }
+          compare={compare}
+        >
+          <a>
+            <div css={xw`relative`}>
+              <GraphImg
+                image={photo}
+                alt={photo.alt}
+                fit="crop"
+                css={xw`lg:h-cardImgD`}
+              />
+              <Hover css={xw`absolute bottom-1 left-2 z-20`}>
+                <Checkbox
+                  name={product.slug}
+                  fnChange={v => handleCheckbox({ isChecked: v, product })}
+                  checked={has({ product, shared })}
+                />
               </Hover>
-            </a>
-          </ListLink>
-        </CardStyled>
-      ))}
-    </ListUL>
-  )
+            </div>
+            <Hover>
+              <NameStyled>
+                {rest.__typename === 'Line' && rest.name}
+                {/* {show
+                  ? `${product.name} - ${product.code}`
+                  : product.family_name} */}
+              </NameStyled>
+              <DesignStyled>{product?.designer.name}</DesignStyled>
+            </Hover>
+          </a>
+        </ListLink>
+      </CardStyled>,
+    ]
+  })
+
+  return <ListUL>{listItems}</ListUL>
 }
 
 export default List

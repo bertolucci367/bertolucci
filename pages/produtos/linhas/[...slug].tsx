@@ -1,7 +1,8 @@
+import { GraphQLClient } from 'graphql-request'
+import { useRouter } from 'next/router'
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
 import { useAppContext } from '~/components/context/AppContext'
-import { useRouter } from 'next/router'
 
 const Lines = ({ products, product }) => {
   const router = useRouter()
@@ -12,26 +13,49 @@ const Lines = ({ products, product }) => {
   return (
     <LayoutProduct>
       <List
-        products={product}
+        items={[product]}
         show
         close={{
           pathname: '/produtos',
         }}
       />
-      <List products={products} show />
+      <List items={[products]} show />
     </LayoutProduct>
   )
 }
 
+const query = `
+  query Line($id: String!) {
+    values: line (where: { slug: $id}, stage: PUBLISHED) {
+      id
+      stage
+      updatedAt
+      createdAt
+      id
+      name
+      products {
+        name
+        code
+        slug
+        designer {
+          name
+        }
+        photo {
+          handle
+          height
+          width
+          alt
+        }
+      }
+    }
+  }
+`
+
 export async function getStaticProps({ params, preview = false }) {
+  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { slug } = params
-
-  const code = slug[1]
-
-  const res = await fetch(
-    `http://bertolucci.com.br/api/produtos/linhas/${slug[0]}.json`,
-  )
-  const data = await res.json()
+  const [id, code] = slug
+  const data = await gcms.request(query, { id })
 
   if (!data) {
     return {
@@ -39,31 +63,50 @@ export async function getStaticProps({ params, preview = false }) {
     }
   }
 
-  const { products } = data
+  const { values } = data
+  const { products } = values
   let product = []
   let idx = 0
 
   if (code) {
-    idx = products.findIndex((p) => p.code === code)
+    idx = products.findIndex((p: any) => p.code === code)
   }
 
   product = products.splice(idx, 1)
 
   return {
-    props: { products, product }, // will be passed to the page component as props
+    props: {
+      products: { ...values, products: products },
+      product: { ...values, products: product },
+    }, // will be passed to the page component as props
   }
 }
 
+const _paths = `
+query Lines {
+  values: lines(where: {NOT: {slug: "null"}}) {
+    slug
+    products {
+      code
+    }
+  }
+}
+`
+
 export async function getStaticPaths() {
-  const res = await fetch(
-    `http://bertolucci.com.br/api/produtos/novolayout.json`,
-  )
-  const data = await res.json()
+  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
+  const { values } = await gcms.request(_paths)
 
   // Get the paths we want to pre-render based on posts
-  const paths = data.products.map((p: any) => ({
-    params: { slug: [p.family_slug, p.code] },
-  }))
+  const paths = []
+
+  values.forEach((el: any) => {
+    el.products.forEach((product: any) => {
+      paths.push({
+        params: { slug: [el.slug, product.code] },
+      })
+    })
+  })
 
   return { paths, fallback: 'blocking' }
 }
