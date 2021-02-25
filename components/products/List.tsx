@@ -23,7 +23,7 @@ const DesignStyled = styled.p(xw`text-12px px-2 truncate`)
 const ListUL = styled.ul(
   xw`
   col-start-1 col-end-4 lg:col-start-2 lg:col-end-3
-  flex flex-wrap justify-between
+  flex flex-wrap justify-center
   lg:justify-center
 
   `,

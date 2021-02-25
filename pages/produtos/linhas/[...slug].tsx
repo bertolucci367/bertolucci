@@ -56,15 +56,17 @@ export async function getStaticProps({ params, preview = false }) {
   const { slug } = params
   const [id, code] = slug
   const data = await gcms.request(query, { id })
+  const { values } = data
+
+  console.log(values, data)
 
   if (!data) {
     return {
       notFound: true,
     }
   }
+  const { products } = values || { products: [] }
 
-  const { values } = data
-  const { products } = values
   let product = []
   let idx = 0
 
