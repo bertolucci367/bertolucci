@@ -1,10 +1,13 @@
 import xw from 'xwind'
 import styled from '@emotion/styled'
+import Image from 'next/image'
 import LayoutProduct from '~/components/LayoutProduct'
 import Container from '~/components/Container'
 import Carousel from '~/components/Carousel'
 import { GraphQLClient } from 'graphql-request'
 import { useAppContext } from '~/components/context/AppContext'
+import Properties from '~/components/products/Properties'
+import Finishings from '~/components/products/Finishings'
 
 const InfoStyled = styled.div([
   xw`
@@ -18,13 +21,6 @@ const InfoBody = styled.div(xw`text-14px lg:flex`)
 
 const InfoTextBlock = styled.div(xw`lg:flex-1 text-left`)
 
-const FinishingCategoryStyled = styled.li({
-  [':after']: {
-    content: '"/"',
-    padding: '0 5px',
-  },
-})
-
 const Product = ({ product }) => {
   const shared = useAppContext()
 
@@ -34,9 +30,15 @@ const Product = ({ product }) => {
     path = shared.productClosePath
   }
 
-  const images = product.photo.map((img: any) => {
-    return <img src={img.url} />
-  })
+  const images = product.photo.map((img: any) => (
+    <Image
+      src={img.url}
+      layout="intrinsic"
+      height={img.height}
+      width={img.width}
+      alt={img.alt}
+    />
+  ))
 
   return (
     <LayoutProduct>
@@ -57,38 +59,30 @@ const Product = ({ product }) => {
                 }}
               ></InfoTextBlock>
 
-              <InfoTextBlock css={xw`lg:ml-5`}>
+              <InfoTextBlock css={xw`lg:ml-5 mt-10 lg:mt-0`}>
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: product.text,
+                    __html: product.text.html,
                   }}
                 ></div>
 
-                <p>
-                  <span>
-                    <label>H</label> 55 cm
-                  </span>
-                  <span>
-                    <label className="dimention">L</label>45 cm"
-                  </span>
-                  <span>
-                    <label className="dimention">P</label> 20 cm"
-                  </span>
-                </p>
+                <Properties product={product} />
 
                 <p>
-                  <label className="none">tipo de lâmpada</label>3 x LED E27
+                  <label css={xw`hidden`}>tipos de lâmpada</label>
+                </p>
+                <ul>
+                  {product.lampTypes &&
+                    product.lampTypes.map(lamp => (
+                      <li key={lamp.id}>{lamp.name}</li>
+                    ))}
+                </ul>
+
+                <p>
+                  <label css={xw`font-medium`}>acabamentos</label>
                 </p>
 
-                <label css={xw`font-medium`}>acabamentos</label>
-
-                <div>
-                  <ul css={xw`flex`}>
-                    <FinishingCategoryStyled>madeiras</FinishingCategoryStyled>
-                    <FinishingCategoryStyled>cobre</FinishingCategoryStyled>
-                    <FinishingCategoryStyled>latão</FinishingCategoryStyled>
-                  </ul>
-                </div>
+                <Finishings finishings={product.finishings} />
               </InfoTextBlock>
             </InfoBody>
           </InfoStyled>
@@ -102,10 +96,16 @@ const query = `
   query Product($id: String!) {
     values: product (where: { slug: $id}, stage: PUBLISHED) {
 
-      name
-      code
       slug
-      text
+      code
+      name
+      width
+      depth
+      height
+      diameter
+      text {
+        html
+      }
       description {
         html
       }
@@ -115,9 +115,28 @@ const query = `
       photo(skip: 1) {
         url
         alt
+        width
+        height
       }
       lines(first: 1) {
         slug
+      }
+      lampTypes {
+        id
+        name
+      }
+      finishings {
+        id
+        name
+        category {
+          name
+        }
+        thumb {
+          url
+          handle
+          width
+          height
+        }
       }
     }
 

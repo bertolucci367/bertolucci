@@ -60,7 +60,7 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
   return (
     <SectionStyled>
       <ListWrapStyled>
-        <div ref={prevRef} css={xw`relative flex flex-col w-10`}>
+        <div css={xw`relative flex flex-col w-10`}>
           {close && (
             <CloseStyled>
               <Link href={close}>
@@ -106,7 +106,6 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
         <div css={xw`w-10`}>
           {nav && slides.length > 1 && (
             <NavBtnStyled
-              ref={nextRef}
               href="#"
               role="button"
               css={xw`justify-start lg:order-3`}

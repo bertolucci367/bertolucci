@@ -9,7 +9,7 @@ function Container({ children }: ContainerProps) {
     <div
       css={[
         `
-          grid-template-columns: 12px 1fr 12px;
+          grid-template-columns: 0 1fr 0;
           @media (min-width: 1024px) {
             grid-template-columns: 0 1fr 0;
           }

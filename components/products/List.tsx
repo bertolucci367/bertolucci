@@ -44,10 +44,6 @@ const CardStyled = styled.li([
   },
 ])
 
-const getImage = ({ cover_image_url, images }) => {
-  return cover_image_url || images[0]?.image.image.tooltip.url
-}
-
 const List = ({ items = [], show = false, compare = false, close = {} }) => {
   const router = useRouter()
   const shared = useAppContext()
