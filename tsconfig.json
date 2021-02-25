@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/components/*": ["components/*"]
+      "~/components/*": ["components/*"],
+      "~/graphcms/*": ["graphcms/*"]
     },
     "types": ["@emotion/react/types/css-prop"],
     "target": "es5",

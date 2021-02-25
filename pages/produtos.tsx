@@ -4,6 +4,7 @@ import xw from 'xwind'
 import styled from '@emotion/styled'
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
+import { ProductsQuery } from '~/graphcms/index'
 
 const Hover = styled.div([
   xw`lg:opacity-0`,
@@ -27,7 +28,7 @@ const Products = ({ page }) => {
   return (
     <LayoutProduct>
       <h1 css={xw`h-0 opacity-0`}>Produtos</h1>
-      <List items={page.items} />
+      <List items={page.items} useLineName />
     </LayoutProduct>
   )
 }
@@ -35,36 +36,7 @@ const Products = ({ page }) => {
 export async function getStaticProps({ preview = false }) {
   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
 
-  const { page } = await gcms.request(
-    `
-    query ProductPage {
-      page(where: {slug: "produtos"}) {
-        items {
-          ... on Line {
-            __typename
-            id
-            name
-            products(first: 1) {
-              name
-              code
-              slug
-              designer {
-                name
-              }
-              photo {
-                handle
-                height
-                width
-                alt
-              }
-            }
-          }
-        }
-      }
-    }
-
-    `,
-  )
+  const { page } = await gcms.request(ProductsQuery)
 
   return {
     props: { page, preview },

@@ -2,85 +2,52 @@ import { GraphQLClient } from 'graphql-request'
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
 import { useAppContext } from '~/components/context/AppContext'
+import { MaterialQuery } from '~/graphcms/index'
 
-const Materials = ({ products }) => {
+const Materials = ({ values }) => {
   const shared = useAppContext()
 
   return (
     <LayoutProduct>
-      <List products={products} />
+      <List products={values.products} />
     </LayoutProduct>
   )
 }
 
-const graph = {
-  tipologias: (name: string) => {
-    return `
-    {
-      products(where: { lines_some: { name: "${name}" } })  {
-        id
-        name
-      }
-    }
-    `
-  },
-}
+export async function getStaticProps({ params, preview = false }) {
+  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
+  const { slug } = params
+  const { values } = await gcms.request(MaterialQuery, { id: slug })
 
-export async function getServerSideProps({ params }) {
-  const res = await fetch(
-    `http://bertolucci.com.br/api/produtos/materiais/${params.slug}.json`,
-  )
-  const data = await res.json()
-
-  if (!data) {
+  if (!values) {
     return {
       notFound: true,
     }
   }
 
   return {
-    props: data, // will be passed to the page component as props
+    props: {
+      values,
+    }, // will be passed to the page component as props
   }
 }
 
-// export async function getStaticProps({ params, preview = false }) {
-//   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
+const _paths = `
+query materials {
+  values: materials(where: {NOT: {slug: "null"}}) {
+    slug
+  }
+}
+`
 
-//   const { slug } = params
+export async function getStaticPaths() {
+  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
+  const { values } = await gcms.request(_paths)
 
-//   const products = []
+  // Get the paths we want to pre-render based on posts
+  const paths = values.map(el => ({ params: { slug: el.slug } }))
 
-//   for (let i = 100, l = 107; i < l; i++) {
-//     products.push({ id: i, name: `Product ${i}`, design: `oficina bertolucci` })
-//   }
-
-//   return {
-//     props: { products, preview },
-//   }
-// }
-
-// export async function getStaticPaths() {
-//   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
-
-//   const typos = [
-//     'acrilico',
-//     'ceramica',
-//     'cortiça',
-//     'fibras-naturais',
-//     'madeira',
-//     'metal',
-//     'tecido',
-//     'vidro',
-//   ]
-
-//   const paths = typos.map((val) => ({
-//     params: { slug: val },
-//   }))
-
-//   return {
-//     paths,
-//     fallback: false,
-//   }
-// }
+  return { paths, fallback: 'blocking' }
+}
 
 export default Materials

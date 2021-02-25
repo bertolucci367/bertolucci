@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
 import { useAppContext } from '~/components/context/AppContext'
+import { LineQuery } from '~/graphcms/index'
 
 const Lines = ({ products, product }) => {
   const router = useRouter()
@@ -15,50 +16,22 @@ const Lines = ({ products, product }) => {
       <List
         items={[product]}
         show
+        useProductCode
         close={{
           pathname: '/produtos',
         }}
       />
-      <List items={[products]} show />
+      <List items={[products]} show useProductCode />
     </LayoutProduct>
   )
 }
-
-const query = `
-  query Line($id: String!) {
-    values: line (where: { slug: $id}, stage: PUBLISHED) {
-      id
-      stage
-      updatedAt
-      createdAt
-      id
-      name
-      products {
-        name
-        code
-        slug
-        designer {
-          name
-        }
-        photo {
-          handle
-          height
-          width
-          alt
-        }
-      }
-    }
-  }
-`
 
 export async function getStaticProps({ params, preview = false }) {
   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { slug } = params
   const [id, code] = slug
-  const data = await gcms.request(query, { id })
+  const data = await gcms.request(LineQuery, { id })
   const { values } = data
-
-  console.log(values, data)
 
   if (!data) {
     return {
