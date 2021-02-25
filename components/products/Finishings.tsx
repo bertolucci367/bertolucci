@@ -11,7 +11,7 @@ const FinishingCategoryStyled = styled.li({
 })
 
 const Tooltip = styled.div([
-  xw`bg-gray-100 hidden absolute z-10 bottom-20 left-0 shadow-xl`,
+  xw`bg-gray-100 hidden absolute z-10 bottom-20 left-0 shadow`,
 ])
 
 const ThumbStyled = styled.li([
@@ -68,11 +68,7 @@ const Finishings = ({ finishings }) => {
             <GraphImg image={f.thumb} fit="crop" css={xw`w-14 h-14`} />
 
             <Tooltip>
-              <GraphImg
-                image={f.thumb}
-                fit="crop"
-                css={xw`w-tooltip h-tooltip`}
-              />
+              <GraphImg image={f.thumb} fit="crop" css={xw`w-96 h-48`} />
               <label htmlFor={f.id} css={xw`p-4 block`}>
                 {f.name}
               </label>

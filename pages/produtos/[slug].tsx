@@ -78,10 +78,6 @@ const Product = ({ product }) => {
                     ))}
                 </ul>
 
-                <p>
-                  <label css={xw`font-medium`}>acabamentos</label>
-                </p>
-
                 <Finishings finishings={product.finishings} />
               </InfoTextBlock>
             </InfoBody>
