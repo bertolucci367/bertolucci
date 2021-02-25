@@ -24,12 +24,12 @@ export const ListStyled = styled.ol(xw`relative flex`)
 
 export const NavBtnStyled = styled.a<NavProps>([
   xw`
-  flex items-center px-2 z-20
+  flex items-center z-20 h-full w-10 mb-4 px-2
   lg:relative
   `,
 ])
 
-export const CloseStyled = styled.div(xw`absolute top-1 left-0 bg-white z-30`)
+export const CloseStyled = styled.div(xw`bg-white z-30 self-end px-2`)
 
 export const SectionInfoStyled = styled.div({
   ['@media(min-width: 1024px)']: {

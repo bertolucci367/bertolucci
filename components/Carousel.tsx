@@ -33,6 +33,8 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
     setCurr(curr === 0 ? length - 1 : curr - 1)
   }
 
+  const getTextWrapWidth = () => listRef.current.clientWidth
+
   useEffect(() => {
     if (length === 1) {
       setCurr(0)
@@ -40,13 +42,11 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
   }, [length])
 
   useEffect(() => {
-    setTextWrapWidth(listRef.current.clientWidth)
+    setTextWrapWidth(getTextWrapWidth())
   }, [curr, listRef?.current?.clientWidth])
 
   useEffect(() => {
-    function handleResize() {
-      setTextWrapWidth(listRef.current.clientWidth)
-    }
+    const handleResize = () => setTextWrapWidth(getTextWrapWidth())
     handleResize()
     window.addEventListener('resize', handleResize)
 
@@ -60,7 +60,7 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
   return (
     <SectionStyled>
       <ListWrapStyled>
-        <div css={xw`relative flex items-center`}>
+        <div ref={prevRef} css={xw`relative flex flex-col w-10`}>
           {close && (
             <CloseStyled>
               <Link href={close}>
@@ -80,7 +80,7 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
             <NavBtnStyled
               href="#"
               role="button"
-              css={xw`left-0`}
+              css={xw`justify-end`}
               onClick={goToPrev}
             >
               <Image
@@ -103,27 +103,30 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
           ))}
         </ListStyled>
 
-        {nav && slides.length > 1 && (
-          <NavBtnStyled
-            href="#"
-            role="button"
-            css={xw`right-0 lg:order-3`}
-            onClick={goToNext}
-          >
-            <Image
-              src="/next.svg"
-              layout="fixed"
-              height="12"
-              width="11"
-              alt="proximo icone"
-            />
-          </NavBtnStyled>
-        )}
+        <div css={xw`w-10`}>
+          {nav && slides.length > 1 && (
+            <NavBtnStyled
+              ref={nextRef}
+              href="#"
+              role="button"
+              css={xw`justify-start lg:order-3`}
+              onClick={goToNext}
+            >
+              <Image
+                src="/next.svg"
+                layout="fixed"
+                height="12"
+                width="11"
+                alt="proximo icone"
+              />
+            </NavBtnStyled>
+          )}
+        </div>
       </ListWrapStyled>
 
       <SectionInfoStyled>
         <div
-          style={{ maxWidth: textWrapWidth ? textWrapWidth : 'auto' }}
+          style={{ maxWidth: textWrapWidth ? textWrapWidth : 'initial' }}
           css={xw`mx-auto`}
         >
           {children}

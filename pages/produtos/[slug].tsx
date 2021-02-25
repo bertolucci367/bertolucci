@@ -28,7 +28,7 @@ const FinishingCategoryStyled = styled.li({
 const Product = ({ product }) => {
   const shared = useAppContext()
 
-  let path = `${shared.productClosePath}/linhas/${product.family_slug}/${product.code}`
+  let path = `${shared.productClosePath}/linhas/${product.lines[0].slug}/${product.code}`
 
   if (!shared.goToLines) {
     path = shared.productClosePath
@@ -58,11 +58,11 @@ const Product = ({ product }) => {
               ></InfoTextBlock>
 
               <InfoTextBlock css={xw`lg:ml-5`}>
-                {/* <div
+                <div
                   dangerouslySetInnerHTML={{
-                    __html: product.text_formatted,
+                    __html: product.text,
                   }}
-                ></div> */}
+                ></div>
 
                 <p>
                   <span>
@@ -105,6 +105,7 @@ const query = `
       name
       code
       slug
+      text
       description {
         html
       }
@@ -114,6 +115,9 @@ const query = `
       photo(skip: 1) {
         url
         alt
+      }
+      lines(first: 1) {
+        slug
       }
     }
 
