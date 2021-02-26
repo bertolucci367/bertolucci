@@ -42,7 +42,7 @@ export async function getStaticPaths() {
   // Get the paths we want to pre-render based on posts
   const paths = values.map(el => ({ params: { slug: el.slug } }))
 
-  return { paths, fallback: 'blocking' }
+  return { paths, fallback: false }
 }
 
 export default Typology

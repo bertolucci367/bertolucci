@@ -96,7 +96,7 @@ export async function getStaticPaths() {
     })
   })
 
-  return { paths, fallback: 'blocking' }
+  return { paths, fallback: false }
 }
 
 export default LinesByTypology
