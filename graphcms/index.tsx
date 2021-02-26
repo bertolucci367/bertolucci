@@ -46,7 +46,6 @@ query Material($id: String!) {
     stage
     updatedAt
     createdAt
-    id
     name
     products {
       ${fields.product}
@@ -62,8 +61,31 @@ query Line($id: String!) {
     stage
     updatedAt
     createdAt
-    id
     name
+    products {
+      ${fields.product}
+    }
+  }
+}
+`
+
+export const DesignerQuery = `
+query Designer($id: String!) {
+  values: designer (where: { slug: $id}) {
+    id
+    stage
+    updatedAt
+    createdAt
+    name
+    description {
+      html
+    }
+    photo {
+      handle
+      height
+      width
+      alt
+    }
     products {
       ${fields.product}
     }

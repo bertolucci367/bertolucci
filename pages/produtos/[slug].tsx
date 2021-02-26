@@ -24,10 +24,12 @@ const InfoTextBlock = styled.div(xw`lg:flex-1 text-left`)
 const Product = ({ product }) => {
   const shared = useAppContext()
 
-  let path = `${shared.productClosePath}/linhas/${product.lines[0].slug}/${product.code}`
+  const [line] = product.lines
 
-  if (!shared.goToLines) {
-    path = shared.productClosePath
+  let path = shared.productClosePath
+
+  if (shared.goToLines) {
+    path = `${shared.productClosePath}/linhas/${line.slug}/${product.code}`
   }
 
   const images = product.photo.map((img: any) => (

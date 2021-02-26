@@ -6,14 +6,16 @@ import { useAppContext } from '~/components/context/AppContext'
 import { LineQuery } from '~/graphcms/index'
 import { useEffect } from 'react'
 
-const Lines = ({ products, product }) => {
+const LinesByMaterial = ({ products, product }) => {
   const router = useRouter()
   const shared = useAppContext()
+
+  const { slug, ids } = router.query
 
   useEffect(() => {
     shared.addData({
       goToLines: true,
-      productClosePath: `/produtos`,
+      productClosePath: `/produtos/materiais/${slug}`,
     })
   }, [])
 
@@ -24,7 +26,7 @@ const Lines = ({ products, product }) => {
         show
         useProductCode
         close={{
-          pathname: '/produtos',
+          pathname: `/produtos/materiais/${slug}`,
         }}
       />
       <List items={[products]} show useProductCode />
@@ -34,8 +36,8 @@ const Lines = ({ products, product }) => {
 
 export async function getStaticProps({ params, preview = false }) {
   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
-  const { slug } = params
-  const [id, code] = slug
+  const { ids } = params
+  const [id, code] = ids
   const data = await gcms.request(LineQuery, { id })
   const { values } = data
 
@@ -44,6 +46,7 @@ export async function getStaticProps({ params, preview = false }) {
       notFound: true,
     }
   }
+
   const { products } = values || { products: [] }
 
   let product = []
@@ -64,11 +67,14 @@ export async function getStaticProps({ params, preview = false }) {
 }
 
 const _paths = `
-query Lines {
-  values: lines(where: {NOT: {slug: "null"}}) {
+query LinesByMaterial {
+  values: materials(where: {NOT: {slug: "null"}}) {
     slug
     products {
       code
+      lines {
+        slug
+      }
     }
   }
 }
@@ -83,8 +89,9 @@ export async function getStaticPaths() {
 
   values.forEach((el: any) => {
     el.products.forEach((product: any) => {
+      const [line] = product.lines
       paths.push({
-        params: { slug: [el.slug, product.code] },
+        params: { slug: el.slug, ids: [line.slug, product.code] },
       })
     })
   })
@@ -92,4 +99,4 @@ export async function getStaticPaths() {
   return { paths, fallback: 'blocking' }
 }
 
-export default Lines
+export default LinesByMaterial

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import xw from 'xwind'
 import styled from '@emotion/styled'
+import GraphImg from 'graphcms-image'
 
 const DesignerWrap = styled.div(xw`lg:sticky top-36`)
 
@@ -15,15 +16,11 @@ const Photo = styled.div([
 
 const Designer = ({ designer }) => {
   const [readMore, setReadMore] = useState(false)
+  const [photo] = designer.photo
   return (
     <DesignerWrap>
       <Photo>
-        <img
-          src={`http://bertolucci.com.br${designer.images[0].image.image.url}`}
-          css={xw`w-full`}
-          height={200}
-          width={200}
-        />
+        <GraphImg image={photo} alt={photo.alt} fit="crop" />
       </Photo>
       <h1 css={xw`leading-tight font-medium text-18px mb-5 lg:mb-2`}>
         {designer.name}
@@ -36,12 +33,13 @@ const Designer = ({ designer }) => {
         <span aria-label="fechar">{readMore && `[ - ]`}</span>
       </a>
 
-      <p
+      <div
         css={xw`mb-5 text-13px`}
         style={{ display: readMore ? 'block' : 'none' }}
-      >
-        {designer.description}
-      </p>
+        dangerouslySetInnerHTML={{
+          __html: designer?.description?.html,
+        }}
+      ></div>
     </DesignerWrap>
   )
 }
