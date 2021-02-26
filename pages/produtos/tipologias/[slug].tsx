@@ -1,6 +1,7 @@
 import { GraphQLClient } from 'graphql-request'
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
+import { TypologyQuery } from '~/graphcms/index'
 
 const Typology = ({ products }) => {
   return (
@@ -10,64 +11,38 @@ const Typology = ({ products }) => {
   )
 }
 
-export async function getServerSideProps({ params }) {
-  const host = 'http://bertolucci.com.br/api/produtos/tipologias/'
-  const res = await fetch(`${host}${params.slug}.json`)
-  const data = await res.json()
+export async function getStaticProps({ params, preview = false }) {
+  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
+  const { slug } = params
+  const { values } = await gcms.request(TypologyQuery, { id: slug })
 
-  if (!data) {
+  if (!values) {
     return {
       notFound: true,
     }
   }
 
   return {
-    props: data, // will be passed to the page component as props
+    props: {
+      products: values.products,
+    }, // will be passed to the page component as props
   }
 }
 
-// const graph = {
-//   tipologias: (name: string) => {
-//     return `
-//     {
-//       products(where: { lines_some: { name: "${name}" } })  {
-//         id
-//         name
-//       }
-//     }
-//     `
-//   },
-// }
+export async function getStaticPaths() {
+  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
+  const { values } = await gcms.request(`
+    query tipologias {
+      values: typologies(where: {NOT: {slug: "null"}}) {
+        slug
+      }
+    }
+  `)
 
-// export async function getStaticProps({ params, preview = false }) {
-//   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
+  // Get the paths we want to pre-render based on posts
+  const paths = values.map(el => ({ params: { slug: el.slug } }))
 
-//   const { slug } = params
-
-//   const products = []
-
-//   for (let i = 100, l = 107; i < l; i++) {
-//     products.push({ id: i, name: `Product ${i}`, design: `oficina bertolucci` })
-//   }
-
-//   return {
-//     props: { products, preview },
-//   }
-// }
-
-// export async function getStaticPaths() {
-//   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
-
-//   const typos = ['abajur', 'arandela', 'coluna', 'pendente', 'plafom']
-
-//   const paths = typos.map((val) => ({
-//     params: { slug: val },
-//   }))
-
-//   return {
-//     paths,
-//     fallback: false,
-//   }
-// }
+  return { paths, fallback: 'blocking' }
+}
 
 export default Typology

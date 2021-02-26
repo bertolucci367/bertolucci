@@ -92,3 +92,18 @@ query Designer($id: String!) {
   }
 }
 `
+
+export const TypologyQuery = `
+query typology($id: String!) {
+  values: typology (where: { slug: $id }) {
+    id
+    stage
+    updatedAt
+    createdAt
+    name
+    products {
+      ${fields.product}
+    }
+  }
+}
+`
