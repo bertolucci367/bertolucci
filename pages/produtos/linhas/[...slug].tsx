@@ -6,7 +6,7 @@ import { useAppContext } from '~/components/context/AppContext'
 import { LineQuery } from '~/graphcms/index'
 import { useEffect } from 'react'
 
-const Lines = ({ products, product }) => {
+const Lines = ({ data }) => {
   const router = useRouter()
   const shared = useAppContext()
 
@@ -20,14 +20,14 @@ const Lines = ({ products, product }) => {
   return (
     <LayoutProduct>
       <List
-        items={[product]}
+        products={data.product}
         show
         useProductCode
         close={{
           pathname: '/produtos',
         }}
       />
-      <List items={[products]} show useProductCode />
+      <List products={data.products} show useProductCode />
     </LayoutProduct>
   )
 }
@@ -57,8 +57,7 @@ export async function getStaticProps({ params, preview = false }) {
 
   return {
     props: {
-      products: { ...values, products: products },
-      product: { ...values, products: product },
+      data: { ...values, product, products },
     }, // will be passed to the page component as props
   }
 }
@@ -83,6 +82,7 @@ export async function getStaticPaths() {
 
   values.forEach((el: any) => {
     el.products.forEach((product: any) => {
+      paths.push({ params: { slug: [el.slug] } })
       paths.push({
         params: { slug: [el.slug, product.code] },
       })

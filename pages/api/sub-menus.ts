@@ -33,5 +33,26 @@ export default async (req, res) => {
       `,
     },
   }).then(r => r.data)
+
+  let _subItems: any[] = [..._res.data.lines]
+
+  const dic = {}
+  const subLines = []
+  _subItems.forEach(item => {
+    const char = item.name.charAt(0)
+    dic[char] = dic[char] ? [...dic[char], item] : [item]
+  })
+
+  for (var [key, value] of Object.entries(dic)) {
+    subLines.push({ name: key, title: true })
+
+    const arr: any = value
+    arr.map((item: any) => subLines.push(item))
+  }
+
+  if (subLines.length > 0) {
+    _res.data.lines = subLines
+  }
+
   res.json(_res.data)
 }
