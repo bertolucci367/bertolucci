@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import Link from 'next/link'
@@ -6,6 +6,7 @@ import Image from 'next/image'
 import useSWR from 'swr'
 import { useAppContext } from '~/components/context/AppContext'
 import fetcher from '~/components/libs/fetcher'
+import GraphImg from 'graphcms-image'
 
 type SubMenuProps = {
   show?: boolean
@@ -96,6 +97,7 @@ interface MenuItemProps {
   children?: React.ReactNode
   plus?: boolean
   lines?: boolean
+  items?: any
 }
 
 export const MenuItem = ({
@@ -104,15 +106,11 @@ export const MenuItem = ({
   path,
   children,
   plus,
+  items,
   lines,
 }: MenuItemProps) => {
   const shared = useAppContext()
   const [shouldFetch, setShouldFetch] = useState(false)
-  const url = `/api/submenu?id=${subItems}`
-  const { data, error } = useSWR<any[]>(
-    () => (shouldFetch ? url : null),
-    fetcher,
-  )
 
   const handleToggle = (name: string) => {
     if (!plus) return
@@ -134,10 +132,10 @@ export const MenuItem = ({
       >
         {name}
       </SubMenuLabel>
-      {data && (
+      {items && (
         <SubMenuWrapStyled show={isOpenMenu(name)}>
           <SubMenuStyled show={isOpenMenu(name)} name={name}>
-            {data.map(({ slug, name, img, thumb, title }) => (
+            {items.map(({ slug, name, img, thumb, title, photo }) => (
               <SubMenuItemStyled key={name}>
                 {title && (
                   <SubMenuTitle css={xw`font-medium`}>{name}</SubMenuTitle>
@@ -148,13 +146,12 @@ export const MenuItem = ({
                     prefetch={false}
                   >
                     <SubMenuLink>
-                      {img && (
-                        <img
-                          src={img}
+                      {photo && (
+                        <GraphImg
+                          image={photo[0]}
+                          alt={photo[0].alt}
+                          fit="crop"
                           css={xw`mr-2.5 h-32px w-32px`}
-                          alt={name}
-                          height={32}
-                          width={32}
                         />
                       )}
                       {thumb && <Thumb slug={slug} />}

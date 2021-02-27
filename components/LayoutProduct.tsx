@@ -28,7 +28,7 @@ const LayoutProduct = ({ children, search, designer }: LayoutProductProps) => {
   }, [])
 
   return (
-    <Layout subMenu={<SubMenuProduct search={search} />}>
+    <Layout subMenu="product">
       <div
         css={[
           xw`

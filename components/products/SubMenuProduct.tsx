@@ -7,9 +7,10 @@ import { MenuItem } from '~/components/products/MenuItem'
 
 interface SubMenuProductProps {
   search?: string
+  data: any
 }
 
-const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
+const SubMenuProduct = ({ search = '', data }: SubMenuProductProps) => {
   const searchRef = useRef(null)
   const shared = useAppContext()
   const router = useRouter()
@@ -43,18 +44,21 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
           name="tipologia"
           subItems={'typologies'}
           path="tipologias"
+          items={data.typologies}
           plus
         />
         <MenuItem
           name="materiais"
           subItems={'materials'}
           path="materiais"
+          items={data.materials}
           plus
         />
         <MenuItem
           name="designers"
           subItems={'designers'}
           path="designers"
+          items={data.designers}
           plus
         />
         <MenuItem
@@ -62,6 +66,7 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
           subItems={'families'}
           path="linhas"
           plus
+          items={data.lines}
           lines
         />
         <MenuItem name="busca">

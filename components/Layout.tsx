@@ -8,11 +8,12 @@ import MenuButton from '~/components/MenuButton'
 import { Logo, LogoFooter } from '~/components/Logo'
 
 interface LayoutProps {
-  subMenu?: any
   children?: React.ReactNode
 }
 
-const Layout = ({ children, subMenu }: LayoutProps) => {
+const contact = ['11 3874 2879', '11 9 4521 9938', 'rua espártaco, 367 - lapa']
+
+const Layout = ({ children }: LayoutProps) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
 
   const handleClick = () => {
@@ -72,7 +73,6 @@ const Layout = ({ children, subMenu }: LayoutProps) => {
           ]}
         >
           <Menu />
-          {subMenu}
         </div>
 
         <MenuButton>
@@ -165,7 +165,5 @@ const Layout = ({ children, subMenu }: LayoutProps) => {
     </div>
   )
 }
-
-const contact = ['11 3874 2879', '11 9 4521 9938', 'rua espártaco, 367 - lapa']
 
 export default Layout
