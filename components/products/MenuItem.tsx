@@ -2,11 +2,9 @@ import { useState } from 'react'
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import Link from 'next/link'
-import Image from 'next/image'
-import useSWR from 'swr'
 import { useAppContext } from '~/components/context/AppContext'
-import fetcher from '~/components/libs/fetcher'
 import GraphImg from 'graphcms-image'
+import MenuItemThumb from '~/components/products/MenuItemThumb'
 
 type SubMenuProps = {
   show?: boolean
@@ -92,22 +90,18 @@ const SubMenuLabel = styled.span<SubMenuProps>(({ show, plus }) => [
 
 interface MenuItemProps {
   name?: string
-  subItems?: string
   path?: string
   children?: React.ReactNode
   plus?: boolean
-  lines?: boolean
   items?: any
 }
 
 export const MenuItem = ({
   name,
-  subItems,
   path,
   children,
   plus,
   items,
-  lines,
 }: MenuItemProps) => {
   const shared = useAppContext()
   const [shouldFetch, setShouldFetch] = useState(false)
@@ -154,7 +148,7 @@ export const MenuItem = ({
                           css={xw`mr-2.5 h-32px w-32px`}
                         />
                       )}
-                      {thumb && <Thumb slug={slug} />}
+                      <MenuItemThumb slug={slug} />
                       {name}
                     </SubMenuLink>
                   </Link>
@@ -166,29 +160,6 @@ export const MenuItem = ({
       )}
       {children}
     </MenuItemStyled>
-  )
-}
-
-const Thumb = ({ slug }) => {
-  const posBySlug = {
-    lampshade: 0,
-    sconce: 2,
-    column: 4,
-    pending: 6,
-    plafom: 8,
-  }
-
-  return (
-    <div css={[xw`overflow-hidden`, { height: '32px' }]}>
-      <div
-        css={{
-          marginTop: `-${32 * posBySlug[slug]}px`,
-          marginRight: '4px',
-        }}
-      >
-        <Image src="/pic_thumbs.png" layout="fixed" height={448} width={32} />
-      </div>
-    </div>
   )
 }
 
