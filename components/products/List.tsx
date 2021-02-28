@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 
 import React, { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
-import { add, remove, has } from '~/components/products/compare'
 import Card from './Card'
 
 const ListUL = styled.ul(
@@ -24,11 +23,11 @@ const List = ({ items = [], products = [], ...args }) => {
 
     if (!product) return
 
-    return <Card key={i} product={product} {...args} />
+    return <Card key={product.slug} product={product} {...args} />
   })
 
   const listProducts = products.map(product => (
-    <Card key={product.id} product={product} {...args} />
+    <Card key={product.slug} product={product} {...args} />
   ))
 
   return (

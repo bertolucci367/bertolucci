@@ -1,12 +1,12 @@
-import { useRef, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import xw from 'xwind'
 
 import Layout from './Layout'
 import { useAppContext } from '~/components/context/AppContext'
-import SubMenuProduct from '~/components/products/SubMenuProduct'
 import CompareList from '~/components/products/CompareList'
 import Designer from '~/components/products/Designer'
+import CompareForm from '~/components/products/CompareForm'
 
 interface LayoutProductProps {
   search?: string
@@ -28,7 +28,7 @@ const LayoutProduct = ({ children, search, designer }: LayoutProductProps) => {
   }, [])
 
   return (
-    <Layout subMenu="product">
+    <Layout>
       <div
         css={[
           xw`
@@ -36,18 +36,13 @@ const LayoutProduct = ({ children, search, designer }: LayoutProductProps) => {
           lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-2
           lg:px-4
           `,
+          { paddingBottom: '130px' },
         ]}
       >
         {designer && <Designer designer={designer} />}
 
-        <div
-          css={[
-            xw`sticky text-center hidden lg:block`,
-            `top: calc(50% - 45px);`,
-          ]}
-        >
-          <CompareList />
-        </div>
+        <CompareList />
+        <CompareForm />
       </div>
       <div css={[xw`col-start-2 col-end-3`]}>{children}</div>
     </Layout>

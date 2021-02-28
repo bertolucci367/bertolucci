@@ -32,7 +32,7 @@ const Layout = ({ children }: LayoutProps) => {
         }
 
         @media (min-width: 1024px) {
-          grid-template-rows: 90px auto;
+          grid-template-rows: 90px minmax(calc(100vh - 90px), 1fr);
           grid-template-columns: 220px 1fr 220px;
         }
       `}

@@ -1,13 +1,23 @@
 import xw from 'xwind'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 import { remove } from '~/components/products/compare'
 
 const CompareList = () => {
   const shared = useAppContext()
+  const router = useRouter()
+
+  const hidden = ['comparar', 'designers']
+
+  const re = new RegExp(hidden.join('|'))
+
+  if (re.test(router.asPath)) {
+    return <></>
+  }
 
   return (
-    <>
+    <div css={[xw`sticky text-center hidden h-full lg:flex items-center`]}>
       {shared.compare.length > 0 && (
         <div css={xw`text-13px`}>
           <Link href="/produtos/comparar">
@@ -30,7 +40,7 @@ const CompareList = () => {
           </ul>
         </div>
       )}
-    </>
+    </div>
   )
 }
 
