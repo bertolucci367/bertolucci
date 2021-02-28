@@ -36,3 +36,7 @@
 .carousel img {
   max-height: 80vh;
 }
+
+.slider .graphcms-image-outer-wrapper {
+  height: 100vh;
+}
