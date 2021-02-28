@@ -6,16 +6,18 @@ import fetcher from '~/components/libs/fetcher'
 
 const ComparePage = () => {
   const shared = useAppContext()
-  // const slugs = shared.compare.map((item) => item.slug)
-  const slugs = ['umbu-4-dot-pe', 'luz-ecologica-dot-ar']
-  const { data, error } = useSWR<any[]>(
-    `/api/compare?slug=${slugs.join(',')}`,
+
+  // Example:
+  // shared.compare = [{ slug: 'ju-ab', code: 'A920', name: 'ju.ab' }]
+
+  const { data, error } = useSWR(
+    `/api/compare?slugs=${shared.compare.map(o => o.slug).join(',')}`,
     fetcher,
   )
 
   return (
     <LayoutProduct>
-      <List products={data} show compare />
+      {data && <List products={data.products} show compare />}
     </LayoutProduct>
   )
 }

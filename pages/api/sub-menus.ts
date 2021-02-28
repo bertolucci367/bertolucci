@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default async (req, res) => {
   const _res = await axios({
-    url: `https://api-us-west-2.graphcms.com/v2/ckhwru7ly4xvt01xs07jqaofg/master`,
+    url: process.env.GRAPHCMS_API,
     method: 'post',
     data: {
       query: `
