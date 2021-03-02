@@ -103,7 +103,7 @@ const Card = ({
           </div>
           <Hover>
             <NameStyled>{nickname.join(' - ')}</NameStyled>
-            <DesignStyled>{product?.designer.name}</DesignStyled>
+            <DesignStyled>{product?.designer?.name}</DesignStyled>
           </Hover>
         </a>
       </ListLink>

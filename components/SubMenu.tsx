@@ -1,17 +1,13 @@
-import useSWR from 'swr'
-import fetcher from '~/components/libs/fetcher'
+import xw from 'xwind'
 import SubMenuProduct from '~/components/products/SubMenuProduct'
+import SubMenuAbout from '~/components/SubMenuAbout'
 
-const SubMenu = () => {
-  const { data, error } = useSWR<any[]>(`/api/sub-menus`, fetcher)
-
-  if (error) return <div>failed to load</div>
-  if (!data) return <div>loading...</div>
-
+const SubMenu = ({ active }) => {
   return (
-    <>
-      <SubMenuProduct data={data} />
-    </>
+    <div css={xw`flex max-h-full overflow-y-auto w-full lg:justify-center`}>
+      {/^\/produtos/.test(active) && <SubMenuProduct />}
+      {/^\/sobre/.test(active) && <SubMenuAbout />}
+    </div>
   )
 }
 

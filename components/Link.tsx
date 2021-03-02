@@ -8,12 +8,13 @@ const isActive = ({ path, href }) => {
   return re.test(path)
 }
 
-const ActiveLink = ({ href, children }) => {
+const ActiveLink = ({ href, active, children }) => {
   const router = useRouter()
   const {
     props: { className },
   } = children
   let style = {}
+
   if (isActive({ path: router.pathname, href })) {
     style = xw`border-b border-solid border-black`
   }

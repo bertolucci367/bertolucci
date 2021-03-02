@@ -6,13 +6,20 @@ import { useAppContext } from '~/components/context/AppContext'
 import GraphImg from 'graphcms-image'
 import MenuItemThumb from '~/components/products/MenuItemThumb'
 
+type TypeMenuItemProps = {
+  all?: boolean
+}
+
 type SubMenuProps = {
   show?: boolean
   plus?: boolean
   name?: string
 }
 
-const MenuItemStyled = styled.li(xw`mx-4 my-10 lg:my-0`)
+const MenuItemStyled = styled.li<TypeMenuItemProps>(({ all }) => [
+  xw`mx-4 my-10 lg:my-0`,
+  all ? xw`lg:hidden` : '',
+])
 const SubMenuWrapStyled = styled.div<SubMenuProps>(({ show }) => [
   xw`bg-white lg:mt-2.5 lg:absolute lg:left-0 lg:right-0`,
   {
@@ -94,6 +101,8 @@ interface MenuItemProps {
   children?: React.ReactNode
   plus?: boolean
   items?: any
+  isLink?: boolean
+  isAll?: boolean
 }
 
 export const MenuItem = ({
@@ -102,6 +111,8 @@ export const MenuItem = ({
   children,
   plus,
   items,
+  isLink,
+  isAll,
 }: MenuItemProps) => {
   const shared = useAppContext()
   const [shouldFetch, setShouldFetch] = useState(false)
@@ -118,18 +129,19 @@ export const MenuItem = ({
   }
 
   return (
-    <MenuItemStyled>
+    <MenuItemStyled all={isAll}>
       <SubMenuLabel
         show={isOpenMenu(name)}
         plus={plus}
         onClick={e => handleToggle(name)}
       >
-        {name}
+        {isLink && <Link href={path}>{name}</Link>}
+        {!isLink && name}
       </SubMenuLabel>
       {items && (
         <SubMenuWrapStyled show={isOpenMenu(name)}>
           <SubMenuStyled show={isOpenMenu(name)} name={name}>
-            {items.map(({ slug, name, img, thumb, title, photo }) => (
+            {items.map(({ slug, name, title, photo }) => (
               <SubMenuItemStyled key={name}>
                 {title && (
                   <SubMenuTitle css={xw`font-medium`}>{name}</SubMenuTitle>
@@ -140,10 +152,10 @@ export const MenuItem = ({
                     prefetch={false}
                   >
                     <SubMenuLink>
-                      {photo && (
+                      {photo && photo[0] && (
                         <GraphImg
                           image={photo[0]}
-                          alt={photo[0].alt}
+                          alt={photo[0]?.alt}
                           fit="crop"
                           css={xw`mr-2.5 h-32px w-32px`}
                         />

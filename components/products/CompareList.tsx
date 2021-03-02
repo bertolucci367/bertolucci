@@ -17,7 +17,12 @@ const CompareList = () => {
   }
 
   return (
-    <div css={[xw`sticky text-center hidden h-full lg:flex items-center`]}>
+    <div
+      css={[
+        xw`sticky text-center hidden h-full lg:flex items-center lg:h-asideBody`,
+        `top: 90px;`,
+      ]}
+    >
       {shared.compare.length > 0 && (
         <div css={xw`text-13px`}>
           <Link href="/produtos/comparar">

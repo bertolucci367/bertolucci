@@ -25,7 +25,10 @@ module.exports = {
         cardD: '270px',
         cardImgD: '200px',
         tooltip: '144px',
+        asideBody: `calc(100vh - (130px + 90px))`,
       },
+      spacing: { logoFooter: '130px' },
+
       maxHeight: { '90vh': '90vh' },
       minWidth: { card: '225px' },
       maxWidth: { card: '225px', '48%': '48%', '49%': '49%' },

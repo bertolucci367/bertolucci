@@ -34,9 +34,8 @@ const LayoutProduct = ({ children, search, designer }: LayoutProductProps) => {
           xw`
           col-start-2 col-end-3 row-start-2 row-end-2
           lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-2
-          lg:px-4
+          lg:px-4 lg:pb-logoFooter
           `,
-          { paddingBottom: '130px' },
         ]}
       >
         {designer && <Designer designer={designer} />}

@@ -1,15 +1,15 @@
 import xw from 'xwind'
 import { useForm } from 'react-hook-form'
+import Layout from '~/components/Layout'
 
 function Contact({}) {
-  const { register, handleSubmit, watch, errors } = useForm()
-  const onSubmit = (data) => {
+  const { register, handleSubmit, errors } = useForm()
+  const onSubmit = data => {
     console.log(data)
   }
-  console.log(watch('example'))
   return (
-    <div>
-      <div css={xw`bg-red-900 w-full h-96`}></div>
+    <Layout>
+      {/* <div css={xw`bg-red-900 w-full h-96`}></div>
       <div>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -25,8 +25,8 @@ function Contact({}) {
           {errors.exampleRequired && <p>This field is required</p>}
           <input type="submit" />
         </form>
-      </div>
-    </div>
+      </div> */}
+    </Layout>
   )
 }
 

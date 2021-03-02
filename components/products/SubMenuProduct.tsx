@@ -1,5 +1,7 @@
 import { useRef, useEffect } from 'react'
 import xw from 'xwind'
+import useSWR from 'swr'
+import fetcher from '~/components/libs/fetcher'
 import { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 
@@ -7,13 +9,13 @@ import { MenuItem } from '~/components/products/MenuItem'
 
 interface SubMenuProductProps {
   search?: string
-  data: any
 }
 
-const SubMenuProduct = ({ search = '', data }: SubMenuProductProps) => {
+const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
   const searchRef = useRef(null)
   const shared = useAppContext()
   const router = useRouter()
+  const { data, error } = useSWR(`/api/sub-menus`, fetcher)
 
   let timer: ReturnType<typeof setTimeout> = null
 
@@ -34,41 +36,33 @@ const SubMenuProduct = ({ search = '', data }: SubMenuProductProps) => {
   }, [])
 
   return (
-    <nav
-      css={xw`flex max-h-full overflow-y-auto w-full lg:justify-center`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <nav onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <ul css={xw`lg:flex lg:flex-row lg:justify-center`}>
-        <MenuItem
-          name="tipologia"
-          subItems={'typologies'}
-          path="tipologias"
-          items={data.typologies}
-          plus
-        />
-        <MenuItem
-          name="materiais"
-          subItems={'materials'}
-          path="materiais"
-          items={data.materials}
-          plus
-        />
-        <MenuItem
-          name="designers"
-          subItems={'designers'}
-          path="designers"
-          items={data.designers}
-          plus
-        />
-        <MenuItem
-          name="linhas"
-          subItems={'families'}
-          path="linhas"
-          plus
-          items={data.lines}
-          lines
-        />
+        {data && (
+          <>
+            <MenuItem name="todos" path="/produtos" isLink isAll />
+            <MenuItem
+              name="tipologia"
+              path="tipologias"
+              items={data.typologies}
+              plus
+            />
+            <MenuItem
+              name="materiais"
+              path="materiais"
+              items={data.materials}
+              plus
+            />
+            <MenuItem
+              name="designers"
+              path="designers"
+              items={data.designers}
+              plus
+            />
+            <MenuItem name="linhas" path="linhas" plus items={data.lines} />
+          </>
+        )}
+
         <MenuItem name="busca">
           <input
             ref={searchRef}
