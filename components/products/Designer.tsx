@@ -19,9 +19,12 @@ const Designer = ({ designer }) => {
   const [photo] = designer.photo
   return (
     <DesignerWrap>
-      <Photo>
-        <GraphImg image={photo} alt={photo.alt} fit="crop" />
-      </Photo>
+      {photo && (
+        <Photo>
+          <GraphImg image={photo} alt={photo.alt} fit="crop" />
+        </Photo>
+      )}
+
       <h1 css={xw`leading-tight font-medium text-18px mb-5 lg:mb-2`}>
         {designer.name}
       </h1>
