@@ -13,7 +13,7 @@ const Designer = ({ designer, products }) => {
       goToLines: false,
       productClosePath: `/produtos/designers/${designer.slug}`,
     })
-  }, [])
+  }, [designer.slug])
 
   return (
     <LayoutProduct designer={designer}>
