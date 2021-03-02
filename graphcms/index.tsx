@@ -73,9 +73,7 @@ export const DesignerQuery = `
 query Designer($id: String!) {
   values: designer (where: { slug: $id}) {
     id
-    stage
-    updatedAt
-    createdAt
+    slug
     name
     description {
       html
