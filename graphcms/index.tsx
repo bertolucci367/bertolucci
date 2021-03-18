@@ -69,6 +69,22 @@ query Line($id: String!) {
 }
 `
 
+export const DesignersQuery = `
+query Designers {
+  values: designers {
+    id
+    slug
+    name
+    photo {
+      handle
+      height
+      width
+      alt
+    }
+  }
+}
+`
+
 export const DesignerQuery = `
 query Designer($id: String!) {
   values: designer (where: { slug: $id}) {

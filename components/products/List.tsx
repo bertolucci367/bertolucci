@@ -5,12 +5,11 @@ import React, { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 import Card from './Card'
 
-const ListUL = styled.ul(
+export const ListUL = styled.ul(
   xw`
-  col-start-1 col-end-4 lg:col-start-2 lg:col-end-3
-  flex flex-wrap justify-center
-  lg:justify-center
-
+    col-start-1 col-end-4 lg:col-start-2 lg:col-end-3
+    flex flex-wrap justify-center
+    lg:justify-center
   `,
 )
 

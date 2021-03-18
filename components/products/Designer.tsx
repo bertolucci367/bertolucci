@@ -7,9 +7,9 @@ const DesignerWrap = styled.div(xw`lg:sticky top-36`)
 
 const Photo = styled.div([
   xw`
-  mr-5 mb-2 max-w-49%
+  mr-5 mb-2 w-full max-w-49%
   sm:mb-4 sm:w-1/3
-  lg:mr-0 lg:w-full lg:min-w-full
+  lg:mr-0 lg:min-w-full
 `,
   { float: 'left' },
 ])

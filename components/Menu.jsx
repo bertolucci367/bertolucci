@@ -6,19 +6,13 @@ import SubMenu from './SubMenu'
 
 const menu = [
   { name: 'Produtos', url: '/produtos', hasSubmenu: true },
-  { name: 'Ambientes', url: '/ambientes', hasSubmenu: false },
-  { name: 'Sobre', url: '/sobre', hasSubmenu: true },
-  { name: 'Imprensa', url: '/imprensa', hasSubmenu: false },
-  { name: 'Blog', url: '/noticias', hasSubmenu: false },
+  { name: 'Designers', url: '/designers', hasSubmenu: false },
+  // { name: 'Ambientes', url: '/ambientes', hasSubmenu: false },
+  // { name: 'Sobre', url: '/sobre', hasSubmenu: true },
+  // { name: 'Imprensa', url: '/imprensa', hasSubmenu: false },
+  // { name: 'Blog', url: '/noticias', hasSubmenu: false },
   { name: 'Contato', url: '/contato', hasSubmenu: false },
 ]
-
-// const SubMenuItemStyled = styled.li<SubMenuProps>(({ show = true }) => [
-//   xw`my-5 lg:my-0`,
-//   {
-//     display: show ? 'block' : 'none',
-//   },
-// ])
 
 const Desktop = () => {
   const router = useRouter()

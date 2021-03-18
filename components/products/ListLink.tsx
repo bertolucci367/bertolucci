@@ -1,11 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import xw from 'xwind'
 
-const ListLink = ({ href, children, compare }) => {
-  const router = useRouter()
-
+const ListLink = ({ href, children, compare = false }) => {
   if (compare) {
     return React.cloneElement(children)
   }

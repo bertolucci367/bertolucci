@@ -43,23 +43,28 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
             <MenuItem name="todos" path="/produtos" isLink isAll />
             <MenuItem
               name="tipologia"
-              path="tipologias"
+              path="/produtos/tipologias"
               items={data.typologies}
               plus
             />
             <MenuItem
               name="materiais"
-              path="materiais"
+              path="/produtos/materiais"
               items={data.materials}
               plus
             />
             <MenuItem
               name="designers"
-              path="designers"
+              path="/designers"
               items={data.designers}
               plus
             />
-            <MenuItem name="linhas" path="linhas" plus items={data.lines} />
+            <MenuItem
+              name="linhas"
+              path="/produtos/linhas"
+              plus
+              items={data.lines}
+            />
           </>
         )}
 

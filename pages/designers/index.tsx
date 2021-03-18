@@ -1,31 +1,29 @@
+import Layout from '~/components/Layout'
 import { GraphQLClient } from 'graphql-request'
-import LayoutProduct from '~/components/LayoutProduct'
-import List from '~/components/products/List'
-import { useAppContext } from '~/components/context/AppContext'
-import { useEffect } from 'react'
-import { DesignerQuery } from '~/graphcms/index'
+import { DesignersQuery } from '~/graphcms/index'
+import { ListUL } from '~/components/products/List'
+import Card from '~/components/Card'
 
-const Designer = ({ designer, products }) => {
-  const shared = useAppContext()
-
-  useEffect(() => {
-    shared.addData({
-      goToLines: false,
-      productClosePath: `/produtos/designers/${designer.slug}`,
-    })
-  }, [designer.slug])
-
+const Designers = ({ designers }) => {
   return (
-    <LayoutProduct designer={designer}>
-      <List products={products} show />
-    </LayoutProduct>
+    <Layout>
+      <ListUL>
+        {designers.map(d => (
+          <Card
+            key={d.slug}
+            photo={d.photo}
+            path={`/designers/${d.slug}`}
+            title={d.name}
+          ></Card>
+        ))}
+      </ListUL>
+    </Layout>
   )
 }
 
 export async function getStaticProps({ params, preview = false }) {
   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
-  const { slug } = params
-  const { values } = await gcms.request(DesignerQuery, { id: slug })
+  const { values } = await gcms.request(DesignersQuery)
 
   if (!values) {
     return {
@@ -35,8 +33,7 @@ export async function getStaticProps({ params, preview = false }) {
 
   return {
     props: {
-      designer: values,
-      products: values.products,
+      designers: values,
     }, // will be passed to the page component as props
   }
 }
@@ -60,4 +57,4 @@ export async function getStaticPaths() {
   return { paths, fallback: false }
 }
 
-export default Designer
+export default Designers
