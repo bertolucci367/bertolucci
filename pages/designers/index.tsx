@@ -47,14 +47,4 @@ query Designers {
 }
 `
 
-export async function getStaticPaths() {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
-  const { values } = await gcms.request(_paths)
-
-  // Get the paths we want to pre-render based on posts
-  const paths = values.map(el => ({ params: { slug: el.slug } }))
-
-  return { paths, fallback: false }
-}
-
 export default Designers
