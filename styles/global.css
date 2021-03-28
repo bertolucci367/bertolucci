@@ -1,19 +1,5 @@
-@font-face {
-  font-family: 'FuturaStdLight';
-  src: url('/fonts/futura-light-bt.ttf');
-  font-style: normal;
-  font-weight: 400;
-  /* font-display: swap; */
-  font-display: optional; /* Define how the browser behaves during download */
-}
-
-@font-face {
-  font-family: 'FuturaStdMedium';
-  src: url('/fonts/futura-medium-bt.ttf');
-  font-style: medium;
-  font-weight: 500;
-  /* font-display: swap; */
-  font-display: optional; /* Define how the browser behaves during download */
+body {
+  font-size: 16px;
 }
 
 .slide,
@@ -39,4 +25,29 @@
 
 .slider .graphcms-image-outer-wrapper {
   height: 100vh;
+}
+
+label {
+  padding: 0 0.4rem;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+input,
+textarea {
+  border: 1px solid black;
+  box-sizing: border-box;
+  font-family: 'helvetica', 'arial', sans-serif;
+  font-size: 1.2rem;
+  padding: 0.6rem;
+  margin-bottom: 1.6rem;
+  width: 100%;
+}
+
+input[type='submit'] {
+  border-color: #767676;
+  color: #212121;
+  padding: 0.4rem 1.6rem;
+  width: auto;
 }

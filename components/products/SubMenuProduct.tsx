@@ -74,7 +74,7 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
             type="search"
             css={[
               { lineHeight: '19px' },
-              xw`border border-gray-500 ml-2 outline-none px-1.5 -mt-2`,
+              xw`border border-gray-500 ml-2 outline-none py-1.5 px-2 -mt-2 inline-block w-auto`,
             ]}
             onKeyPress={event => {
               if (event.key !== 'Enter') {
