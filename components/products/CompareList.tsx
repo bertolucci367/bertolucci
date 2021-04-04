@@ -25,7 +25,13 @@ const CompareList = () => {
     >
       {shared.compare.length > 0 && (
         <div css={xw`text-13px`}>
-          <Link href="/produtos/comparar">
+          <Link
+            prefetch={false}
+            href={{
+              pathname: '/produtos/comparar',
+              query: { p: shared.compare.map(o => o.slug) },
+            }}
+          >
             <a css={xw`font-medium mb-2 hover:cursor-pointer`}>
               Acessar seleção de produtos:
             </a>

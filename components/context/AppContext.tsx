@@ -18,7 +18,7 @@ export function AppWrapper({ children }) {
     <AppContext.Provider
       value={{
         ...data,
-        addData: (obj) =>
+        addData: obj =>
           setData((prev: any) => {
             return { ...prev, ...obj }
           }),

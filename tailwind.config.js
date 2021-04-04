@@ -26,6 +26,7 @@ module.exports = {
         cardImgD: '200px',
         tooltip: '144px',
         asideBody: `calc(100vh - (130px + 90px))`,
+        map: '50vh',
       },
       spacing: { logoFooter: '130px' },
 

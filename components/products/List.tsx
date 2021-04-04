@@ -1,8 +1,5 @@
 import xw from 'xwind'
 import styled from '@emotion/styled'
-
-import React, { useRouter } from 'next/router'
-import { useAppContext } from '~/components/context/AppContext'
 import Card from './Card'
 
 export const ListUL = styled.ul(
@@ -14,9 +11,6 @@ export const ListUL = styled.ul(
 )
 
 const List = ({ items = [], products = [], ...args }) => {
-  const router = useRouter()
-  const shared = useAppContext()
-
   const listItems = items.map(({ products, ...rest }, i) => {
     const [product] = products
 

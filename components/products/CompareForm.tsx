@@ -3,16 +3,11 @@ import { useForm } from 'react-hook-form'
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import Image from 'next/image'
+import { useAppContext } from '~/components/context/AppContext'
 
-const Title = styled.h2(xw`font-medium text-13px`)
+const Title = styled.h2(xw`font-medium text-13px mb-10`)
 
-const FieldWrap = styled.div([
-  xw`text-left text-13px`,
-  {
-    ['input, textarea']: xw`border border-solid border-black w-full px-2 py-1`,
-    ['label']: xw`mt-4 block font-medium`,
-  },
-])
+const FieldWrap = styled.div()
 
 interface IFormInput {
   name: String
@@ -24,15 +19,24 @@ interface IFormInput {
 
 const CompareForm = () => {
   const router = useRouter()
+  const shared = useAppContext()
 
-  if (router.asPath !== '/produtos/comparar') {
+  const reg = /\/produtos\/comparar/
+
+  if (!reg.test(router.pathname)) {
     return <></>
   }
 
   const { register, handleSubmit } = useForm<IFormInput>()
 
   const onSubmit = (data: IFormInput) => {
-    console.log(data)
+    const items = shared.compare.map(o => o.name)
+    const _data = { ...data, products: items, url: router.asPath }
+    fetch('/api/send-compare-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(_data),
+    })
   }
 
   return (
@@ -55,7 +59,7 @@ const CompareForm = () => {
             <label htmlFor="form-name">*Meu nome:</label>
             <input
               id="form-name"
-              name="nome"
+              name="name"
               placeholder="nome"
               type="text"
               required
@@ -73,7 +77,7 @@ const CompareForm = () => {
             <label htmlFor="form-email">*Meu e-mail:</label>
             <input
               id="form-email"
-              name="e-mail"
+              name="email"
               placeholder="e-mail"
               type="email"
               required
