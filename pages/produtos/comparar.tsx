@@ -11,10 +11,14 @@ const ComparePage = () => {
   const shared = useAppContext()
   const router = useRouter()
   const {
-    query: { p = [] },
+    query: { p },
   } = router
   const _slugs: any =
-    shared.compare.length > 0 ? shared.compare.map(o => o.slug) : p
+    shared.compare.length > 0
+      ? shared.compare.map(o => o.slug)
+      : Array.isArray(p)
+      ? p
+      : [p]
 
   // Example:
   // shared.compare = [{ slug: 'ju-ab', code: 'A920', name: 'ju.ab' }]

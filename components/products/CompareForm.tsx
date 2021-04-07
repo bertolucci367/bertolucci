@@ -4,6 +4,8 @@ import xw from 'xwind'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import { useAppContext } from '~/components/context/AppContext'
+import { useState } from 'react'
+import FormMessage from '~/components/FormMessage'
 
 const Title = styled.h2(xw`font-medium text-13px mb-10`)
 
@@ -27,7 +29,14 @@ const CompareForm = () => {
     return <></>
   }
 
-  const { register, handleSubmit } = useForm<IFormInput>()
+  const [sending, setSending] = useState(false)
+  const [success, setSuccess] = useState(true)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
 
   const onSubmit = (data: IFormInput) => {
     const items = shared.compare.map(o => o.name)
@@ -55,6 +64,7 @@ const CompareForm = () => {
           <span>enviar por e-mail</span>{' '}
         </Title>
         <form onSubmit={handleSubmit(onSubmit)}>
+          {success && <FormMessage status="success">sucesso!</FormMessage>}
           <FieldWrap>
             <label htmlFor="form-name">*Meu nome:</label>
             <input
@@ -63,14 +73,16 @@ const CompareForm = () => {
               placeholder="nome"
               type="text"
               required
-              ref={register({ required: true })}
+              {...register('name', { required: true })}
             />
+            {errors.name && errors.name.type === 'required' && (
+              <FormMessage status="error">{errors.name.message}</FormMessage>
+            )}
             <input
               css={xw`hidden`}
               id="form-nickname"
               name="nickname"
               type="text"
-              ref={register}
             />
           </FieldWrap>
           <FieldWrap>
@@ -81,7 +93,7 @@ const CompareForm = () => {
               placeholder="e-mail"
               type="email"
               required
-              ref={register({ required: true })}
+              {...register('email', { required: true })}
             />
           </FieldWrap>
           <FieldWrap>
@@ -92,7 +104,6 @@ const CompareForm = () => {
               type="email"
               required
               defaultValue="bertolucci@bertolucci.com.br"
-              ref={register}
             />
           </FieldWrap>
           <FieldWrap>
@@ -102,7 +113,6 @@ const CompareForm = () => {
               name="message"
               placeholder="digite sua mensagem"
               rows={5}
-              ref={register}
             ></textarea>
           </FieldWrap>
           <FieldWrap>

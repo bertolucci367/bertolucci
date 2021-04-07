@@ -1,5 +1,7 @@
 import xw from 'xwind'
 import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import FormMessage from '~/components/FormMessage'
 
 interface IFormInput {
   name: String
@@ -10,51 +12,69 @@ interface IFormInput {
 }
 
 const ContactForm = () => {
-  const { register, handleSubmit, errors } = useForm()
-  const onSubmit = (data: IFormInput) => {
-    fetch('/api/send-contact-email', {
+  const [sending, setSending] = useState(false)
+  const [success, setSuccess] = useState(false)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = async (data: IFormInput) => {
+    setSending(true)
+    setSuccess(false)
+    const res = await fetch('/api/send-contact-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
+
+    setSending(false)
+
+    if (res.ok) {
+      setSuccess(true)
+    }
   }
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
+        {success && (
+          <FormMessage status="success">enviado com sucesso!</FormMessage>
+        )}
+
         <label htmlFor="name">*nome</label>
         <input
-          type="text"
           id="name"
-          name="name"
           placeholder="nome completo"
-          ref={register}
+          aria-invalid={errors.name ? 'true' : 'false'}
+          {...register('name', { required: true })}
         />
-        <input type="text" css={xw`hidden`} ref={register} />
+        {errors.name && errors.name.type === 'required' && (
+          <FormMessage status="error">{errors.name.message}</FormMessage>
+        )}
+        <input type="text" css={xw`hidden`} />
         <label htmlFor="email">*e-mail</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder=""
-          ref={register}
-        />
+        <input type="email" name="email" id="email" placeholder="" />
+        {errors.email && (
+          <FormMessage status="error">{errors.email.message}</FormMessage>
+        )}
         <label htmlFor="phone">telefone</label>
         <input
           type="tel"
           name="phone"
           id="phone"
           placeholder="telefone com DDD"
-          ref={register}
         />
         <label htmlFor="message">mensagem</label>
-        <textarea
-          name="message"
-          id="message"
-          rows={10}
-          ref={register}
-        ></textarea>
-        <input type="submit" value="enviar" />
+        <textarea name="message" id="message" rows={10}></textarea>
+
+        <input
+          type="submit"
+          value={sending ? 'enviando...' : 'enviar'}
+          disabled={sending}
+        />
       </form>
     </>
   )
