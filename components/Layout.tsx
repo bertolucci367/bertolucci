@@ -157,7 +157,7 @@ const Layout = ({ children }: LayoutProps) => {
       <div
         css={[
           { width: '210px' },
-          xw`hidden fixed bottom-0 left-0 pb-10 z-50 lg:flex justify-center`,
+          xw`hidden fixed bottom-0 left-0 pb-10 z-0 lg:flex justify-center pointer-events-none`,
         ]}
       >
         <LogoFooter />

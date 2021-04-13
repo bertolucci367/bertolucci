@@ -13,7 +13,7 @@ interface IFormInput {
 
 const ContactForm = () => {
   const [sending, setSending] = useState(false)
-  const [success, setSuccess] = useState(false)
+  const [msgStatus, setMsgStatus] = useState(0)
 
   const {
     register,
@@ -23,7 +23,7 @@ const ContactForm = () => {
 
   const onSubmit = async (data: IFormInput) => {
     setSending(true)
-    setSuccess(false)
+    setMsgStatus(0)
     const res = await fetch('/api/send-contact-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -31,17 +31,19 @@ const ContactForm = () => {
     })
 
     setSending(false)
-
-    if (res.ok) {
-      setSuccess(true)
-    }
+    setMsgStatus(res.status)
   }
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {success && (
+        {msgStatus === 200 && (
           <FormMessage status="success">enviado com sucesso!</FormMessage>
+        )}
+        {msgStatus === 404 && (
+          <FormMessage status="error">
+            ops... tente mais tarde ou entre em contato por telefone.
+          </FormMessage>
         )}
 
         <label htmlFor="name">*nome</label>
@@ -52,13 +54,13 @@ const ContactForm = () => {
           {...register('name', { required: true })}
         />
         {errors.name && errors.name.type === 'required' && (
-          <FormMessage status="error">{errors.name.message}</FormMessage>
+          <FormMessage status="error.field">{errors.name.message}</FormMessage>
         )}
         <input type="text" css={xw`hidden`} />
         <label htmlFor="email">*e-mail</label>
         <input type="email" name="email" id="email" placeholder="" />
         {errors.email && (
-          <FormMessage status="error">{errors.email.message}</FormMessage>
+          <FormMessage status="error.field">{errors.email.message}</FormMessage>
         )}
         <label htmlFor="phone">telefone</label>
         <input

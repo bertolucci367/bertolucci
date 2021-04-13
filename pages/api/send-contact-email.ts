@@ -4,8 +4,7 @@ import { sendContact } from '~/components/libs/sendEmail'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { name, email, phone, message } = req.body
-    // await sendContact({ name, email, phone, message })
+    await sendContact(req.body)
     return res.status(200).end()
   }
   return res.status(404).json({

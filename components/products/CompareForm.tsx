@@ -30,7 +30,7 @@ const CompareForm = () => {
   }
 
   const [sending, setSending] = useState(false)
-  const [success, setSuccess] = useState(true)
+  const [msgStatus, setMsgStatus] = useState(0)
 
   const {
     register,
@@ -38,14 +38,19 @@ const CompareForm = () => {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data: IFormInput) => {
+  const onSubmit = async (data: IFormInput) => {
     const items = shared.compare.map(o => o.name)
     const _data = { ...data, products: items, url: router.asPath }
-    fetch('/api/send-compare-email', {
+    setSending(true)
+    setMsgStatus(0)
+    const res = await fetch('/api/send-compare-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(_data),
     })
+
+    setSending(false)
+    setMsgStatus(res.status)
   }
 
   return (
@@ -64,7 +69,14 @@ const CompareForm = () => {
           <span>enviar por e-mail</span>{' '}
         </Title>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {success && <FormMessage status="success">sucesso!</FormMessage>}
+          {msgStatus === 200 && (
+            <FormMessage status="success">sucesso!</FormMessage>
+          )}
+          {msgStatus === 404 && (
+            <FormMessage status="error">
+              ops... tente mais tarde ou entre em contato por telefone.
+            </FormMessage>
+          )}
           <FieldWrap>
             <label htmlFor="form-name">*Meu nome:</label>
             <input
