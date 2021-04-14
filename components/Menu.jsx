@@ -8,7 +8,7 @@ const menu = [
   { name: 'Produtos', url: '/produtos', hasSubmenu: true },
   { name: 'Designers', url: '/designers', hasSubmenu: false },
   // { name: 'Ambientes', url: '/ambientes', hasSubmenu: false },
-  // { name: 'Sobre', url: '/sobre', hasSubmenu: true },
+  { name: 'Sobre', url: '/sobre', hasSubmenu: true },
   // { name: 'Imprensa', url: '/imprensa', hasSubmenu: false },
   // { name: 'Blog', url: '/noticias', hasSubmenu: false },
   { name: 'Contato', url: '/contato', hasSubmenu: false },
