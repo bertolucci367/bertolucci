@@ -33,13 +33,7 @@ const Product = ({ product }) => {
   }
 
   const images = product.photo.map((img: any) => (
-    <Image
-      src={img.url}
-      layout="intrinsic"
-      height={img.height}
-      width={img.width}
-      alt={img.alt}
-    />
+    <img src={img.url} height={img.height} width={img.width} alt={img.alt} />
   ))
 
   return (

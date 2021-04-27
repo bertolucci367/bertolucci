@@ -21,6 +21,8 @@ body {
 
 .carousel img {
   max-height: 80vh;
+  height: 80vh;
+  width: auto;
 }
 
 .slider .graphcms-image-outer-wrapper {

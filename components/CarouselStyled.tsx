@@ -32,12 +32,14 @@ export const NavBtnStyled = styled.a<NavProps>([
 export const CloseStyled = styled.div(xw`bg-white z-30 self-end px-2`)
 
 export const SectionInfoStyled = styled.div({
+  animation: 'all .4s ease-in-out',
   ['@media(min-width: 1024px)']: {
     [`:hover`]: {
       position: 'absolute',
       bottom: 0,
       left: 0,
       right: 0,
+      paddingTop: '10px',
     },
   },
 })

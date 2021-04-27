@@ -121,3 +121,56 @@ query typology($id: String!) {
   }
 }
 `
+
+export const BlogQuery = `
+query Blog($id: String!) {
+  values: blog (where: { slug: $id}, stage: PUBLISHED) {
+
+    id
+    stage
+    updatedAt
+    assets(first: 500) {
+      id
+      stage
+      handle
+      height
+      width
+      alt
+      url
+    }
+    createdAt
+    id
+    publishedAt
+    slug
+    texto {
+      raw
+    }
+    title
+    updatedAt
+    videos
+
+  }
+
+}
+`
+
+export const BlogPageQuery = `
+query BlogoPage {
+  data: page(where: {slug: "blog"}) {
+    items {
+      ... on  Blog{
+        __typename
+        id
+        title
+        slug
+				assets(first: 1) {
+          handle
+          height
+          width
+          alt
+        }
+      }
+    }
+  }
+}
+`

@@ -126,7 +126,25 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
       <SectionInfoStyled>
         <div
           style={{ maxWidth: textWrapWidth ? textWrapWidth : 'initial' }}
-          css={xw`mx-auto`}
+          css={[
+            xw`mx-auto bg-white overflow-y-scroll max-h-asideBody pr-2 pt-4 pb-12`,
+            `
+            ::-webkit-scrollbar {
+              width: 2px;
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+              background: white;
+            }
+
+          `,
+            {
+              [':hover']: {
+                '::-webkit-scrollbar-thumb': { backgroundColor: '#ccc' },
+              },
+            },
+          ]}
         >
           {children}
         </div>
