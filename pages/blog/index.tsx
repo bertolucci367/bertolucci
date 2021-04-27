@@ -30,8 +30,6 @@ export async function getStaticProps({ params }) {
   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { data } = await gcms.request(BlogPageQuery)
 
-  console.log(data)
-
   if (!data) {
     return {
       notFound: true,

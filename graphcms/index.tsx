@@ -143,7 +143,7 @@ query Blog($id: String!) {
     publishedAt
     slug
     texto {
-      raw
+      html
     }
     title
     updatedAt

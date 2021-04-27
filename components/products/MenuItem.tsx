@@ -83,7 +83,7 @@ const SubMenuStyled = styled.ul<SubMenuProps>(({ name }) => [
   custom[name],
 ])
 
-const SubMenuLabel = styled.span<SubMenuProps>(({ show, plus }) => [
+const SubMenuLabel = styled.a<SubMenuProps>(({ show, plus }) => [
   xw`inline-block text-13px hover:cursor-pointer`,
   {
     fontFamily: show ? 'FuturaStdMedium' : 'FuturaStdLight',
@@ -115,11 +115,11 @@ export const MenuItem = ({
   isAll,
 }: MenuItemProps) => {
   const shared = useAppContext()
-  const [shouldFetch, setShouldFetch] = useState(false)
 
-  const handleToggle = (name: string) => {
+  const handleToggle = (e: React.MouseEvent, name: string) => {
     if (!plus) return
-    setShouldFetch(true)
+    e.preventDefault()
+
     const _isOpen = shared.menuOpen === name ? !shared.menuIsOpen : true
     shared.addData({ menuOpen: name, menuIsOpen: _isOpen })
   }
@@ -133,7 +133,8 @@ export const MenuItem = ({
       <SubMenuLabel
         show={isOpenMenu(name)}
         plus={plus}
-        onClick={e => handleToggle(name)}
+        onClick={e => handleToggle(e, name)}
+        href={path}
       >
         {isLink && <Link href={path}>{name}</Link>}
         {!isLink && name}
