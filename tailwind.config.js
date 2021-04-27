@@ -30,7 +30,7 @@ module.exports = {
       },
       spacing: { logoFooter: '130px' },
 
-      maxHeight: { '90vh': '90vh' },
+      maxHeight: { '90vh': '90vh', asideBody: `calc(100vh - (130px + 90px))` },
       minWidth: { card: '225px' },
       maxWidth: { card: '225px', '48%': '48%', '49%': '49%' },
       width: {

@@ -10,7 +10,7 @@ const menu = [
   // { name: 'Ambientes', url: '/ambientes', hasSubmenu: false },
   { name: 'Sobre', url: '/sobre', hasSubmenu: true },
   // { name: 'Imprensa', url: '/imprensa', hasSubmenu: false },
-  // { name: 'Blog', url: '/noticias', hasSubmenu: false },
+  { name: 'Blog', url: '/blog', hasSubmenu: false },
   { name: 'Contato', url: '/contato', hasSubmenu: false },
 ]
 

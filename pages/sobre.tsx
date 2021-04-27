@@ -30,7 +30,7 @@ const data = {
   },
 }
 
-const About = (): JSX.Element => {
+const About = () => {
   return (
     <Layout>
       <div css={xw`col-start-2`}>
