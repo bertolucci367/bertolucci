@@ -14,7 +14,9 @@ const Blog = ({ data }) => {
       <div css={xw`col-start-2`}>
         <Carousel slides={images} nav close={'/blog'}>
           <div>
-            <h1>{data.title}</h1>
+            <h1 css={xw`font-medium sticky top-0 bg-white py-2.5`}>
+              {data.title}
+            </h1>
             <div
               dangerouslySetInnerHTML={{
                 __html: data?.texto?.html,

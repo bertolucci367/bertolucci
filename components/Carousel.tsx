@@ -127,7 +127,7 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
         <div
           style={{ maxWidth: textWrapWidth ? textWrapWidth : 'initial' }}
           css={[
-            xw`mx-auto bg-white overflow-y-scroll max-h-asideBody pr-2 pt-4 pb-12`,
+            xw`mx-auto bg-white overflow-y-scroll max-h-asideBody pr-2 pb-12`,
             `
             ::-webkit-scrollbar {
               width: 2px;
