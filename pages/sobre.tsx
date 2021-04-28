@@ -36,8 +36,10 @@ const About = () => {
       <div css={xw`col-start-2`}>
         <div css={xw`relative`}>
           <div id="historia" css={xw`-top-36 absolute left-0`}></div>
-          <div css={xw`grid grid-cols-4 gap-10 mb-36`}>
-            <div css={xw`w-10/12 col-span-1`}>
+          <div
+            css={xw`grid grid-cols-1 xl:grid-cols-4 gap-y-10 xl:gap-10 mb-36`}
+          >
+            <div css={xw`xl:w-10/12 xl:col-span-1`}>
               <div css={xw`sticky top-36`}>
                 <h2 css={xw`text-18px mb-6`}>
                   Paulistana na origem mas brasileira de alma, uma empresa em
@@ -62,22 +64,22 @@ const About = () => {
               </div>
             </div>
 
-            <ol css={xw`col-span-3 grid grid-cols-3 gap-10`}>
-              <ol css={xw`col-span-3 grid grid-cols-3 gap-10`}>
-                {data.history.imgs.map((url, i) => (
-                  <li key={i} css={xw`relative`}>
-                    <img src={url} alt="" />
-                  </li>
-                ))}
-              </ol>
+            <ol
+              css={xw`grid gap-y-2  xl:col-span-3 md:grid-cols-2 xl:grid-cols-3 md:gap-5 xl:gap-10`}
+            >
+              {data.history.imgs.map((url, i) => (
+                <li key={i} css={xw`relative`}>
+                  <img src={url} alt="" />
+                </li>
+              ))}
             </ol>
           </div>
         </div>
 
         <div css={xw`relative`}>
           <div id="producao" css={xw`-top-36 absolute left-0`}></div>
-          <div css={xw`grid grid-cols-4 gap-10 mb-36`}>
-            <div css={xw`w-10/12`}>
+          <div css={xw`grid xl:grid-cols-4 gap-y-10 xl:gap-10 mb-36`}>
+            <div css={xw`xl:w-10/12`}>
               <div css={xw`sticky top-36`}>
                 <h2 css={xw`text-18px mb-6`}>
                   Com o requinte da produção semi-artesanal
@@ -102,7 +104,9 @@ const About = () => {
               </div>
             </div>
 
-            <ol css={xw`col-span-3 grid grid-cols-3 gap-10`}>
+            <ol
+              css={xw`grid xl:col-span-3 md:grid-cols-2 xl:grid-cols-3 gap-y-2 md:gap-5 xl:gap-10`}
+            >
               {data.production.imgs.map((url, i) => (
                 <li key={i}>
                   <img src={url} alt="" />
