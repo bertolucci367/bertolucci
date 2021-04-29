@@ -5,9 +5,9 @@ import SubMenu from './SubMenu'
 const menu = [
   { name: 'Produtos', url: '/produtos' },
   { name: 'Ambientes', url: '/ambientes' },
-  { name: 'Sobre', url: '/sobre' },
+  { name: 'Sobre', url: '/fabrica' },
   { name: 'Imprensa', url: '/news' },
-  { name: 'Blog', url: '/blog' },
+  { name: 'Blog', url: '/giornale' },
   { name: 'Contato', url: '/contact' },
 ]
 

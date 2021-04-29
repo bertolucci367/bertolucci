@@ -12,7 +12,7 @@ const Blog = ({ data }) => {
   return (
     <Layout>
       <div css={xw`col-start-2`}>
-        <Carousel slides={images} nav close={'/blog'}>
+        <Carousel slides={images} nav close={'/giornale'}>
           <div>
             <h1 css={xw`font-medium sticky top-0 bg-white py-2.5`}>
               {data.title}

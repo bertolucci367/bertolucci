@@ -65,7 +65,7 @@ const About = () => {
             </div>
 
             <ol
-              css={xw`grid gap-y-2  xl:col-span-3 md:grid-cols-2 xl:grid-cols-3 md:gap-5 xl:gap-10`}
+              css={xw`grid gap-y-2 xl:col-span-2 md:grid-cols-2 xl:grid-cols-2 xl:col-span-3 md:gap-5 xl:gap-x-5 xl:gap-y-40`}
             >
               {data.history.imgs.map((url, i) => (
                 <li key={i} css={xw`relative`}>
@@ -105,7 +105,7 @@ const About = () => {
             </div>
 
             <ol
-              css={xw`grid xl:col-span-3 md:grid-cols-2 xl:grid-cols-3 gap-y-2 md:gap-5 xl:gap-10`}
+              css={xw`grid gap-y-2 xl:col-span-2 md:grid-cols-2 xl:grid-cols-2 xl:col-span-3 md:gap-5 xl:gap-x-5 xl:gap-y-40`}
             >
               {data.production.imgs.map((url, i) => (
                 <li key={i}>

@@ -15,7 +15,7 @@ const Blog = ({ data }) => {
               <Card
                 key={item.slug}
                 photo={item.assets}
-                path={`/blog/${item.slug}`}
+                path={`/giornale/${item.slug}`}
                 title={item.title}
               ></Card>
             ))}
