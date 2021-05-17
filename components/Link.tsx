@@ -13,7 +13,7 @@ const ActiveLink = ({ href, active, children }) => {
   const {
     props: { className },
   } = children
-  let style = {}
+  let style = xw`border-b border-solid border-white`
 
   if (isActive({ path: router.pathname, href })) {
     style = xw`border-b border-solid border-black`

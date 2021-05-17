@@ -5,8 +5,8 @@ const SubMenuAbout = () => {
   return (
     <nav>
       <ul css={xw`lg:flex lg:flex-row lg:justify-center`}>
-        <MenuItem name="história" path="#historia" />
-        <MenuItem name="produção" path="#producao" />
+        <MenuItem name="história" path="/fabrica#historia" />
+        <MenuItem name="produção" path="/fabrica#producao" />
       </ul>
     </nav>
   )

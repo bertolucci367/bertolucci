@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { css } from '@emotion/react'
 import xw from 'xwind'
 import Image from 'next/image'
@@ -6,6 +5,7 @@ import Image from 'next/image'
 import Menu from '~/components/Menu'
 import MenuButton from '~/components/MenuButton'
 import { Logo, LogoFooter } from '~/components/Logo'
+import { useAppContext } from '~/components/context/AppContext'
 
 interface LayoutProps {
   children?: React.ReactNode
@@ -14,10 +14,10 @@ interface LayoutProps {
 const contact = ['11 3874 2879', '11 9 4521 9938', 'rua espártaco, 367 - lapa']
 
 const Layout = ({ children }: LayoutProps) => {
-  const [isOpenMenu, setIsOpenMenu] = useState(false)
+  const shared = useAppContext()
 
   const handleClick = () => {
-    setIsOpenMenu(!isOpenMenu)
+    shared.addData({ menuMobileIsOpen: !shared.menuMobileIsOpen })
   }
 
   return (
@@ -50,34 +50,24 @@ const Layout = ({ children }: LayoutProps) => {
         <div
           css={xw`
             sticky top-0
-            flex items-center lg:justify-center
-            px-5 lg:px-4
+            flex items-center lg:justify-center lg:items-start
+            px-5 lg:px-4 lg:pt-3
             col-start-1 row-start-1`}
         >
           <Logo />
         </div>
 
         <div
-          css={[
-            `display: ${isOpenMenu ? 'flex' : 'none'}`,
-            xw`
-              fixed top-0 bottom-0 left-0 right-0 m-auto
-              overflow-y-scroll
-              flex-nowrap items-center
-              p-5 lg:p-0
-              bg-white border border-solid border-black lg:border-0
-              w-11/12 lg:w-full h-2/3 lg:h-auto
-              lg:overflow-y-visible
-              lg:flex lg:flex-wrap lg:relative lg:justify-center
-              col-start-2`,
-          ]}
+          css={xw`
+          col-start-2 lg:pt-3
+        `}
         >
-          <Menu />
+          <Menu isOpenMenu={shared.menuMobileIsOpen} />
         </div>
 
         <MenuButton>
           <button onClick={handleClick} css={xw`flex items-center px-4 py-3`}>
-            {!isOpenMenu && (
+            {!shared.menuMobileIsOpen && (
               <svg
                 css={xw`h-8`}
                 viewBox="0 0 20 20"
@@ -88,7 +78,7 @@ const Layout = ({ children }: LayoutProps) => {
               </svg>
             )}
 
-            {isOpenMenu && (
+            {shared.menuMobileIsOpen && (
               <Image
                 src="/close.svg"
                 layout="fixed"
@@ -99,8 +89,9 @@ const Layout = ({ children }: LayoutProps) => {
             )}
           </button>
         </MenuButton>
+
         <div
-          css={xw`hidden text-13px lg:flex flex-col justify-center items-end pr-4 col-start-3`}
+          css={xw`hidden text-13px lg:flex flex-col lg:mt-5 items-end pr-4 col-start-3`}
         >
           <div css={xw`text-right relative w-full`}>
             <div css={xw`lg:flex absolute left-0 top-2`}>

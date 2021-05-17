@@ -6,6 +6,7 @@ const sharedState = {
   compare: [],
   menuOpen: '',
   menuIsOpen: false,
+  menuMobileIsOpen: false,
   addData: (obj: any) => {},
 }
 

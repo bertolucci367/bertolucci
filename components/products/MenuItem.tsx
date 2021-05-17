@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import xw from 'xwind'
 import styled from '@emotion/styled'
 import Link from 'next/link'
@@ -111,17 +110,23 @@ export const MenuItem = ({
   children,
   plus,
   items,
-  isLink,
   isAll,
 }: MenuItemProps) => {
   const shared = useAppContext()
 
-  const handleToggle = (e: React.MouseEvent, name: string) => {
-    if (!plus) return
-    e.preventDefault()
+  const handleToggle = (e: React.MouseEvent, name: string, plus) => {
+    if (!plus) {
+      shared.addData({ menuMobileIsOpen: false })
+      return
+    }
 
+    e.preventDefault()
     const _isOpen = shared.menuOpen === name ? !shared.menuIsOpen : true
     shared.addData({ menuOpen: name, menuIsOpen: _isOpen })
+  }
+
+  const handleSubLink = () => {
+    shared.addData({ menuMobileIsOpen: false })
   }
 
   const isOpenMenu = (name: string) => {
@@ -133,11 +138,10 @@ export const MenuItem = ({
       <SubMenuLabel
         show={isOpenMenu(name)}
         plus={plus}
-        onClick={e => handleToggle(e, name)}
+        onClick={e => handleToggle(e, name, plus)}
         href={path}
       >
-        {isLink && <Link href={path}>{name}</Link>}
-        {!isLink && name}
+        {name}
       </SubMenuLabel>
       {items && (
         <SubMenuWrapStyled show={isOpenMenu(name)}>
@@ -145,11 +149,11 @@ export const MenuItem = ({
             {items.map(({ slug, name, title, photo }) => (
               <SubMenuItemStyled key={name}>
                 {title && (
-                  <SubMenuTitle css={xw`font-medium`}>{name}</SubMenuTitle>
+                  <SubMenuTitle css={xw`font-medium`}>1.{name}</SubMenuTitle>
                 )}
                 {!title && (
                   <Link href={`${path}/${slug}`} prefetch={false}>
-                    <SubMenuLink>
+                    <SubMenuLink onClick={() => handleSubLink()}>
                       {photo && photo[0] && (
                         <GraphImg
                           image={photo[0]}

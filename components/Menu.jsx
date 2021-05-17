@@ -3,12 +3,13 @@ import xw from 'xwind'
 import { useRouter } from 'next/router'
 import Link from './Link'
 import SubMenu from './SubMenu'
+import { useAppContext } from '~/components/context/AppContext'
 
 const menu = [
   { name: 'Produtos', url: '/produtos', hasSubmenu: true },
   { name: 'Designers', url: '/designers', hasSubmenu: false },
   // { name: 'Ambientes', url: '/ambientes', hasSubmenu: false },
-  { name: 'Fábrica', url: '/fabrica', hasSubmenu: true },
+  { name: 'A Fábrica', url: '/fabrica', hasSubmenu: true },
   // { name: 'Imprensa', url: '/imprensa', hasSubmenu: false },
   { name: 'Giornale', url: '/giornale', hasSubmenu: false },
   { name: 'Contato', url: '/contato', hasSubmenu: false },
@@ -19,12 +20,12 @@ const Desktop = () => {
   return (
     <>
       <nav css={xw`text-18px leading-none mr-8 lg:mr-0`}>
-        <ul css={xw`lg:flex lg:justify-around`}>
+        <ul css={xw`lg:flex lg:justify-center`}>
           {menu.map((m, i) => (
             <li key={i}>
               <Link href={m.url}>
                 <a
-                  css={xw`block font-bold mx-4 pb-1 my-10 lg:my-3 hover:cursor-pointer`}
+                  css={xw`block font-bold mx-4 pt-4 pb-1 mb-1 hover:cursor-pointer`}
                 >
                   {m.name}
                 </a>
@@ -41,18 +42,23 @@ const Desktop = () => {
 const Mobile = () => {
   const router = useRouter()
   const [current, setCurrent] = useState(router.asPath)
+  const shared = useAppContext()
 
   const handleClick = (e, menu) => {
     if (!menu.hasSubmenu) {
       router.push(menu.url)
+      shared.addData({ menuMobileIsOpen: false })
     }
+
+    e.preventDefault()
+    e.stopPropagation()
 
     setCurrent(menu.url)
   }
 
   return (
     <>
-      <nav css={xw`text-18px leading-none mr-8 lg:mr-0`}>
+      <nav css={xw`text-18px`}>
         <ul css={xw`lg:flex lg:justify-around`}>
           {menu.map((m, i) => (
             <li key={i}>
@@ -74,25 +80,27 @@ const Mobile = () => {
   )
 }
 
-const Menu = () => {
-  const [activePath, setActivePath] = useState('')
-  const [bodyWidth, setBodyWidth] = useState(0)
-
-  useEffect(() => {
-    function handleResize() {
-      const { width } = document.body.getBoundingClientRect()
-      setBodyWidth(width)
-    }
-    handleResize()
-    window.addEventListener('resize', handleResize)
-
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  if (bodyWidth < 1024) {
-    return <Mobile />
-  }
-
-  return <Desktop />
+const Menu = ({ isOpenMenu }) => {
+  return (
+    <>
+      <div
+        css={[
+          `display: ${isOpenMenu ? 'flex' : 'none'}`,
+          xw`lg:hidden
+          fixed top-0 bottom-0 left-0 right-0 m-auto lg:mt-3
+          overflow-y-scroll
+          flex-nowrap items-center
+          p-5 lg:p-0
+          bg-white border border-solid border-black lg:border-0
+          w-11/12 lg:w-full h-2/3 lg:h-auto`,
+        ]}
+      >
+        <Mobile />
+      </div>
+      <div css={xw`hidden lg:block`}>
+        <Desktop />
+      </div>
+    </>
+  )
 }
 export default Menu

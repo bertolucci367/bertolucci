@@ -32,6 +32,7 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
   }
 
   useEffect(() => {
+    if (!searchRef.current) return
     searchRef.current.value = search
   }, [])
 
@@ -40,7 +41,7 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
       <ul css={xw`lg:flex lg:flex-row lg:justify-center`}>
         {data && (
           <>
-            <MenuItem name="todos" path="/produtos" isLink isAll />
+            <MenuItem name="todos" path="/produtos" isAll />
             <MenuItem
               name="tipologia"
               path="/produtos/tipologias"
@@ -74,7 +75,7 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
             type="search"
             css={[
               { lineHeight: '19px' },
-              xw`border border-gray-500 ml-2 outline-none py-1.5 px-2 -mt-2 inline-block w-auto`,
+              xw`border border-gray-500 ml-2 outline-none py-1.5 px-2 inline-block w-auto`,
             ]}
             onKeyPress={event => {
               if (event.key !== 'Enter') {
