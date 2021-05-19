@@ -11,9 +11,7 @@ import Finishings from '~/components/products/Finishings'
 
 const InfoStyled = styled.div([
   xw`
-    bg-white text-center py-6
-    overflow-hidden
-    transition-all
+    bg-white text-center
     `,
 ])
 
@@ -41,12 +39,9 @@ const Product = ({ product }) => {
       <Container>
         <Carousel slides={images} close={path} nav>
           <InfoStyled>
-            <hgroup className="itemInfo">
-              <h2 css={xw`text-14px mb-1 font-medium`}>
-                {product.name} - {product.code}
-              </h2>
-              <h3></h3>
-            </hgroup>
+            <h1 css={xw`font-medium text-14px sticky top-0 bg-white py-2.5`}>
+              {product.name} - {product.code}
+            </h1>
 
             <InfoBody>
               <InfoTextBlock

@@ -127,18 +127,19 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
         <div
           style={{ maxWidth: textWrapWidth ? textWrapWidth : 'initial' }}
           css={[
-            xw`mx-auto bg-white overflow-y-scroll max-h-asideBody pr-2 pb-12`,
+            xw`mx-auto bg-white pr-2 pb-12`,
+            xw`lg:overflow-y-scroll lg:max-h-asideBody`,
             `
-            ::-webkit-scrollbar {
-              width: 2px;
-            }
+              ::-webkit-scrollbar {
+                width: 2px;
+              }
 
-            /* Handle */
-            ::-webkit-scrollbar-thumb {
-              background: white;
-            }
+              /* Handle */
+              ::-webkit-scrollbar-thumb {
+                background: white;
+              }
 
-          `,
+            `,
             {
               [':hover']: {
                 '::-webkit-scrollbar-thumb': { backgroundColor: '#ccc' },

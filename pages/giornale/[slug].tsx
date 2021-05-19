@@ -14,7 +14,7 @@ const Blog = ({ data }) => {
       <div css={xw`col-start-2`}>
         <Carousel slides={images} nav close={'/giornale'}>
           <div>
-            <h1 css={xw`font-medium sticky top-0 bg-white py-2.5`}>
+            <h1 css={xw`font-medium sticky z-50 top-0 bg-white py-2.5`}>
               {data.title}
             </h1>
             <div
