@@ -11,11 +11,18 @@ interface SubMenuProductProps {
   search?: string
 }
 
+interface DataProps {
+  typologies: []
+  materials: []
+  designers: []
+  lines: []
+}
+
 const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
   const searchRef = useRef(null)
   const shared = useAppContext()
   const router = useRouter()
-  const { data, error } = useSWR(`/api/sub-menus`, fetcher)
+  const { data, error } = useSWR<DataProps>(`/api/sub-menus`, fetcher)
 
   let timer: ReturnType<typeof setTimeout> = null
 

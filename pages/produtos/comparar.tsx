@@ -7,6 +7,10 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { addArray } from '~/components/products/compare'
 
+interface DataProps {
+  products: []
+}
+
 const ComparePage = () => {
   const shared = useAppContext()
   const router = useRouter()
@@ -23,7 +27,7 @@ const ComparePage = () => {
   // Example:
   // shared.compare = [{ slug: 'ju-ab', code: 'A920', name: 'ju.ab' }]
 
-  const { data, error } = useSWR(
+  const { data, error } = useSWR<DataProps>(
     `/api/compare?slugs=${_slugs.join(',')}`,
     fetcher,
   )
