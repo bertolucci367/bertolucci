@@ -10,7 +10,7 @@ const Blog = ({ data }) => {
   ))
 
   return (
-    <Layout>
+    <Layout title={data.title}>
       <div css={xw`col-start-2`}>
         <Carousel slides={images} nav close={'/giornale'}>
           <div>

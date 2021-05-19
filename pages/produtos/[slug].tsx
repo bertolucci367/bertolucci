@@ -1,6 +1,5 @@
 import xw from 'xwind'
 import styled from '@emotion/styled'
-import Image from 'next/image'
 import LayoutProduct from '~/components/LayoutProduct'
 import Container from '~/components/Container'
 import Carousel from '~/components/Carousel'
@@ -35,11 +34,13 @@ const Product = ({ product }) => {
   ))
 
   return (
-    <LayoutProduct>
+    <LayoutProduct title={`${product.name} - ${product.code}`}>
       <Container>
         <Carousel slides={images} close={path} nav>
           <InfoStyled>
-            <h1 css={xw`font-medium text-14px sticky top-0 bg-white py-2.5`}>
+            <h1
+              css={xw`font-medium text-14px sticky z-50 top-0 bg-white py-2.5`}
+            >
               {product.name} - {product.code}
             </h1>
 

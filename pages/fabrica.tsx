@@ -32,7 +32,7 @@ const data = {
 
 const About = () => {
   return (
-    <Layout>
+    <Layout title="a fábrica">
       <div css={xw`col-start-2`}>
         <div css={xw`relative`}>
           <div id="historia" css={xw`-top-36 absolute left-0`}></div>

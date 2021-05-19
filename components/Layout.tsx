@@ -6,14 +6,21 @@ import Menu from '~/components/Menu'
 import MenuButton from '~/components/MenuButton'
 import { Logo, LogoFooter } from '~/components/Logo'
 import { useAppContext } from '~/components/context/AppContext'
+import Head from 'next/head'
 
 interface LayoutProps {
   children?: React.ReactNode
+  title?: string
+  description?: string
 }
 
 const contact = ['11 3874 2879', '11 9 4521 9938', 'rua espártaco, 367 - lapa']
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({
+  children,
+  title = '',
+  description = 'bertolucci - Dedicada ao Brasil desde 1956',
+}: LayoutProps) => {
   const shared = useAppContext()
 
   const handleClick = () => {
@@ -37,6 +44,10 @@ const Layout = ({ children }: LayoutProps) => {
         }
       `}
     >
+      <Head>
+        <title>{[title, 'bertolucci'].filter(Boolean).join(' | ')}</title>
+        <meta name="description" content={description}></meta>
+      </Head>
       <div
         css={[
           `

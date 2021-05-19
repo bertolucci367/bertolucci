@@ -1,4 +1,3 @@
-import { GetStaticProps } from 'next'
 import { GraphQLClient } from 'graphql-request'
 import xw from 'xwind'
 import styled from '@emotion/styled'
@@ -24,11 +23,11 @@ const Card = styled.li({
   height: '270px',
 })
 
-const Products = ({ page }) => {
+const Products = ({ items }) => {
   return (
     <LayoutProduct>
       <h1 css={xw`h-0 opacity-0`}>Produtos</h1>
-      <List items={page.items} useLineName />
+      <List items={items} useLineName />
     </LayoutProduct>
   )
 }
@@ -37,9 +36,10 @@ export async function getStaticProps({ preview = false }) {
   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
 
   const { page } = await gcms.request(ProductsQuery)
+  const { items } = page
 
   return {
-    props: { page, preview },
+    props: { items, preview },
   }
 }
 

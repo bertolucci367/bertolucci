@@ -6,7 +6,7 @@ import Card from '~/components/Card'
 
 const Designers = ({ designers }) => {
   return (
-    <Layout>
+    <Layout title="designers">
       <ListUL>
         {designers.map(d => (
           <Card

@@ -16,7 +16,7 @@ const Designer = ({ designer, products }) => {
   }, [designer.slug])
 
   return (
-    <LayoutProduct designer={designer}>
+    <LayoutProduct designer={designer} title={designer.name}>
       <List products={products} show />
     </LayoutProduct>
   )

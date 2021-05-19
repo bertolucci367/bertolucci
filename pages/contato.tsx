@@ -4,7 +4,7 @@ import ContactForm from '~/components/ContactForm'
 
 function Contact({}) {
   return (
-    <Layout>
+    <Layout title="contato">
       <div
         css={xw`col-start-2 col-end-3 grid gap-16 grid-cols-1 2xl:grid-cols-3`}
       >

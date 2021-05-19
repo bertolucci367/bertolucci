@@ -7,7 +7,7 @@ import { ListUL } from '~/components/products/List'
 
 const Blog = ({ data }) => {
   return (
-    <Layout>
+    <Layout title="gionale">
       <div css={xw`col-start-2`}>
         <div css={xw`mb-36 grid gap-x-20 items-start`}>
           <ListUL>

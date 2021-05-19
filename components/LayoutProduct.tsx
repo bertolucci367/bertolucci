@@ -12,9 +12,15 @@ interface LayoutProductProps {
   search?: string
   children?: React.ReactNode
   designer?: any
+  title?: string
 }
 
-const LayoutProduct = ({ children, search, designer }: LayoutProductProps) => {
+const LayoutProduct = ({
+  children,
+  search,
+  designer,
+  title = 'produtos',
+}: LayoutProductProps) => {
   const router = useRouter()
   const shared = useAppContext()
 
@@ -28,7 +34,7 @@ const LayoutProduct = ({ children, search, designer }: LayoutProductProps) => {
   }, [])
 
   return (
-    <Layout>
+    <Layout title={title}>
       <div
         css={[
           xw`

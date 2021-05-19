@@ -9,7 +9,11 @@ function App({ Component, pageProps }) {
   return (
     <AppWrapper>
       <Head>
-        <title>Bertolucci</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+        <meta http-equiv="Content-Language" content="pt-br"></meta>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <Head>
         <link
           rel="preload"
           href="/fonts/futura-light-bt.ttf"
