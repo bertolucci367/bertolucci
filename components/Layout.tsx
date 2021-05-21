@@ -6,12 +6,14 @@ import Menu from '~/components/Menu'
 import MenuButton from '~/components/MenuButton'
 import { Logo, LogoFooter } from '~/components/Logo'
 import { useAppContext } from '~/components/context/AppContext'
+import CookieBanner from '~/components/CookieBanner'
 import Head from 'next/head'
 
 interface LayoutProps {
   children?: React.ReactNode
   title?: string
   description?: string
+  showCookie?: boolean
 }
 
 const contact = ['11 3874 2879', '11 9 4521 9938', 'rua espártaco, 367 - lapa']
@@ -20,6 +22,7 @@ const Layout = ({
   children,
   title = '',
   description = 'bertolucci - Dedicada ao Brasil desde 1956',
+  showCookie = true,
 }: LayoutProps) => {
   const shared = useAppContext()
 
@@ -164,6 +167,8 @@ const Layout = ({
       >
         <LogoFooter />
       </div>
+
+      {showCookie && <CookieBanner />}
     </div>
   )
 }
