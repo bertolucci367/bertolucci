@@ -5,6 +5,10 @@
     @apply font-body;
   }
 
+  h1 {
+    @apply font-medium text-18px mb-4;
+  }
+
   h2 {
     @apply font-medium;
   }

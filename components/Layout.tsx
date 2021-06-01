@@ -8,6 +8,7 @@ import { Logo, LogoFooter } from '~/components/Logo'
 import { useAppContext } from '~/components/context/AppContext'
 import CookieBanner from '~/components/CookieBanner'
 import Head from 'next/head'
+import { useEffect } from 'react'
 
 interface LayoutProps {
   children?: React.ReactNode
