@@ -35,6 +35,17 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
 
   const getTextWrapWidth = () => listRef.current.clientWidth
 
+  const recursiveWidth = w => {
+    if (w > 0) return
+
+    const _w = getTextWrapWidth()
+
+    setTimeout(() => {
+      setTextWrapWidth(_w)
+      recursiveWidth(_w)
+    }, 10)
+  }
+
   useEffect(() => {
     if (length === 1) {
       setCurr(0)
@@ -49,6 +60,8 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
     const handleResize = () => setTextWrapWidth(getTextWrapWidth())
     handleResize()
     window.addEventListener('resize', handleResize)
+
+    recursiveWidth(getTextWrapWidth())
 
     return () => window.removeEventListener('resize', handleResize)
   }, [])
@@ -130,6 +143,8 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
             xw`mx-auto bg-white pr-2 pb-12`,
             xw`lg:overflow-y-scroll lg:max-h-asideBody`,
             `
+              transition: max-width .3s;
+
               ::-webkit-scrollbar {
                 width: 2px;
               }

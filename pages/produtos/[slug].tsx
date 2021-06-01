@@ -39,7 +39,7 @@ const Product = ({ product }) => {
         <Carousel slides={images} close={path} nav>
           <InfoStyled>
             <h1
-              css={xw`font-medium text-14px sticky z-50 top-0 bg-white py-2.5`}
+              css={xw`font-medium text-14px sticky z-50 top-0 bg-white pt-3 pb-2.5`}
             >
               {product.name} - {product.code}
             </h1>
