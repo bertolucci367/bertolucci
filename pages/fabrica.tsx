@@ -1,5 +1,12 @@
 import xw from 'xwind'
+import styled from '@emotion/styled'
 import Layout from '~/components/Layout'
+
+const ListStyled = styled.ol(
+  xw`grid gap-y-28
+  md:grid-cols-2 md:gap-x-4px
+  xl:col-span-2 xl:grid-cols-2 xl:col-span-3 xl:gap-x-2.5`,
+)
 
 const data = {
   history: {
@@ -64,15 +71,13 @@ const About = () => {
               </div>
             </div>
 
-            <ol
-              css={xw`grid gap-y-2 xl:col-span-2 md:grid-cols-2 xl:grid-cols-2 xl:col-span-3 md:gap-5 xl:gap-x-2.5 xl:gap-y-28`}
-            >
+            <ListStyled>
               {data.history.imgs.map((url, i) => (
                 <li key={i} css={xw`relative`}>
                   <img src={url} alt="" />
                 </li>
               ))}
-            </ol>
+            </ListStyled>
           </div>
         </div>
 
@@ -104,15 +109,13 @@ const About = () => {
               </div>
             </div>
 
-            <ol
-              css={xw`grid gap-y-2 xl:col-span-2 md:grid-cols-2 xl:grid-cols-2 xl:col-span-3 md:gap-5 xl:gap-x-2.5 xl:gap-y-40`}
-            >
+            <ListStyled>
               {data.production.imgs.map((url, i) => (
                 <li key={i}>
                   <img src={url} alt="" />
                 </li>
               ))}
-            </ol>
+            </ListStyled>
           </div>
         </div>
       </div>
