@@ -16,7 +16,7 @@ type SubMenuProps = {
 }
 
 const MenuItemStyled = styled.li<TypeMenuItemProps>(({ all }) => [
-  xw`mx-4 my-10 lg:my-0`,
+  xw`mx-2 my-10 lg:my-0`,
   all ? xw`lg:hidden` : '',
 ])
 const SubMenuWrapStyled = styled.div<SubMenuProps>(({ show }) => [
@@ -83,7 +83,7 @@ const SubMenuStyled = styled.ul<SubMenuProps>(({ name }) => [
 ])
 
 const SubMenuLabel = styled.a<SubMenuProps>(({ show, plus }) => [
-  xw`inline-block text-13px hover:cursor-pointer`,
+  xw`inline-block text-13px hover:cursor-pointer hover:font-medium`,
   {
     fontFamily: show ? 'FuturaStdMedium' : 'FuturaStdLight',
   },
@@ -135,14 +135,16 @@ export const MenuItem = ({
 
   return (
     <MenuItemStyled all={isAll}>
-      <SubMenuLabel
-        show={isOpenMenu(name)}
-        plus={plus}
-        onClick={e => handleToggle(e, name, plus)}
-        href={path}
-      >
-        {name}
-      </SubMenuLabel>
+      {name && (
+        <SubMenuLabel
+          show={isOpenMenu(name)}
+          plus={plus}
+          onClick={e => handleToggle(e, name, plus)}
+          href={path}
+        >
+          {name}
+        </SubMenuLabel>
+      )}
       {items && (
         <SubMenuWrapStyled show={isOpenMenu(name)}>
           <SubMenuStyled show={isOpenMenu(name)} name={name}>

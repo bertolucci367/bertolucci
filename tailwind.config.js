@@ -28,7 +28,7 @@ module.exports = {
         asideBody: `calc(100vh - (130px + 90px))`,
         map: '50vh',
       },
-      spacing: { logoFooter: '130px' },
+      spacing: { '2px': '2px', '4px': '4px', logoFooter: '130px' },
 
       maxHeight: {
         '90vh': '90vh',

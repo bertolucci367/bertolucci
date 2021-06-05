@@ -25,7 +25,7 @@ const Desktop = () => {
             <li key={i}>
               <Link href={m.url}>
                 <a
-                  css={xw`block font-bold mx-4 pt-4 pb-1 mb-1 hover:cursor-pointer`}
+                  css={xw`block font-bold mx-4px pt-4 pb-1 mb-1 hover:cursor-pointer`}
                 >
                   {m.name}
                 </a>

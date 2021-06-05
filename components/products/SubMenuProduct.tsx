@@ -45,7 +45,22 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
 
   return (
     <nav onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <ul css={xw`lg:flex lg:flex-row lg:justify-center`}>
+      <ul
+        css={[
+          xw`lg:flex lg:flex-row lg:justify-center`,
+          `
+          &:hover {
+            li {
+              opacity: .5;
+
+              &:hover {
+                opacity: 1;
+              }
+            }
+          }
+      `,
+        ]}
+      >
         {data && (
           <>
             <MenuItem name="todos" path="/produtos" isAll />
@@ -62,12 +77,6 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
               plus
             />
             <MenuItem
-              name="designers"
-              path="/designers"
-              items={data.designers}
-              plus
-            />
-            <MenuItem
               name="linhas"
               path="/produtos/linhas"
               plus
@@ -76,31 +85,35 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
           </>
         )}
 
-        <MenuItem name="busca">
-          <input
-            ref={searchRef}
-            type="search"
-            css={[
-              { lineHeight: '19px' },
-              xw`border border-gray-500 ml-2 outline-none py-1.5 px-2 inline-block w-auto`,
-            ]}
-            onKeyPress={event => {
-              if (event.key !== 'Enter') {
-                return
-              }
+        <MenuItem name="">
+          <div css={xw`flex flex-wrap lg:flex-nowrap text-12px items-start`}>
+            <label css={xw`mt-4px`} htmlFor="search">
+              busca
+            </label>
+            <input
+              ref={searchRef}
+              type="search"
+              css={[
+                { lineHeight: '19px' },
+                xw`border border-gray-500 ml-2 outline-none mt-1 py-0.5 px-2 inline-block w-auto`,
+              ]}
+              onKeyPress={event => {
+                if (event.key !== 'Enter') {
+                  return
+                }
 
-              const target = event.target as HTMLTextAreaElement
+                const target = event.target as HTMLTextAreaElement
 
-              if (target.value.length > 0) {
-                router.push(`/produtos/busca/${target.value}`)
-                return
-              }
+                if (target.value.length > 0) {
+                  router.push(`/produtos/busca/${target.value}`)
+                  return
+                }
 
-              router.push(`/produtos`)
-            }}
-          />
+                router.push(`/produtos`)
+              }}
+            />
+          </div>
         </MenuItem>
-        <MenuItem name="baixar o catálogo" />
       </ul>
     </nav>
   )

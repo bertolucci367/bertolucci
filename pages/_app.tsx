@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { AppWrapper } from '~/components/context/AppContext'
-import { GraphQLClient } from 'graphql-request'
 
 import '../styles/base.css'
 import '../styles/fonts.css'

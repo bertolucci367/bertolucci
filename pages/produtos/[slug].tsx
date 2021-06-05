@@ -1,4 +1,5 @@
 import xw from 'xwind'
+import Head from 'next/head'
 import styled from '@emotion/styled'
 import LayoutProduct from '~/components/LayoutProduct'
 import Container from '~/components/Container'
@@ -34,7 +35,19 @@ const Product = ({ product }) => {
   ))
 
   return (
-    <LayoutProduct title={`${product.name} - ${product.code}`}>
+    <LayoutProduct
+      title={product.seo?.title || `${product.name} - ${product.code}`}
+    >
+      <Head>
+        <meta
+          name="description"
+          content={product.seo?.description || product.text?.text}
+        ></meta>
+        <meta
+          name="keywords"
+          content={product.seo?.keywords.map(k => k.name).join(',')}
+        ></meta>
+      </Head>
       <Container>
         <Carousel slides={images} close={path} nav>
           <InfoStyled>
@@ -83,7 +96,6 @@ const Product = ({ product }) => {
 const query = `
   query Product($id: String!) {
     values: product (where: { slug: $id}, stage: PUBLISHED) {
-
       slug
       code
       name
@@ -93,6 +105,7 @@ const query = `
       diameter
       text {
         html
+        text
       }
       description {
         html
@@ -124,6 +137,14 @@ const query = `
           handle
           width
           height
+        }
+      }
+
+      seo {
+        title
+        description
+        keywords {
+          name
         }
       }
     }

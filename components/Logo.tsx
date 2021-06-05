@@ -5,7 +5,7 @@ import xw from 'xwind'
 export const Logo = () => {
   return (
     <Link href="/">
-      <a css={xw`lg:pt-4 hover:cursor-pointer`}>
+      <a css={xw`lg:pt-3.5 hover:cursor-pointer`}>
         <Image
           src="/logo.svg"
           layout="fixed"

@@ -111,20 +111,6 @@ const Layout = ({
           <div css={xw`text-right relative w-full`}>
             <div css={xw`lg:flex absolute left-0 top-2`}>
               <a
-                href="https://www.facebook.com/iluminacao.bertolucci"
-                className="facebook icon"
-                target="_blank"
-                rel="noopener"
-              >
-                <Image
-                  src="/facebook.svg"
-                  layout="fixed"
-                  height="18"
-                  width="18"
-                  alt="facebook icon"
-                />
-              </a>
-              <a
                 href="https://instagram.com/bertolucci.iluminacao/"
                 className="instagram icon"
                 target="_blank"
@@ -139,15 +125,20 @@ const Layout = ({
                   alt="instagram icon"
                 />
               </a>
-              <span css={xw`ml-5`} className="whatsapp icon">
-                <Image
-                  src="/whatsapp.svg"
-                  layout="fixed"
-                  height="18"
-                  width="18"
-                  alt="whatsapp icon"
-                />
-              </span>
+              <a
+                href="https://api.whatsapp.com/send?phone=5511945219938"
+                target="_blank"
+              >
+                <span css={xw`ml-5`} className="whatsapp icon">
+                  <Image
+                    src="/whatsapp.svg"
+                    layout="fixed"
+                    height="18"
+                    width="18"
+                    alt="whatsapp icon"
+                  />
+                </span>
+              </a>
             </div>
             {contact.map((value, i) => (
               <span css={xw`block`} key={i}>

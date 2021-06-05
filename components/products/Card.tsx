@@ -20,7 +20,7 @@ const DesignStyled = styled.p(xw`text-12px px-2 truncate`)
 const CardStyled = styled.li([
   xw`
   relative w-1/2
-  pr-2 mb-8
+  mx-2px mb-8
   sm:min-w-card sm:w-1/3
   lg:w-1/6 lg:max-w-card
   `,
