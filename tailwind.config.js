@@ -28,12 +28,20 @@ module.exports = {
         asideBody: `calc(100vh - (130px + 90px))`,
         map: '50vh',
       },
-      spacing: { '2px': '2px', '4px': '4px', logoFooter: '130px' },
+      spacing: {
+        '2px': '2px',
+        '4px': '4px',
+        '8px': '8px',
+        logoFooter: '130px',
+      },
 
       maxHeight: {
         '90vh': '90vh',
         '50vh': '50vh',
         asideBody: `calc(100vh - (130px + 90px))`,
+      },
+      minHeight: {
+        cardD: '270px',
       },
       minWidth: { card: '225px' },
       maxWidth: { card: '225px', '48%': '48%', '49%': '49%' },

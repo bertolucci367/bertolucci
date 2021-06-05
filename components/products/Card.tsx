@@ -9,20 +9,26 @@ import { add, remove, has } from '~/components/products/compare'
 import React, { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 
-const Hover = styled.div([
-  xw`lg:opacity-0`,
+type HoverProps = {
+  isOpacity?: boolean
+}
+
+const Hover = styled.div<HoverProps>(({ isOpacity }) => [
   {
     transition: 'opacity 350ms ease',
   },
+  `@media (min-width: 1024px) {
+    opacity: ${isOpacity ? '1' : '0'}
+  }`,
 ])
-const NameStyled = styled.h2(xw`text-14px font-medium mt-2 px-2 truncate`)
+const NameStyled = styled.h2(xw`text-14px font-medium mt-8px px-2 truncate`)
 const DesignStyled = styled.p(xw`text-12px px-2 truncate`)
 const CardStyled = styled.li([
   xw`
   relative w-1/2
-  mx-2px mb-8
+  mb-8 px-2px
   sm:min-w-card sm:w-1/3
-  lg:w-1/6 lg:max-w-card
+  lg:w-1/6 lg:max-w-card lg:min-h-cardD lg:mb-0
   `,
   {
     [':hover']: { cursor: 'pointer' },
@@ -93,7 +99,10 @@ const Card = ({
               fit="crop"
               css={xw`lg:h-cardImgD`}
             />
-            <Hover css={xw`absolute bottom-1 left-2 z-20`}>
+            <Hover
+              css={[xw`absolute bottom-1 left-2 z-20 pt-0`]}
+              isOpacity={has({ product, shared })}
+            >
               <Checkbox
                 name={product.slug}
                 fnChange={v => handleCheckbox({ isChecked: v, product })}

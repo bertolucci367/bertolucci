@@ -9,14 +9,16 @@ const Hover = styled.div([
     transition: 'opacity 350ms ease',
   },
 ])
-const NameStyled = styled.h2(xw`text-14px font-medium mt-2 px-2 truncate`)
+const NameStyled = styled.h2(
+  xw`text-14px leading-none font-medium mt-2 px-2 truncate`,
+)
 const DesignStyled = styled.p(xw`text-12px px-2 truncate`)
 const CardStyled = styled.li([
   xw`
   relative w-1/2
-  mx-2px mb-8
+  px-2px mb-8
   sm:min-w-card sm:w-1/3
-  lg:w-1/6 lg:max-w-card
+  lg:w-1/6 lg:max-w-card lg:min-h-cardD lg:mb-0
   `,
   {
     [':hover']: { cursor: 'pointer' },
