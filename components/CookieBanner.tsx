@@ -36,6 +36,7 @@ const CookieBanner = () => {
             xw`
             fixed left-4 right-4 bottom-4
             bg-white bg-opacity-90 py-4 px-6
+            z-50
           `,
             `
           @keyframes example {

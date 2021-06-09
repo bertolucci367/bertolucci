@@ -129,6 +129,7 @@ const query = `
       finishings {
         id
         name
+        stage
         category {
           name
         }
