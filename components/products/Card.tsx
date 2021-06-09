@@ -21,7 +21,9 @@ const Hover = styled.div<HoverProps>(({ isOpacity }) => [
     opacity: ${isOpacity ? '1' : '0'}
   }`,
 ])
-const NameStyled = styled.h2(xw`text-14px font-medium mt-8px px-2 truncate`)
+const NameStyled = styled.h2(
+  xw`text-14px leading-none text-gray-555 font-medium mt-8px px-2 truncate`,
+)
 const DesignStyled = styled.p(xw`text-12px px-2 truncate`)
 const CardStyled = styled.li([
   xw`

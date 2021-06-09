@@ -10,7 +10,7 @@ const Hover = styled.div([
   },
 ])
 const NameStyled = styled.h2(
-  xw`text-14px leading-none font-medium mt-2 px-2 truncate`,
+  xw`text-14px leading-none text-gray-555 font-medium mt-2 px-2 truncate`,
 )
 const DesignStyled = styled.p(xw`text-12px px-2 truncate`)
 const CardStyled = styled.li([

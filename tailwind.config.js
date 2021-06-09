@@ -12,7 +12,9 @@ module.exports = {
     },
 
     extend: {
-      colors,
+      colors: {
+        'gray-555': '#555',
+      },
       fontFamily: {
         body: ['FuturaStdLight', 'Helvetica', 'Arial', 'Sans-serif'],
         medium: 'FuturaStdMedium',
