@@ -173,7 +173,7 @@ export async function getStaticProps({ params, preview = false }) {
 
 const _paths = `
 query Products {
-  values: products {
+  values: products(first: 10000) {
     slug
   }
 }

@@ -34,7 +34,7 @@ export async function getServerSideProps({ params }) {
   const { values } = await gcms.request(
     `
   query Search($id: String!) {
-    values: products(where: {name_contains: $id}) {
+    values: products(where: {name_contains: $id}, stage: PUBLISHED) {
       id
       name
       code
