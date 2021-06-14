@@ -8,7 +8,9 @@ function Contact({}) {
       <div
         css={xw`col-start-2 col-end-3 grid gap-16 grid-cols-1 2xl:grid-cols-3`}
       >
-        <div css={xw`2xl:col-span-2 2xl:col-start-2 2xl:row-start-1`}>
+        <div
+          css={xw`col-span-3 col-start-1 row-start-2 2xl:min-h-screen pb-20 2xl:pb-0`}
+        >
           <h1 css={xw`text-center font-medium mb-4 px-4 text-18px`}>
             loja e showroom
           </h1>
@@ -20,13 +22,39 @@ function Contact({}) {
             allowFullScreen={false}
           ></iframe>
         </div>
-        <div css={xw`md:w-2/3 pb-20`}>
-          <h2 css={xw`mb-4 text-18px`}>entre em contato</h2>
-          <p css={xw`mb-20`}>
-            lorem ipsum dolor sit amet consectetur adipisicing elit. Natus illo
-            expedita tempora placeat doloremque vitae inventore explicabo?
-          </p>
-          <ContactForm />
+        <div
+          css={xw`col-start-1 col-end-4 grid gap-x-32 grid-cols-1 2xl:grid-cols-3`}
+        >
+          <div css={xw` pb-20`}>
+            <h2 css={xw`mb-4 text-18px`}>Você quer mais informações?</h2>
+            <p css={xw`mb-20`}>
+              Caso não tenha encontrado as informações necessárias, não hesite
+              em nos contactar preenchendo o formulário abaixo ou através das
+              nossas redes sociais. Há muitas coisas a descobrir, conheça mais
+              do mundo Bertolucci.
+            </p>
+            <ContactForm />
+          </div>
+
+          <div css={xw` pb-20`}>
+            <p>
+              É profissional? Ficaremos felizes em achar uma solução
+              luminotécnica ao seu projeto. Agende uma visita
+            </p>
+          </div>
+
+          <div css={xw` pb-20`}>
+            <h2 css={xw`mb-4 text-18px`}>Atendimento por whatsapp</h2>
+            <p>
+              <strong>Consultor Alexandre</strong>: 55 11 9 7073 7652
+            </p>
+            <p>
+              <strong>Consultora Sandra</strong>: 55 11 9 9690 2176
+            </p>
+            <p>
+              <strong>Gerente Comercial Bia</strong>: 55 11 9 4521 9938
+            </p>
+          </div>
         </div>
       </div>
     </Layout>
