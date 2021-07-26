@@ -1,28 +1,28 @@
-import xw from 'xwind'
-import styled from '@emotion/styled'
+const Label = ({ children }) => (
+  <strong className="font-medium">{children}</strong>
+)
 
-const Label = styled.label(xw`font-medium`)
-const Value = styled.span(xw`ml-2`)
+const Value = ({ children }) => <span className="ml-2">{children}</span>
 
 const Properties = ({ product }) => {
   const { height, depth, width, diameter } = product
   return (
-    <ul css={xw`flex flex-wrap`}>
+    <ul className={`flex flex-wrap`}>
       {height && (
-        <li css={xw`mr-6`}>
+        <li className={`mr-6`}>
           <Label>H</Label>
           <Value>{height} cm</Value>
         </li>
       )}
       {width && (
-        <li css={xw`mr-6`}>
+        <li className={`mr-6`}>
           <Label>L</Label>
           <Value>{width} cm"</Value>
         </li>
       )}
 
       {diameter && (
-        <li css={xw`mr-6`}>
+        <li className={`mr-6`}>
           <Label>P</Label>
           <Value>{diameter} cm"</Value>
         </li>

@@ -1,4 +1,3 @@
-import xw from 'xwind'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import FormMessage from '~/components/FormMessage'
@@ -56,7 +55,7 @@ const ContactForm = () => {
         {errors.name && errors.name.type === 'required' && (
           <FormMessage status="error.field">{errors.name.message}</FormMessage>
         )}
-        <input type="text" css={xw`hidden`} />
+        <input type="text" className={`hidden`} />
         <label htmlFor="email">*e-mail</label>
         <input type="email" name="email" id="email" placeholder="" />
         {errors.email && (

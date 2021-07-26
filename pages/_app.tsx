@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import { AppWrapper } from '~/components/context/AppContext'
 
-import '../styles/base.css'
 import '../styles/fonts.css'
+import '../styles/tailwind.base.css'
 import '../styles/global.css'
 
 function App({ Component, pageProps }) {

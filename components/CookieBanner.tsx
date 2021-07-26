@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import xw from 'xwind'
 import useSWR from 'swr'
 import fetcher from '~/components/libs/fetcher'
+
+import style from './CookieBanner.module.css'
 
 interface DataProps {
   cookiePolicy: {
@@ -32,36 +33,30 @@ const CookieBanner = () => {
     <>
       {showBanner && (
         <div
-          css={[
-            xw`
+          className={`
             fixed left-4 right-4 bottom-4
             bg-white bg-opacity-90 py-4 px-6
             z-50
-          `,
-            `
-          @keyframes example {
-            from {bottom: -300px}
-            to {bottom: 1rem }
-          }
 
-          animation-name: example;
-          animation-duration: 1s;
-          `,
-          ]}
+            ${style.animate}
+          `}
         >
-          <div css={xw`flex flex-wrap lg:flex-nowrap`}>
+          <div className={`flex flex-wrap lg:flex-nowrap`}>
             <div
               dangerouslySetInnerHTML={{
                 __html: data.cookiePolicy[0].banner.html,
               }}
             ></div>
             <div
-              css={xw`flex flex-col font-medium mt-4 lg:mt-0 lg:ml-8 lg:w-2/12`}
+              className={`flex flex-col font-medium mt-4 lg:mt-0 lg:ml-8 lg:w-2/12`}
             >
               <a href="" onClick={e => handleAccept(e)}>
                 Concordo
               </a>
-              <a href="/politica-de-cookies" css={xw`whitespace-nowrap mt-2`}>
+              <a
+                href="/politica-de-cookies"
+                className={`whitespace-nowrap mt-2`}
+              >
                 Definições dos Cookies
               </a>
             </div>

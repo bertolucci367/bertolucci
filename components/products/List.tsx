@@ -1,14 +1,10 @@
-import xw from 'xwind'
-import styled from '@emotion/styled'
 import Card from './Card'
 
-export const ListUL = styled.ul(
-  xw`
+export const ListUL = `
     col-start-1 col-end-4 lg:col-start-2 lg:col-end-3
     flex flex-wrap justify-center
     lg:justify-center
-  `,
-)
+  `
 
 const List = ({ items = [], products = [], ...args }) => {
   const listItems = items.map(({ products, ...rest }, i) => {
@@ -24,10 +20,10 @@ const List = ({ items = [], products = [], ...args }) => {
   ))
 
   return (
-    <ListUL>
+    <ul className={ListUL}>
       {listItems}
       {listProducts}
-    </ListUL>
+    </ul>
   )
 }
 

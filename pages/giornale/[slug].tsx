@@ -1,4 +1,3 @@
-import xw from 'xwind'
 import Layout from '~/components/Layout'
 import Carousel from '~/components/Carousel'
 import { GraphQLClient } from 'graphql-request'
@@ -11,10 +10,12 @@ const Blog = ({ data }) => {
 
   return (
     <Layout title={data.title}>
-      <div css={xw`col-start-2`}>
+      <div className={`col-start-2`}>
         <Carousel slides={images} nav close={'/giornale'}>
           <div>
-            <h1 css={xw`font-medium sticky z-50 top-0 bg-white py-3 pb-2.5`}>
+            <h1
+              className={`font-medium sticky z-50 top-0 bg-white py-3 pb-2.5`}
+            >
               {data.title}
             </h1>
             <div

@@ -1,11 +1,12 @@
 import Layout from '~/components/Layout'
-import xw from 'xwind'
 import { GraphQLClient } from 'graphql-request'
+
+import style from './policy.module.css'
 
 const Policy = ({ data }) => {
   return (
     <Layout showCookie={false}>
-      <div css={[xw`col-start-2`, `p { margin: 10px 0; }`]}>
+      <div className={`col-start-2 ${style.tags}`}>
         <div
           dangerouslySetInnerHTML={{
             __html: data?.page?.html,

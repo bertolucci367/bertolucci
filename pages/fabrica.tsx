@@ -1,12 +1,4 @@
-import xw from 'xwind'
-import styled from '@emotion/styled'
 import Layout from '~/components/Layout'
-
-const ListStyled = styled.ol(
-  xw`grid gap-y-28
-  md:grid-cols-2 md:gap-x-4px
-  xl:col-span-2 xl:grid-cols-2 xl:col-span-3 xl:gap-x-2.5`,
-)
 
 const data = {
   history: {
@@ -37,18 +29,34 @@ const data = {
   },
 }
 
+const List = ({ items }) => {
+  return (
+    <ol
+      className="grid gap-y-28
+              md:grid-cols-2 md:gap-x-4px
+              xl:grid-cols-2 xl:col-span-3 xl:gap-x-2.5"
+    >
+      {items.map((url, i) => (
+        <li key={i} className={`relative`}>
+          <img src={url} alt="" />
+        </li>
+      ))}
+    </ol>
+  )
+}
+
 const About = () => {
   return (
     <Layout title="a fábrica">
-      <div css={xw`col-start-2`}>
-        <div css={xw`relative`}>
-          <div id="historia" css={xw`-top-36 absolute left-0`}></div>
+      <div className={`col-start-2`}>
+        <div className={`relative`}>
+          <div id="historia" className={`-top-36 absolute left-0`}></div>
           <div
-            css={xw`grid grid-cols-1 xl:grid-cols-4 gap-y-10 xl:gap-10 mb-36`}
+            className={`grid grid-cols-1 xl:grid-cols-4 gap-y-10 xl:gap-10 mb-36`}
           >
-            <div css={xw`xl:w-10/12 xl:col-span-1`}>
-              <div css={xw`sticky top-36`}>
-                <h2 css={xw`text-18px mb-6`}>
+            <div className={`xl:w-10/12 xl:col-span-1`}>
+              <div className={`sticky top-36`}>
+                <h2 className={`text-18px mb-6`}>
                   Paulistana na origem mas brasileira de alma, uma empresa em
                   movimento
                 </h2>
@@ -71,22 +79,17 @@ const About = () => {
               </div>
             </div>
 
-            <ListStyled>
-              {data.history.imgs.map((url, i) => (
-                <li key={i} css={xw`relative`}>
-                  <img src={url} alt="" />
-                </li>
-              ))}
-            </ListStyled>
+            {/*  */}
+            <List items={data.history.imgs} />
           </div>
         </div>
 
-        <div css={xw`relative`}>
-          <div id="producao" css={xw`-top-36 absolute left-0`}></div>
-          <div css={xw`grid xl:grid-cols-4 gap-y-10 xl:gap-10 mb-36`}>
-            <div css={xw`xl:w-10/12`}>
-              <div css={xw`sticky top-36`}>
-                <h2 css={xw`text-18px mb-6`}>
+        <div className={`relative`}>
+          <div id="producao" className={`-top-36 absolute left-0`}></div>
+          <div className={`grid xl:grid-cols-4 gap-y-10 xl:gap-10 mb-36`}>
+            <div className={`xl:w-10/12`}>
+              <div className={`sticky top-36`}>
+                <h2 className={`text-18px mb-6`}>
                   Com o requinte da produção semi-artesanal
                 </h2>
                 <p>
@@ -109,13 +112,7 @@ const About = () => {
               </div>
             </div>
 
-            <ListStyled>
-              {data.production.imgs.map((url, i) => (
-                <li key={i}>
-                  <img src={url} alt="" />
-                </li>
-              ))}
-            </ListStyled>
+            <List items={data.production.imgs} />
           </div>
         </div>
       </div>

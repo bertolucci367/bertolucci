@@ -1,11 +1,11 @@
 import { useRef, useEffect } from 'react'
-import xw from 'xwind'
 import useSWR from 'swr'
 import fetcher from '~/components/libs/fetcher'
 import { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 
 import { MenuItem } from '~/components/products/MenuItem'
+import style from './SubMenuProduct.module.css'
 
 interface SubMenuProductProps {
   search?: string
@@ -45,22 +45,7 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
 
   return (
     <nav onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <ul
-        css={[
-          xw`lg:flex lg:flex-row lg:justify-center`,
-          `
-          &:hover {
-            li {
-              opacity: .5;
-
-              &:hover {
-                opacity: 1;
-              }
-            }
-          }
-      `,
-        ]}
-      >
+      <ul className={`lg:flex lg:flex-row lg:justify-center ${style.onHover}`}>
         {data && (
           <>
             <MenuItem name="todos" path="/produtos" isAll />
@@ -86,17 +71,17 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
         )}
 
         <MenuItem name="">
-          <div css={xw`flex flex-wrap lg:flex-nowrap text-12px items-start`}>
-            <label css={xw`mt-4px`} htmlFor="search">
+          <div
+            className={`flex flex-wrap lg:flex-nowrap text-12px items-start`}
+          >
+            <label className={`mt-4px`} htmlFor="search">
               busca
             </label>
             <input
               ref={searchRef}
               type="search"
-              css={[
-                { lineHeight: '19px' },
-                xw`border border-gray-500 ml-2 outline-none mt-1 py-0.5 px-2 inline-block w-auto`,
-              ]}
+              style={{ lineHeight: '19px' }}
+              className={`border border-gray-500 ml-2 outline-none mt-1 py-0.5 px-2 inline-block w-auto`}
               onKeyPress={event => {
                 if (event.key !== 'Enter') {
                   return

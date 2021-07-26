@@ -1,11 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import xw from 'xwind'
 
 export const Logo = () => {
   return (
     <Link href="/">
-      <a css={xw`lg:pt-3.5 hover:cursor-pointer`}>
+      <a className={`lg:pt-3.5 hover:cursor-pointer`}>
         <Image
           src="/logo.svg"
           layout="fixed"

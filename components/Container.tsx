@@ -1,4 +1,4 @@
-import xw from 'xwind'
+import style from './Container.module.css'
 
 interface ContainerProps {
   children?: React.ReactNode
@@ -7,17 +7,9 @@ interface ContainerProps {
 function Container({ children }: ContainerProps) {
   return (
     <div
-      css={[
-        `
-          grid-template-columns: 0 1fr 0;
-          @media (min-width: 1024px) {
-            grid-template-columns: 0 1fr 0;
-          }
-        `,
-        xw`col-start-1 col-end-4 bg-white sticky top-0 grid z-40`,
-      ]}
+      className={`col-start-1 col-end-4 bg-white sticky top-0 grid z-40 ${style.template}`}
     >
-      <div css={xw`col-start-2 relative`}>{children}</div>
+      <div className={`col-start-2 relative`}>{children}</div>
     </div>
   )
 }

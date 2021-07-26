@@ -7,7 +7,7 @@ import Card from '~/components/Card'
 const Designers = ({ designers }) => {
   return (
     <Layout title="designers">
-      <ListUL>
+      <ul className={ListUL}>
         {designers.map(d => (
           <Card
             key={d.slug}
@@ -16,7 +16,7 @@ const Designers = ({ designers }) => {
             title={d.name}
           ></Card>
         ))}
-      </ListUL>
+      </ul>
     </Layout>
   )
 }

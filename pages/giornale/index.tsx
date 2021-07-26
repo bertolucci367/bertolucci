@@ -1,4 +1,3 @@
-import xw from 'xwind'
 import Layout from '~/components/Layout'
 import { GraphQLClient } from 'graphql-request'
 import { BlogPageQuery } from '~/graphcms/index'
@@ -8,9 +7,9 @@ import { ListUL } from '~/components/products/List'
 const Blog = ({ data }) => {
   return (
     <Layout title="gionale">
-      <div css={xw`col-start-2`}>
-        <div css={xw`mb-36 grid gap-x-20 items-start`}>
-          <ListUL>
+      <div className={`col-start-2`}>
+        <div className={`mb-36 grid gap-x-20 items-start`}>
+          <ul className={ListUL}>
             {data.map((item, i) => (
               <Card
                 key={item.slug}
@@ -19,7 +18,7 @@ const Blog = ({ data }) => {
                 title={item.title}
               ></Card>
             ))}
-          </ListUL>
+          </ul>
         </div>
       </div>
     </Layout>

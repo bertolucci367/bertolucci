@@ -1,29 +1,33 @@
-import React from 'react'
+import React, { Children } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import xw from 'xwind'
 
 const isActive = ({ path, href }) => {
   const re = new RegExp(`^${href}`, 'i')
   return re.test(path)
 }
 
-const ActiveLink = ({ href, active, children }) => {
-  const router = useRouter()
-  const {
-    props: { className },
-  } = children
-  let style = xw`border-b border-solid border-white`
+const ActiveLink = ({ href, children, activeClassName, ...props }) => {
+  const { asPath } = useRouter()
+  const child = Children.only(children)
+  const childClassName = child.props.className || ''
 
-  if (isActive({ path: router.pathname, href })) {
-    style = xw`border-b border-solid border-black`
-  }
+  // pages/index.js will be matched via props.href
+  // pages/about.js will be matched via props.href
+  // pages/[slug].js will be matched via props.as
+
+  console.log(href, props.as, asPath)
+  const className =
+    asPath === href || asPath === props.as
+      ? `${childClassName} ${activeClassName}`.trim()
+      : `pest2 ${childClassName}`
 
   return (
-    <Link href={href}>
-      {React.cloneElement(children, { className, style })}
+    <Link href={href} {...props}>
+      {React.cloneElement(child, {
+        className: className || null,
+      })}
     </Link>
   )
 }
-
 export default ActiveLink

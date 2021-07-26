@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import xw from 'xwind'
 
 import Layout from './Layout'
 import { useAppContext } from '~/components/context/AppContext'
@@ -17,7 +16,6 @@ interface LayoutProductProps {
 
 const LayoutProduct = ({
   children,
-  search,
   designer,
   title = 'produtos',
 }: LayoutProductProps) => {
@@ -35,21 +33,19 @@ const LayoutProduct = ({
 
   return (
     <Layout title={title}>
-      <div
-        css={[
-          xw`
+      <aside
+        className={`
           col-start-2 col-end-3 row-start-2 row-end-2
           lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-2
           lg:px-4 lg:pb-logoFooter
-          `,
-        ]}
+          `}
       >
         {designer && <Designer designer={designer} />}
 
         <CompareList />
         <CompareForm />
-      </div>
-      <div css={[xw`col-start-2 col-end-3`]}>{children}</div>
+      </aside>
+      <main className={`col-start-2 col-end-3`}>{children}</main>
     </Layout>
   )
 }

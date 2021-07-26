@@ -1,8 +1,13 @@
 @tailwind base;
 
 @layer base {
+  html {
+    font-size: 10px;
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply font-body;
+    @apply font-body text-13px;
   }
 
   h1 {
@@ -12,8 +17,10 @@
   h2 {
     @apply font-medium;
   }
+  p {
+    @apply mb-4;
+  }
 }
 
-html {
-  font-size: 10px;
-}
+/* @tailwind components; */
+@tailwind utilities;

@@ -1,6 +1,5 @@
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
-import xw from 'xwind'
 import { useEffect } from 'react'
 import { useAppContext } from '~/components/context/AppContext'
 import { useRouter } from 'next/router'
@@ -20,7 +19,7 @@ const Search = ({ products }) => {
   return (
     <LayoutProduct search={router.query.q as string}>
       {products.length === 0 && (
-        <h2 css={xw`font-medium text-center text-14px my-10`}>
+        <h2 className={`font-medium text-center text-14px my-10`}>
           Desculpe, mas não encontramos nenhum produto.
         </h2>
       )}

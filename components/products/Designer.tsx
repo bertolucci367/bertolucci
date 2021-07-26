@@ -1,18 +1,19 @@
 import { useState } from 'react'
-import xw from 'xwind'
-import styled from '@emotion/styled'
 import GraphImg from 'graphcms-image'
 
-const DesignerWrap = styled.div(xw`lg:sticky top-36`)
+const DesignerWrap = ({ children }) => (
+  <div className="lg:sticky top-36">{children}</div>
+)
 
-const Photo = styled.div([
-  xw`
-  mr-5 mb-2 w-full max-w-49%
-  sm:mb-4 sm:w-1/3
-  lg:mr-0 lg:min-w-full
-`,
-  { float: 'left' },
-])
+const Photo = ({ children }) => (
+  <div
+    className="float-left mr-5 mb-2 w-full max-w-49%
+                sm:mb-4 sm:w-1/3
+                lg:mr-0 lg:min-w-full"
+  >
+    {children}
+  </div>
+)
 
 const Designer = ({ designer }) => {
   const [readMore, setReadMore] = useState(false)
@@ -25,11 +26,11 @@ const Designer = ({ designer }) => {
         </Photo>
       )}
 
-      <h1 css={xw`leading-tight font-medium text-18px mb-5 lg:mb-2`}>
+      <h1 className={`leading-tight font-medium text-18px mb-5 lg:mb-2`}>
         {designer.name}
       </h1>
       <a
-        css={xw`block mb-4 text-12px font-medium text-gray-500 hover:cursor-pointer`}
+        className={`block mb-4 text-12px font-medium text-gray-500 hover:cursor-pointer`}
         onClick={() => setReadMore(!readMore)}
       >
         <span aria-label="saiba mais">{!readMore && `[ Saiba + ]`}</span>
@@ -37,7 +38,7 @@ const Designer = ({ designer }) => {
       </a>
 
       <div
-        css={xw`mb-5 text-13px`}
+        className={`mb-5 text-13px`}
         style={{ display: readMore ? 'block' : 'none' }}
         dangerouslySetInnerHTML={{
           __html: designer?.description?.html,

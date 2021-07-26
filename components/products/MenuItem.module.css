@@ -1,0 +1,8 @@
+@media (min-width: 1024px) {
+  .linhas {
+    display: block;
+    column-gap: 4px;
+    column-count: 4;
+    max-width: 600px;
+  }
+}

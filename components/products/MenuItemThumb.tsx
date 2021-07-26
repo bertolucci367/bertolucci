@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import xw from 'xwind'
 
 interface ThumbProps {
   slug?: any
@@ -20,13 +19,8 @@ const MenuItemThumb = ({ slug }: ThumbProps) => {
   }
 
   return (
-    <div css={[xw`overflow-hidden`, { height: '32px' }]}>
-      <div
-        css={{
-          marginTop: `-${32 * posBySlug[slug]}px`,
-          marginRight: '4px',
-        }}
-      >
+    <div className={`overflow-hidden h-[32px]`}>
+      <div className={`mr-4px -mt-[${32 * posBySlug[slug]}px]`}>
         <Image src="/pic_thumbs.png" layout="fixed" height={448} width={32} />
       </div>
     </div>

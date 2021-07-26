@@ -1,44 +1,20 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import GraphImg from 'graphcms-image'
-import xw from 'xwind'
-import styled from '@emotion/styled'
 import ListLink from '~/components/products/ListLink'
 import Checkbox from '~/components/products/Checkbox'
 import { add, remove, has } from '~/components/products/compare'
 import React, { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 
-type HoverProps = {
-  isOpacity?: boolean
-}
-
-const Hover = styled.div<HoverProps>(({ isOpacity }) => [
-  {
-    transition: 'opacity 350ms ease',
-  },
-  `@media (min-width: 1024px) {
-    opacity: ${isOpacity ? '1' : '0'}
-  }`,
-])
-const NameStyled = styled.h2(
-  xw`text-14px leading-none text-gray-555 font-medium mt-8px px-2 truncate`,
-)
-const DesignStyled = styled.p(xw`text-12px px-2 truncate`)
-const CardStyled = styled.li([
-  xw`
+const NameStyled = `text-14px leading-none text-gray-555 font-medium mt-8px px-2 truncate`
+const DesignStyled = `text-12px px-2 truncate`
+const CardStyled = `
   relative w-1/2
   mb-8 px-2px
   sm:min-w-card sm:w-1/3
   lg:w-1/6 lg:max-w-card lg:min-h-cardD lg:mb-0
-  `,
-  {
-    [':hover']: { cursor: 'pointer' },
-    [`:hover ${Hover}`]: {
-      opacity: 1,
-    },
-  },
-])
+  `
 
 const Card = ({
   product,
@@ -69,9 +45,9 @@ const Card = ({
   }
 
   return (
-    <CardStyled>
+    <li className={CardStyled}>
       {Object.keys(close).length > 0 && (
-        <div css={xw`absolute z-20 -ml-8`}>
+        <div className={`absolute z-20 -ml-8`}>
           <Link href={close}>
             <a>
               <Image
@@ -93,32 +69,33 @@ const Card = ({
         }
         compare={compare}
       >
-        <a>
-          <div css={xw`relative`}>
+        <a className="group">
+          <div className={`relative`}>
             <GraphImg
               image={photo}
               alt={photo.alt}
               fit="crop"
-              css={xw`lg:h-cardImgD`}
+              className={`lg:h-cardImgD`}
             />
-            <Hover
-              css={[xw`absolute bottom-1 left-2 z-20 pt-0`]}
-              isOpacity={has({ product, shared })}
+            <div
+              className={`absolute bottom-1 left-2 z-20 pt-0
+              transition-opacity duration-300 group-hover:opacity-100
+              ${has({ product, shared }) ? 'opacity-100' : 'opacity-0'}`}
             >
               <Checkbox
                 name={product.slug}
                 fnChange={v => handleCheckbox({ isChecked: v, product })}
                 checked={has({ product, shared })}
               />
-            </Hover>
+            </div>
           </div>
-          <Hover>
-            <NameStyled>{nickname.join(' - ')}</NameStyled>
-            <DesignStyled>{product?.designer?.name}</DesignStyled>
-          </Hover>
+          <div className="opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <h2 className={NameStyled}>{nickname.join(' - ')}</h2>
+            <p className={DesignStyled}>{product?.designer?.name}</p>
+          </div>
         </a>
       </ListLink>
-    </CardStyled>
+    </li>
   )
 }
 

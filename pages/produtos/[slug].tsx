@@ -1,6 +1,4 @@
-import xw from 'xwind'
 import Head from 'next/head'
-import styled from '@emotion/styled'
 import LayoutProduct from '~/components/LayoutProduct'
 import Container from '~/components/Container'
 import Carousel from '~/components/Carousel'
@@ -9,15 +7,7 @@ import { useAppContext } from '~/components/context/AppContext'
 import Properties from '~/components/products/Properties'
 import Finishings from '~/components/products/Finishings'
 
-const InfoStyled = styled.div([
-  xw`
-    bg-white text-center
-    `,
-])
-
-const InfoBody = styled.div(xw`text-14px lg:flex`)
-
-const InfoTextBlock = styled.div(xw`lg:flex-1 text-left`)
+import style from './product.module.css'
 
 const Product = ({ product }) => {
   const shared = useAppContext()
@@ -50,21 +40,20 @@ const Product = ({ product }) => {
       </Head>
       <Container>
         <Carousel slides={images} close={path} nav>
-          <InfoStyled>
-            <h1
-              css={xw`font-medium text-14px sticky z-50 top-0 bg-white pt-3 pb-2.5`}
-            >
+          <div className={`${style.description} text-center`}>
+            <h1 className={`font-medium text-14px pt-3 pb-2.5`}>
               {product.name} - {product.code}
             </h1>
 
-            <InfoBody>
-              <InfoTextBlock
+            <div className="text-14px lg:flex">
+              <div
+                className="lg:flex-1 text-left"
                 dangerouslySetInnerHTML={{
                   __html: product?.description?.html,
                 }}
-              ></InfoTextBlock>
+              ></div>
 
-              <InfoTextBlock css={xw`lg:ml-5 mt-10 lg:mt-0`}>
+              <div className={`lg:flex-1 text-left lg:ml-5 mt-10 lg:mt-0`}>
                 <div
                   dangerouslySetInnerHTML={{
                     __html: product.text.html,
@@ -74,7 +63,7 @@ const Product = ({ product }) => {
                 <Properties product={product} />
 
                 <p>
-                  <label css={xw`hidden`}>tipos de lâmpada</label>
+                  <label className={`hidden`}>tipos de lâmpada</label>
                 </p>
                 <ul>
                   {product.lampTypes &&
@@ -84,9 +73,9 @@ const Product = ({ product }) => {
                 </ul>
 
                 <Finishings finishings={product.finishings} />
-              </InfoTextBlock>
-            </InfoBody>
-          </InfoStyled>
+              </div>
+            </div>
+          </div>
         </Carousel>
       </Container>
     </LayoutProduct>

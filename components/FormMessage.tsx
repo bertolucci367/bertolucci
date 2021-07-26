@@ -1,22 +1,24 @@
-import xw from 'xwind'
 import { IoMdCheckmarkCircle, IoMdAlert } from 'react-icons/io'
 
 const mstatus = {
-  error: xw` bg-red-100 text-red-700 flex items-center py-4 px-6 font-medium mb-5 w-full`,
-  'error.field': xw`text-red-700 inline-block`,
-  success: xw`bg-green-700 text-white flex items-center py-4 px-6 font-black mb-5 w-full`,
+  error: `bg-red-100 text-red-700 flex items-center py-4 px-6 font-medium mb-5 w-full`,
+  'error.field': `text-red-700 inline-block`,
+  success: `bg-green-700 text-white flex items-center py-4 px-6 font-black mb-5 w-full`,
 }
 
 const FormMessage = ({ status, children }) => {
   return (
-    <div css={mstatus[status]}>
+    <div className={mstatus[status]}>
       {status === 'success' && (
-        <IoMdCheckmarkCircle css={[xw`mr-4 w-28`, { fontSize: '28px' }]} />
+        <IoMdCheckmarkCircle
+          style={{ fontSize: '28px' }}
+          className={`mr-4 w-28`}
+        />
       )}
       {status === 'error' && (
-        <IoMdAlert css={[xw`mr-4 w-36`, { fontSize: '28px' }]} />
+        <IoMdAlert style={{ fontSize: '28px' }} className={`mr-4 w-36`} />
       )}
-      <span css={xw``}>{children}</span>
+      <span>{children}</span>
     </div>
   )
 }

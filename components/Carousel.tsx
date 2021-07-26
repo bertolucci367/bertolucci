@@ -1,22 +1,25 @@
 import { useEffect, useState, useRef } from 'react'
-import xw from 'xwind'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import {
-  SectionStyled,
-  ListWrapStyled,
-  ListStyled,
-  NavBtnStyled,
-  CloseStyled,
-  SectionInfoStyled,
-} from '~/components/CarouselStyled'
 
 interface Props {
   slides: any
   close?: string
   nav?: boolean
   children?: React.ReactNode
+}
+
+const NavBtn = ({ children, click, klass }) => {
+  return (
+    <a
+      href="#"
+      role="button"
+      className={`flex items-center z-20 h-full w-10 mb-4 px-2 lg:relative ${klass}`}
+      onClick={click}
+    >
+      {children}
+    </a>
+  )
 }
 
 const Carousel = ({ slides, close, nav, children }: Props) => {
@@ -71,11 +74,11 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
   }
 
   return (
-    <SectionStyled>
-      <ListWrapStyled>
-        <div css={xw`relative flex flex-col w-10`}>
+    <div className="relative lg:flex lg:flex-col lg:overflow-hidden">
+      <div className="flex justify-center">
+        <div className={`relative flex flex-col w-10`}>
           {close && (
-            <CloseStyled>
+            <div className="bg-white z-30 self-end px-2">
               <Link href={close}>
                 <a>
                   <Image
@@ -87,15 +90,10 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
                   />
                 </a>
               </Link>
-            </CloseStyled>
+            </div>
           )}
           {nav && slides.length > 1 && (
-            <NavBtnStyled
-              href="#"
-              role="button"
-              css={xw`justify-end`}
-              onClick={goToPrev}
-            >
+            <NavBtn click={goToPrev} klass="justify-end">
               <Image
                 src="/prior.svg"
                 layout="fixed"
@@ -103,27 +101,24 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
                 width="11"
                 alt="anterior icone"
               />
-            </NavBtnStyled>
+            </NavBtn>
           )}
         </div>
-        <ListStyled ref={listRef}>
+        <ol className="relative flex" ref={listRef}>
           {slides.map((s, i) => (
             <li className={i === curr ? 'carousel active' : 'carousel'} key={i}>
-              <div css={xw`pointer-events-none h-full w-full overflow-hidden`}>
+              <div
+                className={`pointer-events-none h-full w-full overflow-hidden`}
+              >
                 {s}
               </div>
             </li>
           ))}
-        </ListStyled>
+        </ol>
 
-        <div css={xw`w-10`}>
+        <div className={`w-10`}>
           {nav && slides.length > 1 && (
-            <NavBtnStyled
-              href="#"
-              role="button"
-              css={xw`justify-start lg:order-3`}
-              onClick={goToNext}
-            >
+            <NavBtn click={goToNext} klass="justify-start lg:order-3">
               <Image
                 src="/next.svg"
                 layout="fixed"
@@ -131,20 +126,18 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
                 width="11"
                 alt="proximo icone"
               />
-            </NavBtnStyled>
+            </NavBtn>
           )}
         </div>
-      </ListWrapStyled>
+      </div>
 
-      <SectionInfoStyled>
-        <div
-          style={{ maxWidth: textWrapWidth ? textWrapWidth : 'initial' }}
-          css={[xw`mx-auto bg-white pr-2 pb-12`]}
-        >
-          {children}
-        </div>
-      </SectionInfoStyled>
-    </SectionStyled>
+      <div
+        style={{ maxWidth: textWrapWidth ? textWrapWidth : 'initial' }}
+        className={`mx-auto`}
+      >
+        {children}
+      </div>
+    </div>
   )
 }
 

@@ -1,4 +1,3 @@
-import xw from 'xwind'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
@@ -18,13 +17,11 @@ const CompareList = () => {
 
   return (
     <div
-      css={[
-        xw`sticky text-center hidden h-full lg:flex items-center lg:h-asideBody`,
-        `top: 90px;`,
-      ]}
+      style={{ top: '90px;' }}
+      className={`sticky text-center hidden h-full lg:flex items-center lg:h-asideBody`}
     >
       {shared.compare.length > 0 && (
-        <div css={xw`text-13px`}>
+        <div className={`text-13px`}>
           <Link
             prefetch={false}
             href={{
@@ -32,16 +29,16 @@ const CompareList = () => {
               query: { p: shared.compare.map(o => o.slug) },
             }}
           >
-            <a css={xw`font-medium mb-2 hover:cursor-pointer`}>
+            <a className={`font-medium mb-2 hover:cursor-pointer`}>
               Acessar seleção de produtos:
             </a>
           </Link>
           <ul>
             {shared.compare.map((prod, i) => (
-              <li key={i} css={xw`font-light`}>
+              <li key={i} className={`font-light`}>
                 {prod.name} ({prod.code})
                 <button
-                  css={xw`opacity-30 ml-3`}
+                  className={`opacity-30 ml-3`}
                   onClick={() => remove({ product: prod, shared })}
                 >
                   X

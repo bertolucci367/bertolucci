@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import xw from 'xwind'
 import { GraphQLClient } from 'graphql-request'
 import GraphImg from 'graphcms-image'
 import Layout from '~/components/Layout'
+
+import style from './index.module.css'
 
 const Index = ({ data }) => {
   const [windowWidthSize, setWindowWidthSize] = useState(0)
@@ -42,25 +43,10 @@ const Index = ({ data }) => {
       {data.items.map(({ id, photoCover, photoCoverMobile }) => {
         const images = getImages({ photoCover, photoCoverMobile })
         return (
-          <div key={id} css={xw`row-start-2 col-start-1 col-end-4`}>
-            <div
-              css={[
-                xw`relative`,
-                `
-                height: calc(100vh - 70px);
-
-                @media (orientation: landscape) {
-                  height: calc(100vh - 40px);
-                }
-
-                @media (min-width: 1024px) {
-                  height: calc(100vh - 90px);
-                }
-                `,
-              ]}
-            >
+          <div key={id} className={`row-start-2 col-start-1 col-end-4`}>
+            <div className={style.wrap}>
               <Slider slides={images} />
-              <main css={xw`relative`}></main>
+              <main className={`relative`}></main>
             </div>
           </div>
         )
@@ -99,7 +85,7 @@ const Slider = ({ slides }) => {
       {slides.map((s, i) => (
         <div className={i === curr ? 'slide active' : 'slide'} key={i}>
           <div
-            css={xw`absolute pointer-events-none h-full w-full overflow-hidden`}
+            className={`absolute pointer-events-none h-full w-full overflow-hidden`}
           >
             {s}
           </div>

@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-import xw from 'xwind'
-import styled from '@emotion/styled'
 import Image from 'next/image'
 import { useAppContext } from '~/components/context/AppContext'
 import { useState } from 'react'
 import FormMessage from '~/components/FormMessage'
 
-const Title = styled.h2(xw`font-medium text-13px mb-10`)
+const Title = ({ children }) => (
+  <h2 className="font-medium text-13px mb-10">{children}</h2>
+)
 
-const FieldWrap = styled.div()
+const FieldWrap = ({ children }) => <div>{children}</div>
 
 interface IFormInput {
   name: String
@@ -54,8 +54,8 @@ const CompareForm = () => {
   }
 
   return (
-    <div css={[xw`sticky text-center hidden h-full lg:flex items-center`]}>
-      <div css={xw`w-full`}>
+    <div className={`sticky text-center hidden h-full lg:flex items-center`}>
+      <div className={`w-full`}>
         <Title>
           <div>
             <Image
@@ -63,10 +63,10 @@ const CompareForm = () => {
               layout="fixed"
               height="11"
               width="15"
-              alt="close icon"
+              alt="email icon"
             />
           </div>
-          <span>enviar por e-mail</span>{' '}
+          <span>enviar por e-mail</span>
         </Title>
         <form onSubmit={handleSubmit(onSubmit)}>
           {msgStatus === 200 && (
@@ -91,7 +91,7 @@ const CompareForm = () => {
               <FormMessage status="error">{errors.name.message}</FormMessage>
             )}
             <input
-              css={xw`hidden`}
+              className={`hidden`}
               id="form-nickname"
               name="nickname"
               type="text"

@@ -3,7 +3,6 @@
   src: url('/fonts/futura-light-bt.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
-  /* font-display: swap; */
   font-display: swap; /* Define how the browser behaves during download */
 }
 
@@ -12,6 +11,5 @@
   src: url('/fonts/futura-medium-bt.ttf') format('truetype');
   font-style: medium;
   font-weight: 500;
-  /* font-display: swap; */
   font-display: swap; /* Define how the browser behaves during download */
 }

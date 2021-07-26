@@ -1,0 +1,7 @@
+.onHover:hover li {
+  opacity: 0.5;
+}
+
+.onHover:hover li:hover {
+  opacity: 1;
+}
