@@ -3,8 +3,6 @@ import { GraphQLClient } from 'graphql-request'
 import GraphImg from 'graphcms-image'
 import Layout from '~/components/Layout'
 
-import style from './index.module.css'
-
 const Index = ({ data }) => {
   const [windowWidthSize, setWindowWidthSize] = useState(0)
   const [windowHeightSize, setWindowHeightSize] = useState(0)
@@ -40,17 +38,16 @@ const Index = ({ data }) => {
 
   return (
     <Layout>
-      {data.items.map(({ id, photoCover, photoCoverMobile }) => {
-        const images = getImages({ photoCover, photoCoverMobile })
-        return (
-          <div key={id} className={`row-start-2 col-start-1 col-end-4`}>
-            <div className={style.wrap}>
+      <div data-label="slider" className="col-start-[1] col-end-[-1]">
+        {data.items.map(({ id, photoCover, photoCoverMobile }) => {
+          const images = getImages({ photoCover, photoCoverMobile })
+          return (
+            <div key={id} className={`h-slimSlide lg:h-wideSlide`}>
               <Slider slides={images} />
-              <main className={`relative`}></main>
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
+      </div>
     </Layout>
   )
 }

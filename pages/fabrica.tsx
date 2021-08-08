@@ -1,34 +1,5 @@
 import Layout from '~/components/Layout'
 
-const data = {
-  history: {
-    imgs: [
-      '/imgs/about/pendentes-antigos.jpg',
-      '/imgs/about/colunas-abajures.jpg',
-      '/imgs/about/coluna-com-mulheres.jpg',
-      '/imgs/about/pendentes-anos-80.jpg',
-      '/imgs/about/252-ouro_saveforweb.jpg',
-    ],
-  },
-
-  production: {
-    imgs: [
-      '/imgs/about/Fabrica-Bertolucci-069.jpg',
-      '/imgs/about/Fabrica-Bertolucci-103.jpg',
-      '/imgs/about/Fabrica-Bertolucci-139.jpg',
-      '/imgs/about/Fabrica-Bertolucci-212.jpg',
-      '/imgs/about/Fabrica-Bertolucci-247.jpg',
-      '/imgs/about/Fabrica-Bertolucci-316.jpg',
-      '/imgs/about/Fabrica-Bertolucci-329.jpg',
-      '/imgs/about/Fabrica-Bertolucci-358.jpg',
-      '/imgs/about/Fabrica-Bertolucci-371.jpg',
-      '/imgs/about/Fabrica-Bertolucci-457.jpg',
-      '/imgs/about/Fabrica-Bertolucci-468.jpg',
-      '/imgs/about/Fabrica-Bertolucci-504.jpg',
-    ],
-  },
-}
-
 const List = ({ items }) => {
   return (
     <ol
@@ -46,9 +17,38 @@ const List = ({ items }) => {
 }
 
 const About = () => {
+  const data = {
+    history: {
+      imgs: [
+        '/imgs/about/pendentes-antigos.jpg',
+        '/imgs/about/colunas-abajures.jpg',
+        '/imgs/about/coluna-com-mulheres.jpg',
+        '/imgs/about/pendentes-anos-80.jpg',
+        '/imgs/about/252-ouro_saveforweb.jpg',
+      ],
+    },
+
+    production: {
+      imgs: [
+        '/imgs/about/Fabrica-Bertolucci-069.jpg',
+        '/imgs/about/Fabrica-Bertolucci-103.jpg',
+        '/imgs/about/Fabrica-Bertolucci-139.jpg',
+        '/imgs/about/Fabrica-Bertolucci-212.jpg',
+        '/imgs/about/Fabrica-Bertolucci-247.jpg',
+        '/imgs/about/Fabrica-Bertolucci-316.jpg',
+        '/imgs/about/Fabrica-Bertolucci-329.jpg',
+        '/imgs/about/Fabrica-Bertolucci-358.jpg',
+        '/imgs/about/Fabrica-Bertolucci-371.jpg',
+        '/imgs/about/Fabrica-Bertolucci-457.jpg',
+        '/imgs/about/Fabrica-Bertolucci-468.jpg',
+        '/imgs/about/Fabrica-Bertolucci-504.jpg',
+      ],
+    },
+  }
+
   return (
     <Layout title="a fábrica">
-      <div className={`col-start-2`}>
+      <div className={`grid-in-main`}>
         <div className={`relative`}>
           <div id="historia" className={`-top-36 absolute left-0`}></div>
           <div

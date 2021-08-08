@@ -33,19 +33,16 @@ const LayoutProduct = ({
 
   return (
     <Layout title={title}>
-      <aside
-        className={`
-          col-start-2 col-end-3 row-start-2 row-end-2
-          lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-2
-          lg:px-4 lg:pb-logoFooter
-          `}
-      >
+      <aside className="grid-in-l">
         {designer && <Designer designer={designer} />}
-
-        <CompareList />
-        <CompareForm />
+        <div
+          className={`text-center hidden lg:block sticky top-1/2 -translate-y-1/2`}
+        >
+          <CompareList />
+          <CompareForm />
+        </div>
       </aside>
-      <main className={`col-start-2 col-end-3`}>{children}</main>
+      <main className="grid-in-main">{children}</main>
     </Layout>
   )
 }

@@ -255,43 +255,7 @@ module.exports = {
       DEFAULT: '1',
     },
     fontFamily: {
-      body: ['FuturaStdLight', 'Helvetica', 'Arial', 'Sans-serif'],
-      medium: 'FuturaStdMedium',
-
-      sans: [
-        'ui-sans-serif',
-        'system-ui',
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        '"Noto Sans"',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
-      ],
-      serif: [
-        'ui-serif',
-        'Georgia',
-        'Cambria',
-        '"Times New Roman"',
-        'Times',
-        'serif',
-      ],
-      mono: [
-        'ui-monospace',
-        'SFMono-Regular',
-        'Menlo',
-        'Monaco',
-        'Consolas',
-        '"Liberation Mono"',
-        '"Courier New"',
-        'monospace',
-      ],
+      futura: ['FuturaStd', 'Helvetica', 'Arial', 'Sans-serif'],
     },
     fontSize: {
       '12px': '1.2rem',
@@ -415,10 +379,13 @@ module.exports = {
       6: '6',
       7: '7',
     },
+    gridTemplateAreas: {
+      slim: ['h1 h2 h3', 'main main main', 'f1 f2 f2'],
+      wide: ['h1 h2 h3', 'l main r', 'f1 f2 f3'],
+    },
     gridTemplateColumns: {
       none: 'none',
-      layout: '12px repeat(1, 1fr) 12px',
-      'layout-lg': '220px 1fr 220px',
+      wide: '220px 1fr 220px',
       1: 'repeat(1, minmax(0, 1fr))',
       2: 'repeat(2, minmax(0, 1fr))',
       3: 'repeat(3, minmax(0, 1fr))',
@@ -433,9 +400,8 @@ module.exports = {
       12: 'repeat(12, minmax(0, 1fr))',
     },
     gridTemplateRows: {
-      none: 'none',
-      layout: '70px 1fr',
-      'layout-lg': '90px minmax(calc(100vh - 90px), 1fr)',
+      slim: '7rem 1fr auto',
+      'slim-wide': '9rem 1fr auto',
       1: 'repeat(1, minmax(0, 1fr))',
       2: 'repeat(2, minmax(0, 1fr))',
       3: 'repeat(3, minmax(0, 1fr))',
@@ -473,6 +439,10 @@ module.exports = {
       tooltip: '144px',
       asideBody: `calc(100vh - (130px + 90px))`,
       map: '50vh',
+      slimHeader: '7rem',
+      wideHeader: '9rem',
+      slimSlide: `calc(100vh - 7rem)`,
+      wideSlide: `calc(100vh - 9rem)`,
     }),
     inset: (theme, { negative }) => ({
       auto: 'auto',
@@ -882,6 +852,7 @@ module.exports = {
     'disabled',
   ],
   variants: {
+    gridTemplateAreas: ['responsive'],
     accessibility: ['responsive', 'focus-within', 'focus'],
     alignContent: ['responsive'],
     alignItems: ['responsive'],
@@ -1074,9 +1045,5 @@ module.exports = {
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
   },
-  plugins: [],
-  // xwind options
-  xwind: {
-    mode: 'objectstyles',
-  },
+  plugins: [require('@savvywombat/tailwindcss-grid-areas')],
 }

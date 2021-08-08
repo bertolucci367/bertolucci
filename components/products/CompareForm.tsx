@@ -54,85 +54,83 @@ const CompareForm = () => {
   }
 
   return (
-    <div className={`sticky text-center hidden h-full lg:flex items-center`}>
-      <div className={`w-full`}>
-        <Title>
-          <div>
-            <Image
-              src="/email.svg"
-              layout="fixed"
-              height="11"
-              width="15"
-              alt="email icon"
-            />
-          </div>
-          <span>enviar por e-mail</span>
-        </Title>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {msgStatus === 200 && (
-            <FormMessage status="success">sucesso!</FormMessage>
+    <>
+      <Title>
+        <div>
+          <Image
+            src="/email.svg"
+            layout="fixed"
+            height="11"
+            width="15"
+            alt="email icon"
+          />
+        </div>
+        <span>enviar por e-mail</span>
+      </Title>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {msgStatus === 200 && (
+          <FormMessage status="success">sucesso!</FormMessage>
+        )}
+        {msgStatus === 404 && (
+          <FormMessage status="error">
+            ops... tente mais tarde ou entre em contato por telefone.
+          </FormMessage>
+        )}
+        <FieldWrap>
+          <label htmlFor="form-name">*Meu nome:</label>
+          <input
+            id="form-name"
+            name="name"
+            placeholder="nome"
+            type="text"
+            required
+            {...register('name', { required: true })}
+          />
+          {errors.name && errors.name.type === 'required' && (
+            <FormMessage status="error">{errors.name.message}</FormMessage>
           )}
-          {msgStatus === 404 && (
-            <FormMessage status="error">
-              ops... tente mais tarde ou entre em contato por telefone.
-            </FormMessage>
-          )}
-          <FieldWrap>
-            <label htmlFor="form-name">*Meu nome:</label>
-            <input
-              id="form-name"
-              name="name"
-              placeholder="nome"
-              type="text"
-              required
-              {...register('name', { required: true })}
-            />
-            {errors.name && errors.name.type === 'required' && (
-              <FormMessage status="error">{errors.name.message}</FormMessage>
-            )}
-            <input
-              className={`hidden`}
-              id="form-nickname"
-              name="nickname"
-              type="text"
-            />
-          </FieldWrap>
-          <FieldWrap>
-            <label htmlFor="form-email">*Meu e-mail:</label>
-            <input
-              id="form-email"
-              name="email"
-              placeholder="e-mail"
-              type="email"
-              required
-              {...register('email', { required: true })}
-            />
-          </FieldWrap>
-          <FieldWrap>
-            <label htmlFor="form-to">*Para:</label>
-            <input
-              id="form-to"
-              name="to"
-              type="email"
-              required
-              defaultValue="bertolucci@bertolucci.com.br"
-            />
-          </FieldWrap>
-          <FieldWrap>
-            <label htmlFor="form-message">Mensagem:</label>
-            <textarea
-              id="form-message"
-              name="message"
-              placeholder="digite sua mensagem"
-              rows={5}
-            ></textarea>
-          </FieldWrap>
-          <FieldWrap>
-            <input name="commit" type="submit" value="Enviar" />
-          </FieldWrap>
-        </form>
-      </div>
-    </div>
+          <input
+            className={`hidden`}
+            id="form-nickname"
+            name="nickname"
+            type="text"
+          />
+        </FieldWrap>
+        <FieldWrap>
+          <label htmlFor="form-email">*Meu e-mail:</label>
+          <input
+            id="form-email"
+            name="email"
+            placeholder="e-mail"
+            type="email"
+            required
+            {...register('email', { required: true })}
+          />
+        </FieldWrap>
+        <FieldWrap>
+          <label htmlFor="form-to">*Para:</label>
+          <input
+            id="form-to"
+            name="to"
+            type="email"
+            required
+            defaultValue="bertolucci@bertolucci.com.br"
+          />
+        </FieldWrap>
+        <FieldWrap>
+          <label htmlFor="form-message">Mensagem:</label>
+          <textarea
+            id="form-message"
+            name="message"
+            placeholder="digite sua mensagem"
+            rows={5}
+          ></textarea>
+        </FieldWrap>
+        <FieldWrap>
+          <input name="commit" type="submit" value="Enviar" />
+        </FieldWrap>
+      </form>
+    </>
   )
 }
 

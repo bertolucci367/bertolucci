@@ -1,7 +1,6 @@
 import Card from './Card'
 
 export const ListUL = `
-    col-start-1 col-end-4 lg:col-start-2 lg:col-end-3
     flex flex-wrap justify-center
     lg:justify-center
   `

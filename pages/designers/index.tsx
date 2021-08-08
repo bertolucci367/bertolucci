@@ -7,16 +7,18 @@ import Card from '~/components/Card'
 const Designers = ({ designers }) => {
   return (
     <Layout title="designers">
-      <ul className={ListUL}>
-        {designers.map(d => (
-          <Card
-            key={d.slug}
-            photo={d.photo}
-            path={`/designers/${d.slug}`}
-            title={d.name}
-          ></Card>
-        ))}
-      </ul>
+      <div data-label="designers" className="grid-in-main">
+        <ul className={ListUL}>
+          {designers.map(d => (
+            <Card
+              key={d.slug}
+              photo={d.photo}
+              path={`/designers/${d.slug}`}
+              title={d.name}
+            ></Card>
+          ))}
+        </ul>
+      </div>
     </Layout>
   )
 }

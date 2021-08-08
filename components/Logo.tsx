@@ -1,10 +1,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-export const Logo = () => {
+interface Props {
+  className?: string
+}
+
+export const Logo = ({ className }: Props) => {
   return (
     <Link href="/">
-      <a className={`lg:pt-3.5 hover:cursor-pointer`}>
+      <a className={`hover:cursor-pointer ${className}`}>
         <Image
           src="/logo.svg"
           layout="fixed"
@@ -19,5 +23,11 @@ export const Logo = () => {
 }
 
 export const LogoFooter = () => (
-  <Image src="/logo-footer.svg" layout="fixed" height="84" width="33" alt="" />
+  <Image
+    src="/logo-footer.svg"
+    layout="fixed"
+    height="84"
+    width="33"
+    alt="Bertolucci dedicada ao brasil desde 1956"
+  />
 )

@@ -4,9 +4,7 @@ import ContactForm from '~/components/ContactForm'
 function Contact({}) {
   return (
     <Layout title="contato">
-      <div
-        className={`col-start-2 col-end-3 grid gap-16 grid-cols-1 2xl:grid-cols-3`}
-      >
+      <div className={`grid-in-main grid gap-16 grid-cols-1 2xl:grid-cols-3`}>
         <div
           className={`col-span-3 col-start-1 row-start-2 2xl:min-h-screen pb-20 2xl:pb-0`}
         >

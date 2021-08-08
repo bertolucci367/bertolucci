@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'FuturaStdLight';
+  font-family: 'FuturaStd';
   src: url('/fonts/futura-light-bt.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
@@ -7,7 +7,7 @@
 }
 
 @font-face {
-  font-family: 'FuturaStdMedium';
+  font-family: 'FuturaStd';
   src: url('/fonts/futura-medium-bt.ttf') format('truetype');
   font-style: medium;
   font-weight: 500;

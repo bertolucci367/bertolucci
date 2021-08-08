@@ -25,7 +25,7 @@ const Desktop = () => {
                 activeClassName="border-b border-solid border-black"
               >
                 <a
-                  className={`block font-bold mx-4px pt-4 pb-1 mb-1 hover:cursor-pointer`}
+                  className={`block font-bold mx-4px pb-1 mb-1 hover:cursor-pointer`}
                 >
                   {m.name}
                 </a>
@@ -84,6 +84,7 @@ const Menu = ({ isOpenMenu }) => {
   return (
     <>
       <div
+        data-label="Menu Mobile"
         style={{ display: `${isOpenMenu ? 'flex' : 'none'}` }}
         className={`lg:hidden
           fixed top-0 bottom-0 left-0 right-0 m-auto lg:mt-3
@@ -95,7 +96,7 @@ const Menu = ({ isOpenMenu }) => {
       >
         <Mobile />
       </div>
-      <div className={`hidden lg:block`}>
+      <div data-label="Menu Desktop" className={`hidden lg:block`}>
         <Desktop />
       </div>
     </>

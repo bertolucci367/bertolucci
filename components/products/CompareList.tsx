@@ -16,12 +16,9 @@ const CompareList = () => {
   }
 
   return (
-    <div
-      style={{ top: '90px;' }}
-      className={`sticky text-center hidden h-full lg:flex items-center lg:h-asideBody`}
-    >
+    <>
       {shared.compare.length > 0 && (
-        <div className={`text-13px`}>
+        <div>
           <Link
             prefetch={false}
             href={{
@@ -48,7 +45,7 @@ const CompareList = () => {
           </ul>
         </div>
       )}
-    </div>
+    </>
   )
 }
 
