@@ -100,7 +100,7 @@ const Header = () => {
       />
 
       <header
-        className={`grid-in-h2 lg:pt-[18px]  justify-center ${stickStyle}`}
+        className={`grid-in-h2 lg:pt-[18px] justify-center ${stickStyle}`}
       >
         <Menu isOpenMenu={shared.menuMobileIsOpen} />
       </header>
@@ -111,19 +111,21 @@ const Header = () => {
 const Footer = () => {
   return (
     <>
-      <div className="hidden grid-in-f1 block pl-6 pb-8">
+      <div className="hidden grid-in-f1 pb-8 lg:flex justify-center">
         <LogoFooter />
       </div>
-      <div className=" lg:block z-50 pl-6 pb-4 grid-in-f1 lg:grid-in-f3 lg:text-right">
-        <a className="block" href="/newsletter">
-          Newsletter
-        </a>
-        <a className="block" href="">
-          Tire suas dúvidas
-        </a>
-        <a className="block" href="">
-          Política de privacidade
-        </a>
+      <div className="z-50 pl-6 pb-4 grid-in-f1 lg:flex lg:items-center lg:flex-wrap lg:pr-6 lg:grid-in-f3 ">
+        <div className="lg:text-right w-full">
+          <a className="block" href="/newsletter">
+            Newsletter
+          </a>
+          <a className="block" href="">
+            Tire suas dúvidas
+          </a>
+          <a className="block" href="">
+            Política de privacidade
+          </a>
+        </div>
       </div>
     </>
   )
