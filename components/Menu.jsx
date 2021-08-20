@@ -9,6 +9,7 @@ const menu = [
   { name: 'Designers', url: '/designers', hasSubmenu: false },
   { name: 'A Fábrica', url: '/fabrica', hasSubmenu: true },
   { name: 'Giornale', url: '/giornale', hasSubmenu: false },
+  { name: 'Persona', url: '/persona', hasSubmenu: false },
   { name: 'Contato', url: '/contato', hasSubmenu: false },
 ]
 
