@@ -49,7 +49,7 @@ const Newsletter = () => {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="my-20 mx-10 text-14px"
+          className="my-20 px-10 text-14px max-w-[520px] mx-auto"
         >
           <label>e-mail</label>
           <input
