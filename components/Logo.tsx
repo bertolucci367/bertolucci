@@ -22,12 +22,13 @@ export const Logo = ({ className }: Props) => {
   )
 }
 
-export const LogoFooter = () => (
+export const LogoFooter = ({ className }: Props) => (
   <Image
     src="/logo-footer.svg"
     layout="fixed"
     height="84"
     width="33"
     alt="Bertolucci dedicada ao brasil desde 1956"
+    className={className}
   />
 )

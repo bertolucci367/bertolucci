@@ -258,6 +258,8 @@ module.exports = {
       futura: ['FuturaStd', 'Helvetica', 'Arial', 'Sans-serif'],
     },
     fontSize: {
+      h2: ['2.5rem', { lineHeight: '1.5' }],
+      h3: ['2rem', { lineHeight: '1.5' }],
       '12px': '1.2rem',
       '13px': '1.3rem',
       '14px': '1.4rem',
