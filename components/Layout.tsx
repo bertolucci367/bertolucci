@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import Menu from '~/components/Menu'
 import MenuButton from '~/components/MenuButton'
-import { Logo, LogoFooter } from '~/components/Logo'
+import { Logo } from '~/components/Logo'
 import { useAppContext } from '~/components/context/AppContext'
 import CookieBanner from '~/components/CookieBanner'
 import Head from 'next/head'
+import Footer from '~/components/Footer'
 
 interface LayoutProps {
   children?: React.ReactNode
@@ -28,7 +29,7 @@ const Layout = ({
 
       <div
         className="h-full min-h-screen
-                   grid grid-areas-slim lg:grid-areas-wide lg:grid-cols-wide
+                   grid grid-areas-slim grid-cols-slim lg:grid-areas-wide lg:grid-cols-wide
                    grid-rows-slim lg:grid-rows-slim-wide"
       >
         <Header />
@@ -57,19 +58,19 @@ const Header = () => {
   return (
     <>
       <div
-        className={`grid-in-h1 pl-6 ${wrapStyle} flex-start ${stickStyle} lg:p-0`}
+        className={`grid-in-h1 ${wrapStyle} flex-start ${stickStyle} lg:p-0`}
       >
         <Logo />
       </div>
 
       <div
-        className={`grid-in-h3 pr-4 lg:hidden ${wrapStyle} justify-end ${stickStyle}`}
+        className={`grid-in-h3 lg:hidden ${wrapStyle} justify-end ${stickStyle}`}
         data-label="menu button"
       >
         <MenuButton>
           <button
             onClick={handleClick}
-            className={`flex items-center px-4 py-3`}
+            className={`flex items-center py-3 px-2`}
           >
             {!shared.menuMobileIsOpen && (
               <svg
@@ -96,7 +97,7 @@ const Header = () => {
       </div>
 
       <ContactInfo
-        className={`grid-in-f2 pr-6 lg:grid-in-h3 lg:pt-[18px] ${stickStyle}`}
+        className={`grid-in-f2 lg:grid-in-h3 lg:pt-[18px] ${stickStyle}`}
       />
 
       <header
@@ -104,29 +105,6 @@ const Header = () => {
       >
         <Menu isOpenMenu={shared.menuMobileIsOpen} />
       </header>
-    </>
-  )
-}
-
-const Footer = () => {
-  return (
-    <>
-      <div className="hidden grid-in-f1 pb-8 lg:flex justify-center">
-        <LogoFooter />
-      </div>
-      <div className="z-50 pl-6 pb-4 grid-in-f1 lg:flex lg:items-center lg:flex-wrap lg:pr-6 lg:grid-in-f3 ">
-        <div className="lg:text-right w-full">
-          <a className="block" href="/newsletter">
-            Newsletter
-          </a>
-          <a className="block" href="">
-            Tire suas dúvidas
-          </a>
-          <a className="block" href="">
-            Política de privacidade
-          </a>
-        </div>
-      </div>
     </>
   )
 }

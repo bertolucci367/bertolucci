@@ -258,8 +258,9 @@ module.exports = {
       futura: ['FuturaStd', 'Helvetica', 'Arial', 'Sans-serif'],
     },
     fontSize: {
-      h2: ['2.5rem', { lineHeight: '1.5' }],
-      h3: ['2rem', { lineHeight: '1.5' }],
+      h1: ['1.8rem', { lineHeight: '1.5' }],
+      h2: ['1.6rem', { lineHeight: '1.5' }],
+      h3: ['1.4rem', { lineHeight: '1.5' }],
       '12px': '1.2rem',
       '13px': '1.3rem',
       '14px': '1.4rem',
@@ -382,11 +383,12 @@ module.exports = {
       7: '7',
     },
     gridTemplateAreas: {
-      slim: ['h1 h2 h3', 'main main main', 'f1 f2 f2'],
+      slim: ['. h1 h2 h3 .', '. main main main .', '. f1 f2 f2 .'],
       wide: ['h1 h2 h3', 'l main r', 'f1 f2 f3'],
     },
     gridTemplateColumns: {
       none: 'none',
+      slim: '12px auto auto auto 12px',
       wide: '220px 1fr 220px',
       1: 'repeat(1, minmax(0, 1fr))',
       2: 'repeat(2, minmax(0, 1fr))',

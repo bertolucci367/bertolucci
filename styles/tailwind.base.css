@@ -15,8 +15,13 @@
   }
 
   h2 {
-    @apply font-medium;
+    @apply font-medium text-h2 mt-8 mb-4;
   }
+
+  h3 {
+    @apply font-medium text-h3 mt-8 mb-4;
+  }
+
   p {
     @apply mb-4;
   }

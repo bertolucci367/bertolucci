@@ -27,15 +27,15 @@ const Newsletter = () => {
   }
 
   return (
-    <Layout showCookie={false}>
+    <Layout title="Newsletter" showCookie={false}>
       <div className="grid-in-main text-center">
         <h1 className="sr-only">Newsletter</h1>
         <div className="my-20">
           <LogoFooter />
         </div>
 
-        <h2 className="text-h2">Fique por dentro das nossas novidades!</h2>
-        <h3 className="text-h3">
+        <h2 className="text-5xl">Fique por dentro das nossas novidades!</h2>
+        <h3 className="text-4xl font-normal">
           Não se preocupe, nós também não gostamos de spam.
         </h3>
 

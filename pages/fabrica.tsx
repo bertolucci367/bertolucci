@@ -56,7 +56,7 @@ const About = () => {
           >
             <div className={`xl:w-10/12 xl:col-span-1`}>
               <div className={`sticky top-36`}>
-                <h2 className={`text-18px mb-6`}>
+                <h2 className={`text-h1 mt-0`}>
                   Paulistana na origem mas brasileira de alma, uma empresa em
                   movimento
                 </h2>
