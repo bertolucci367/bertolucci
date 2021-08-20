@@ -1,4 +1,5 @@
 import Layout from '~/components/Layout'
+import Image from 'next/image'
 import ContactForm from '~/components/ContactForm'
 
 function Contact({}) {
@@ -22,8 +23,8 @@ function Contact({}) {
         <div
           className={`col-start-1 col-end-4 grid gap-x-32 grid-cols-1 2xl:grid-cols-3`}
         >
-          <div className={` pb-20`}>
-            <h2 className={`mb-4 text-18px`}>Você quer mais informações?</h2>
+          <div className="pb-20">
+            <h2 className="mt-0 text-h1">Você quer mais informações?</h2>
             <p className={`mb-20`}>
               Caso não tenha encontrado as informações necessárias, não hesite
               em nos contactar preenchendo o formulário abaixo ou através das
@@ -33,23 +34,32 @@ function Contact({}) {
             <ContactForm />
           </div>
 
-          <div className={` pb-20`}>
+          <div className="pb-20">
             <p>
               É profissional? Ficaremos felizes em achar uma solução
               luminotécnica ao seu projeto. Agende uma visita
             </p>
           </div>
 
-          <div className={` pb-20`}>
-            <h2 className={`mb-4 text-18px`}>Atendimento por whatsapp</h2>
+          <div className="pb-20">
+            <h2 className="mt-0 text-h1">Atendimento por whatsapp</h2>
             <p>
-              <strong>Consultor Alexandre</strong>: 55 11 9 7073 7652
-            </p>
-            <p>
-              <strong>Consultora Sandra</strong>: 55 11 9 9690 2176
-            </p>
-            <p>
-              <strong>Gerente Comercial Bia</strong>: 55 11 9 4521 9938
+              <a
+                href="https://api.whatsapp.com/send?phone=5511945219938"
+                target="_blank"
+                className="flex items-center"
+              >
+                55 11 9 4521 9938
+                <span className="whatsapp icon ml-5">
+                  <Image
+                    src="/whatsapp.svg"
+                    layout="fixed"
+                    height="18"
+                    width="18"
+                    alt="whatsapp icon"
+                  />
+                </span>
+              </a>
             </p>
           </div>
         </div>
