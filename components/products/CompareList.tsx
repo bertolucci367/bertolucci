@@ -26,8 +26,8 @@ const CompareList = () => {
               query: { p: shared.compare.map(o => o.slug) },
             }}
           >
-            <a className={`font-medium mb-2 hover:cursor-pointer`}>
-              Acessar seleção de produtos:
+            <a className="font-medium mb-2 block hover:cursor-pointer">
+              Selecione as luminárias para consulta
             </a>
           </Link>
           <ul>

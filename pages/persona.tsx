@@ -24,28 +24,28 @@ const List = ({ items }) => {
 const Persona = () => {
   const data = [
     {
-      img: '/imgs/persona/Foto_1.jpg',
+      img: '/imgs/persona/1.png',
       text: [
         'Esta coleção foi feita exclusivamente para um hotel de luxo na região de São Paulo.',
-        'O desenvolvimento foi integralmente personalizado: desde os protótipos iniciais, aos moldes de fabricação e cortes a laser, até a disponibilização de uma equipe dedicada somente para que esse projeto se concretizasse. O que acharam do resultado?',
+        'O desenvolvimento foi integralmente personalizado: desde os protótipos iniciais, aos moldes de fabricação e cortes a laser, até a disponibilização de uma equipe dedicada somente para que esse projeto se concretizasse.',
       ],
     },
     {
-      img: '/imgs/persona/Foto_2.jpg',
+      img: '/imgs/persona/2.png',
       text: [
-        'Esta coleção foi feita exclusivamente para um hotel de luxo na região de São Paulo.',
-        'O desenvolvimento foi integralmente personalizado: desde os protótipos iniciais, aos moldes de fabricação e cortes a laser, até a disponibilização de uma equipe dedicada somente para que esse projeto se concretizasse. O que acharam do resultado?',
+        'Mais um pouco dessa belíssima coleção feita exclusivamente para um hotel de luxo na região de São Paulo.',
+        'O que acharam do resultado?',
       ],
     },
     {
-      img: '/imgs/persona/Foto_3.jpg',
+      img: '/imgs/persona/3.png',
       text: [
         'Neste produto Persona, acolhemos o pedido de cliente em uma combinação singular do braço articulado da arandela Flash unificado ao refletor da arandela Gras.',
         'Diante de nosso catálogo de centenas de produtos e mais de duzentos acabamentos possíveis, basta você libertar a sua criatividade e deixar que a Bertolucci lhe ajude a ter objetos de design personalizados.',
       ],
     },
     {
-      img: '/imgs/persona/Foto_4.jpg',
+      img: '/imgs/persona/4.png',
       text: [
         'No caso desse abajur Ibira Persona, a proposta foi trocar o refletor do Ibira para uma cúpula florida do abajur Mix Print.',
         'Vamos desde a mais simples personalização, até o desenvolvimento de uma linha completa feita só para você.',
