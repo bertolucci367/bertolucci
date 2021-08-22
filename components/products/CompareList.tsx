@@ -26,7 +26,7 @@ const CompareList = () => {
               query: { p: shared.compare.map(o => o.slug) },
             }}
           >
-            <a className="font-medium mb-2 block hover:cursor-pointer">
+            <a className="font-medium mb-10 block hover:cursor-pointer">
               Selecione as luminárias para consulta
             </a>
           </Link>
@@ -43,6 +43,16 @@ const CompareList = () => {
               </li>
             ))}
           </ul>
+
+          <Link
+            prefetch={false}
+            href={{
+              pathname: '/produtos/comparar',
+              query: { p: shared.compare.map(o => o.slug) },
+            }}
+          >
+            <a className="btn mt-10">Solicitar consulta</a>
+          </Link>
         </div>
       )}
     </>

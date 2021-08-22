@@ -10,13 +10,10 @@ const FormMessage = ({ status, children }) => {
   return (
     <div className={mstatus[status]}>
       {status === 'success' && (
-        <IoMdCheckmarkCircle
-          style={{ fontSize: '28px' }}
-          className={`mr-4 w-28`}
-        />
+        <IoMdCheckmarkCircle style={{ fontSize: '28px' }} className={`mr-4`} />
       )}
       {status === 'error' && (
-        <IoMdAlert style={{ fontSize: '28px' }} className={`mr-4 w-36`} />
+        <IoMdAlert style={{ fontSize: '28px' }} className={`mr-4`} />
       )}
       <span>{children}</span>
     </div>

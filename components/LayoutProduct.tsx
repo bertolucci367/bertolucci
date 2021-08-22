@@ -35,11 +35,9 @@ const LayoutProduct = ({
     <Layout title={title}>
       <aside className="grid-in-l">
         {designer && <Designer designer={designer} />}
-        <div
-          className={`text-center hidden lg:block sticky top-1/2 -translate-y-1/2`}
-        >
+        <div className={`text-center lg:sticky lg:top-1/2 lg:-translate-y-1/2`}>
           <CompareList />
-          <CompareForm />
+          <CompareForm className="lg:pl-4" />
         </div>
       </aside>
       <main className="grid-in-main">{children}</main>

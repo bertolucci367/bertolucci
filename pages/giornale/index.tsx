@@ -6,7 +6,7 @@ import { ListUL } from '~/components/products/List'
 
 const Blog = ({ data }) => {
   return (
-    <Layout title="gionale">
+    <Layout title="giornale">
       <div className={`grid-in-main`}>
         <div className={`mb-36 grid gap-x-20 items-start`}>
           <ul className={ListUL}>

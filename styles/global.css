@@ -36,7 +36,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+.btn {
   border: 1px solid black;
   box-sizing: border-box;
   font-family: 'helvetica', 'arial', sans-serif;
@@ -46,15 +47,19 @@ textarea {
   width: 100%;
 }
 
+.btn,
 input[type='submit'] {
+  @apply inline-block;
   border-color: #ccc;
   background-color: #efefef;
   border-radius: 6px;
   color: #212121;
   padding: 0.8rem 3.6rem;
   width: auto;
+  transition: background-color 0.3s, color 0.3s;
 }
 
+.btn:hover,
 input[type='submit']:hover {
   border-color: #212121;
   background-color: #212121;

@@ -23,6 +23,7 @@ const Card = ({
   close = {},
   useLineName = false,
   useProductCode = false,
+  nameVisible = false,
 }) => {
   const router = useRouter()
   const shared = useAppContext()
@@ -89,7 +90,11 @@ const Card = ({
               />
             </div>
           </div>
-          <div className="opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <div
+            className={`${
+              nameVisible ? '' : 'opacity-0'
+            } transition-opacity duration-300 group-hover:opacity-100`}
+          >
             <h2 className={NameStyled}>{nickname.join(' - ')}</h2>
             <p className={DesignStyled}>{product?.designer?.name}</p>
           </div>

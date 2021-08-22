@@ -4,12 +4,15 @@ import Image from 'next/image'
 import { useAppContext } from '~/components/context/AppContext'
 import { useState } from 'react'
 import FormMessage from '~/components/FormMessage'
+import { useEffect } from 'react'
 
 const Title = ({ children }) => (
   <h2 className="font-medium text-13px mb-10">{children}</h2>
 )
 
-const FieldWrap = ({ children }) => <div>{children}</div>
+const FieldWrap = ({ children, className = '' }) => (
+  <div className={className}>{children}</div>
+)
 
 interface IFormInput {
   name: String
@@ -19,7 +22,7 @@ interface IFormInput {
   message: string
 }
 
-const CompareForm = () => {
+const CompareForm = ({ className = '' }) => {
   const router = useRouter()
   const shared = useAppContext()
 
@@ -31,16 +34,19 @@ const CompareForm = () => {
 
   const [sending, setSending] = useState(false)
   const [msgStatus, setMsgStatus] = useState(0)
+  const [msg, setMsg] = useState('')
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm()
 
   const onSubmit = async (data: IFormInput) => {
-    const items = shared.compare.map(o => o.name)
+    const items = shared.compare.map(o => `${o.name} (${o.code})`)
     const _data = { ...data, products: items, url: router.asPath }
+
     setSending(true)
     setMsgStatus(0)
     const res = await fetch('/api/send-compare-email', {
@@ -51,10 +57,21 @@ const CompareForm = () => {
 
     setSending(false)
     setMsgStatus(res.status)
+
+    if (res.status == 200) {
+      reset()
+    }
   }
 
+  useEffect(() => {
+    const text =
+      'Olá, \npor gentileza, gostaria de solicitar consulta para as seguintes luminárias que estão na página.'
+
+    setMsg(text)
+  }, [])
+
   return (
-    <>
+    <div className={className}>
       <Title>
         <div>
           <Image
@@ -65,7 +82,7 @@ const CompareForm = () => {
             alt="email icon"
           />
         </div>
-        <span>enviar por e-mail</span>
+        <span>enviar pedido de consulta</span>
       </Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         {msgStatus === 200 && (
@@ -108,29 +125,21 @@ const CompareForm = () => {
           />
         </FieldWrap>
         <FieldWrap>
-          <label htmlFor="form-to">*Para:</label>
-          <input
-            id="form-to"
-            name="to"
-            type="email"
-            required
-            defaultValue="bertolucci@bertolucci.com.br"
-          />
-        </FieldWrap>
-        <FieldWrap>
           <label htmlFor="form-message">Mensagem:</label>
           <textarea
             id="form-message"
             name="message"
             placeholder="digite sua mensagem"
-            rows={5}
+            rows={6}
+            defaultValue={msg}
+            {...register('message')}
           ></textarea>
         </FieldWrap>
         <FieldWrap>
           <input name="commit" type="submit" value="Enviar" />
         </FieldWrap>
       </form>
-    </>
+    </div>
   )
 }
 

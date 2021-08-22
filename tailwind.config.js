@@ -383,7 +383,7 @@ module.exports = {
       7: '7',
     },
     gridTemplateAreas: {
-      slim: ['. h1 h2 h3 .', '. main main main .', '. f1 f2 f2 .'],
+      slim: ['. h1 h2 h3 .', '. main main main .', '. l l l .', '. f1 f2 f2 .'],
       wide: ['h1 h2 h3', 'l main r', 'f1 f2 f3'],
     },
     gridTemplateColumns: {
@@ -404,7 +404,7 @@ module.exports = {
       12: 'repeat(12, minmax(0, 1fr))',
     },
     gridTemplateRows: {
-      slim: '7rem 1fr auto',
+      slim: '7rem auto 1fr auto',
       'slim-wide': '9rem 1fr auto',
       1: 'repeat(1, minmax(0, 1fr))',
       2: 'repeat(2, minmax(0, 1fr))',
