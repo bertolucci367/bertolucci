@@ -51,6 +51,7 @@ export const MenuItem = ({
         >
           <ul
             className={`
+              ${isOpenMenu(name) ? '' : 'hidden'}
               w-full bg-white
               pl-8 lg:pl-0 lg:mt-5 lg:pb-5
               flex-col

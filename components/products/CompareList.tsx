@@ -18,7 +18,7 @@ const CompareList = () => {
   return (
     <>
       {shared.compare.length > 0 && (
-        <div>
+        <div className="my-20">
           <Link
             prefetch={false}
             href={{

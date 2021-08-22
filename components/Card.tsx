@@ -41,7 +41,10 @@ const Card = ({
               {children}
             </div>
           </div>
-          <div className="opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <div
+            data-label="card-title"
+            className="lg:opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          >
             <h2 className="text-14px leading-none text-gray-555 font-medium mt-2 px-2 truncate">
               {title}
             </h2>

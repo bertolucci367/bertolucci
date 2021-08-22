@@ -7,8 +7,6 @@ import { add, remove, has } from '~/components/products/compare'
 import React, { useRouter } from 'next/router'
 import { useAppContext } from '~/components/context/AppContext'
 
-const NameStyled = `text-14px leading-none text-gray-555 font-medium mt-8px px-2 truncate`
-const DesignStyled = `text-12px px-2 truncate`
 const CardStyled = `
   relative w-1/2
   mb-8 px-2px
@@ -81,7 +79,7 @@ const Card = ({
             <div
               className={`absolute bottom-1 left-2 z-20 pt-0
               transition-opacity duration-300 group-hover:opacity-100
-              ${has({ product, shared }) ? 'opacity-100' : 'opacity-0'}`}
+              ${has({ product, shared }) ? 'opacity-100' : 'lg:opacity-0'}`}
             >
               <Checkbox
                 name={product.slug}
@@ -92,11 +90,13 @@ const Card = ({
           </div>
           <div
             className={`${
-              nameVisible ? '' : 'opacity-0'
+              nameVisible ? '' : 'lg:opacity-0'
             } transition-opacity duration-300 group-hover:opacity-100`}
           >
-            <h2 className={NameStyled}>{nickname.join(' - ')}</h2>
-            <p className={DesignStyled}>{product?.designer?.name}</p>
+            <h2 className="text-14px leading-none text-gray-555 font-medium mt-8px mb-1 px-2 truncate">
+              {nickname.join(' - ')}
+            </h2>
+            <p className="text-12px px-2 truncate">{product?.designer?.name}</p>
           </div>
         </a>
       </ListLink>
