@@ -61,6 +61,7 @@ input[type='submit'] {
 
 .btn:hover,
 input[type='submit']:hover {
+  @apply no-underline;
   border-color: #212121;
   background-color: #212121;
   color: white;

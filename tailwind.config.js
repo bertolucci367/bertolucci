@@ -384,12 +384,12 @@ module.exports = {
     },
     gridTemplateAreas: {
       slim: ['. h1 h2 h3 .', '. main main main .', '. l l l .', '. f1 f2 f2 .'],
-      wide: ['h1 h2 h3', 'l main r', 'f1 f2 f3'],
+      wide: ['. h1 h2 h3 .', '. l main r .', '. f1 f2 f3 .'],
     },
     gridTemplateColumns: {
       none: 'none',
       slim: '12px auto auto auto 12px',
-      wide: '220px 1fr 220px',
+      wide: '10px 220px 1fr 220px 10px',
       1: 'repeat(1, minmax(0, 1fr))',
       2: 'repeat(2, minmax(0, 1fr))',
       3: 'repeat(3, minmax(0, 1fr))',
