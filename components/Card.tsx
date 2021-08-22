@@ -27,7 +27,7 @@ const Card = ({
     lg:w-1/6 lg:max-w-card lg:min-h-cardD lg:mb-0"
     >
       <ListLink href={path} compare={compare}>
-        <a className="group">
+        <a className="group hover:no-underline">
           <div className={`relative`}>
             <GraphImg
               image={_photo}

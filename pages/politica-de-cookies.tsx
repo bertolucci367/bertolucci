@@ -1,18 +1,25 @@
 import Layout from '~/components/Layout'
 import { GraphQLClient } from 'graphql-request'
-
-import style from './policy.module.css'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 const Policy = ({ data }) => {
+  const [cmsData, setCmsData] = useState('')
+
+  useEffect(() => {
+    setCmsData(data?.page?.html)
+  }, [])
+
   return (
-    <Layout showCookie={false}>
-      <div className={`col-start-2 ${style.tags}`}>
-        <div
+    <Layout>
+      {cmsData && (
+        <main
           dangerouslySetInnerHTML={{
-            __html: data?.page?.html,
+            __html: cmsData,
           }}
-        ></div>
-      </div>
+          className="grid-in-main mb-20"
+        ></main>
+      )}
     </Layout>
   )
 }

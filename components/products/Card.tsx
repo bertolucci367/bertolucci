@@ -68,7 +68,7 @@ const Card = ({
         }
         compare={compare}
       >
-        <a className="group">
+        <a className="group hover:no-underline">
           <div className={`relative`}>
             <GraphImg
               image={photo}
@@ -96,7 +96,9 @@ const Card = ({
             <h2 className="text-14px leading-none text-gray-555 font-medium mt-8px mb-1 px-2 truncate">
               {nickname.join(' - ')}
             </h2>
-            <p className="text-12px px-2 truncate">{product?.designer?.name}</p>
+            <p className="text-12px px-2 truncate font-normal ">
+              {product?.designer?.name}
+            </p>
           </div>
         </a>
       </ListLink>

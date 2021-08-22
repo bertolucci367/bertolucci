@@ -4,8 +4,7 @@ function FAQ() {
   return (
     <Layout title="Tire suas dúvidas">
       <div className="grid-in-main mb-20 ckeditor">
-        <h1 className="sr-only">Tire suas dúvidas</h1>
-        <h2>A BERTOLUCCI</h2>
+        <h1>A BERTOLUCCI</h1>
         <p>
           Fundada em São Paulo no bairro da Lapa há mais de 65 anos, a
           Bertolucci é um verdadeiro laboratório de criação e valorização do

@@ -123,7 +123,7 @@ const MenuLink = ({ isOpen, name, plus, path }) => {
   return (
     <a
       className={`
-      inline-block text-12px hover:cursor-pointer hover:font-medium
+      inline-block text-12px hover:cursor-pointer hover:font-medium hover:no-underline
       lg:mt-4px
       ${isOpen ? 'font-medium' : ''}`}
       onClick={e => handleToggle(e, name, plus)}
