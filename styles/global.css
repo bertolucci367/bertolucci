@@ -71,3 +71,19 @@ input[type='submit']:hover {
   content: '/';
   padding: 0 5px;
 }
+
+.ckeditor ul {
+  @apply list-disc pl-10;
+}
+
+.ckeditor ol {
+  @apply list-decimal pl-10;
+}
+
+.ckeditor ul ul {
+  @apply list-none mb-10;
+}
+
+.ckeditor li {
+  @apply my-2;
+}
