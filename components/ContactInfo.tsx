@@ -13,7 +13,7 @@ const ContactInfo = ({ className }) => {
         <div className="pt-2 -mr-12">
           <a
             href="https://instagram.com/bertolucci.iluminacao/"
-            className="instagram icon ml-5"
+            className="instagram icon inline-block"
             target="_blank"
             rel="noopener"
           >
@@ -27,6 +27,7 @@ const ContactInfo = ({ className }) => {
           </a>
           <a
             href="https://api.whatsapp.com/send?phone=5511945219938"
+            className="whatsapp icon ml-6 inline-block"
             target="_blank"
           >
             <Image
@@ -35,7 +36,6 @@ const ContactInfo = ({ className }) => {
               height="18"
               width="18"
               alt="whatsapp icon"
-              className="whatsapp icon ml-5"
             />
           </a>
         </div>
