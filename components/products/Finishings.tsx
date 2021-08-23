@@ -9,8 +9,6 @@ const Finishings = ({ finishings }) => {
 
   const unique = uniqBy(publishedValid, 'id')
 
-  console.log(unique)
-
   const categories = Array.from(new Set(unique.map(f => f.category.name)))
 
   const [curr, setCurr] = useState(categories[0])
