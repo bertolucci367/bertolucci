@@ -29,15 +29,14 @@ const ContactInfo = ({ className }) => {
             href="https://api.whatsapp.com/send?phone=5511945219938"
             target="_blank"
           >
-            <span className="whatsapp icon ml-5">
-              <Image
-                src="/whatsapp.svg"
-                layout="fixed"
-                height="18"
-                width="18"
-                alt="whatsapp icon"
-              />
-            </span>
+            <Image
+              src="/whatsapp.svg"
+              layout="fixed"
+              height="18"
+              width="18"
+              alt="whatsapp icon"
+              className="whatsapp icon ml-5"
+            />
           </a>
         </div>
         <div>

@@ -43,24 +43,22 @@ function Contact({}) {
 
           <div className="pb-20">
             <h2 className="mt-0 text-h1">Atendimento por whatsapp</h2>
-            <p>
-              <a
-                href="https://api.whatsapp.com/send?phone=5511945219938"
-                target="_blank"
-                className="flex items-center"
-              >
-                55 11 9 4521 9938
-                <span className="whatsapp icon ml-5">
-                  <Image
-                    src="/whatsapp.svg"
-                    layout="fixed"
-                    height="18"
-                    width="18"
-                    alt="whatsapp icon"
-                  />
-                </span>
-              </a>
-            </p>
+            <a
+              href="https://api.whatsapp.com/send?phone=5511945219938"
+              target="_blank"
+              className="flex items-center"
+            >
+              55 11 9 4521 9938
+              <div className="whatsapp icon ml-5">
+                <Image
+                  src="/whatsapp.svg"
+                  layout="fixed"
+                  height="18"
+                  width="18"
+                  alt="whatsapp icon"
+                />
+              </div>
+            </a>
           </div>
         </div>
       </div>

@@ -17,6 +17,7 @@ const ContactForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm()
 
@@ -31,13 +32,19 @@ const ContactForm = () => {
 
     setSending(false)
     setMsgStatus(res.status)
+
+    if (res.status == 200) {
+      reset()
+    }
   }
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         {msgStatus === 200 && (
-          <FormMessage status="success">enviado com sucesso!</FormMessage>
+          <FormMessage status="success">
+            mensagem enviada com sucesso!
+          </FormMessage>
         )}
         {msgStatus === 404 && (
           <FormMessage status="error">
@@ -57,7 +64,13 @@ const ContactForm = () => {
         )}
         <input type="text" className={`hidden`} />
         <label htmlFor="email">*e-mail</label>
-        <input type="email" name="email" id="email" placeholder="" />
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder=""
+          {...register('email', { required: true })}
+        />
         {errors.email && (
           <FormMessage status="error.field">{errors.email.message}</FormMessage>
         )}
@@ -67,9 +80,15 @@ const ContactForm = () => {
           name="phone"
           id="phone"
           placeholder="telefone com DDD"
+          {...register('phone')}
         />
         <label htmlFor="message">mensagem</label>
-        <textarea name="message" id="message" rows={10}></textarea>
+        <textarea
+          name="message"
+          id="message"
+          rows={10}
+          {...register('message')}
+        ></textarea>
 
         <input
           type="submit"
