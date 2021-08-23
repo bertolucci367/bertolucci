@@ -40,7 +40,7 @@ const Product = ({ product }) => {
       </Head>
       <Container>
         <Carousel slides={images} close={path} nav>
-          <div className={`${style.description} text-center`}>
+          <div className={`${style.description} text-center mb-20 lg:mb-0`}>
             <h1 className={`font-medium text-14px pt-3 pb-2.5`}>
               {product.name} - {product.code}
             </h1>
@@ -72,7 +72,9 @@ const Product = ({ product }) => {
                     ))}
                 </ul>
 
-                <Finishings finishings={product.finishings} />
+                <Finishings
+                  finishings={[...line.finishings, ...product.finishings]}
+                />
               </div>
             </div>
           </div>
@@ -110,6 +112,21 @@ const query = `
       }
       lines(first: 1) {
         slug
+        finishings {
+          id
+          name
+          stage
+          category {
+            name
+          }
+          thumb {
+            url
+            alt
+            handle
+            width
+            height
+          }
+        }
       }
       lampTypes {
         id
@@ -124,6 +141,7 @@ const query = `
         }
         thumb {
           url
+          alt
           handle
           width
           height

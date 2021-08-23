@@ -1,18 +1,26 @@
 import GraphImg from 'graphcms-image'
 import { useState, useEffect } from 'react'
+import uniqBy from 'lodash/uniqBy'
 
 const Finishings = ({ finishings }) => {
   const publishedValid = finishings
     .filter(f => f.stage === 'PUBLISHED')
     .filter(f => f.thumb != null)
-  const categories = Array.from(
-    new Set(publishedValid.map(f => f.category.name)),
-  )
+
+  const unique = uniqBy(publishedValid, 'id')
+
+  console.log(unique)
+
+  const categories = Array.from(new Set(unique.map(f => f.category.name)))
+
   const [curr, setCurr] = useState(categories[0])
   const [thumbs, setThumbs] = useState([])
 
-  const getFinishings = () =>
-    publishedValid.filter(f => f.category.name === curr)
+  const getAlt = f => {
+    return f.alt || f.name
+  }
+
+  const getFinishings = () => unique.filter(f => f.category.name === curr)
 
   useEffect(() => {
     const _thumbs = getFinishings()
@@ -43,7 +51,12 @@ const Finishings = ({ finishings }) => {
       <ul className={`grid grid-cols-3 gap-4 lg:hidden`}>
         {thumbs.map(f => (
           <li key={f.id} className={`flex flex-col bg-gray-100 w-full`}>
-            <GraphImg image={f.thumb} fit="crop" className={`w-full h-32`} />
+            <GraphImg
+              image={f.thumb}
+              fit="crop"
+              className={`w-full h-32`}
+              alt={getAlt(f)}
+            />
             <label htmlFor={f.id} className={`p-2 block font-medium`}>
               {f.name}
             </label>
@@ -56,10 +69,20 @@ const Finishings = ({ finishings }) => {
             className="group flex flex-col w-full lg:w-10 lg:h-10 m-2px"
             key={f.id}
           >
-            <GraphImg image={f.thumb} fit="crop" className={`w-10 h-10`} />
+            <GraphImg
+              image={f.thumb}
+              fit="crop"
+              className={`w-10 h-10`}
+              alt={getAlt(f)}
+            />
 
             <div className="bg-gray-100 hidden group-hover:block absolute z-10 top-0 left-0 transform -translate-y-full -mt-4 shadow-2xl">
-              <GraphImg image={f.thumb} fit="crop" className={`w-96 h-48`} />
+              <GraphImg
+                image={f.thumb}
+                fit="crop"
+                className={`w-96 h-48`}
+                alt={getAlt(f)}
+              />
               <label htmlFor={f.id} className={`p-4 block`}>
                 {f.name}
               </label>
