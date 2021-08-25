@@ -9,11 +9,25 @@ const ContactInfo = ({ className }) => {
 
   return (
     <div className={`flex justify-end ${className}`}>
-      <div className="flex text-right relative">
-        <div className="pt-2 -mr-12">
+      <div className="flex flex-wrap pb-6 justify-end text-right relative lg:flex-nowrap lg:pb-0">
+        <div className="py-2 lg:flex lg:-mr-10 ">
+          <a
+            href="https://br.pinterest.com/bertolucci1956/"
+            className="icon inline-block"
+            target="_blank"
+            rel="noopener"
+          >
+            <Image
+              src="/pinterest.svg"
+              layout="fixed"
+              height="18"
+              width="18"
+              alt="instagram icon"
+            />
+          </a>
           <a
             href="https://instagram.com/bertolucci.iluminacao/"
-            className="instagram icon inline-block"
+            className="instagram icon inline-block ml-6"
             target="_blank"
             rel="noopener"
           >
