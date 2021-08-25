@@ -40,7 +40,7 @@ const Newsletter = () => {
         </h3>
 
         {showMsg && (
-          <h4 className="bg-green-700 text-white p-4 m-10 mb-0 text-18px ">
+          <h4 className="bg-gray-100 text-black p-4 m-10 mb-0 text-18px">
             <span className="font-medium">TUDO CERTO!</span>
             <br />
             Em breve te enviaremos novidades.

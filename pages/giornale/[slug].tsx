@@ -10,7 +10,7 @@ const Blog = ({ data }) => {
 
   return (
     <Layout title={data.title}>
-      <div className={`col-start-2`}>
+      <main className={`grid-in-main`}>
         <Carousel slides={images} nav close={'/giornale'}>
           <div>
             <h1
@@ -25,7 +25,7 @@ const Blog = ({ data }) => {
             ></div>
           </div>
         </Carousel>
-      </div>
+      </main>
     </Layout>
   )
 }

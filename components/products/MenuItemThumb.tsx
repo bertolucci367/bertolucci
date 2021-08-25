@@ -7,11 +7,11 @@ interface ThumbProps {
 const MenuItemThumb = ({ slug }: ThumbProps) => {
   const posBySlug = {
     abajur: 0,
-    embutido: 0,
-    arandela: 2,
-    coluna: 4,
-    pendente: 6,
-    plafom: 8,
+    embutido: 2,
+    arandela: 4,
+    coluna: 6,
+    pendente: 8,
+    plafom: 10,
   }
 
   if (!Object.keys(posBySlug).includes(slug)) {
@@ -20,7 +20,11 @@ const MenuItemThumb = ({ slug }: ThumbProps) => {
 
   return (
     <div className={`overflow-hidden h-[32px]`}>
-      <div className={`mr-4px -mt-[${32 * posBySlug[slug]}px]`}>
+      <div
+        data-index={posBySlug[slug]}
+        className={`mr-4px`}
+        style={{ marginTop: `-${32 * posBySlug[slug]}px` }}
+      >
         <Image src="/pic_thumbs.png" layout="fixed" height={448} width={32} />
       </div>
     </div>
