@@ -7,9 +7,9 @@ interface ThumbProps {
 const MenuItemThumb = ({ slug }: ThumbProps) => {
   const posBySlug = {
     abajur: 0,
-    embutido: 2,
-    arandela: 4,
-    coluna: 6,
+    arandela: 2,
+    coluna: 4,
+    embutido: 6,
     pendente: 8,
     plafom: 10,
   }
