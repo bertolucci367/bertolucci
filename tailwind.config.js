@@ -79,6 +79,7 @@ module.exports = {
       ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
       pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       bounce: 'bounce 1s infinite',
+      'slide-footer': 'slide-footer 1s linear',
     },
     backdropBlur: theme => theme('blur'),
     backdropBrightness: theme => theme('brightness'),
@@ -493,6 +494,14 @@ module.exports = {
         '50%': {
           transform: 'none',
           animationTimingFunction: 'cubic-bezier(0,0,0.2,1)',
+        },
+      },
+      'slide-footer': {
+        from: {
+          bottom: '-300px',
+        },
+        to: {
+          bottom: 0,
         },
       },
     },

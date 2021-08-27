@@ -1,5 +1,5 @@
 .animate {
-  @keyframes example {
+  @keyframes slide {
     from {
       bottom: -300px;
     }
@@ -8,6 +8,6 @@
     }
   }
 
-  animation-name: example;
+  animation-name: slide;
   animation-duration: 1s;
 }
