@@ -81,11 +81,7 @@ const Slider = ({ slides }) => {
     <section className="slider">
       {slides.map((s, i) => (
         <div className={i === curr ? 'slide active' : 'slide'} key={i}>
-          <div
-            className={`absolute pointer-events-none h-full w-full overflow-hidden`}
-          >
-            {s}
-          </div>
+          <div className={`absolute h-full w-full overflow-hidden`}>{s}</div>
         </div>
       ))}
     </section>
