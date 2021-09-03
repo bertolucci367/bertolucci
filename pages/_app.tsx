@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { AppWrapper } from '~/components/context/AppContext'
+import { Provider } from 'next-auth/client'
 
 import '../styles/fonts.css'
 import '../styles/tailwind.base.css'
@@ -27,7 +28,9 @@ function App({ Component, pageProps }) {
           crossOrigin="anonymous"
         />
       </Head>
-      <Component {...pageProps} />
+      <Provider session={pageProps.session}>
+        <Component {...pageProps} />
+      </Provider>
     </AppWrapper>
   )
 }
