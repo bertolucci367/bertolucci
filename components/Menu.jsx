@@ -11,6 +11,7 @@ const menu = [
   { name: 'Giornale', url: '/giornale', hasSubmenu: false },
   { name: 'Persona', url: '/persona', hasSubmenu: false },
   { name: 'Contato', url: '/contato', hasSubmenu: false },
+  { name: 'Área do cliente', url: '/dashboard', hasSubmenu: false },
 ]
 
 const Desktop = () => {
