@@ -9,7 +9,6 @@ class BertolucciDocument extends Document {
   render() {
     return (
       <Html lang="pt-br">
-        <Head />
         <Head>
           <script
             type="text/javascript"

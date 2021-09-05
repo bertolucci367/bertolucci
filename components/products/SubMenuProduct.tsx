@@ -38,6 +38,21 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
     clearTimeout(timer)
   }
 
+  const handleSearch = event => {
+    if (event.key !== 'Enter') {
+      return
+    }
+
+    const target = event.target as HTMLTextAreaElement
+
+    if (target.value.length > 0) {
+      router.push(`/produtos/busca/${target.value}`)
+      return
+    }
+
+    router.push(`/produtos`)
+  }
+
   useEffect(() => {
     if (!searchRef.current) return
     searchRef.current.value = search
@@ -82,20 +97,7 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
               type="search"
               style={{ lineHeight: '19px' }}
               className={`border border-gray-500 ml-2 outline-none mt-1 py-0.5 px-2 inline-block w-full lg:w-auto`}
-              onKeyPress={event => {
-                if (event.key !== 'Enter') {
-                  return
-                }
-
-                const target = event.target as HTMLTextAreaElement
-
-                if (target.value.length > 0) {
-                  router.push(`/produtos/busca/${target.value}`)
-                  return
-                }
-
-                router.push(`/produtos`)
-              }}
+              onKeyPress={event => handleSearch(event)}
             />
           </div>
         </MenuItem>
