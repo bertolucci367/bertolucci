@@ -11,14 +11,14 @@ const menu = [
   { name: 'Giornale', url: '/giornale', hasSubmenu: false },
   { name: 'Persona', url: '/persona', hasSubmenu: false },
   { name: 'Contato', url: '/contato', hasSubmenu: false },
-  { name: 'Área do cliente', url: '/dashboard', hasSubmenu: false },
+  { name: 'Área do cliente', url: '/dashboard', hasSubmenu: true },
 ]
 
 const Desktop = () => {
   const router = useRouter()
   return (
     <>
-      <nav className={`text-18px leading-none mr-8 lg:mr-0`}>
+      <nav className={`text-18px leading-none mr-8 lg:mr-0 truncate`}>
         <ul className={`lg:flex lg:justify-center`}>
           {menu.map((m, i) => (
             <li key={i}>

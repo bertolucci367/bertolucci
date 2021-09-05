@@ -2,6 +2,8 @@ import Layout from '~/components/Layout'
 import { signOut, useSession, getSession } from 'next-auth/client'
 import { useEffect } from 'react'
 import router from 'next/router'
+import Link from 'next/link'
+import { links } from '~/components/SubMenuDashboard'
 
 const Dashboard = () => {
   const [session, loading] = useSession()
@@ -15,22 +17,16 @@ const Dashboard = () => {
   if (session) {
     return (
       <Layout title="dashboard">
-        <main className="grid-in-main">
-          <h1>Dashboard</h1>
-          Signed in as{' '}
-          <h1>
-            {session.user.email} ({session.user.name})
-          </h1>
-          <br />
-          <button
-            onClick={() =>
-              signOut({
-                callbackUrl: `${window.location.origin}`,
-              })
-            }
-          >
-            Sign out
-          </button>
+        <main className="grid-in-l lg:grid-in-main">
+          <div className="flex justify-center items-center h-full flex-col flex-wrap lg:flex-row">
+            {links.map(l => (
+              <Link key={l.path} href={l.path}>
+                <a className="btn m-10">
+                  <span className="text-14px ">{l.label}</span>
+                </a>
+              </Link>
+            ))}
+          </div>
         </main>
       </Layout>
     )

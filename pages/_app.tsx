@@ -3,8 +3,8 @@ import { AppWrapper } from '~/components/context/AppContext'
 import { Provider } from 'next-auth/client'
 
 import '../styles/fonts.css'
-import '../styles/tailwind.base.css'
 import '../styles/global.css'
+import '../styles/tailwind.base.css'
 
 function App({ Component, pageProps }) {
   return (
