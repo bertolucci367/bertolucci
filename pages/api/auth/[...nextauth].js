@@ -46,36 +46,16 @@ export default NextAuth({
   jwt: {
     // secret: jwtSecret,
     encryption: true,
-    signingKey:
-      '{"kty":"oct","kid":"iwJulRPg5rpCq1tQ64upB8TBj-OXcdYCcUaSBnJHpUg","alg":"HS512","k":"9qGZqJBcO_q9v6mT-GjFGMAqfp5ADhXHqer6Uk7xNZk"}',
-    encryptionKey:
-      '{"kty":"oct","kid":"SDPMtjbXIjO1WBbAKua1RRLUGlDGVYcGdYS_fOc7DiA","alg":"A256GCM","k":"suELCtEtD2v1BtMaQbh6pq54GZbiwTSIR2SkY0WNkWg"}',
+    signingKey: process.env.NEXTAUTH_SIGNIN_KEY,
+    encryptionKey: process.env.NEXTAUTH_ENCRYPTION_KEY,
   },
 
-  // callbacks: {
-  //   redirect: async (url, baseUrl) => {
-  //     // const res = url.startsWith(baseUrl) ? url : baseUrl
-  //     // console.log(res)
-
-  //     // return Promise.resolve(res)
-  //     return url.startsWith(baseUrl) ? url : baseUrl
-  //   },
-  // },
-
-  // callbacks: {
-  //   async signIn(user, account, profile) {
-  //     return true
-  //   },
-  //   async redirect(url, baseUrl) {
-  //     return baseUrl
-  //   },
-  //   async session(session, user) {
-  //     return session
-  //   },
-  //   async jwt(token, user, account, profile, isNewUser) {
-  //     return token
-  //   },
-  // },
+  callbacks: {
+    async session(session, user) {
+      session.user_id = user.sub
+      return session
+    },
+  },
 })
 
 const getCustomer = async mail => {

@@ -120,18 +120,32 @@ const MenuLink = ({ isOpen, name, plus, path }) => {
     shared.addData({ menuOpen: name, menuIsOpen: _isOpen })
   }
 
+  const _class =
+    'inline-block text-12px hover:cursor-pointer hover:font-medium lg:mt-4px'
+
+  //
   return (
-    <a
-      className={`
-      inline-block text-12px hover:cursor-pointer hover:font-medium hover:no-underline
-      lg:mt-4px
-      ${isOpen ? 'font-medium' : ''}`}
-      onClick={e => handleToggle(e, name, plus)}
-      href={path}
-    >
-      {name}
-      {plus && isOpen && <span>-</span>}
-      {plus && !isOpen && <span>+</span>}
-    </a>
+    <>
+      {plus && (
+        <button
+          className={`${_class} ${isOpen ? 'font-medium' : ''}`}
+          onClick={e => handleToggle(e, name, plus)}
+        >
+          {name}
+          {isOpen && <span>-</span>}
+          {!isOpen && <span>+</span>}
+        </button>
+      )}
+
+      {!plus && (
+        <a
+          className={_class}
+          onClick={e => handleToggle(e, name, plus)}
+          href={path}
+        >
+          {name}
+        </a>
+      )}
+    </>
   )
 }

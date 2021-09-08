@@ -1,5 +1,5 @@
 import Layout from '~/components/Layout'
-import { signOut, useSession, getSession } from 'next-auth/client'
+import { useSession, getSession } from 'next-auth/client'
 import { useEffect } from 'react'
 import router from 'next/router'
 import Link from 'next/link'
@@ -11,6 +11,7 @@ const Dashboard = () => {
   if (typeof window !== 'undefined' && loading) return null
 
   useEffect(() => {
+    console.log(session)
     if (!session) router.push('/login')
   }, [session])
 

@@ -7,7 +7,7 @@ const SubMenu = ({ active }) => {
     <div className={`flex max-h-full overflow-y-auto w-full lg:justify-center`}>
       {/^\/produtos/.test(active) && <SubMenuProduct />}
       {/^\/fabrica/.test(active) && <SubMenuAbout />}
-      {/^\/dashboard/.test(active) && <SubMenuDashboard />}
+      {/^\/area-do-cliente/.test(active) && <SubMenuDashboard />}
     </div>
   )
 }

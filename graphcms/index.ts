@@ -174,3 +174,55 @@ query BlogoPage {
   }
 }
 `
+
+export const ProfileQuery = `
+query Profile($id: ID!) {
+  values: customer (where: { id: $id }, stage: PUBLISHED) {
+    id
+		mail
+		name
+		newsletter
+		phone
+    consultor
+    company
+  }
+}
+`
+
+export const CreateCustomerQuery = `
+mutation createCustomer($input: CustomerCreateInput!) {
+  createCustomer(data: $input) {
+    id
+  }
+}
+`
+
+export const UpdateCustomerQuery = `
+mutation($id: ID!, $input: CustomerUpdateInput!) {
+  updateCustomer(
+    where: { id: $id },
+    data: $input
+  ) {
+    id
+  }
+}
+`
+
+export const PublishCustomerQuery = `
+mutation publishCustomer($id: ID!) {
+  publishCustomer(where: { id: $id }, to: PUBLISHED) {
+    id
+  }
+}
+`
+
+export const CustomerByEmailQuery = `
+query Customer($mail: String!) {
+  values: customer (where: { mail: $mail }, stage: PUBLISHED) {
+    mail
+    password
+    name
+    id
+  }
+}
+`

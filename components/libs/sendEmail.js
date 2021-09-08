@@ -84,3 +84,34 @@ export const sendCompare = async ({ name, email, message, products, url }) => {
     }),
   })
 }
+
+export const sendEmailToBertolucci = async ({ subject, message }) => {
+  await fetch(SENDGRID_API, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${SENDGRID_API_KEY}`,
+    },
+    body: JSON.stringify({
+      personalizations: [
+        {
+          to: [
+            {
+              email: MAIL_TO,
+            },
+          ],
+          subject,
+        },
+      ],
+      from: {
+        email: MAIL_FROM,
+      },
+      content: [
+        {
+          type: 'text/html',
+          value: message,
+        },
+      ],
+    }),
+  })
+}

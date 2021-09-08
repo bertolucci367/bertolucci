@@ -1,7 +1,7 @@
 import Layout from '~/components/Layout'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { getCsrfToken } from 'next-auth/client'
 import { signIn } from 'next-auth/client'
@@ -30,12 +30,12 @@ const Login = ({ csrfToken }) => {
     const res = await signIn('credentials', {
       email,
       password,
-      callbackUrl: `${window.location.origin}/dashboard`,
+      callbackUrl: `${window.location.origin}/area-do-cliente`,
       redirect: false,
     })
 
     if (res?.error) console.log('res.error', res.error) // handleError(res.error)
-    if (res.url) router.push('/dashboard')
+    if (res.url) router.push('/area-do-cliente')
   }
 
   useEffect(() => {

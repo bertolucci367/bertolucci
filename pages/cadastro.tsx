@@ -1,37 +1,9 @@
 import Layout from '~/components/Layout'
 import Image from 'next/image'
-import { useForm } from 'react-hook-form'
 import React, { useState } from 'react'
-import Checkbox from '~/components/products/Checkbox'
-
-interface IFormInput {
-  name: String
-  email: string
-  phone: string
-  company: string
-  newsletter: boolean
-  nickname: string
-}
+import FormCustomer from '~/components/FormCustomer'
 
 const Signup = () => {
-  const [news, setNews] = useState(false)
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    reset,
-    formState: { errors },
-  } = useForm()
-
-  const onSubmit = data => {
-    console.log(data)
-  }
-
-  const handleCheckbox = ({ isChecked }: any) => {
-    setNews(isChecked)
-    setValue('newsletter', isChecked)
-  }
-
   return (
     <Layout title="cadastro">
       <main className="grid-in-main relative">
@@ -50,56 +22,17 @@ const Signup = () => {
             <div>
               <h1>faça seu cadastro</h1>
 
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="name">*nome</label>
-                <input
-                  id="name"
-                  placeholder="nome"
-                  aria-invalid={errors.mail ? 'true' : 'false'}
-                  {...register('name', { required: true })}
-                />
-
-                <label htmlFor="mail">*e-mail</label>
-                <input
-                  id="mail"
-                  placeholder="e-mail"
-                  aria-invalid={errors.name ? 'true' : 'false'}
-                  {...register('mail', { required: true })}
-                />
-
-                <label htmlFor="phone">*telefone</label>
-                <input
-                  id="phone"
-                  placeholder="telefone"
-                  aria-invalid={errors.phone ? 'true' : 'false'}
-                  {...register('phone', { required: true })}
-                />
-
-                <label htmlFor="company">*empresa</label>
-                <input
-                  id="company"
-                  placeholder="empresa"
-                  aria-invalid={errors.company ? 'true' : 'false'}
-                  {...register('company', { required: true })}
-                />
-
-                <label htmlFor="newsletter" className="flex items-center mt-5">
-                  <Checkbox
-                    name="newsletter"
-                    fnChange={v => handleCheckbox({ isChecked: v })}
-                    checked={news}
-                  >
-                    {' '}
-                    quero receber novidades da bertolucci{' '}
-                  </Checkbox>
-                </label>
-
-                <input
-                  type="submit"
-                  value="solicitar login"
-                  className="btn mt-10"
-                />
-              </form>
+              <FormCustomer
+                type="create"
+                defaultValues={{
+                  name: '',
+                  phone: '',
+                  mail: '',
+                  company: '',
+                  consultor: '',
+                  newsletter: false,
+                }}
+              />
             </div>
           </div>
         </div>
