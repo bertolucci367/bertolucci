@@ -17,9 +17,10 @@ type IFormInput = {
 interface FormProps {
   type: 'update' | 'create'
   defaultValues?: IFormInput
+  btnLabel: string
 }
 
-const FormCustomer = ({ type, defaultValues }: FormProps) => {
+const FormCustomer = ({ type, defaultValues, btnLabel }: FormProps) => {
   const { consultor, newsletter } = defaultValues
   const [news, setNews] = useState(newsletter)
   const [sending, setSending] = useState(false)
@@ -40,25 +41,30 @@ const FormCustomer = ({ type, defaultValues }: FormProps) => {
       delete dataForm.mail
 
       const { id } = dataForm
-      await axios.post('/api/customer/update', dataForm)
-      await axios.post('/api/customer/publish', { id })
-      setMsgStatus(200)
+      try {
+        await axios.post('/api/customer/update', dataForm)
+        await axios.post('/api/customer/publish', { id })
+        setMsgStatus(200)
+      } catch {}
     },
 
     create: async dataForm => {
-      await axios.post('/api/customer/create', dataForm)
-      setMsgStatus(200)
-      reset()
+      try {
+        await axios.post('/api/customer/create', dataForm)
+        setMsgStatus(200)
+        reset()
+        setNews(false)
+      } catch {}
     },
   }
 
   const onSubmit = async data => {
     setSending(true)
+
     try {
       const submitType = await updateSubmit[type]
-      submitType(data)
+      await submitType(data)
     } catch (err) {
-      console.log(err)
     } finally {
       setSending(false)
     }
@@ -71,7 +77,7 @@ const FormCustomer = ({ type, defaultValues }: FormProps) => {
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
-      {msgStatus == 200 && (
+      {!sending && msgStatus == 200 && (
         <FormMessage status="success">
           {type == 'update' && 'dados alterada com sucesso!'}
           {type == 'create' && (
@@ -138,11 +144,11 @@ const FormCustomer = ({ type, defaultValues }: FormProps) => {
         </Checkbox>
       </label>
 
-      <div>
+      <div className="text-center">
         <input
           type="submit"
-          value="salvar conta"
-          className="btn mt-10"
+          value={btnLabel}
+          className="btn"
           disabled={sending}
         />
       </div>

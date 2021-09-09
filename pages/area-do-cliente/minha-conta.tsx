@@ -24,7 +24,11 @@ const Profile = ({ values }) => {
 
           <div className="col-start-2 col-span-1 mb-20 flex flex-col ">
             <h1 className="w-full">minha conta</h1>
-            <FormCustomer type="update" defaultValues={values} />
+            <FormCustomer
+              type="update"
+              btnLabel="salvar dados"
+              defaultValues={values}
+            />
           </div>
 
           <div className="col-start-3">

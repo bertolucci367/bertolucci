@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { getCsrfToken } from 'next-auth/client'
 import { signIn } from 'next-auth/client'
 import { useRouter } from 'next/router'
+import LayoutLogin from '~/components/LayoutLogin'
 
 interface IFormInput {
   email: string
@@ -49,29 +50,20 @@ const Login = ({ csrfToken }) => {
 
   return (
     <Layout title="entrar">
-      <main className="grid-in-main relative">
-        <div className="grid lg:grid-cols-4 h-full">
-          <div className="col-start-2 col-span-1 flex items-center justify-center px-4 mb-10 lg:mb-0">
-            <Image
-              src="/logo-circle.jpg"
-              layout="fixed"
-              height="200"
-              width="200"
-              alt="logo bertolucci"
-            />
-          </div>
+      <main className="grid-in-l lg:grid-in-main">
+        <LayoutLogin>
+          <div>
+            <h1>entrar</h1>
 
-          <div className="col-start-3 col-span-1 mb-20 flex items-center">
-            <div>
-              <h1>entrar</h1>
+            <form className="form" onSubmit={handleSubmit(onSubmit)}>
+              <input
+                name="csrfToken"
+                type="hidden"
+                defaultValue={csrfToken}
+                {...register('csrfToken')}
+              />
 
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <input
-                  name="csrfToken"
-                  type="hidden"
-                  defaultValue={csrfToken}
-                  {...register('csrfToken')}
-                />
+              <div>
                 <label htmlFor="email">*e-mail</label>
                 <input
                   id="email"
@@ -80,7 +72,9 @@ const Login = ({ csrfToken }) => {
                   aria-invalid={errors.name ? 'true' : 'false'}
                   {...register('email', { required: true })}
                 />
+              </div>
 
+              <div>
                 <label htmlFor="password">*senha</label>
                 <input
                   id="password"
@@ -89,16 +83,16 @@ const Login = ({ csrfToken }) => {
                   aria-invalid={errors.password ? 'true' : 'false'}
                   {...register('password', { required: true })}
                 />
+              </div>
 
-                <input type="submit" value="entrar" className="btn mt-10" />
-              </form>
+              <input type="submit" value="entrar" className="btn" />
+            </form>
 
-              <Link href="/cadastro">
-                <a className="text-h2 my-10 inline-block">quero me cadastrar</a>
-              </Link>
-            </div>
+            <Link href="/cadastro">
+              <a className="text-h2 my-10 inline-block">quero me cadastrar</a>
+            </Link>
           </div>
-        </div>
+        </LayoutLogin>
       </main>
     </Layout>
   )
