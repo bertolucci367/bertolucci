@@ -11,7 +11,11 @@ const menu = [
   { name: 'Giornale', url: '/giornale', hasSubmenu: false },
   { name: 'Persona', url: '/persona', hasSubmenu: false },
   { name: 'Contato', url: '/contato', hasSubmenu: false },
+<<<<<<< HEAD
   { name: 'Área do cliente', url: '/area-do-cliente', hasSubmenu: true },
+=======
+  { name: 'Área do cliente', url: '/dashboard', hasSubmenu: false },
+>>>>>>> d4bcd0854913f50193dcefce7ba5b2a2f65a0d23
 ]
 
 const Desktop = () => {

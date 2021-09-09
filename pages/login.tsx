@@ -1,12 +1,19 @@
 import Layout from '~/components/Layout'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
+<<<<<<< HEAD
 import React, { useEffect } from 'react'
+=======
+import React, { useState, useEffect } from 'react'
+>>>>>>> d4bcd0854913f50193dcefce7ba5b2a2f65a0d23
 import Link from 'next/link'
 import { getCsrfToken } from 'next-auth/client'
 import { signIn } from 'next-auth/client'
 import { useRouter } from 'next/router'
+<<<<<<< HEAD
 import LayoutLogin from '~/components/LayoutLogin'
+=======
+>>>>>>> d4bcd0854913f50193dcefce7ba5b2a2f65a0d23
 
 interface IFormInput {
   email: string
