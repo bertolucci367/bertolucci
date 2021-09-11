@@ -44,11 +44,11 @@
 
   .btn,
   input[type='submit'] {
-    @apply inline-block;
+    @apply inline-block relative;
+    @apply text-black;
     border-color: #ccc;
     background-color: #efefef;
     border-radius: 6px;
-    color: #212121;
     padding: 0.8rem 3.6rem;
     width: auto;
     transition: background-color 0.3s, color 0.3s;
@@ -71,6 +71,7 @@
     text-align: left;
   }
 
+  .btn:disabled,
   input:disabled {
     @apply bg-gray-100 border-gray-100;
   }

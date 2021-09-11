@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import FormMessage from '~/components/FormMessage'
+import SubmitButton from './SubmitButton'
 
 import Checkbox from '~/components/products/Checkbox'
 
@@ -140,17 +141,12 @@ const FormCustomer = ({ type, defaultValues, btnLabel }: FormProps) => {
           checked={news}
         >
           {' '}
-          quero receber novidades da bertolucci{' '}
+          quero receber novidades da bertolucci
         </Checkbox>
       </label>
 
       <div className="text-center">
-        <input
-          type="submit"
-          value={btnLabel}
-          className="btn"
-          disabled={sending}
-        />
+        <SubmitButton sending={sending} btnLabel={btnLabel} />
       </div>
     </form>
   )

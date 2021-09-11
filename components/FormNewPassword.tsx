@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form'
 import { useSession } from 'next-auth/client'
+import { useState } from 'react'
 import axios from 'axios'
 import FormMessage from '~/components/FormMessage'
-import { useState } from 'react'
+import SubmitButton from './SubmitButton'
 
 const FormNewPassword = () => {
   const [session, status] = useSession()
@@ -26,6 +27,7 @@ const FormNewPassword = () => {
         type: 'manual',
         message: 'a nova senha e a de confirmação devem ser iguais.',
       })
+      setSending(false)
       return
     }
 
@@ -60,6 +62,7 @@ const FormNewPassword = () => {
         <input
           id="current"
           placeholder="senha atual"
+          type="password"
           aria-invalid={errors.current ? 'true' : 'false'}
           {...register('current', { required: true })}
         />
@@ -71,6 +74,7 @@ const FormNewPassword = () => {
         <label htmlFor="password">nova senha</label>
         <input
           id="password"
+          type="password"
           placeholder="nova senha"
           aria-invalid={errors.password ? 'true' : 'false'}
           {...register('password', { required: true })}
@@ -81,6 +85,7 @@ const FormNewPassword = () => {
         <label htmlFor="confirm">confirme a nova senha</label>
         <input
           id="confirm"
+          type="password"
           placeholder="confirme a nova senha"
           aria-invalid={errors.confirm ? 'true' : 'false'}
           {...register('confirm', { required: true })}
@@ -88,13 +93,9 @@ const FormNewPassword = () => {
         {errors.confirm && (
           <p className="text-help error">{errors.confirm.message}</p>
         )}
-
-        <input
-          type="submit"
-          value={sending ? 'enviando...' : 'salvar senha'}
-          className="btn mt-10"
-          disabled={sending}
-        />
+      </div>
+      <div>
+        <SubmitButton sending={sending} btnLabel="salvar senha" />
       </div>
     </form>
   )

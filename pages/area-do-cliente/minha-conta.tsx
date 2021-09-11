@@ -9,7 +9,7 @@ import FormNewPassword from '~/components/FormNewPassword'
 
 const Profile = ({ values }) => {
   const { consultor } = values
-  const [showChangePwd, setShowChangePwd] = useState(true)
+  const [showChangePwd, setShowChangePwd] = useState(false)
 
   return (
     <Layout title="minha conta">
@@ -29,18 +29,20 @@ const Profile = ({ values }) => {
               btnLabel="salvar dados"
               defaultValues={values}
             />
+
+            <div className="mt-20">
+              <button
+                onClick={() => setShowChangePwd(!showChangePwd)}
+                className="text-h3 mb-4 font-medium text-left hover:underline"
+              >
+                alterar senha
+              </button>
+
+              {showChangePwd && <FormNewPassword />}
+            </div>
           </div>
 
-          <div className="col-start-3">
-            <button
-              onClick={() => setShowChangePwd(!showChangePwd)}
-              className="text-h2 mb-4 font-medium text-left hover:underline"
-            >
-              alterar senha
-            </button>
-
-            {showChangePwd && <FormNewPassword />}
-          </div>
+          <div className="col-start-3"></div>
         </div>
       </main>
     </Layout>

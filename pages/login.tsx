@@ -1,19 +1,13 @@
 import Layout from '~/components/Layout'
-import Image from 'next/image'
 import { useForm } from 'react-hook-form'
-<<<<<<< HEAD
-import React, { useEffect } from 'react'
-=======
-import React, { useState, useEffect } from 'react'
->>>>>>> d4bcd0854913f50193dcefce7ba5b2a2f65a0d23
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { getCsrfToken } from 'next-auth/client'
 import { signIn } from 'next-auth/client'
 import { useRouter } from 'next/router'
-<<<<<<< HEAD
 import LayoutLogin from '~/components/LayoutLogin'
-=======
->>>>>>> d4bcd0854913f50193dcefce7ba5b2a2f65a0d23
+import SubmitButton from '~/components/SubmitButton'
+import FormMessage from '~/components/FormMessage'
 
 interface IFormInput {
   email: string
@@ -23,16 +17,18 @@ interface IFormInput {
 }
 
 const Login = ({ csrfToken }) => {
+  const [sending, setSending] = useState(false)
+  const [showError, setShowError] = useState(false)
   const router = useRouter()
   const {
     register,
     handleSubmit,
-    setValue,
-    reset,
     formState: { errors },
   } = useForm()
 
   const onSubmit = async data => {
+    setSending(true)
+
     const { email, password } = data
 
     const res = await signIn('credentials', {
@@ -42,7 +38,10 @@ const Login = ({ csrfToken }) => {
       redirect: false,
     })
 
-    if (res?.error) console.log('res.error', res.error) // handleError(res.error)
+    if (res?.error) {
+      setSending(false)
+      setShowError(true)
+    }
     if (res.url) router.push('/area-do-cliente')
   }
 
@@ -61,6 +60,12 @@ const Login = ({ csrfToken }) => {
         <LayoutLogin>
           <div>
             <h1>entrar</h1>
+
+            {!sending && showError && (
+              <FormMessage status="error">
+                E-mail ou senha inválido.
+              </FormMessage>
+            )}
 
             <form className="form" onSubmit={handleSubmit(onSubmit)}>
               <input
@@ -92,7 +97,9 @@ const Login = ({ csrfToken }) => {
                 />
               </div>
 
-              <input type="submit" value="entrar" className="btn" />
+              <div>
+                <SubmitButton btnLabel="entrar" sending={sending} />
+              </div>
             </form>
 
             <Link href="/cadastro">
