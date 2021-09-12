@@ -63,7 +63,7 @@ const Mobile = () => {
             <li key={i}>
               <a
                 data-label="menu link"
-                className={`block font-bold mx-4 pb-1 my-10 lg:my-3 hover:cursor-pointer border-b border-solid`}
+                className={`block font-medium tracking-tight mx-4 pb-1 my-10 lg:my-3 hover:cursor-pointer border-b border-solid`}
                 style={{
                   borderBottomColor: m.url === current ? 'black' : 'white',
                 }}
