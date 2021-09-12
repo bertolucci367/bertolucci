@@ -25,7 +25,7 @@ const Desktop = () => {
                 href={m.url}
                 activeClassName="border-b border-solid border-black"
               >
-                <a className="block font-telefon font-normal mx-4px pb-1 mb-1 hover:cursor-pointer hover:no-underline">
+                <a className="block font-medium tracking-tight mx-4px pb-1 mb-1 hover:cursor-pointer hover:no-underline">
                   {m.name}
                 </a>
               </ActiveLink>
