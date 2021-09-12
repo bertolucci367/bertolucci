@@ -37,7 +37,7 @@ function Contact({}) {
           <div className="pb-20">
             <p>
               É profissional? Ficaremos felizes em achar uma solução
-              luminotécnica ao seu projeto. Agende uma visita
+              personalizada ao seu projeto. Agende uma visita
             </p>
           </div>
 

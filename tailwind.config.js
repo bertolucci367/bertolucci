@@ -258,6 +258,7 @@ module.exports = {
     },
     fontFamily: {
       futura: ['FuturaStd', 'Helvetica', 'Arial', 'Sans-serif'],
+      telefon: ['Telefon'],
     },
     fontSize: {
       h1: ['1.8rem', { lineHeight: '1.5' }],
