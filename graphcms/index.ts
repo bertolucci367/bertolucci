@@ -226,3 +226,28 @@ query Customer($mail: String!) {
   }
 }
 `
+
+export const CatalogQuery = `
+query Catalogs {
+  values: catalogos(stage: PUBLISHED, orderBy: updatedAt_DESC, first: 1) {
+    id
+    name
+    updatedAt
+    photo {
+      handle
+      height
+      width
+      alt
+      url
+    }
+    file {
+      id
+      handle
+      height
+      width
+      alt
+      url
+    }
+  }
+}
+`
