@@ -115,3 +115,34 @@ export const sendEmailToBertolucci = async ({ subject, message }) => {
     }),
   })
 }
+
+export const sendEmail = async ({ to, subject, message }) => {
+  await fetch(SENDGRID_API, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${SENDGRID_API_KEY}`,
+    },
+    body: JSON.stringify({
+      personalizations: [
+        {
+          to: [
+            {
+              email: to,
+            },
+          ],
+          subject,
+        },
+      ],
+      from: {
+        email: MAIL_FROM,
+      },
+      content: [
+        {
+          type: 'text/html',
+          value: message,
+        },
+      ],
+    }),
+  })
+}

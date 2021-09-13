@@ -251,3 +251,16 @@ query Catalogs {
   }
 }
 `
+
+export const ConsultantsByUser = `
+query ConsultantByUser($id: ID!) {
+  values: customer(where: {id: $id}, stage: PUBLISHED) {
+    consultant {
+      email
+      name
+      phone
+      id
+    }
+  }
+}
+`

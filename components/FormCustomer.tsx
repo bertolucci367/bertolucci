@@ -12,7 +12,6 @@ type IFormInput = {
   phone: string
   company: string
   newsletter: boolean
-  consultor: string
 }
 
 interface FormProps {
@@ -22,7 +21,7 @@ interface FormProps {
 }
 
 const FormCustomer = ({ type, defaultValues, btnLabel }: FormProps) => {
-  const { consultor, newsletter } = defaultValues
+  const { newsletter } = defaultValues
   const [news, setNews] = useState(newsletter)
   const [sending, setSending] = useState(false)
   const [msgStatus, setMsgStatus] = useState(0)
