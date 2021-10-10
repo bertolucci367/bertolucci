@@ -64,7 +64,7 @@ export async function getStaticProps({ params, preview = false }) {
 
 const _paths = `
 query Lines {
-  values: lines(where: {NOT: {slug: "null"}}) {
+  values: lines(where: {NOT: {slug: "null"}}, first: 50000) {
     slug
     products {
       code

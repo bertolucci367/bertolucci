@@ -90,10 +90,10 @@ const About = () => {
             <div className={`xl:w-10/12`}>
               <div className={`sticky top-36`}>
                 <h2 className={`text-18px mb-6`}>
-                  Com o requinte da produção semi-artesanal
+                  Com o requinte da produção artesanal
                 </h2>
                 <p>
-                  A Bertolucci possui quase 60 anos de tradição fabril,
+                  A Bertolucci possui mais de 65 anos de tradição fabril,
                   dominando todo o processo produtivo de suas luminárias: do
                   conceito inicial ao projeto. Da montagem do protótipo à sua
                   fabricação. Sem esquecer, claro, de sua comercialização.
@@ -106,7 +106,7 @@ const About = () => {
                   desenvolver o ferramental para materializá-la.”, declara
                   Eneida Bertolucci, que na melhor tradição italiana, aponta a
                   atenção aos detalhes como outro dos pontos fortes da empresa.
-                  “Um requinte de acabamento que só a produção semi-artesanal
+                  “Um requinte de acabamento que só a produção artesanal
                   permite.”, pontua.
                 </p>
               </div>

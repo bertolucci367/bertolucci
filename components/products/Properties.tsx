@@ -20,17 +20,16 @@ const Properties = ({ product }) => {
           <Value>{width} cm"</Value>
         </li>
       )}
-
-      {diameter && (
-        <li className={`mr-6`}>
-          <Label>P</Label>
-          <Value>{diameter} cm"</Value>
-        </li>
-      )}
       {depth && (
         <li>
-          <Label>Ø</Label>
+          <Label>P</Label>
           <Value>{depth} cm"</Value>
+        </li>
+      )}
+      {diameter && (
+        <li className={`mr-6`}>
+          <Label>Ø</Label>
+          <Value>{diameter} cm"</Value>
         </li>
       )}
     </ul>
