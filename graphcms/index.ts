@@ -183,8 +183,11 @@ query Profile($id: ID!) {
 		name
 		newsletter
 		phone
-    consultor
     company
+    consultant {
+      id
+      name
+    }
   }
 }
 `

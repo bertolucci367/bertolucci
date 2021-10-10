@@ -51,7 +51,13 @@ export default function FormConsultant({ consultant, user }) {
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="to">para</label>
-          <input type="email" name="to" id="to" value={email} disabled />
+          <input
+            type="email"
+            name="to"
+            id="to"
+            value={consultant.email}
+            disabled
+          />
         </div>
         <div>
           <label htmlFor="message">mensagem:</label>
