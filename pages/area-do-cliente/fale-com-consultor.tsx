@@ -22,10 +22,11 @@ export default function Talk({ session, consultant }) {
               target="_blank"
               className="text-14px"
             >
-              Atendimento por whatsapp
+              Whatsapp
             </a>
           </h2>
-          <h3 className="mt-10 text-14px">Mande aqui a sua mensagem</h3>
+          <hr className="my-10" />
+          <h3 className="mt-10 text-14px">E-mail</h3>
           <FormConsultant
             user={session.user}
             consultant={consultant}
