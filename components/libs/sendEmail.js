@@ -5,7 +5,15 @@ const SENDGRID_API_KEY = process.env.SENDGRID_KEY
 const MAIL_TO = process.env.MAIL_TO
 const MAIL_FROM = process.env.MAIL_FROM
 
-export const sendContact = async ({ name, email, phone, message }) => {
+export const sendContact = async ({
+  name,
+  email,
+  ddd,
+  phone,
+  city,
+  state,
+  message,
+}) => {
   await fetch(SENDGRID_API, {
     method: 'POST',
     headers: {
@@ -35,8 +43,10 @@ export const sendContact = async ({ name, email, phone, message }) => {
             </p>
             <p>
               <b>Nome:</b> ${name}<br/>
-              <b>Telefone:</b> ${phone}<br/>
-              <b>E-mail:</b> ${email}
+              <b>Telefone:</b> (${ddd}) ${phone}<br/>
+              <b>E-mail:</b> ${email}<br/>
+              <b>Cidade:</b> ${city} <br/>
+              <b>Estado:</b> ${state}<br/>
             </p>
           `,
         },
