@@ -6,7 +6,10 @@ interface IFormInput {
   name: String
   nickname: string
   email: string
+  ddd: string
   phone: string
+  city: string
+  state: string
   message: string
 }
 
@@ -68,27 +71,92 @@ const ContactForm = () => {
           type="email"
           name="email"
           id="email"
-          placeholder=""
+          placeholder="seu e-mail para entrarmos em contato"
           {...register('email', { required: true })}
         />
         {errors.email && (
           <FormMessage status="error.field">{errors.email.message}</FormMessage>
         )}
-        <label htmlFor="phone">telefone</label>
-        <input
-          type="tel"
-          name="phone"
-          id="phone"
-          placeholder="telefone com DDD"
-          {...register('phone')}
-        />
-        <label htmlFor="message">mensagem</label>
-        <textarea
-          name="message"
-          id="message"
-          rows={10}
-          {...register('message')}
-        ></textarea>
+
+        <div className="md:flex">
+          <div>
+            <label htmlFor="ddd">*código (DDD)</label>
+            <input
+              type="tel"
+              name="ddd"
+              id="ddd"
+              placeholder="DDD"
+              maxLength={3}
+              {...register('ddd', { required: true })}
+            />
+          </div>
+
+          <div className="w-full md:ml-4">
+            <label htmlFor="phone">*telefone</label>
+            <input
+              type="tel"
+              name="phone"
+              id="phone"
+              placeholder="telefone"
+              {...register('phone', { required: true })}
+            />
+            {errors.phone && (
+              <FormMessage status="error.field">
+                {errors.phone.message}
+              </FormMessage>
+            )}
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="city">*cidade</label>
+          <input
+            type="text"
+            name="city"
+            id="city"
+            placeholder="cidade"
+            aria-invalid={errors.city ? 'true' : 'false'}
+            {...register('city', { required: true })}
+          />
+          {errors.city && (
+            <FormMessage status="error.field">
+              {errors.city.message}
+            </FormMessage>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="state">*estado</label>
+          <input
+            type="text"
+            name="state"
+            id="state"
+            placeholder=""
+            aria-invalid={errors.state ? 'true' : 'false'}
+            {...register('state', { required: true })}
+            className="uppercase"
+          />
+          {errors.state && (
+            <FormMessage status="error.field">
+              {errors.state.message}
+            </FormMessage>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="message">*mensagem</label>
+          <textarea
+            name="message"
+            id="message"
+            rows={10}
+            {...register('message', { required: true })}
+          ></textarea>
+          {errors.message && (
+            <FormMessage status="error.field">
+              {errors.message.message}
+            </FormMessage>
+          )}
+        </div>
 
         <input
           type="submit"
