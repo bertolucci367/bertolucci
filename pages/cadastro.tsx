@@ -19,7 +19,6 @@ const Signup = () => {
                 phone: '',
                 mail: '',
                 company: '',
-                consultor: '',
                 newsletter: false,
               }}
             />
