@@ -1,11 +1,6 @@
 import Layout from '~/components/Layout'
-import { useForm } from 'react-hook-form'
-import React, { useState } from 'react'
-import Link from 'next/link'
-import { getCsrfToken } from 'next-auth/react'
-import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/router'
 import LayoutLogin from '~/components/LayoutLogin'
+import { getCsrfToken } from 'next-auth/react'
 import FormLogin from '~/components/FormLogin'
 
 const Login = ({ csrfToken }) => {
@@ -15,16 +10,7 @@ const Login = ({ csrfToken }) => {
         <LayoutLogin>
           <div>
             <h1>entrar</h1>
-
-            <FormLogin
-              csrfToken={csrfToken}
-              redirectTo="/area-do-cliente"
-              role="user"
-            />
-
-            <Link href="/cadastro">
-              <a className="text-h2 my-10 inline-block">quero me cadastrar</a>
-            </Link>
+            <FormLogin csrfToken={csrfToken} redirectTo="/admin" role="admin" />
           </div>
         </LayoutLogin>
       </main>

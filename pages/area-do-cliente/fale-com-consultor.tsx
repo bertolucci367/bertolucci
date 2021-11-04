@@ -1,6 +1,6 @@
 import Layout from '~/components/Layout'
 import LayoutLogin from '~/components/LayoutLogin'
-import { getSession } from 'next-auth/client'
+import { getSession } from 'next-auth/react'
 import { GraphQLClient } from 'graphql-request'
 import { ConsultantsByUser } from '~/graphcms/index'
 import FormConsultant from '~/components/FormConsultant'

@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
+import CredentialsProvider from 'next-auth/providers/credentials'
 import axios from 'axios'
 import bcrypt from 'bcrypt'
 
@@ -13,7 +13,7 @@ export default NextAuth({
 
   // Configure one or more authentication providers
   providers: [
-    Providers.Credentials({
+    CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
       name: 'Credentials',
 
@@ -23,7 +23,14 @@ export default NextAuth({
             return null
           }
 
-          const { values } = await getCustomer(credentials.email)
+          const roles = {
+            admin: getConsultant,
+            user: getCustomer,
+          }
+
+          const getLogin = roles[credentials.role]
+
+          const { values } = await getLogin(credentials.email)
 
           if (!values) {
             return null
@@ -33,7 +40,9 @@ export default NextAuth({
 
           const match = await bcrypt.compare(credentials.password, password)
 
-          return match ? { id, name, email } : null
+          const user = { id, name, email, role: credentials.role }
+
+          return match ? user : null
         } catch (e) {
           const errorMessage = e.response.data.message
           // Redirecting to the login page with error message          in the URL
@@ -51,14 +60,47 @@ export default NextAuth({
   },
 
   callbacks: {
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (user) {
+        token.role = user?.role
+      }
+      // token.roles = ['consultant']
+      return token
+    },
+
     async session(session, user) {
-      session.user_id = user.sub
+      session.user_id = session.token.sub
+      session.role = session.token.role
       return session
     },
   },
 })
 
 const getCustomer = async mail => {
+  return await axios({
+    url: process.env.GRAPHCMS_API,
+    method: 'post',
+    data: {
+      query: `
+        query Customer($mail: String!) {
+          values: customer (where: { mail: $mail }, stage: PUBLISHED) {
+            mail
+            password
+            name
+            id
+          }
+        }
+      `,
+      variables: {
+        mail,
+      },
+    },
+  })
+    .then(r => r.data)
+    .then(({ data }) => data)
+}
+
+const getConsultant = async mail => {
   return await axios({
     url: process.env.GRAPHCMS_API,
     method: 'post',

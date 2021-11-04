@@ -12,6 +12,7 @@ const menu = [
   { name: 'Persona', url: '/persona', hasSubmenu: false },
   { name: 'Contato', url: '/contato', hasSubmenu: false },
   { name: 'Área do cliente', url: '/area-do-cliente', hasSubmenu: true },
+  { name: 'Admin', url: '/admin', hasSubmenu: true },
 ]
 
 const Desktop = () => {

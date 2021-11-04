@@ -1,6 +1,7 @@
 import SubMenuProduct from '~/components/products/SubMenuProduct'
 import SubMenuAbout from '~/components/SubMenuAbout'
 import SubMenuDashboard from '~/components/SubMenuDashboard'
+import SubMenuAdmin from '~/components/SubMenuAdmin'
 
 const SubMenu = ({ active }) => {
   return (
@@ -8,6 +9,7 @@ const SubMenu = ({ active }) => {
       {/^\/produtos/.test(active) && <SubMenuProduct />}
       {/^\/fabrica/.test(active) && <SubMenuAbout />}
       {/^\/area-do-cliente/.test(active) && <SubMenuDashboard />}
+      {/^\/admin/.test(active) && <SubMenuAdmin />}
     </div>
   )
 }

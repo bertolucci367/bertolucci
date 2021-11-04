@@ -2,12 +2,12 @@ import Layout from '~/components/Layout'
 import { useState } from 'react'
 import { ProfileQuery } from '~/graphcms/index'
 import { GraphQLClient } from 'graphql-request'
-import { getSession } from 'next-auth/client'
+import { getSession } from 'next-auth/react'
 
 import FormCustomer from '~/components/FormCustomer'
 import FormNewPassword from '~/components/FormNewPassword'
 
-const Profile = ({ values }) => {
+const Profile = ({ values, session }) => {
   const { consultant } = values
   const [showChangePwd, setShowChangePwd] = useState(false)
 

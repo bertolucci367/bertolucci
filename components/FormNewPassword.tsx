@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import axios from 'axios'
 import FormMessage from '~/components/FormMessage'

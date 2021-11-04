@@ -1,10 +1,11 @@
 import Layout from '~/components/Layout'
-import { signOut, useSession, getSession } from 'next-auth/client'
+import { signOut, useSession, getSession } from 'next-auth/react'
 import { useEffect } from 'react'
 import router from 'next/router'
 
 const Dashboard = () => {
-  const [session, loading] = useSession()
+  const { data: session, status } = useSession()
+  const loading = status === 'loading'
 
   if (typeof window !== 'undefined' && loading) return null
 

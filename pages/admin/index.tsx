@@ -1,12 +1,13 @@
 import Layout from '~/components/Layout'
-import { useSession, getSession } from 'next-auth/react'
+import { getSession } from 'next-auth/react'
 import Link from 'next/link'
 import { links } from '~/components/SubMenuDashboard'
 
-const Dashboard = ({ session }) => {
+export default function AdminDashboard({ session }) {
   return (
     <Layout title="dashboard">
       <main className="grid-in-l lg:grid-in-main">
+        <h1>Role: {session && session?.role}</h1>
         <div className="flex justify-center items-center h-full flex-col flex-wrap lg:flex-row">
           {links.map(l => (
             <Link key={l.path} href={l.path}>
@@ -23,7 +24,7 @@ const Dashboard = ({ session }) => {
 
 export const isAuthenticated = async context => {
   const data = await getSession(context)
-  return Dashboard.auth.role == data?.role
+  return AdminDashboard.auth.role == data?.role
 }
 
 export async function getServerSideProps(context) {
@@ -39,14 +40,12 @@ export async function getServerSideProps(context) {
 
   return {
     redirect: {
-      destination: '/login',
+      destination: '/admin/login',
       permanent: false,
     },
   }
 }
 
-Dashboard.auth = {
-  role: 'user',
+AdminDashboard.auth = {
+  role: 'admin',
 }
-
-export default Dashboard
