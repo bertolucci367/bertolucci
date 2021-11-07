@@ -1,9 +1,11 @@
-import Layout from '~/components/Layout'
-import { useSession, getSession } from 'next-auth/react'
 import Link from 'next/link'
+import { parseCookies } from 'nookies'
+import Layout from '~/components/Layout'
 import { links } from '~/components/SubMenuDashboard'
+import { USER_TOKEN } from '~/components/libs/constants'
+import { redirectsNoUser } from '~/services/auth'
 
-const Dashboard = ({ session }) => {
+const Dashboard = ({}) => {
   return (
     <Layout title="dashboard">
       <main className="grid-in-l lg:grid-in-main">
@@ -21,32 +23,16 @@ const Dashboard = ({ session }) => {
   )
 }
 
-export const isAuthenticated = async context => {
-  const data = await getSession(context)
-  return Dashboard.auth.role == data?.role
-}
-
 export async function getServerSideProps(context) {
-  const data = await getSession(context)
+  const { [USER_TOKEN]: token } = parseCookies(context)
 
-  if (await isAuthenticated(context)) {
-    return {
-      props: {
-        session: data.session,
-      },
-    }
+  if (!token) {
+    return redirectsNoUser()
   }
 
   return {
-    redirect: {
-      destination: '/login',
-      permanent: false,
-    },
+    props: {},
   }
-}
-
-Dashboard.auth = {
-  role: 'user',
 }
 
 export default Dashboard

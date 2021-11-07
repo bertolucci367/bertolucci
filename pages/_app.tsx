@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import React from 'react'
 import { AppWrapper } from '~/components/context/AppContext'
-import { SessionProvider } from 'next-auth/react'
+import { AuthProvider } from '~/components/context/AuthContext'
 
 import '../styles/fonts.css'
 import '../styles/global.css'
@@ -29,9 +29,9 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
           crossOrigin="anonymous"
         />
       </Head>
-      <SessionProvider session={session} refetchInterval={5 * 60}>
+      <AuthProvider>
         <Component {...pageProps} />
-      </SessionProvider>
+      </AuthProvider>
     </AppWrapper>
   )
 }

@@ -6,7 +6,7 @@ import FormMessage from '~/components/FormMessage'
 import SubmitButton from './SubmitButton'
 
 const FormNewPassword = () => {
-  const [session, status] = useSession()
+  const { data: session, status } = useSession()
   const [msgStatus, setMsgStatus] = useState(0)
   const [sending, setSending] = useState(false)
 

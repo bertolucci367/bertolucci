@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Link from 'next/link'
+import { AuthContext } from './context/AuthContext'
 
-import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import SubmitButton from '~/components/SubmitButton'
 import FormMessage from '~/components/FormMessage'
@@ -11,13 +11,12 @@ interface IFormInput {
   email: string
   password: string
   nickname: string
-  csrfToken: string
 }
 
-export default function FormLogin({ csrfToken, redirectTo, role }) {
+export default function FormLogin({ redirectTo, role }) {
   const [sending, setSending] = useState(false)
   const [showError, setShowError] = useState(false)
-  const router = useRouter()
+  const { signIn } = useContext(AuthContext)
   const {
     register,
     handleSubmit,
@@ -27,21 +26,7 @@ export default function FormLogin({ csrfToken, redirectTo, role }) {
   const onSubmit = async data => {
     setSending(true)
 
-    const { email, password } = data
-
-    const res = await signIn('credentials', {
-      email,
-      password,
-      callbackUrl: `${window.location.origin}${redirectTo}`,
-      redirect: false,
-      role,
-    })
-
-    if (res?.error) {
-      setSending(false)
-      setShowError(true)
-    }
-    if (res?.url) router.push(redirectTo)
+    await signIn(data)
   }
 
   return (
@@ -51,13 +36,6 @@ export default function FormLogin({ csrfToken, redirectTo, role }) {
       )}
 
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <input
-          name="csrfToken"
-          type="hidden"
-          defaultValue={csrfToken}
-          {...register('csrfToken')}
-        />
-
         <div>
           <label htmlFor="email">*e-mail</label>
           <input

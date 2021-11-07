@@ -1,6 +1,7 @@
 import { MenuItem } from '~/components/products/MenuItem'
-import { signOut, useSession } from 'next-auth/react'
 import { IoIosLogOut } from 'react-icons/io'
+import { useContext } from 'react'
+import { AuthContext } from './context/AuthContext'
 
 export const links = [
   { path: '/area-do-cliente/fale-com-consultor', label: 'fale com consultor' },
@@ -9,11 +10,11 @@ export const links = [
 ]
 
 const SubMenuDashboard = () => {
-  const { data: session } = useSession()
+  const { signOut } = useContext(AuthContext)
 
   return (
     <nav>
-      {session && (
+      {true && (
         <ul className={`lg:flex lg:flex-row lg:justify-center`}>
           {links.map(l => (
             <MenuItem key={l.path} name={l.label} path={l.path} />
@@ -21,11 +22,7 @@ const SubMenuDashboard = () => {
           <li className="mx-2 my-10 lg:my-0 lg:mt-[3px]">
             <button
               className="flex items-center font-medium hover:underline"
-              onClick={() =>
-                signOut({
-                  callbackUrl: `${window.location.origin}`,
-                })
-              }
+              onClick={() => signOut()}
             >
               sair <IoIosLogOut className="ml-2" />
             </button>

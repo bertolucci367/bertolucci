@@ -1,6 +1,5 @@
 import Layout from '~/components/Layout'
 import LayoutLogin from '~/components/LayoutLogin'
-import { getCsrfToken } from 'next-auth/react'
 import FormLogin from '~/components/FormLogin'
 
 const Login = ({ csrfToken }) => {
@@ -10,7 +9,7 @@ const Login = ({ csrfToken }) => {
         <LayoutLogin>
           <div>
             <h1>entrar</h1>
-            <FormLogin csrfToken={csrfToken} redirectTo="/admin" role="admin" />
+            <FormLogin redirectTo="/admin" role="admin" />
           </div>
         </LayoutLogin>
       </main>
@@ -21,9 +20,7 @@ const Login = ({ csrfToken }) => {
 // This is the recommended way for Next.js 9.3 or newer
 export async function getServerSideProps(context) {
   return {
-    props: {
-      csrfToken: await getCsrfToken(context),
-    },
+    props: {},
   }
 }
 

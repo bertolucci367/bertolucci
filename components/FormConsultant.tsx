@@ -37,6 +37,10 @@ export default function FormConsultant({ consultant, user }) {
     }
   }
 
+  if (!consultant) {
+    return <></>
+  }
+
   return (
     <>
       {!sending && status == 200 && (
