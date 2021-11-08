@@ -2,10 +2,10 @@ import Head from 'next/head'
 import LayoutProduct from '~/components/LayoutProduct'
 import Container from '~/components/Container'
 import Carousel from '~/components/Carousel'
-import { GraphQLClient } from 'graphql-request'
 import { useAppContext } from '~/components/context/AppContext'
 import Properties from '~/components/products/Properties'
 import Finishings from '~/components/products/Finishings'
+import { gcms } from '~/services/gcms'
 
 import style from './product.module.css'
 
@@ -161,7 +161,6 @@ const query = `
 `
 
 export async function getStaticProps({ params, preview = false }) {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { slug } = params
   const { values } = await gcms.request(query, { id: slug })
 
@@ -187,7 +186,6 @@ query Products {
 `
 
 export async function getStaticPaths() {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { values } = await gcms.request(_paths)
 
   // Get the paths we want to pre-render based on posts

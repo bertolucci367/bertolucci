@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { GraphQLClient } from 'graphql-request'
 import GraphImg from 'graphcms-image'
 import Layout from '~/components/Layout'
+import { gcms } from '~/services/gcms'
 
 const Index = ({ data }) => {
   const [windowWidthSize, setWindowWidthSize] = useState(0)
@@ -89,8 +90,6 @@ const Slider = ({ slides }) => {
 }
 
 export async function getStaticProps({ preview = false }) {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
-
   const { values } = await gcms.request(
     `
     query {

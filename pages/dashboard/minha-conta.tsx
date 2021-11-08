@@ -1,14 +1,13 @@
 import Layout from '~/components/Layout'
 import { useState } from 'react'
 import { ProfileQuery } from '~/graphcms/index'
-import { GraphQLClient } from 'graphql-request'
-import { getSession } from 'next-auth/react'
+import { gcms } from '~/services/gcms'
 
 import FormCustomer from '~/components/FormCustomer'
 import FormNewPassword from '~/components/FormNewPassword'
 
-const Profile = ({ values, session }) => {
-  const { consultant } = values
+const Profile = () => {
+  // const { consultant } = values
   const [showChangePwd, setShowChangePwd] = useState(false)
 
   return (
@@ -18,17 +17,17 @@ const Profile = ({ values, session }) => {
           <div className="col-start-1 col-span-1 ">
             <section className="w-full self-start mb-20">
               <span className="mt-0 text-14px">consultor(a):</span>
-              <h1>{consultant.name}</h1>
+              <h1>{'consultant.name'}</h1>
             </section>
           </div>
 
           <div className="col-start-2 col-span-1 mb-20 flex flex-col ">
             <h1 className="w-full">minha conta</h1>
-            <FormCustomer
+            {/* <FormCustomer
               type="update"
               btnLabel="salvar dados"
-              defaultValues={values}
-            />
+              defaultValues={'values'}
+            /> */}
 
             <div className="mt-20">
               <button
@@ -50,13 +49,11 @@ const Profile = ({ values, session }) => {
 }
 
 export async function getServerSideProps(context) {
-  const session = await getSession(context)
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
-
-  const { values } = await gcms.request(ProfileQuery, { id: session.user_id })
+  // const session = await getSession(context)
+  // const { values } = await gcms.request(ProfileQuery, { id: session.user_id })
 
   return {
-    props: { session, values },
+    props: {},
   }
 }
 

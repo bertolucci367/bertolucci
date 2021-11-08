@@ -1,4 +1,4 @@
-import { GraphQLClient } from 'graphql-request'
+import { gcms } from '~/services/gcms'
 import { useRouter } from 'next/router'
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
@@ -35,7 +35,6 @@ const LinesByTypology = ({ products, product }) => {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { ids } = params
   const [id, code] = ids
   const data = await gcms.request(LineQuery, { id })
@@ -81,7 +80,6 @@ query LinesByTypology {
 `
 
 export async function getStaticPaths() {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { values } = await gcms.request(_paths)
 
   // Get the paths we want to pre-render based on posts

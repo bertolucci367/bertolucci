@@ -1,7 +1,7 @@
 import Layout from '~/components/Layout'
 import Carousel from '~/components/Carousel'
-import { GraphQLClient } from 'graphql-request'
 import { BlogQuery } from '~/graphcms/index'
+import { gcms } from '~/services/gcms'
 
 const Blog = ({ data }) => {
   const images = data.assets.map((img: any) => (
@@ -35,7 +35,6 @@ const query = `
 `
 
 export async function getStaticProps({ params, preview = false }) {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { slug } = params
   const { values } = await gcms.request(BlogQuery, { id: slug })
 
@@ -61,7 +60,6 @@ query Blogs {
 `
 
 export async function getStaticPaths() {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { values } = await gcms.request(_paths)
 
   // Get the paths we want to pre-render based on posts

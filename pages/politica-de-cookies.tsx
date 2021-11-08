@@ -1,7 +1,7 @@
 import Layout from '~/components/Layout'
-import { GraphQLClient } from 'graphql-request'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { gcms } from '~/services/gcms'
 
 const Policy = ({ data }) => {
   const [cmsData, setCmsData] = useState('')
@@ -25,8 +25,6 @@ const Policy = ({ data }) => {
 }
 
 export async function getStaticProps({ preview = false }) {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
-
   const { values } = await gcms.request(
     `
     query cookie {

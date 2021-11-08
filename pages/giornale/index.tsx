@@ -1,8 +1,8 @@
 import Layout from '~/components/Layout'
-import { GraphQLClient } from 'graphql-request'
 import { BlogPageQuery } from '~/graphcms/index'
 import Card from '~/components/Card'
 import { ListUL } from '~/components/products/List'
+import { gcms } from '~/services/gcms'
 
 const Blog = ({ data }) => {
   return (
@@ -26,7 +26,6 @@ const Blog = ({ data }) => {
 }
 
 export async function getStaticProps({ params }) {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { data } = await gcms.request(BlogPageQuery)
 
   if (!data) {

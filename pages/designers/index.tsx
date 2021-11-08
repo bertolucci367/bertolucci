@@ -1,8 +1,8 @@
 import Layout from '~/components/Layout'
-import { GraphQLClient } from 'graphql-request'
 import { DesignersQuery } from '~/graphcms/index'
 import { ListUL } from '~/components/products/List'
 import Card from '~/components/Card'
+import { gcms } from '~/services/gcms'
 
 const Designers = ({ designers }) => {
   return (
@@ -24,7 +24,6 @@ const Designers = ({ designers }) => {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { values } = await gcms.request(DesignersQuery)
 
   if (!values) {

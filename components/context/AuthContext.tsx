@@ -10,8 +10,10 @@ type SignInData = {
 }
 
 type User = {
+  id: string
   name: string
   email: string
+  role: Array<string>
 }
 
 interface AuthContextInterface {
@@ -47,12 +49,13 @@ export function AuthProvider({ children }) {
 
     setUser(user)
 
-    // window.location.href = '/area-do-cliente'
-    Router.push('/area-do-cliente')
+    Router.push('/dashboard')
   }
 
   async function signOut() {
-    destroyCookie({}, USER_TOKEN)
+    destroyCookie({}, USER_TOKEN, {
+      path: '/', // THE KEY IS TO SET THE SAME PATH
+    })
     Router.push('/')
   }
 

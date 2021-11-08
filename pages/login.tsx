@@ -12,7 +12,7 @@ const Login = () => {
           <div>
             <h1>entrar</h1>
 
-            <FormLogin redirectTo="/area-do-cliente" role="user" />
+            <FormLogin redirectTo="/dashboard" role="user" />
 
             <Link href="/cadastro">
               <a className="text-h2 my-10 inline-block">quero me cadastrar</a>

@@ -1,12 +1,10 @@
 import { useForm } from 'react-hook-form'
-import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import axios from 'axios'
 import FormMessage from '~/components/FormMessage'
 import SubmitButton from './SubmitButton'
 
 const FormNewPassword = () => {
-  const { data: session, status } = useSession()
   const [msgStatus, setMsgStatus] = useState(0)
   const [sending, setSending] = useState(false)
 
@@ -32,13 +30,13 @@ const FormNewPassword = () => {
     }
 
     try {
-      const res = await axios.post('/api/customer/new-password', {
-        id: session.user_id,
-        email: session.user.email,
-        ...data,
-      })
+      // const res = await axios.post('/api/customer/new-password', {
+      //   id: session.user_id,
+      //   email: session.user.email,
+      //   ...data,
+      // })
 
-      await axios.post('/api/customer/publish', { id: session.user_id })
+      // await axios.post('/api/customer/publish', { id: session.user_id })
 
       setMsgStatus(200)
       reset()

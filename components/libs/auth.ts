@@ -6,9 +6,17 @@ import { USER_TOKEN, JWT_SECRET_KEY } from './constants'
 import { jsonResponse } from './utils'
 import { setCookie } from 'nookies'
 
+type User = {
+  id: string
+  name: string
+  email: string
+  role: Array<string>
+}
+
 interface UserJwtPayload {
   jti: string
   iat: number
+  exp: number
 }
 
 /**
@@ -40,7 +48,7 @@ export async function verifyAuth(request: NextRequest) {
 export async function setUserCookie(
   request: NextRequest,
   response: NextResponse,
-  user,
+  user: User,
 ) {
   const cookie = request.cookies[USER_TOKEN]
 

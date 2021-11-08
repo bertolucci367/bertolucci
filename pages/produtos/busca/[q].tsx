@@ -3,7 +3,7 @@ import List from '~/components/products/List'
 import { useEffect } from 'react'
 import { useAppContext } from '~/components/context/AppContext'
 import { useRouter } from 'next/router'
-import { GraphQLClient } from 'graphql-request'
+import { gcms } from '~/services/gcms'
 
 const Search = ({ products }) => {
   const router = useRouter()
@@ -29,7 +29,6 @@ const Search = ({ products }) => {
 }
 
 export async function getServerSideProps({ params }) {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { values } = await gcms.request(
     `
   query Search($id: String!) {

@@ -4,6 +4,7 @@ import List from '~/components/products/List'
 import { useAppContext } from '~/components/context/AppContext'
 import { useEffect } from 'react'
 import { DesignerQuery } from '~/graphcms/index'
+import { gcms } from '~/services/gcms'
 
 const Designer = ({ designer, products }) => {
   const shared = useAppContext()
@@ -23,7 +24,6 @@ const Designer = ({ designer, products }) => {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { slug } = params
   const { values } = await gcms.request(DesignerQuery, { id: slug })
 
@@ -51,7 +51,6 @@ query Designers {
 `
 
 export async function getStaticPaths() {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { values } = await gcms.request(_paths)
 
   // Get the paths we want to pre-render based on posts

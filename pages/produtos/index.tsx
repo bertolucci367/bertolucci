@@ -1,7 +1,7 @@
-import { GraphQLClient } from 'graphql-request'
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
 import { ProductsQuery } from '~/graphcms/index'
+import { gcms } from '~/services/gcms'
 
 const Products = ({ items }) => {
   return (
@@ -13,8 +13,6 @@ const Products = ({ items }) => {
 }
 
 export async function getStaticProps({ preview = false }) {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
-
   const { page } = await gcms.request(ProductsQuery)
   const { items } = page
 

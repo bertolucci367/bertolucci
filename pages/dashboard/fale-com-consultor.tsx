@@ -1,22 +1,15 @@
 import Layout from '~/components/Layout'
 import LayoutLogin from '~/components/LayoutLogin'
-import { getSession } from 'next-auth/react'
-import { GraphQLClient } from 'graphql-request'
 import { ConsultantsByUser } from '~/graphcms/index'
 import FormConsultant from '~/components/FormConsultant'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { AuthContext } from '~/components/context/AuthContext'
 import { redirectsNoUser } from '~/services/auth'
 import { USER_TOKEN } from '~/components/libs/constants'
 import { parseCookies } from 'nookies'
-import { request } from 'graphql-request'
 import useSWR from 'swr'
 import axios from 'axios'
 import Image from 'next/image'
-
-// import fetcher from '~/components/libs/fetcher'
-
-// const fetcher = query => request('/api/graphql', query)
 
 const fetchWithUser = async (query, user) => {
   const variables = { id: user.id }

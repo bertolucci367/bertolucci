@@ -1,6 +1,4 @@
-import { GraphQLClient } from 'graphql-request'
-
-const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
+import { gcms } from '~/services/gcms'
 
 export default async function handler(req, res) {
   const { email } = req.body

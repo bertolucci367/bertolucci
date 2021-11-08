@@ -1,4 +1,4 @@
-import { GraphQLClient } from 'graphql-request'
+import { gcms } from '~/services/gcms'
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
 import { TypologyQuery } from '~/graphcms/index'
@@ -12,7 +12,6 @@ const Typology = ({ products }) => {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { slug } = params
   const { values } = await gcms.request(TypologyQuery, { id: slug })
 
@@ -30,7 +29,6 @@ export async function getStaticProps({ params, preview = false }) {
 }
 
 export async function getStaticPaths() {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { values } = await gcms.request(`
     query tipologias {
       values: typologies(where: {NOT: {slug: "null"}}) {

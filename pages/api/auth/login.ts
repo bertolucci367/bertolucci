@@ -9,31 +9,32 @@ const gcms = new GraphQLClient(process.env.GRAPHCMS_API, {
 })
 
 const _query = `
-query Customer($email: String!) {
-  values: customer (where: { email: $email }, stage: PUBLISHED) {
+query Person($email: String!) {
+  values: person (where: { email: $email }, stage: PUBLISHED) {
+    id
+    name
     email
     password
-    name
-    id
+    role
   }
 }
 `
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   const { email, password } = req.body
 
-  const { values: customer } = await gcms.request(_query, {
+  const { values: person } = await gcms.request(_query, {
     email,
   })
 
   // Compare password
-  const match = await bcrypt.compare(password, customer?.password) // text, hash
+  const match = await bcrypt.compare(password, person?.password) // text, hash
 
   if (!match) {
     res.status(401).end('email or password wrong')
   } else {
-    const { id, name, email } = customer
-    const user = { id, name, email, role: 'user' }
+    const { id, name, email, role } = person
+    const user = { id, name, email, role }
 
     await setUserCookie(req, res, user)
 

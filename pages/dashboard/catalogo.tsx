@@ -1,8 +1,8 @@
 import Layout from '~/components/Layout'
 import GraphImg from 'graphcms-image'
-import { GraphQLClient } from 'graphql-request'
 import { CatalogQuery } from '~/graphcms/index'
 import { BsDownload } from 'react-icons/bs'
+import { gcms } from '~/services/gcms'
 
 export default function Catalogo({ values }) {
   return (
@@ -43,7 +43,6 @@ export default function Catalogo({ values }) {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { values } = await gcms.request(CatalogQuery)
 
   if (!values) {
