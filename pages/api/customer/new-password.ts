@@ -1,18 +1,12 @@
-import { GraphQLClient } from 'graphql-request'
 import bcrypt from 'bcrypt'
-import { CustomerByEmailQuery, UpdateCustomerQuery } from '~/graphcms/index'
-
-const gcms = new GraphQLClient(process.env.GRAPHCMS_API, {
-  headers: {
-    authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
-  },
-})
+import { PersonByEmailQuery, UpdatePersonQuery } from '~/graphcms/index'
+import { gcms } from '~/services/gcms'
 
 export default async function handler(req, res) {
   const { id, password, current, email } = req.body
 
   // Get customer data
-  const { values: customer } = await gcms.request(CustomerByEmailQuery, {
+  const { values: customer } = await gcms.request(PersonByEmailQuery, {
     mail: email,
   })
 
@@ -28,7 +22,7 @@ export default async function handler(req, res) {
     const hash = await bcrypt.hash(password, 12)
 
     // update database
-    await gcms.request(UpdateCustomerQuery, {
+    await gcms.request(UpdatePersonQuery, {
       id,
       input: { password: hash },
     })

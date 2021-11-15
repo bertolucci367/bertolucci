@@ -1,9 +1,7 @@
 import { useForm } from 'react-hook-form'
 import React, { useState, useContext } from 'react'
-import Link from 'next/link'
 import { AuthContext } from './context/AuthContext'
 
-import { useRouter } from 'next/router'
 import SubmitButton from '~/components/SubmitButton'
 import FormMessage from '~/components/FormMessage'
 
@@ -25,8 +23,15 @@ export default function FormLogin({ redirectTo, role }) {
 
   const onSubmit = async data => {
     setSending(true)
+    setShowError(false)
 
-    await signIn(data)
+    try {
+      await signIn(data)
+    } catch (err) {
+      setShowError(true)
+    } finally {
+      setSending(false)
+    }
   }
 
   return (

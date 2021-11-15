@@ -1,12 +1,6 @@
-import { GraphQLClient } from 'graphql-request'
-import { CreateCustomerQuery } from '~/graphcms/index'
+import { CreatePersonQuery } from '~/graphcms/index'
 import { sendEmailToBertolucci } from '~/components/libs/sendEmail'
-
-const gcms = new GraphQLClient(process.env.GRAPHCMS_API, {
-  headers: {
-    authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
-  },
-})
+import { gcms } from '~/services/gcms'
 
 export default async function handler(req, res) {
   const { id, name, mail, phone, company, newsletter } = req.body
@@ -23,7 +17,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    await gcms.request(CreateCustomerQuery, {
+    await gcms.request(CreatePersonQuery, {
       id,
       input: { name, mail, phone, company, newsletter },
     })

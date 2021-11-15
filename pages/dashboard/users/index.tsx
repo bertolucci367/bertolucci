@@ -6,6 +6,7 @@ import useSWR from 'swr'
 import axios from 'axios'
 import { jwtVerify } from 'jose'
 import Link from 'next/link'
+import { RiEditLine } from 'react-icons/ri'
 
 type User = {
   id: string
@@ -33,6 +34,7 @@ const query = `
       company
       newsletter
       phone
+      activeLogin
       seller {
         name
       }
@@ -50,6 +52,7 @@ const query = `
       company
       newsletter
       phone
+      activeLogin
       seller {
         name
       }
@@ -72,19 +75,31 @@ export default function Users() {
     return (
       <>
         {items.map(
-          ({ id, name, email, company, newsletter, phone, seller }) => (
-            <tr key={id}>
-              <TD>{name}</TD>
+          ({
+            id,
+            name,
+            email,
+            company,
+            newsletter,
+            phone,
+            seller,
+            activeLogin,
+          }) => (
+            <tr key={id} className="border-t border-gray-200">
               <TD>
                 <Link href={`/dashboard/users/${id}`}>
-                  <a>Edit</a>
+                  <a className="p-4 hover:bg-gray-100 inline-block">
+                    <RiEditLine />
+                  </a>
                 </Link>
               </TD>
+              <TD>{name}</TD>
               <TD>{email}</TD>
               <TD>{company}</TD>
               <TD>{seller ? seller.name : '-'}</TD>
               <TD>{phone}</TD>
               <TD>{newsletter ? 'Sim' : '-'}</TD>
+              <TD>{activeLogin ? 'Sim' : 'Não'}</TD>
             </tr>
           ),
         )}
@@ -98,13 +113,14 @@ export default function Users() {
         <table className="w-full">
           <thead>
             <tr>
-              <TH>Nome</TH>
               <TH> </TH>
+              <TH>Nome</TH>
               <TH>E-mail</TH>
               <TH>Empresa</TH>
               <TH>Consultor</TH>
               <TH>Telefone</TH>
               <TH>Newsletter</TH>
+              <TH>Ativo</TH>
             </tr>
           </thead>
           <tbody>

@@ -16,6 +16,7 @@ query Person($email: String!) {
     email
     password
     role
+    activeLogin
   }
 }
 `
@@ -33,8 +34,8 @@ export default async function handler(req, res) {
   if (!match) {
     res.status(401).end('email or password wrong')
   } else {
-    const { id, name, email, role } = person
-    const user = { id, name, email, role }
+    const { id, name, email, role, activeLogin } = person
+    const user = { id, name, email, role, activeLogin }
 
     await setUserCookie(req, res, user)
 

@@ -6,6 +6,8 @@ import axios from 'axios'
 import { jwtVerify } from 'jose'
 import { customAlphabet } from 'nanoid'
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import FormMessage from '~/components/FormMessage'
 
 type User = {
   id: string
@@ -14,12 +16,17 @@ type User = {
   role: Array<string>
 }
 
-const ChooseSeller = ({ sellers, selected = '' }) => {
+const ChooseSeller = ({ register, sellers, defaultValue = '' }) => {
   return (
-    <select name="seller" id="choole-seeler">
+    <select
+      name="seller"
+      id="choole-seeler"
+      defaultValue={defaultValue}
+      {...register('seller')}
+    >
       <option value=""></option>
       {sellers.map(s => (
-        <option value={s.id} selected={selected === s.id}>
+        <option key={s.id} value={s.id}>
           {s.name}
         </option>
       ))}
@@ -28,6 +35,7 @@ const ChooseSeller = ({ sellers, selected = '' }) => {
 }
 
 export default function EditUser({
+  id,
   name,
   email,
   phone,
@@ -35,61 +43,181 @@ export default function EditUser({
   company,
   sellers,
 }) {
-  const defaultChoose = seller ? seller.id : ''
+  // const defaultChoose = seller ? seller.id : ''
 
-  const [pwd, setPWD] = useState('')
   const [linkToActive, setLinkToActive] = useState(true)
   const [newPWD, setNewPWD] = useState(true)
+  const [sending, setSending] = useState(false)
+  const [msgStatus, setMsgStatus] = useState(0)
 
-  const handleGeneratePassword = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    setError,
+    formState: { errors },
+  } = useForm()
+
+  const handleGeneratePassword = e => {
+    e.stopPropagation()
+    e.preventDefault()
     const nanoid = customAlphabet('123456789abcdef', 6)
-    setPWD(nanoid())
+    setValue('pwd', nanoid())
+  }
+
+  const triggerEmail = async ({ userID, email, name, data }) => {
+    try {
+      const { pwd, sendActivation } = data
+
+      const { data: emailData } = await axios.post(
+        '/api/customer/send-activation',
+        {
+          userID,
+          userEmail: email,
+          pwd,
+          sendActivation,
+        },
+      )
+
+      const _res = await axios.post('/api/send-email', {
+        to: email,
+        subject: `Acesso ao Bertolucci.com.br`,
+        message: `
+          <p>Olá <b>${name}</b>,</p>
+          ${emailData.msg}
+          <p>Atenciosamente, <br/> Bertolucci</p>
+        `,
+      })
+
+      console.log('>>>>', _res)
+    } catch (err) {
+      console.log('error: ', err)
+    }
+  }
+
+  const onSubmit = async data => {
+    const confirm = window.confirm('Confirma o envio dos dados?')
+
+    if (!confirm) {
+      return
+    }
+
+    try {
+      const res = await axios.post('/api/customer/edit', {
+        userID: id,
+        ...data,
+      })
+
+      await axios.post('/api/customer/publish', { id })
+
+      triggerEmail({ userID: id, email, name, data })
+
+      setMsgStatus(200)
+      // reset()
+    } catch (err) {
+      // setError('current', {
+      //   type: 'manual',
+      //   message: 'senha atual não confere com a senha cadastrada.',
+      // })
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
     <Layout title="usuários">
       <div className="grid-in-main">
-        <h1>{name}</h1>
-        <p>E-mail: {email}</p>
-        <p>Telefone: {phone}</p>
-        <p>Empresa: {company}</p>
-        <p>
-          Consultor: <ChooseSeller sellers={sellers} selected={defaultChoose} />
-        </p>
-        <p>
-          <label htmlFor="newPWD" className="flex justify-start ">
-            <span>
-              <input
-                type="checkbox"
-                name="newPWD"
-                id="newPWD"
-                checked={newPWD}
-                onClick={() => setNewPWD(!newPWD)}
-                className="w-10"
-              />
-            </span>
-            <span className="flex-1">Gerar nova senha?</span>
-          </label>
-        </p>
-        <p>
-          <input type="text" value={pwd} />
-          <button onClick={handleGeneratePassword}>Gerar senha</button>
-        </p>
-        <p>
-          <label htmlFor="activate" className="flex justify-start ">
-            <span>
-              <input
-                type="checkbox"
-                name="activate"
-                id="activate"
-                checked={linkToActive}
-                onClick={() => setLinkToActive(!linkToActive)}
-                className="w-10"
-              />
-            </span>
-            <span className="flex-1">Enviar link de ativação</span>
-          </label>
-        </p>
+        <div className="grid grid-cols-2">
+          <div>
+            <h1>{name}</h1>
+            <p>E-mail: {email}</p>
+            <p>Telefone: {phone}</p>
+            <p>Empresa: {company}</p>
+          </div>
+
+          <div>
+            {msgStatus === 200 && (
+              <FormMessage status="success">
+                dados salvo com sucesso!
+              </FormMessage>
+            )}
+            {msgStatus === 404 && (
+              <FormMessage status="error">
+                ops... tente mais tarde ou entre em contato por telefone.
+              </FormMessage>
+            )}
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <p>
+                Consultor:{' '}
+                <ChooseSeller
+                  register={register}
+                  sellers={sellers}
+                  defaultValue={seller?.id}
+                />
+              </p>
+              {/* <p>
+              <label htmlFor="newPWD" className="flex justify-start ">
+                <span>
+                  <input
+                    type="checkbox"
+                    name="newPWD"
+                    id="newPWD"
+                    onChange={() => setNewPWD(!newPWD)}
+                    className="w-10"
+                    {...register('newPWD', { required: false })}
+                  />
+                </span>
+                <span className="flex-1">Gerar nova senha?</span>
+              </label>
+            </p> */}
+              <p>
+                <label htmlFor="pwd" className="flex justify-start ">
+                  <span className="flex-1">Senha:</span>
+                </label>
+                <span className="relative block">
+                  <input
+                    id="pwd"
+                    type="text"
+                    {...register('pwd', { required: false })}
+                    className="pr-40"
+                  />
+                  <button
+                    className="absolute right-[1px] top-0 bottom-0 bg-gray-200 px-5 my-[1px] leading-none hover:bg-black hover:text-white"
+                    onClick={e => handleGeneratePassword(e)}
+                  >
+                    gerar senha
+                  </button>
+                </span>
+              </p>
+              <p className="py-4">
+                <label htmlFor="sendActivation" className="flex justify-start ">
+                  <span>
+                    <input
+                      type="checkbox"
+                      name="sendActivation"
+                      id="sendActivation"
+                      onChange={() => setLinkToActive(!linkToActive)}
+                      className="w-10"
+                      {...register('sendActivation', { required: false })}
+                    />
+                  </span>
+                  <span className="flex-1">
+                    Enviar link de ativação para o usuário?
+                  </span>
+                </label>
+              </p>
+              <p>
+                <input
+                  type="submit"
+                  value={sending ? 'salvando...' : 'salvar'}
+                  disabled={sending}
+                />
+              </p>
+            </form>
+          </div>
+        </div>
       </div>
     </Layout>
   )
@@ -151,7 +279,9 @@ export async function getServerSideProps(context) {
     variables,
   })
 
+  const _props = { ...data.person, sellers: data.sellers }
+
   return {
-    props: { ...data.person, sellers: data.sellers },
+    props: _props,
   }
 }

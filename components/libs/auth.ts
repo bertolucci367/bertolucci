@@ -5,6 +5,7 @@ import { SignJWT, jwtVerify } from 'jose'
 import { USER_TOKEN, JWT_SECRET_KEY } from './constants'
 import { jsonResponse } from './utils'
 import { setCookie } from 'nookies'
+import bcrypt from 'bcrypt'
 
 type User = {
   id: string
@@ -67,4 +68,10 @@ export async function setUserCookie(
   }
 
   return response
+}
+
+export async function getActivationToken({ id }) {
+  const text = `${id}${process.env.ACTIVATION_KEY}`
+  const hash = await bcrypt.hash(text, 12)
+  return hash
 }

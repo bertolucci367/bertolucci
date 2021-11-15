@@ -47,9 +47,15 @@ export function AuthProvider({ children }) {
       password,
     })
 
-    setUser(user)
+    const { activeLogin } = user
 
-    Router.push('/dashboard')
+    if (activeLogin) {
+      setUser(user)
+      Router.push('/dashboard')
+      return
+    }
+
+    Router.push('/login?msg=no-verified')
   }
 
   async function signOut() {

@@ -192,17 +192,17 @@ query Profile($id: ID!) {
 }
 `
 
-export const CreateCustomerQuery = `
-mutation createCustomer($input: CustomerCreateInput!) {
-  createCustomer(data: $input) {
+export const CreatePersonQuery = `
+mutation createPerson($input: PersonCreateInput!) {
+  createPerson(data: $input) {
     id
   }
 }
 `
 
-export const UpdateCustomerQuery = `
-mutation($id: ID!, $input: CustomerUpdateInput!) {
-  updateCustomer(
+export const UpdatePersonQuery = `
+mutation($id: ID!, $input: PersonUpdateInput!) {
+  updatePerson(
     where: { id: $id },
     data: $input
   ) {
@@ -211,16 +211,16 @@ mutation($id: ID!, $input: CustomerUpdateInput!) {
 }
 `
 
-export const PublishCustomerQuery = `
-mutation publishCustomer($id: ID!) {
-  publishCustomer(where: { id: $id }, to: PUBLISHED) {
+export const PublishPersonQuery = `
+mutation publishPerson($id: ID!) {
+  publishPerson(where: { id: $id }, to: PUBLISHED) {
     id
   }
 }
 `
 
-export const CustomerByEmailQuery = `
-query Customer($mail: String!) {
+export const PersonByEmailQuery = `
+query Person($mail: String!) {
   values: customer (where: { mail: $mail }, stage: PUBLISHED) {
     mail
     password
@@ -264,6 +264,17 @@ query ConsultantByUser($id: ID!) {
       phone
       id
     }
+  }
+}
+`
+
+export const UpdateUserQuery = `
+mutation($id: ID!, $input: PersonUpdateInput!) {
+  updatePerson(
+    where: { id: $id },
+    data: $input
+  ) {
+    id
   }
 }
 `
