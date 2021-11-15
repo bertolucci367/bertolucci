@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
   // Get customer data
   const { values: customer } = await gcms.request(PersonByEmailQuery, {
-    mail: email,
+    email,
   })
 
   // Compare password

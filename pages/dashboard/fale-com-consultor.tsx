@@ -39,10 +39,10 @@ export default function Talk() {
           <h1>Contate o seu consultor</h1>
 
           <h2>
-            {data?.consultant && (
+            {data?.seller && (
               <a
                 href={`https://api.whatsapp.com/send?phone=${clearPhone(
-                  data.consultant.phone,
+                  data.seller.phone,
                 )}`}
                 target="_blank"
                 className="text-14px "
@@ -64,7 +64,7 @@ export default function Talk() {
           </h3>
           <FormConsultant
             user={user}
-            consultant={data?.consultant}
+            consultant={data?.seller}
           ></FormConsultant>
         </LayoutLogin>
       </div>

@@ -177,14 +177,14 @@ query BlogoPage {
 
 export const ProfileQuery = `
 query Profile($id: ID!) {
-  values: customer (where: { id: $id }, stage: PUBLISHED) {
+  values: person (where: { id: $id }, stage: PUBLISHED) {
     id
-		mail
+		email
 		name
 		newsletter
 		phone
     company
-    consultant {
+    seller {
       id
       name
     }
@@ -220,9 +220,9 @@ mutation publishPerson($id: ID!) {
 `
 
 export const PersonByEmailQuery = `
-query Person($mail: String!) {
-  values: customer (where: { mail: $mail }, stage: PUBLISHED) {
-    mail
+query Person($email: String!) {
+  values: person (where: { email: $email }, stage: PUBLISHED) {
+    email
     password
     name
     id
@@ -257,8 +257,8 @@ query Catalogs {
 
 export const ConsultantsByUser = `
 query ConsultantByUser($id: ID!) {
-  values: customer(where: {id: $id}, stage: PUBLISHED) {
-    consultant {
+  values: person(where: {id: $id}, stage: PUBLISHED) {
+    seller {
       email
       name
       phone

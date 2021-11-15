@@ -8,7 +8,7 @@ import Checkbox from '~/components/products/Checkbox'
 
 type IFormInput = {
   name: string
-  mail: string
+  email: string
   phone: string
   company: string
   newsletter: boolean
@@ -38,7 +38,7 @@ const FormCustomer = ({ type, defaultValues, btnLabel }: FormProps) => {
 
   const updateSubmit = {
     update: async dataForm => {
-      delete dataForm.mail
+      delete dataForm.email
 
       const { id } = dataForm
       try {
@@ -97,19 +97,19 @@ const FormCustomer = ({ type, defaultValues, btnLabel }: FormProps) => {
         <input
           id="name"
           placeholder="nome"
-          aria-invalid={errors.mail ? 'true' : 'false'}
+          aria-invalid={errors.email ? 'true' : 'false'}
           {...register('name', { required: true })}
         />
       </div>
 
       <div>
-        <label htmlFor="mail">*e-mail</label>
+        <label htmlFor="email">*e-mail</label>
         <input
-          id="mail"
+          id="email"
           placeholder="e-mail"
           aria-invalid={errors.name ? 'true' : 'false'}
           disabled={type == 'update'}
-          {...register('mail', { required: true })}
+          {...register('email', { required: true })}
         />
       </div>
 

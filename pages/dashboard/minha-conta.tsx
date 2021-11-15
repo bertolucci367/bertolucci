@@ -5,9 +5,19 @@ import { gcms } from '~/services/gcms'
 
 import FormCustomer from '~/components/FormCustomer'
 import FormNewPassword from '~/components/FormNewPassword'
+import { JWT_SECRET_KEY, USER_TOKEN } from '~/components/libs/constants'
+import { parseCookies } from 'nookies'
+import { redirectsNoUser } from '~/services/auth'
+import { jwtVerify } from 'jose'
 
-const Profile = () => {
-  // const { consultant } = values
+type User = {
+  id: string
+  name: string
+  email: string
+  role: Array<string>
+}
+
+const Profile = ({ values, consultant }) => {
   const [showChangePwd, setShowChangePwd] = useState(false)
 
   return (
@@ -17,17 +27,19 @@ const Profile = () => {
           <div className="col-start-1 col-span-1 ">
             <section className="w-full self-start mb-20">
               <span className="mt-0 text-14px">consultor(a):</span>
-              <h1>{'consultant.name'}</h1>
+              <h1>{consultant.name}</h1>
             </section>
           </div>
 
           <div className="col-start-2 col-span-1 mb-20 flex flex-col ">
             <h1 className="w-full">minha conta</h1>
-            {/* <FormCustomer
-              type="update"
-              btnLabel="salvar dados"
-              defaultValues={'values'}
-            /> */}
+            {values && (
+              <FormCustomer
+                type="update"
+                btnLabel="salvar dados"
+                defaultValues={values}
+              />
+            )}
 
             <div className="mt-20">
               <button
@@ -37,7 +49,9 @@ const Profile = () => {
                 alterar senha
               </button>
 
-              {showChangePwd && <FormNewPassword />}
+              {showChangePwd && (
+                <FormNewPassword userID={values.id} email={values.email} />
+              )}
             </div>
           </div>
 
@@ -49,11 +63,26 @@ const Profile = () => {
 }
 
 export async function getServerSideProps(context) {
-  // const session = await getSession(context)
-  // const { values } = await gcms.request(ProfileQuery, { id: session.user_id })
+  const { [USER_TOKEN]: token } = parseCookies(context)
+
+  if (!token) {
+    return redirectsNoUser()
+  }
+
+  const verified = await jwtVerify(
+    token,
+    new TextEncoder().encode(JWT_SECRET_KEY),
+  )
+
+  const _user = verified.payload.user as User
+
+  console.log(_user)
+
+  const { values } = await gcms.request(ProfileQuery, { id: _user.id })
+  const { seller: consultant } = values
 
   return {
-    props: {},
+    props: { values, consultant },
   }
 }
 

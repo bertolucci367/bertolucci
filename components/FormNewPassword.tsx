@@ -4,7 +4,7 @@ import axios from 'axios'
 import FormMessage from '~/components/FormMessage'
 import SubmitButton from './SubmitButton'
 
-const FormNewPassword = () => {
+const FormNewPassword = ({ userID, email }) => {
   const [msgStatus, setMsgStatus] = useState(0)
   const [sending, setSending] = useState(false)
 
@@ -30,13 +30,13 @@ const FormNewPassword = () => {
     }
 
     try {
-      // const res = await axios.post('/api/customer/new-password', {
-      //   id: session.user_id,
-      //   email: session.user.email,
-      //   ...data,
-      // })
+      const res = await axios.post('/api/customer/new-password', {
+        id: userID,
+        email,
+        ...data,
+      })
 
-      // await axios.post('/api/customer/publish', { id: session.user_id })
+      await axios.post('/api/customer/publish', { id: userID })
 
       setMsgStatus(200)
       reset()
