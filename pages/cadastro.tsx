@@ -1,5 +1,5 @@
 import Layout from '~/components/Layout'
-import React, { useState } from 'react'
+import React from 'react'
 import LayoutLogin from '~/components/LayoutLogin'
 import FormCustomer from '~/components/FormCustomer'
 
@@ -17,7 +17,7 @@ const Signup = () => {
               defaultValues={{
                 name: '',
                 phone: '',
-                mail: '',
+                email: '',
                 company: '',
                 newsletter: false,
               }}
