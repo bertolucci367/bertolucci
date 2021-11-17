@@ -24,8 +24,7 @@ const query = `
   query People {
     newUsers: people(
         stage: PUBLISHED,
-        where: {AND: [{seller: null}],
-        role: user},
+        where: {AND: [{seller: null}], role: user},
         orderBy: createdAt_DESC
     ) {
       id

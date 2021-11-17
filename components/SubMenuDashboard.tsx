@@ -12,6 +12,7 @@ type User = {
 }
 
 const links = [
+  { path: '/dashboard/arquivos', label: '3D', role: ['user', 'seller'] },
   { path: '/dashboard/users', label: 'usuários', role: ['seller'] },
   {
     path: '/dashboard/fale-com-consultor',

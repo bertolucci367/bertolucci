@@ -8,6 +8,7 @@ interface CardProps {
   designer?: string
   compare?: any
   path: string
+  classNameImage?: string
 }
 
 const Card = ({
@@ -17,11 +18,12 @@ const Card = ({
   title,
   designer,
   compare,
+  classNameImage,
 }: CardProps) => {
   const _photo = photo[0] || {}
   return (
     <li
-      className="relative w-1/2
+      className="relative w-1/2 truncate
     px-2px mb-8
     sm:min-w-card sm:w-1/3
     lg:w-1/6 lg:max-w-card lg:min-h-cardD lg:mb-0"
@@ -33,7 +35,7 @@ const Card = ({
               image={_photo}
               alt={_photo.alt}
               fit="crop"
-              className={`lg:h-cardImgD`}
+              className={`lg:h-cardImgD ${classNameImage}`}
             />
             <div
               className={`opacity-0 transition-opacity group-hover:opacity-100 absolute bottom-1 left-2 z-20`}

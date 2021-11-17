@@ -91,3 +91,7 @@
 .error {
   @apply text-red-600;
 }
+
+.img-grayscale img {
+  @apply filter grayscale opacity-50;
+}

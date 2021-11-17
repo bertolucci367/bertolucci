@@ -75,9 +75,6 @@ export async function getServerSideProps(context) {
   )
 
   const _user = verified.payload.user as User
-
-  console.log(_user)
-
   const { values } = await gcms.request(ProfileQuery, { id: _user.id })
   const { seller: consultant } = values
 
