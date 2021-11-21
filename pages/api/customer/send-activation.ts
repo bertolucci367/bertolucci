@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     const URL = `${process.env.SITE_URL}/api/customer/activation?id=${userID}&token=${token}`
 
     message += `
-      <p>Para que você consiga acessar o nosso site é necessário que ative ela primeiro</p>
+      <p>Para que você consiga acessar a área do cliente do nosso site é necessário que você ative a sua conta clicando no link abaixo:</p>
       <p>${URL}</p>
     `
   }
