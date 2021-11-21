@@ -14,7 +14,7 @@ const Header = () => {
 
   const wrapStyle =
     'flex items-center lg:justify-center lg:items-start lg:pt-[18px]'
-  const stickStyle = 'sticky top-0 z-50 bg-white'
+  const stickStyle = 'sticky top-0 z-[99] bg-white'
 
   return (
     <>
