@@ -13,6 +13,7 @@ const Product = ({ product }) => {
   const shared = useAppContext()
 
   const [line] = product.lines
+  const files = product.files.filter(el => el.stage === 'PUBLISHED')
 
   let path = shared.productClosePath
 
@@ -75,6 +76,25 @@ const Product = ({ product }) => {
                 <Finishings
                   finishings={[...line.finishings, ...product.finishings]}
                 />
+
+                {files.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="">downloads</h4>
+                    <ul className="list-disc list-inside">
+                      {files.map(f => {
+                        return f.asset
+                          .filter(el => el.stage === 'PUBLISHED')
+                          .map(a => (
+                            <li>
+                              <a href={a.url} target="_blank">
+                                {f.name}
+                              </a>
+                            </li>
+                          ))
+                      })}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -153,6 +173,16 @@ const query = `
         description
         keywords {
           name
+        }
+      }
+
+      files(orderBy: name_ASC) {
+        id
+        stage
+        name
+        asset {
+          url
+          stage
         }
       }
     }
