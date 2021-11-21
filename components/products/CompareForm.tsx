@@ -20,6 +20,10 @@ interface IFormInput {
   email: string
   to: string
   message: string
+  ddd: string
+  phone: string
+  city: string
+  state: string
 }
 
 const CompareForm = ({ className = '' }) => {
@@ -71,7 +75,7 @@ const CompareForm = ({ className = '' }) => {
   }, [])
 
   return (
-    <div className={className}>
+    <div className="text-center">
       <Title>
         <div>
           <Image
@@ -86,7 +90,7 @@ const CompareForm = ({ className = '' }) => {
       </Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         {msgStatus === 200 && (
-          <FormMessage status="success">sucesso!</FormMessage>
+          <FormMessage status="success">enviado com sucesso</FormMessage>
         )}
         {msgStatus === 404 && (
           <FormMessage status="error">
@@ -123,6 +127,77 @@ const CompareForm = ({ className = '' }) => {
             required
             {...register('email', { required: true })}
           />
+        </FieldWrap>
+        <FieldWrap>
+          <div className="flex space-x-5">
+            <div className="w-1/3">
+              <label htmlFor="form-ddd">*DDD:</label>
+              <input
+                id="form-ddd"
+                name="ddd"
+                placeholder="ddd"
+                type="text"
+                required
+                maxLength={3}
+                {...register('ddd', { required: true })}
+              />
+            </div>
+            <div>
+              <label htmlFor="form-phone">*Telefone:</label>
+              <input
+                id="form-phone"
+                name="phone"
+                placeholder="telefone"
+                type="text"
+                required
+                {...register('phone', { required: true })}
+              />
+            </div>
+          </div>
+
+          {errors.ddd && errors.ddd.type === 'required' && (
+            <FormMessage status="error">{errors.ddd.message}</FormMessage>
+          )}
+
+          {errors.phone && errors.phone.type === 'required' && (
+            <FormMessage status="error">{errors.phone.message}</FormMessage>
+          )}
+        </FieldWrap>
+        <FieldWrap>
+          <div className="flex space-x-5">
+            <div className="w-1/3">
+              <label htmlFor="form-state">*Estado:</label>
+              <input
+                id="form-state"
+                name="state"
+                placeholder="UF"
+                type="text"
+                required
+                maxLength={2}
+                className="uppercase"
+                {...register('state', { required: true })}
+              />
+            </div>
+            <div>
+              <label htmlFor="form-city">*Cidade:</label>
+              <input
+                id="form-city"
+                name="city"
+                placeholder="cidade"
+                type="text"
+                required
+                {...register('city', { required: true })}
+              />
+            </div>
+          </div>
+
+          {errors.state && errors.state.type === 'required' && (
+            <FormMessage status="error">{errors.state.message}</FormMessage>
+          )}
+
+          {errors.city && errors.city.type === 'required' && (
+            <FormMessage status="error">{errors.city.message}</FormMessage>
+          )}
         </FieldWrap>
         <FieldWrap>
           <label htmlFor="form-message">Mensagem:</label>

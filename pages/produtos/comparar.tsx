@@ -30,12 +30,12 @@ const ComparePage = () => {
   // shared.compare = [{ slug: 'ju-ab', code: 'A920', name: 'ju.ab' }]
 
   const { data, error } = useSWR<DataProps>(
-    `/api/compare?slugs=${_slugs.join(',')}`,
+    `/api/compare?slugs=${_slugs}`,
     fetcher,
   )
 
   useEffect(() => {
-    if (!data || shared.compare.length === 0) return
+    if (!data) return
 
     const { products } = data
 

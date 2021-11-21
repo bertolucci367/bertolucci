@@ -55,7 +55,17 @@ export const sendContact = async ({
   })
 }
 
-export const sendCompare = async ({ name, email, message, products, url }) => {
+export const sendCompare = async ({
+  name,
+  email,
+  message,
+  products,
+  url,
+  ddd,
+  phone,
+  city,
+  state,
+}) => {
   await fetch(SENDGRID_API, {
     method: 'POST',
     headers: {
@@ -84,10 +94,12 @@ export const sendCompare = async ({ name, email, message, products, url }) => {
 
             <b>Nome:</b> ${name}<br/>
             <b>E-mail:</b> ${email}<br/>
+            <b>Telefone:</b> (${ddd}) ${phone}<br/>
+            <b>Cidade:</b> ${city} - ${state}<br/>
 
             <p><b>Produtos selecionados no site:</b></p>
             <ul>${products.map(val => `<li>${val}</li>`).join('')}</ul>
-            <p><b>URL:</b> ${url}</p>
+            <p><b>URL:</b> ${process.env.SITE_URL}${url}</p>
           `,
         },
       ],
