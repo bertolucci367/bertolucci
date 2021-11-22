@@ -26,8 +26,12 @@ const Profile = ({ values, consultant }) => {
         <div className="grid lg:grid-cols-3 h-full gap-x-20">
           <div className="col-start-1 col-span-1 ">
             <section className="w-full self-start mb-20">
-              <span className="mt-0 text-14px">consultor(a):</span>
-              <h1>{consultant.name}</h1>
+              {consultant && (
+                <>
+                  <span className="mt-0 text-14px">consultor(a):</span>
+                  <h1>{consultant?.name}</h1>
+                </>
+              )}
             </section>
           </div>
 
