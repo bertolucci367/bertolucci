@@ -107,7 +107,7 @@ const FormCustomer = ({ type, defaultValues, btnLabel }: FormProps) => {
         <input
           id="email"
           placeholder="e-mail"
-          aria-invalid={errors.name ? 'true' : 'false'}
+          aria-invalid={errors.email ? 'true' : 'false'}
           disabled={type == 'update'}
           {...register('email', { required: true })}
         />

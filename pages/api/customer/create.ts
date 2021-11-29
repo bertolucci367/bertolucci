@@ -3,13 +3,13 @@ import { sendEmailToBertolucci } from '~/components/libs/sendEmail'
 import { gcms } from '~/services/gcms'
 
 export default async function handler(req, res) {
-  const { id, name, mail, phone, company, newsletter } = req.body
+  const { id, name, email, phone, company, newsletter } = req.body
 
   const profile = {
     subject: '',
     message: `
     <b>Nome:</b> ${name}<br/>
-    <b>E-mail:</b> ${mail}<br/>
+    <b>E-mail:</b> ${email}<br/>
     <b>Telefone:</b> ${phone}<br/>
     <b>Empresa:</b> ${company}<br/>
     <b>Newsletter:</b> ${newsletter ? 'Sim' : 'Não'}<br/>
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   try {
     await gcms.request(CreatePersonQuery, {
       id,
-      input: { name, mail, phone, company, newsletter },
+      input: { name, email, phone, company, newsletter, role: ['user'] },
     })
 
     profile.subject = `${name} se cadastrou no site`

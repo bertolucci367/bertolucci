@@ -43,19 +43,14 @@ export default function EditUser({
   company,
   sellers,
 }) {
-  // const defaultChoose = seller ? seller.id : ''
-
   const [linkToActive, setLinkToActive] = useState(true)
-  const [newPWD, setNewPWD] = useState(true)
   const [sending, setSending] = useState(false)
   const [msgStatus, setMsgStatus] = useState(0)
 
   const {
     register,
     handleSubmit,
-    reset,
     setValue,
-    setError,
     formState: { errors },
   } = useForm()
 
@@ -80,7 +75,7 @@ export default function EditUser({
         },
       )
 
-      const _res = await axios.post('/api/send-email', {
+      await axios.post('/api/send-email', {
         to: email,
         subject: `Acesso ao Bertolucci.com.br`,
         message: `
@@ -89,8 +84,6 @@ export default function EditUser({
           <p>Atenciosamente, <br/> Bertolucci</p>
         `,
       })
-
-      console.log('>>>>', _res)
     } catch (err) {
       console.log('error: ', err)
     }
@@ -116,10 +109,7 @@ export default function EditUser({
       setMsgStatus(200)
       // reset()
     } catch (err) {
-      // setError('current', {
-      //   type: 'manual',
-      //   message: 'senha atual não confere com a senha cadastrada.',
-      // })
+      setMsgStatus(404)
     } finally {
       setSending(false)
     }
@@ -143,9 +133,7 @@ export default function EditUser({
               </FormMessage>
             )}
             {msgStatus === 404 && (
-              <FormMessage status="error">
-                ops... tente mais tarde ou entre em contato por telefone.
-              </FormMessage>
+              <FormMessage status="error">ops... houve um erro.</FormMessage>
             )}
 
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -157,21 +145,6 @@ export default function EditUser({
                   defaultValue={seller?.id}
                 />
               </p>
-              {/* <p>
-              <label htmlFor="newPWD" className="flex justify-start ">
-                <span>
-                  <input
-                    type="checkbox"
-                    name="newPWD"
-                    id="newPWD"
-                    onChange={() => setNewPWD(!newPWD)}
-                    className="w-10"
-                    {...register('newPWD', { required: false })}
-                  />
-                </span>
-                <span className="flex-1">Gerar nova senha?</span>
-              </label>
-            </p> */}
               <p>
                 <label htmlFor="pwd" className="flex justify-start ">
                   <span className="flex-1">Senha:</span>
@@ -225,7 +198,7 @@ export default function EditUser({
 
 const query = `
   query Person($id: ID!) {
-    person: person (where: { id: $id }) {
+    person: person (stage: DRAFT, where: { id: $id }) {
       id
       name
       email
@@ -240,7 +213,7 @@ const query = `
 
     sellers: people(
       stage: PUBLISHED,
-      where: { role: seller },
+      where: { role_contains_all: seller },
       orderBy: name_ASC
     ) {
       id
@@ -274,10 +247,12 @@ export async function getServerSideProps(context) {
   const variables = { id }
   const host = process.env.SITE_URL
 
-  const { data } = await axios.post(`${host}/api/graphql`, {
+  const args = {
     query,
     variables,
-  })
+  }
+
+  const { data } = await axios.post(`${host}/api/graphql`, args)
 
   const _props = { ...data.person, sellers: data.sellers }
 

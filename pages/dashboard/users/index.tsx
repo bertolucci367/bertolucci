@@ -23,7 +23,7 @@ const fetcher = async query => {
 const query = `
   query People {
     newUsers: people(
-        stage: PUBLISHED,
+        stage: DRAFT,
         where: {AND: [{seller: null}], role: user},
         orderBy: createdAt_DESC
     ) {
