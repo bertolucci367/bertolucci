@@ -65,5 +65,5 @@ export default async function handler(req, res) {
     console.log(err)
   }
 
-  res.redirect(307, 'http://localhost:3000/login?msg=active')
+  res.redirect(307, `${process.env.SITE_URL}/login?msg=active`)
 }
