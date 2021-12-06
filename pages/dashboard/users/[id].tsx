@@ -42,6 +42,7 @@ export default function EditUser({
   seller,
   company,
   sellers,
+  host,
 }) {
   const [linkToActive, setLinkToActive] = useState(true)
   const [sending, setSending] = useState(false)
@@ -81,7 +82,14 @@ export default function EditUser({
         message: `
           <p>Olá <b>${name}</b>,</p>
           ${emailData.msg}
-          <p>Atenciosamente, <br/> Bertolucci</p>
+          <p>Atenciosamente</p>
+          <p>
+            <img
+              src="${host}/logo-slogan.jpeg"
+              alt="bertolucci"
+              width="190"
+            />
+          </p>
         `,
       })
     } catch (err) {
@@ -254,7 +262,11 @@ export async function getServerSideProps(context) {
 
   const { data } = await axios.post(`${host}/api/graphql`, args)
 
-  const _props = { ...data.person, sellers: data.sellers }
+  const _props = {
+    ...data.person,
+    sellers: data.sellers,
+    host: process.env.SITE_URL,
+  }
 
   return {
     props: _props,
