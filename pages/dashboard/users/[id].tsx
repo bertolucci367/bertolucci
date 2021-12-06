@@ -82,14 +82,14 @@ export default function EditUser({
         message: `
           <p>Olá <b>${name}</b>,</p>
           ${emailData.msg}
-          <p>Atenciosamente</p>
-          <p>
+          <p>Atenciosamente,<br />
             <img
               src="${host}/logo-slogan.jpeg"
               alt="bertolucci"
-              width="190"
+              width="112"
             />
           </p>
+
         `,
       })
     } catch (err) {
