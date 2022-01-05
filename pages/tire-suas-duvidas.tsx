@@ -188,6 +188,21 @@ function FAQ() {
             parcial ou totalmente.
           </li>
           <li>
+            Nossos produtos são fabricados manualmente e por isso algum grau de
+            variação pode ocorrer.
+          </li>
+          <li>
+            Trabalhamos com os materiais e acabamentos da mais alta qualidade,
+            os quais podem estar sujeitos à variabilidade de seus aspectos,
+            especialmente se oferecidos enquanto “naturais”. Mesmo alguns
+            materiais tratados podem sofrer alguma variação, pois a composição
+            física e química de metais, as misturas para a produção de vidros e
+            cristais e os processos químicos de envelhecimento e oxidação,
+            dentre outros fatores, inclusive a ação do tempo e do clima, podem
+            ocasionar alterações que podem trazer algum nível de diferença entre
+            a amostra e o produto entregue ao cliente.
+          </li>
+          <li>
             Nossa garantia é de 1 (um) ano a contar da data de entrega do pedido
             contra defeitos de fabricação. Qualquer vício de instalação, uso ou
             depreciação pelo tempo, clima ou qualquer outro vício não será
