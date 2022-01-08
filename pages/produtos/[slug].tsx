@@ -34,10 +34,6 @@ const Product = ({ product }) => {
           name="description"
           content={product.seo?.description || product.text?.text}
         ></meta>
-        <meta
-          name="keywords"
-          content={product.seo?.keywords.map(k => k.name).join(',')}
-        ></meta>
       </Head>
       <Container>
         <Carousel slides={images} close={path} nav>
