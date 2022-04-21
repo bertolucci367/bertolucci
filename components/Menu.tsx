@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import ActiveLink from './Link'
 import SubMenu from './SubMenu'
-import { useAppContext } from '~/components/context/AppContext'
+import { useAppContext } from './context/AppContext'
 
 const menu = [
   { name: 'Produtos', url: '/produtos', hasSubmenu: true },
