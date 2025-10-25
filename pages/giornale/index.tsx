@@ -16,6 +16,7 @@ const Blog = ({ data }) => {
                 photo={item.assets}
                 path={`/giornale/${item.slug}`}
                 title={item.title}
+                priority={i < 6}
               ></Card>
             ))}
           </ul>

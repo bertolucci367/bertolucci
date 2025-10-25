@@ -11,11 +11,18 @@ const List = ({ items = [], products = [], ...args }) => {
 
     if (!product) return
 
-    return <Card key={product.slug} product={product} {...args} />
+    return (
+      <Card key={product.slug} product={product} priority={i < 6} {...args} />
+    )
   })
 
-  const listProducts = products.map(product => (
-    <Card key={product.slug} product={product} {...args} />
+  const listProducts = products.map((product, i) => (
+    <Card
+      key={product.slug}
+      product={product}
+      priority={items.length === 0 && i < 6}
+      {...args}
+    />
   ))
 
   return (

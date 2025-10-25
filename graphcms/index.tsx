@@ -7,10 +7,12 @@ const fields = {
       name
     }
     photo {
+      id
       handle
       height
       width
       alt
+      url(transformation: {image: {resize: {width: 300, height: 300, fit: crop}}})
     }
     lines {
       id
@@ -80,6 +82,7 @@ query Designers {
       height
       width
       alt
+      url(transformation: {image: {resize: {width: 300, height: 300, fit: crop}}})
     }
   }
 }
@@ -99,6 +102,7 @@ query Designer($id: String!) {
       height
       width
       alt
+      url(transformation: {image: {resize: {width: 300, height: 300, fit: crop}}})
     }
     products {
       ${fields.product}
@@ -136,7 +140,7 @@ query Blog($id: String!) {
       height
       width
       alt
-      url
+      url(transformation: {image: {resize: {width: 300, height: 300, fit: crop}}})
     }
     createdAt
     id
@@ -168,6 +172,7 @@ query BlogoPage {
           height
           width
           alt
+          url(transformation: {image: {resize: {width: 300, height: 300, fit: crop}}})
         }
       }
     }

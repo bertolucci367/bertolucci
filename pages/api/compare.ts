@@ -24,10 +24,12 @@ export default async (req, res) => {
               name
             }
             photo {
+              id
               handle
               height
               width
               alt
+              url(transformation: {image: {resize: {width: 300, height: 300, fit: crop}}})
             }
             lines {
               id

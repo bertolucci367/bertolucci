@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { GraphQLClient } from 'graphql-request'
-import GraphImg from 'graphcms-image'
 import Layout from '~/components/Layout'
+import Image from 'next/image'
 
 const Index = ({ data }) => {
   const [windowWidthSize, setWindowWidthSize] = useState(0)
@@ -14,14 +14,19 @@ const Index = ({ data }) => {
     getImageByResolution({
       photoCover,
       photoCoverMobile,
-    }).map(({ handle, width, height }) => (
-      <GraphImg
-        image={{ handle, width, height }}
-        withWebp={true}
-        style={{ position: 'unset' }}
-        maxWidth={windowWidthSize > windowHeightSize ? 1920 : 768}
-      />
-    ))
+    }).map(({ width, height, url, alt }) => {
+      return (
+        <Image
+          src={url}
+          alt={alt}
+          width={width}
+          height={height}
+          className={`object-cover w-full h-auto`}
+          style={{ position: 'unset' }}
+          layout="fill"
+        />
+      )
+    })
 
   useEffect(() => {
     function handleResize() {
@@ -110,11 +115,15 @@ export async function getStaticProps({ preview = false }) {
               handle
               height
               width
+              url
+              alt
             }
             photoCover {
               handle
               height
               width
+              url
+              alt
             }
           }
 
