@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import GraphImg from 'graphcms-image'
 import ListLink from '~/components/products/ListLink'
 import Checkbox from '~/components/products/Checkbox'
 import { add, remove, has } from '~/components/products/compare'
@@ -22,6 +21,7 @@ const Card = ({
   useLineName = false,
   useProductCode = false,
   nameVisible = false,
+  priority = false,
 }) => {
   const router = useRouter()
   const shared = useAppContext()
@@ -70,14 +70,19 @@ const Card = ({
       >
         <a className="group hover:no-underline">
           <div className={`relative`}>
-            <GraphImg
-              image={photo}
-              alt={photo.alt}
-              fit="crop"
-              className={`lg:h-cardImgD`}
-            />
+            <div className={`relative lg:h-cardImgD`}>
+              <Image
+                src={photo?.url}
+                alt={photo?.alt}
+                objectFit="cover"
+                layout="fill"
+                quality={100}
+                sizes="(min-width: 1024px) 16.66vw, (min-width: 640px) 33.33vw, 50vw"
+                priority={priority}
+              />
+            </div>
             <div
-              className={`absolute bottom-1 left-2 z-20 pt-0
+              className={`absolute bottom-8px left-8px z-20 pt-0
               transition-opacity duration-300 group-hover:opacity-100
               ${has({ product, shared }) ? 'opacity-100' : 'lg:opacity-0'}`}
             >

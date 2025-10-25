@@ -1,6 +1,6 @@
-import GraphImg from 'graphcms-image'
 import { useState, useEffect } from 'react'
 import uniqBy from 'lodash/uniqBy'
+import Image from 'next/image'
 
 const Finishings = ({ finishings }) => {
   const publishedValid = finishings
@@ -46,14 +46,15 @@ const Finishings = ({ finishings }) => {
           </li>
         ))}
       </ul>
-      <ul className={`grid grid-cols-3 gap-4 lg:hidden`}>
+      <ul data-slot="rodrigo" className={`grid grid-cols-3 gap-4 lg:hidden`}>
         {thumbs.map(f => (
           <li key={f.id} className={`flex flex-col bg-gray-100 w-full`}>
-            <GraphImg
-              image={f.thumb}
-              fit="crop"
-              className={`w-full h-32`}
+            <Image
+              src={f.thumb.url}
               alt={getAlt(f)}
+              width={32}
+              height={32}
+              className={`w-full h-32 object-cover`}
             />
             <label htmlFor={f.id} className={`p-2 block font-medium`}>
               {f.name}
@@ -67,19 +68,21 @@ const Finishings = ({ finishings }) => {
             className="group flex flex-col w-full lg:w-10 lg:h-10 m-2px"
             key={f.id}
           >
-            <GraphImg
-              image={f.thumb}
-              fit="crop"
-              className={`w-10 h-10`}
+            <Image
+              src={f.thumb.url}
               alt={getAlt(f)}
+              width={40}
+              height={40}
+              className={`w-10 h-10 object-cover`}
             />
 
             <div className="bg-gray-100 hidden group-hover:block absolute z-10 top-0 left-0 transform -translate-y-full -mt-4 shadow-2xl">
-              <GraphImg
-                image={f.thumb}
-                fit="crop"
-                className={`w-96 h-48`}
+              <Image
+                src={f.thumb.url}
                 alt={getAlt(f)}
+                width={384}
+                height={192}
+                className={`w-96 h-48 object-cover`}
               />
               <label htmlFor={f.id} className={`p-4 block`}>
                 {f.name}

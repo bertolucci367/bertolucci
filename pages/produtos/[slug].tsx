@@ -6,6 +6,7 @@ import { GraphQLClient } from 'graphql-request'
 import { useAppContext } from '~/components/context/AppContext'
 import Properties from '~/components/products/Properties'
 import Finishings from '~/components/products/Finishings'
+import Image from 'next/image'
 
 import style from './product.module.css'
 
@@ -21,8 +22,17 @@ const Product = ({ product }) => {
     path = `${shared.productClosePath}/linhas/${line.slug}/${product.code}`
   }
 
-  const images = product.photo.map((img: any) => (
-    <img src={img.url} height={img.height} width={img.width} alt={img.alt} />
+  const images = product.photo.map((img: any, i: number) => (
+    <Image
+      src={img.url}
+      height={img.height}
+      width={img.width}
+      alt={img.alt || ''}
+      key={img.id}
+      quality={100}
+      priority={i === 0}
+      loading={i === 0 ? 'eager' : 'lazy'}
+    />
   ))
 
   return (
@@ -125,6 +135,7 @@ const query = `
         name
       }
       photo(skip: 1) {
+        id
         url
         alt
         width
@@ -140,6 +151,7 @@ const query = `
             name
           }
           thumb {
+            id
             url
             alt
             handle
@@ -160,6 +172,7 @@ const query = `
           name
         }
         thumb {
+          id
           url
           alt
           handle

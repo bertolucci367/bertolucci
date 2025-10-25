@@ -42,10 +42,12 @@ export async function getServerSideProps({ params }) {
         name
       }
       photo {
+        id
         handle
         height
         width
         alt
+        url(transformation: {image: {resize: {width: 300, height: 300, fit: crop}}})
       }
       lines {
         id

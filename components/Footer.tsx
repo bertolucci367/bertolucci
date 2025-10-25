@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="hidden grid-in-f1 pb-8 lg:flex justify-center">
         <LogoFooter />
       </div>
-      <div className="z-50 pb-4 grid-in-f1 lg:flex lg:items-center lg:flex-wrap lg:grid-in-f3 ">
+      <div className="bg-white z-50 pb-4 grid-in-f1 lg:bg-transparent lg:flex lg:items-center lg:flex-wrap lg:grid-in-f3 ">
         <div className="lg:text-right w-full">
           <Link href="/newsletter">
             <a className="block">Newsletter</a>

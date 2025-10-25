@@ -9,12 +9,13 @@ const Designers = ({ designers }) => {
     <Layout title="designers">
       <div data-label="designers" className="grid-in-main">
         <ul className={ListUL}>
-          {designers.map(d => (
+          {designers.map((d, i) => (
             <Card
               key={d.slug}
               photo={d.photo}
               path={`/designers/${d.slug}`}
               title={d.name}
+              priority={i < 6}
             ></Card>
           ))}
         </ul>

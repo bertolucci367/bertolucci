@@ -1,12 +1,12 @@
 import Image from 'next/image'
 
 const Checkbox = ({ fnChange, name = '', checked }) => (
-  <label onClick={e => e.stopPropagation()}>
+  <label onClick={e => e.stopPropagation()} className="p-0 flex">
     {!checked && (
-      <Image src="/comparar-empty.svg" layout="fixed" height="16" width="16" />
+      <Image src="/comparar-empty.svg" layout="fixed" height="18" width="18" />
     )}
     {checked && (
-      <Image src="/comparar.svg" layout="fixed" height="16" width="16" />
+      <Image src="/comparar.svg" layout="fixed" height="18" width="18" />
     )}
     <input
       name={name}

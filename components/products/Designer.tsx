@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import GraphImg from 'graphcms-image'
+import Image from 'next/image'
 
 const DesignerWrap = ({ children }) => (
   <div className="lg:sticky top-36">{children}</div>
@@ -22,7 +22,13 @@ const Designer = ({ designer }) => {
     <DesignerWrap>
       {photo && (
         <Photo>
-          <GraphImg image={photo} alt={photo.alt} fit="crop" />
+          <Image
+            src={photo?.url}
+            alt={photo?.alt}
+            width={300}
+            height={300}
+            className={`object-cover w-full h-auto`}
+          />
         </Photo>
       )}
 

@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import { useAppContext } from '~/components/context/AppContext'
-import GraphImg from 'graphcms-image'
 import MenuItemThumb from '~/components/products/MenuItemThumb'
-
 import style from './MenuItem.module.css'
+import Image from 'next/image'
 
 interface MenuItemProps {
   name?: string
@@ -84,10 +83,11 @@ export const MenuItem = ({
                       onClick={() => handleSubLink()}
                     >
                       {photo && photo[0] && (
-                        <GraphImg
-                          image={photo[0]}
+                        <Image
+                          src={photo[0]?.url}
                           alt={photo[0]?.alt}
-                          fit="crop"
+                          width={32}
+                          height={32}
                           className={`mr-2.5 h-32px w-32px`}
                         />
                       )}

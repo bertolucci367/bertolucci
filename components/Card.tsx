@@ -1,4 +1,4 @@
-import GraphImg from 'graphcms-image'
+import Image from 'next/image'
 import ListLink from '~/components/products/ListLink'
 
 interface CardProps {
@@ -8,6 +8,7 @@ interface CardProps {
   designer?: string
   compare?: any
   path: string
+  priority?: boolean
 }
 
 const Card = ({
@@ -17,8 +18,14 @@ const Card = ({
   title,
   designer,
   compare,
+  priority = false,
 }: CardProps) => {
   const _photo = photo[0] || {}
+
+  if (!_photo || !_photo.url) {
+    return null
+  }
+
   return (
     <li
       className="relative w-1/2
@@ -29,12 +36,16 @@ const Card = ({
       <ListLink href={path} compare={compare}>
         <a className="group hover:no-underline">
           <div className={`relative`}>
-            <GraphImg
-              image={_photo}
-              alt={_photo.alt}
-              fit="crop"
-              className={`lg:h-cardImgD`}
-            />
+            <div className={`relative lg:h-cardImgD`}>
+              <Image
+                src={_photo?.url}
+                alt={_photo?.alt}
+                objectFit="cover"
+                layout="fill"
+                sizes="(min-width: 1024px) 16.66vw, (min-width: 640px) 33.33vw, 50vw"
+                priority={priority}
+              />
+            </div>
             <div
               className={`opacity-0 transition-opacity group-hover:opacity-100 absolute bottom-1 left-2 z-20`}
             >
