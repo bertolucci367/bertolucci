@@ -38,6 +38,7 @@ export async function getStaticProps({ params, preview = false }) {
       designer: values,
       products: values.products,
     }, // will be passed to the page component as props
+    revalidate: 86400, // Revalidate every 24 hours
   }
 }
 
@@ -57,7 +58,7 @@ export async function getStaticPaths() {
   // Get the paths we want to pre-render based on posts
   const paths = values.map(el => ({ params: { slug: el.slug } }))
 
-  return { paths, fallback: false }
+  return { paths, fallback: 'blocking' }
 }
 
 export default Designer
