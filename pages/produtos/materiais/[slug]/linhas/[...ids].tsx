@@ -63,6 +63,7 @@ export async function getStaticProps({ params, preview = false }) {
       products: { ...values, products: products },
       product: { ...values, products: product },
     }, // will be passed to the page component as props
+    revalidate: 86400, // Revalidate every 24 hours
   }
 }
 
@@ -96,7 +97,7 @@ export async function getStaticPaths() {
     })
   })
 
-  return { paths, fallback: false }
+  return { paths, fallback: 'blocking' }
 }
 
 export default LinesByMaterial

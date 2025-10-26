@@ -49,6 +49,7 @@ export async function getStaticProps({ params, preview = false }) {
     props: {
       data: values,
     }, // will be passed to the page component as props
+    revalidate: 86400, // Revalidate every 24 hours
   }
 }
 
@@ -69,7 +70,7 @@ export async function getStaticPaths() {
 
   values.forEach((el: any) => paths.push({ params: { slug: el.slug } }))
 
-  return { paths, fallback: false }
+  return { paths, fallback: 'blocking' }
 }
 
 export default Blog

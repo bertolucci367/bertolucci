@@ -218,12 +218,13 @@ export async function getStaticProps({ params, preview = false }) {
     props: {
       product: values,
     }, // will be passed to the page component as props
+    revalidate: 86400, // Revalidate every 24 hours
   }
 }
 
 const _paths = `
 query Products {
-  values: products(first: 10000) {
+  values: products(first: 10) {
     slug
   }
 }
@@ -236,7 +237,7 @@ export async function getStaticPaths() {
   // Get the paths we want to pre-render based on posts
   const paths = values.map(el => ({ params: { slug: el.slug } }))
 
-  return { paths, fallback: false }
+  return { paths, fallback: 'blocking' }
 }
 
 export default Product
