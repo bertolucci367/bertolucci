@@ -19,15 +19,23 @@ const Lines = ({ data }) => {
 
   return (
     <LayoutProduct>
-      <List
-        products={data.product}
-        show
-        useProductCode
-        close={{
-          pathname: '/produtos',
-        }}
-      />
-      <List products={data.products} show useProductCode />
+      {data.product.length > 0 && data?.products?.length > 0 ? (
+        <>
+          <List
+            products={data.product}
+            show
+            useProductCode
+            close={{
+              pathname: '/produtos',
+            }}
+          />
+          <List products={data.products} show useProductCode />
+        </>
+      ) : (
+        <div className="px-4 py-6 text-center flex items-center justify-center h-full text-18px font-medium">
+          Nenhum produto publicado nesta linha no momento.
+        </div>
+      )}
     </LayoutProduct>
   )
 }
@@ -53,7 +61,7 @@ export async function getStaticProps({ params, preview = false }) {
     idx = products.findIndex((p: any) => p.code === code)
   }
 
-  product = products.splice(idx, 1)
+  product = [...products.splice(idx, 1)]
 
   return {
     props: {
@@ -78,15 +86,19 @@ export async function getStaticPaths() {
   const { values } = await gcms.request(_paths)
 
   // Get the paths we want to pre-render based on posts
-  const paths = []
+  const paths: { params: { slug: string[] } }[] = []
 
   values.forEach((el: any) => {
-    el.products.forEach((product: any) => {
-      paths.push({ params: { slug: [el.slug] } })
-      paths.push({
-        params: { slug: [el.slug, product.code] },
+    // Always include the base line path even if there are no products
+    paths.push({ params: { slug: [el.slug] } })
+    // Include product code variant paths when available
+    if (Array.isArray(el.products)) {
+      el.products.forEach((product: any) => {
+        if (product?.code) {
+          paths.push({ params: { slug: [el.slug, product.code] } })
+        }
       })
-    })
+    }
   })
 
   return { paths, fallback: false }

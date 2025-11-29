@@ -58,7 +58,7 @@ query Material($id: String!) {
 
 export const LineQuery = `
 query Line($id: String!) {
-  values: line (where: { slug: $id}) {
+  values: line (where: { slug: $id}, stage: PUBLISHED) {
     id
     stage
     updatedAt
