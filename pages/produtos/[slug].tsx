@@ -32,6 +32,7 @@ const Product = ({ product }) => {
       quality={100}
       priority={i === 0}
       loading={i === 0 ? 'eager' : 'lazy'}
+      unoptimized={process.env.NODE_ENV === 'production'}
     />
   ))
 
