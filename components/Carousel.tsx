@@ -107,7 +107,11 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
         <ol className="relative flex" ref={listRef}>
           {slides.map((s, i) => (
             <li className={i === curr ? 'carousel active' : 'carousel'} key={i}>
-              <div className={`h-full w-full overflow-hidden`}>{s}</div>
+              <div
+                className={`relative h-full w-full overflow-hidden min-h-[220px] lg:min-h-[60vh]`}
+              >
+                {s}
+              </div>
             </li>
           ))}
         </ol>
