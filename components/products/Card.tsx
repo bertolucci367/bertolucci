@@ -70,7 +70,10 @@ const Card = ({
       >
         <a className="group hover:no-underline">
           <div className={`relative`}>
-            <div className={`relative lg:h-cardImgD`}>
+            <div
+              className={`relative min-h-[200px] lg:h-cardImgD`}
+              data-img={photo.url}
+            >
               <Image
                 src={photo?.url}
                 alt={photo?.alt}
