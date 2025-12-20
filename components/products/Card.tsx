@@ -82,6 +82,7 @@ const Card = ({
                 quality={100}
                 sizes="(min-width: 1024px) 16.66vw, (min-width: 640px) 33.33vw, 50vw"
                 priority={priority}
+                unoptimized={process.env.NODE_ENV === 'production'}
               />
             </div>
             <div
