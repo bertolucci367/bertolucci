@@ -1,5 +1,4 @@
 import { GraphQLClient } from 'graphql-request'
-import { useRouter } from 'next/router'
 import LayoutProduct from '~/components/LayoutProduct'
 import List from '~/components/products/List'
 import { useAppContext } from '~/components/context/AppContext'
@@ -7,7 +6,6 @@ import { LineQuery } from '~/graphcms/index'
 import { useEffect } from 'react'
 
 const Lines = ({ data }) => {
-  const router = useRouter()
   const shared = useAppContext()
 
   useEffect(() => {
@@ -17,9 +15,12 @@ const Lines = ({ data }) => {
     })
   }, [])
 
+  const hasProduct = data?.product?.length > 0
+  const hasProducts = data?.products?.length > 0
+
   return (
     <LayoutProduct>
-      {data.product.length > 0 && data?.products?.length > 0 ? (
+      {hasProduct && (
         <>
           <List
             products={data.product}
@@ -29,9 +30,12 @@ const Lines = ({ data }) => {
               pathname: '/produtos',
             }}
           />
-          <List products={data.products} show useProductCode />
         </>
-      ) : (
+      )}
+
+      {hasProducts && <List products={data.products} show useProductCode />}
+
+      {!hasProduct && !hasProducts && (
         <div className="px-4 py-6 text-center flex items-center justify-center h-full text-18px font-medium">
           Nenhum produto publicado nesta linha no momento.
         </div>
