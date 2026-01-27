@@ -22,7 +22,12 @@ const Product = ({ product }) => {
     path = `${shared.productClosePath}/linhas/${line.slug}/${product.code}`
   }
 
-  const images = product.photo.map((img: any, i: number) => (
+  const photos =
+    product.cover && product.cover.length > 0
+      ? product.photo
+      : product.photo.slice(1)
+
+  const images = photos.map((img: any, i: number) => (
     <Image
       src={img.url}
       height={img.height}
@@ -135,7 +140,14 @@ const query = `
       designer {
         name
       }
-      photo(skip: 1) {
+      cover {
+        id
+        url
+        alt
+        width
+        height
+      }
+      photo {
         id
         url
         alt

@@ -25,7 +25,9 @@ const Card = ({
 }) => {
   const router = useRouter()
   const shared = useAppContext()
-  const [photo] = product.photo
+
+  const [photo] =
+    product.cover && product.cover.length > 0 ? product.cover : product.photo
 
   const [line] = product.lines
 

@@ -6,6 +6,14 @@ const fields = {
     designer {
       name
     }
+    cover {
+      id
+      handle
+      height
+      width
+      alt
+      url(transformation: {image: {resize: {width: 300, height: 300, fit: crop}}})
+    }
     photo {
       id
       handle

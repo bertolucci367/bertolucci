@@ -36,7 +36,7 @@ const Carousel = ({ slides, close, nav, children }: Props) => {
     setCurr(curr === 0 ? length - 1 : curr - 1)
   }
 
-  const getTextWrapWidth = () => listRef.current.clientWidth
+  const getTextWrapWidth = () => listRef.current?.clientWidth
 
   const recursiveWidth = w => {
     if (w > 0) return
