@@ -72,7 +72,7 @@ const Card = ({
           <div className={`relative`}>
             <div
               className={`relative min-h-[200px] lg:h-cardImgD`}
-              data-img={photo.url}
+              data-img={photo?.url}
             >
               <Image
                 src={photo?.url}

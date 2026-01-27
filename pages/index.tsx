@@ -24,6 +24,7 @@ const Index = ({ data }) => {
           className={`object-cover w-full h-auto`}
           style={{ position: 'unset' }}
           layout="fill"
+          unoptimized={process.env.NODE_ENV === 'production'}
         />
       )
     })
