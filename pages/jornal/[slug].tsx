@@ -11,7 +11,7 @@ const Blog = ({ data }) => {
   return (
     <Layout title={data.title}>
       <main className={`grid-in-main`}>
-        <Carousel slides={images} nav close={'/giornale'}>
+        <Carousel slides={images} nav close={'/jornal'}>
           <div>
             <h1
               className={`font-medium sticky z-50 top-0 bg-white py-3 pb-2.5`}

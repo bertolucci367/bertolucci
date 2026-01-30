@@ -6,8 +6,8 @@ const menu = [
   { name: 'Ambientes', url: '/ambientes' },
   { name: 'Sobre', url: '/fabrica' },
   { name: 'Imprensa', url: '/news' },
-  { name: 'Blog', url: '/giornale' },
-  { name: 'Contato', url: '/contact' },
+  { name: 'Blog', url: '/jornal' },
+  { name: 'Contato', url: '/contato' },
 ]
 
 const Menu = () => {

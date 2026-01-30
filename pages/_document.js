@@ -10,6 +10,10 @@ class BertolucciDocument extends Document {
     return (
       <Html lang="pt-br">
         <Head>
+          <link rel="icon" type="image/jpeg" href="/favicon.jpeg" />
+          <link rel="apple-touch-icon" href="/favicon.jpeg" />
+          <meta name="theme-color" content="#000000" />
+          {/* PNG and Apple specific icons can be added when files exist */}
           <script
             type="text/javascript"
             dangerouslySetInnerHTML={{
