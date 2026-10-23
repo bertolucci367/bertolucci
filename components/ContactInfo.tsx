@@ -10,7 +10,7 @@ const ContactInfo = ({ className }) => {
   return (
     <div className={`flex justify-end ${className}`}>
       <div className="flex flex-wrap pb-6 justify-end text-right relative lg:flex-nowrap lg:pb-0">
-        <div className="py-2 lg:flex lg:-mr-10 ">
+        <div className="py-2 lg:flex">
           <a
             href="https://br.pinterest.com/bertolucci1956/"
             className="icon inline-block"
@@ -52,13 +52,6 @@ const ContactInfo = ({ className }) => {
               alt="whatsapp icon"
             />
           </a>
-        </div>
-        <div>
-          {contact.map((value, i) => (
-            <span className={`block`} key={i}>
-              {value}
-            </span>
-          ))}
         </div>
       </div>
     </div>

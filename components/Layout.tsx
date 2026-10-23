@@ -27,7 +27,8 @@ const Layout = ({
       <div
         className="h-full min-h-screen
                    grid grid-areas-slim grid-cols-slim lg:grid-areas-wide lg:grid-cols-wide
-                   grid-rows-slim lg:grid-rows-slim-wide"
+                   grid-rows-slim lg:grid-rows-slim-wide
+                   max-w-layout mx-auto"
       >
         <Header />
 

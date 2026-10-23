@@ -1,4 +1,4 @@
-# Tailwind CSS with Emotion.js example
+# Bertolucci
 
 This is an example of how you can add [tailwind CSS](https://tailwindcss.com/) with [Emotion.js](https://emotion.sh/docs/introduction) in your web app. It takes inspiration from [examples/with-tailwindcss](https://github.com/vercel/next.js/blob/canary/examples/with-tailwindcss/README.md).
 
@@ -10,17 +10,23 @@ Deploy the example using [Vercel](https://vercel.com):
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss-emotion)
 
-## How to use
+## Desenvolvimento
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+Este projeto usa Node.js 24 e pnpm 10. No Windows, instale o Node.js 24 LTS, feche e abra um novo terminal, e habilite o pnpm pelo Corepack:
 
-```bash
-npx create-next-app --example with-tailwindcss-emotion with-tailwindcss-emotion-app
-# or
-yarn create next-app --example with-tailwindcss-emotion with-tailwindcss-emotion-app
+```powershell
+corepack enable
+corepack prepare pnpm@12.4.2 --activate
+pnpm install
+pnpm dev
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/import?filter=next.js&utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Para validar uma compilacao de producao:
+
+```powershell
+pnpm build
+pnpm start
+```
 
 ## Environment setup
 
@@ -32,7 +38,7 @@ This project expects a few environment variables (GraphCMS/Hygraph and email set
 cp .env.example .env.local
 ```
 
-2. Ensure `GRAPHCMS_API` is an absolute URL (starts with `https://`). Next.js automatically loads `.env.local` during `yarn dev` and `yarn build`.
+2. Ensure `GRAPHCMS_API` is an absolute URL (starts with `https://`). Next.js automatically loads `.env.local` during `pnpm dev` and `pnpm build`.
 
 Common variables used in the codebase:
 - `GRAPHCMS_API` (required): GraphCMS/Hygraph Content API endpoint
@@ -64,8 +70,6 @@ Will be transformed into:
 
 Use the following command when you add a tailwind plugin that adds to tailwind's base css:
 
-```bash
-npm run build:base-css
-# or
-yarn run build:base-css
+```powershell
+pnpm run build:base-css
 ```

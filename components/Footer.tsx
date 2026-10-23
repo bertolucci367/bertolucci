@@ -4,10 +4,13 @@ import { LogoFooter } from '~/components/Logo'
 const Footer = () => {
   return (
     <>
-      <div className="hidden grid-in-f1 pb-8 lg:flex justify-center">
+      <div className="hidden grid-in-f1 pb-6 lg:flex justify-center">
         <LogoFooter />
       </div>
-      <div className="bg-white z-50 pb-4 grid-in-f1 lg:bg-transparent lg:flex lg:items-center lg:flex-wrap lg:grid-in-f3 ">
+      <div 
+        data-slot="footer-links"
+        className=" bg-white z-50 py-4 grid-in-f1 lg:bg-transparent lg:flex lg:items-center lg:flex-wrap lg:grid-in-f3 ">
+        
         <div className="lg:text-right w-full">
           <Link href="/newsletter">
             <a className="block">Newsletter</a>

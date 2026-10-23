@@ -8,8 +8,8 @@ const menu = [
   { name: 'Produtos', url: '/produtos', hasSubmenu: true },
   { name: 'Designers', url: '/designers', hasSubmenu: false },
   { name: 'A Fábrica', url: '/fabrica', hasSubmenu: true },
-  { name: 'Jornal', url: '/jornal', hasSubmenu: false },
-  { name: 'Persona', url: '/persona', hasSubmenu: false },
+  // { name: 'Jornal', url: '/jornal', hasSubmenu: false },
+  // { name: 'Persona', url: '/persona', hasSubmenu: false },
   { name: 'Contato', url: '/contato', hasSubmenu: false },
 ]
 

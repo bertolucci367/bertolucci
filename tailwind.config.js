@@ -72,6 +72,7 @@ module.exports = {
       72: '18rem',
       80: '20rem',
       96: '24rem',
+      dvh: '100dvh',
     },
     animation: {
       none: 'none',
@@ -572,12 +573,13 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       prose: '65ch',
+      layout: '1920px',
       ...breakpoints(theme('screens')),
     }),
     minHeight: {
       0: '0px',
       full: '100%',
-      screen: '100vh',
+      screen: '100dvh',
 
       cardD: '270px',
     },
