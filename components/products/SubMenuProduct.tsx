@@ -77,9 +77,10 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
               plus
             />
             <MenuItem
-              name="linhas"
+              name="coleções"
               path="/produtos/linhas"
               plus
+              isLine
               items={data.lines}
             />
           </>

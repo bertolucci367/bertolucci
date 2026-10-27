@@ -12,6 +12,7 @@ interface MenuItemProps {
   items?: any
   isLink?: boolean
   isAll?: boolean
+  isLine?: boolean
 }
 
 export const MenuItem = ({
@@ -21,6 +22,7 @@ export const MenuItem = ({
   plus,
   items,
   isAll,
+  isLine,
 }: MenuItemProps) => {
   const shared = useAppContext()
 
@@ -63,7 +65,7 @@ export const MenuItem = ({
                   : ''
               }
 
-              ${name === 'linhas' ? `${style.linhas}` : ''}
+              ${isLine ? `${style.linhas}` : ''}
             `}
           >
             {items.map(({ slug, name, title, photo }) => (
