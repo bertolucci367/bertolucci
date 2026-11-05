@@ -11,7 +11,8 @@ const slidesMobile = [
 
 const slidesDesktop = [
   { src: '/imgs/home/colecao-70-anos-desktop.jpeg', alt: 'Coleção 70 Anos' },
-  { src: '/imgs/home/colecao-1-desktop.jpeg', alt: 'Coleção 1' },
+  { src: '/imgs/home/colecao-xl-1.jpeg', alt: 'Coleção 1' },
+  { src: '/imgs/home/colecao-xl-2.jpeg', alt: 'Coleção 2' },
 ]
 
 const LOCK_MS = 900

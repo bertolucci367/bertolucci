@@ -31,7 +31,6 @@ function Contact({}) {
               nossas redes sociais. Há muitas coisas a descobrir, conheça mais
               do mundo Bertolucci.
             </p>
-            <ContactForm />
           </div>
 
           <div className="pb-20">
