@@ -3,16 +3,16 @@ import Layout from '~/components/Layout'
 
 // Adicione as novas imagens aqui
 const slidesMobile = [
-  { src: '/imgs/home/colecao-70-anos.jpeg', alt: 'Coleção 70 Anos' },
-  { src: '/imgs/home/colecao-1.jpeg', alt: 'Coleção 1' },
-  { src: '/imgs/home/colecao-2.jpeg', alt: 'Coleção 2' },
-  { src: '/imgs/home/colecao-3.jpeg', alt: 'Coleção 3' },
+  { src: '/imgs/home/cover-mobile.jpeg', alt: 'Coleção 70 Anos' },
+  { src: '/imgs/home/colecao-1-mobile.jpeg', alt: 'Coleção 1' },
+  { src: '/imgs/home/colecao-2-mobile.jpeg', alt: 'Coleção 2' },
+  { src: '/imgs/home/colecao-3-mobile.jpeg', alt: 'Coleção 3' },
 ]
 
 const slidesDesktop = [
-  { src: '/imgs/home/colecao-70-anos-desktop.jpeg', alt: 'Coleção 70 Anos' },
-  { src: '/imgs/home/colecao-xl-1.jpeg', alt: 'Coleção 1' },
-  { src: '/imgs/home/colecao-xl-2.jpeg', alt: 'Coleção 2' },
+  { src: '/imgs/home/cover-desktop.jpeg', alt: 'Coleção 70 Anos' },
+  { src: '/imgs/home/colecao-1-desktop.jpeg', alt: 'Coleção 1' },
+  { src: '/imgs/home/colecao-2-desktop.jpeg', alt: 'Coleção 2' },
 ]
 
 const LOCK_MS = 900
