@@ -47,6 +47,11 @@ textarea,
   width: 100%;
 }
 
+.search-input::placeholder {
+  @apply font-futura font-medium text-14px;
+  color: #212121;
+}
+
 .btn,
 input[type='submit'] {
   @apply inline-block;

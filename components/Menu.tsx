@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { useRouter } from 'next/router'
 import ActiveLink from './Link'
 import SubMenu from './SubMenu'
+import Search from './Search'
 import { useAppContext } from './context/AppContext'
 
 const menu = [
@@ -20,17 +21,22 @@ const Desktop = () => {
       <nav className={`text-18px leading-none mr-8 lg:mr-0`}>
         <ul className={`lg:flex lg:justify-center`}>
           {menu.map((m, i) => (
-            <li key={i}>
-              <ActiveLink
-                href={m.url}
-                activeClassName="border-b border-solid border-black"
-              >
-                <a className="block font-medium tracking-tight mx-4px pb-1 mb-1 hover:cursor-pointer hover:no-underline">
-                  {m.name}
-                </a>
-              </ActiveLink>
-            </li>
+            <Fragment key={i}>
+              <li>
+                <ActiveLink
+                  href={m.url}
+                  activeClassName="border-b border-solid border-black"
+                >
+                  <a className="block font-medium tracking-tight mx-4px pb-1 mb-1 hover:cursor-pointer hover:no-underline">
+                    {m.name}
+                  </a>
+                </ActiveLink>
+              </li>
+            </Fragment>
           ))}
+          <li>
+            <Search />
+          </li>
         </ul>
       </nav>
       <SubMenu active={router.asPath} />
@@ -60,18 +66,30 @@ const Mobile = () => {
       <nav className={`text-18px`}>
         <ul className={`lg:flex lg:justify-around`}>
           {menu.map((m, i) => (
-            <li key={i}>
-              <a
-                data-label="menu link"
-                className={`block font-medium tracking-tight mx-4 pb-1 my-10 lg:my-3 hover:cursor-pointer border-b border-solid`}
-                style={{
-                  borderBottomColor: m.url === current ? 'black' : 'white',
-                }}
-                onClick={e => handleClick(e, m)}
-              >
-                {m.name}
-              </a>
-            </li>
+            <Fragment key={i}>
+              <li>
+                <a
+                  data-label="menu link"
+                  className={`block font-medium tracking-tight mx-4 pb-1 my-10 lg:my-3 hover:cursor-pointer border-b border-solid`}
+                  style={{
+                    borderBottomColor: m.url === current ? 'black' : 'white',
+                  }}
+                  onClick={e => handleClick(e, m)}
+                >
+                  {m.name}
+                </a>
+              </li>
+              {m.name === 'Contato' && (
+                <li>
+                  <Search
+                    mobile
+                    onNavigate={() =>
+                      shared.addData({ menuMobileIsOpen: false })
+                    }
+                  />
+                </li>
+              )}
+            </Fragment>
           ))}
         </ul>
       </nav>
