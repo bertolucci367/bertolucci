@@ -21,42 +21,87 @@ function Contact({}) {
           ></iframe>
         </div>
         <div
-          className={`col-start-1 col-end-4 grid gap-x-32 grid-cols-1 2xl:grid-cols-3`}
+          className="col-start-1 col-end-4 pb-20 2xl:pb-28"
         >
-          <div className="pb-20">
-            <h2 className="mt-0 text-h1">Você quer mais informações?</h2>
-            <p className={`mb-20`}>
-              Caso não tenha encontrado as informações necessárias, não hesite
-              em nos contactar preenchendo o formulário abaixo ou através das
-              nossas redes sociais. Há muitas coisas a descobrir, conheça mais
-              do mundo Bertolucci.
-            </p>
-          </div>
-
-          <div className="pb-20">
-            <p>
-              É profissional? Ficaremos felizes em achar uma solução
-              personalizada ao seu projeto. Agende uma visita
-            </p>
-          </div>
-
-          <div className="pb-20">
-            <h2 className="mt-0 text-h1">Atendimento por whatsapp</h2>
+          <div className="flex flex-col gap-8 px-6 text-18px 2xl:px-20 2xl:text-2xl">
             <a
               href="https://api.whatsapp.com/send?phone=5511945219938"
               target="_blank"
-              className="flex items-center"
+              rel="noopener noreferrer"
+              className="flex items-center gap-5"
             >
-              55 11 9 4521 9938
-              <div className="whatsapp icon ml-5">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center">
                 <Image
                   src="/whatsapp.svg"
                   layout="fixed"
-                  height="18"
-                  width="18"
+                  height="28"
+                  width="28"
                   alt="whatsapp icon"
                 />
               </div>
+              (11) 94521-9938
+            </a>
+
+            <a
+              href="mailto:bertolucci@bertolucci.com.br"
+              className="flex items-center gap-5"
+            >
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center">
+                <Image
+                  src="/email.svg"
+                  layout="fixed"
+                  height="26"
+                  width="26"
+                  alt="email icon"
+                />
+              </div>
+              bertolucci@bertolucci.com.br
+            </a>
+
+            <a
+              href="https://www.instagram.com/bertolucci.oficial/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-5"
+            >
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center">
+                <Image
+                  src="/instagram.svg"
+                  layout="fixed"
+                  height="28"
+                  width="28"
+                  alt="instagram icon"
+                />
+              </div>
+              @bertolucci.oficial
+            </a>
+
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Rua+Esp%C3%A1rtaco+367+Lapa+S%C3%A3o+Paulo+SP"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-5"
+            >
+              <svg
+                className="h-8 w-8 shrink-0"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M16 3C10.477 3 6 7.477 6 13c0 7.5 10 16 10 16s10-8.5 10-16c0-5.523-4.477-10-10-10Zm0 13.5A3.5 3.5 0 1 1 16 9a3.5 3.5 0 0 1 0 7.5Z"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                />
+                <path
+                  d="M10 27.5c1.8-1.1 3.8-1.6 6-1.6s4.2.5 6 1.6"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                />
+              </svg>
+              Rua Espártaco, 367, Lapa - São Paulo - SP
             </a>
           </div>
         </div>
