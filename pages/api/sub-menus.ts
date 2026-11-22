@@ -11,7 +11,7 @@ export default async (req, res) => {
             slug
             name
           }
-          materials(orderBy: name_ASC) {
+          materials(where: {NOT: {slug: "null"}}, orderBy: name_ASC) {
             name
             slug
           }

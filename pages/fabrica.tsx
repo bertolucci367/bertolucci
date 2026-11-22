@@ -47,7 +47,7 @@ const About = () => {
   }
 
   return (
-    <Layout title="a fábrica">
+    <Layout title="fábrica">
       <div className={`grid-in-main`}>
         <div className={`relative`}>
           <div id="historia" className={`-top-36 absolute left-0`}></div>

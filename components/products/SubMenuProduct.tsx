@@ -47,12 +47,6 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
               items={data.typologies}
               plus
             />
-            <MenuItem
-              name="materiais"
-              path="/produtos/materiais"
-              items={data.materials}
-              plus
-            />
           </>
         )}
       </ul>

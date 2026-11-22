@@ -8,10 +8,11 @@ import { useAppContext } from './context/AppContext'
 const menu = [
   { name: 'Produtos', url: '/produtos', hasSubmenu: true },
   { name: 'Designers', url: '/designers', hasSubmenu: false },
-  { name: 'A Fábrica', url: '/fabrica', hasSubmenu: true },
+  { name: 'Fábrica', url: '/fabrica', hasSubmenu: true },
   // { name: 'Jornal', url: '/jornal', hasSubmenu: false },
   // { name: 'Persona', url: '/persona', hasSubmenu: false },
   { name: 'Coleções', url: '/colecoes', hasSubmenu: false },
+  { name: 'Materiais', url: '/materias', hasSubmenu: false },
   { name: 'Contato', url: '/contato', hasSubmenu: false },
 ]
 
