@@ -53,13 +53,6 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
               items={data.materials}
               plus
             />
-            <MenuItem
-              name="coleções"
-              path="/produtos/linhas"
-              plus
-              isLine
-              items={data.lines}
-            />
           </>
         )}
       </ul>

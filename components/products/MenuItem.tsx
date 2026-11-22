@@ -27,7 +27,10 @@ export const MenuItem = ({
   const shared = useAppContext()
 
   const handleSubLink = () => {
-    shared.addData({ menuMobileIsOpen: false })
+    shared.addData({
+      menuMobileIsOpen: false,
+      returnToCollections: false,
+    })
   }
 
   const isOpenMenu = (name: string) => {

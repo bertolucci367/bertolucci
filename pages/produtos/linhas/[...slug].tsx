@@ -10,8 +10,8 @@ const Lines = ({ data }) => {
 
   useEffect(() => {
     shared.addData({
-      goToLines: true,
-      productClosePath: `/produtos`,
+      goToLines: !shared.returnToCollections,
+      productClosePath: shared.returnToCollections ? '/colecoes' : '/produtos',
     })
   }, [])
 
@@ -27,7 +27,7 @@ const Lines = ({ data }) => {
             show
             useProductCode
             close={{
-              pathname: '/produtos',
+              pathname: shared.returnToCollections ? '/colecoes' : '/produtos',
             }}
           />
         </>

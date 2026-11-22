@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from 'react'
 const sharedState = {
   goToLines: true,
   productClosePath: '/produtos',
+  returnToCollections: false,
   compare: [],
   menuOpen: '',
   menuIsOpen: false,
