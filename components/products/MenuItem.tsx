@@ -13,6 +13,8 @@ interface MenuItemProps {
   isLink?: boolean
   isAll?: boolean
   isLine?: boolean
+  thumbSlug?: string
+  isActive?: boolean
 }
 
 export const MenuItem = ({
@@ -23,6 +25,8 @@ export const MenuItem = ({
   items,
   isAll,
   isLine,
+  thumbSlug,
+  isActive,
 }: MenuItemProps) => {
   const shared = useAppContext()
 
@@ -38,13 +42,19 @@ export const MenuItem = ({
   }
 
   return (
-    <li className={`mx-2 my-10 lg:my-0 ${isAll ? 'lg:hidden' : ''}`}>
+    <li
+      className={`${
+        thumbSlug ? 'my-5 lg:my-0' : 'mx-2 my-10 lg:my-0'
+      } ${isAll ? 'lg:hidden' : ''}`}
+    >
       {name && (
         <MenuLink
           isOpen={isOpenMenu(name)}
           name={name}
           plus={plus}
           path={path}
+          thumbSlug={thumbSlug}
+          isActive={isActive}
         />
       )}
       {items && (
@@ -111,12 +121,15 @@ export const MenuItem = ({
   )
 }
 
-const MenuLink = ({ isOpen, name, plus, path }) => {
+const MenuLink = ({ isOpen, name, plus, path, thumbSlug, isActive }) => {
   const shared = useAppContext()
 
   const handleToggle = (e: React.MouseEvent, name: string, plus) => {
     if (!plus) {
-      shared.addData({ menuMobileIsOpen: false })
+      shared.addData({
+        menuMobileIsOpen: false,
+        ...(thumbSlug ? { returnToCollections: false } : {}),
+      })
       return
     }
 
@@ -128,12 +141,18 @@ const MenuLink = ({ isOpen, name, plus, path }) => {
   return (
     <a
       className={`
-      inline-block text-12px hover:cursor-pointer hover:font-medium hover:no-underline
-      lg:mt-4px
-      ${isOpen ? 'font-medium' : ''}`}
+      ${
+        thumbSlug
+          ? 'flex text-12px lg:px-5 leading-tight'
+          : 'inline-block text-12px hover:cursor-pointer hover:font-medium hover:no-underline lg:mt-4px'
+      }
+      ${isOpen ? 'font-medium' : ''}
+      ${isActive ? 'underline' : ''}`}
       onClick={e => handleToggle(e, name, plus)}
       href={path}
+      aria-current={isActive ? 'page' : undefined}
     >
+      {thumbSlug && <MenuItemThumb slug={thumbSlug} />}
       {name}
       {plus && isOpen && <span>-</span>}
       {plus && !isOpen && <span>+</span>}

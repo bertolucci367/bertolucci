@@ -31,7 +31,7 @@ const Colecoes = ({ lines }) => {
                 <li key={line.slug} className="my-1">
                   <Link href={`/produtos/linhas/${line.slug}`} prefetch={false}>
                     <a
-                      className="block text-14px font-medium"
+                      className="block text-14px font-medium lowercase"
                       onClick={handleCollectionClick}
                     >
                       {line.name}

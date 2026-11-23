@@ -1,4 +1,5 @@
 import useSWR from 'swr'
+import { useRouter } from 'next/router'
 import fetcher from '~/components/libs/fetcher'
 import { useAppContext } from '~/components/context/AppContext'
 
@@ -10,13 +11,11 @@ interface SubMenuProductProps {
 }
 
 interface DataProps {
-  typologies: []
-  materials: []
-  designers: []
-  lines: []
+  typologies: { name: string; slug: string }[]
 }
 
 const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
+  const router = useRouter()
   const shared = useAppContext()
   const { data, error } = useSWR<DataProps>(`/api/sub-menus`, fetcher)
 
@@ -41,12 +40,19 @@ const SubMenuProduct = ({ search = '' }: SubMenuProductProps) => {
         {data && (
           <>
             <MenuItem name="todos" path="/produtos" isAll />
-            <MenuItem
-              name="tipologia"
-              path="/produtos/tipologias"
-              items={data.typologies}
-              plus
-            />
+            {data.typologies.map(({ name, slug }) => {
+              const path = `/produtos/tipologias/${slug}`
+
+              return (
+                <MenuItem
+                  key={slug}
+                  name={name}
+                  path={path}
+                  thumbSlug={slug}
+                  isActive={router.asPath.split('?')[0] === path}
+                />
+              )
+            })}
           </>
         )}
       </ul>
