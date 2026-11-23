@@ -2,7 +2,12 @@ import { GraphQLClient } from 'graphql-request'
 
 const MaterialsIndex = () => null
 
-export async function getStaticProps() {
+export async function getServerSideProps({ res }) {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=86400, stale-while-revalidate=86400',
+  )
+
   const gcms = new GraphQLClient(process.env.GRAPHCMS_API)
   const { values } = await gcms.request(`
     query FirstMaterial {
@@ -25,7 +30,6 @@ export async function getStaticProps() {
       destination: `/produtos/materiais/${values[0].slug}`,
       permanent: false,
     },
-    revalidate: 86400,
   }
 }
 
