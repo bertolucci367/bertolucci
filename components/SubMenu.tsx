@@ -1,6 +1,5 @@
 import SubMenuProduct from '~/components/products/SubMenuProduct'
 import SubMenuMaterials from '~/components/SubMenuMaterials'
-import SubMenuAbout from '~/components/SubMenuAbout'
 
 const SubMenu = ({ active }) => {
   const isMaterialsPage =
@@ -15,7 +14,6 @@ const SubMenu = ({ active }) => {
     <div className={`flex max-h-full overflow-y-auto w-full lg:justify-center`}>
       {isMaterialsPage && <SubMenuMaterials />}
       {shouldShowProductSubMenu && <SubMenuProduct />}
-      {/^\/fabrica/.test(active) && <SubMenuAbout />}
     </div>
   )
 }

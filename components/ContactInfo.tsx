@@ -26,7 +26,7 @@ const ContactInfo = ({ className }) => {
             />
           </a>
           <a
-            href="https://instagram.com/bertolucci.iluminacao/"
+            href="https://instagram.com/bertolucci.oficial/"
             className="instagram icon inline-block ml-6"
             target="_blank"
             rel="noopener"
