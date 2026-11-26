@@ -52,6 +52,10 @@ textarea,
   color: #212121;
 }
 
+.search-input::-webkit-search-cancel-button {
+  filter: grayscale(1) brightness(0.80);
+}
+
 .btn,
 input[type='submit'] {
   @apply inline-block;
