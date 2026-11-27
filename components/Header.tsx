@@ -20,13 +20,13 @@ const Header = () => {
     <>
       <div
         data-slot="header-logo-wrap"
-        className={`grid-in-h1 ${wrapStyle} flex-start ${stickStyle}`}
+        className={`grid-in-h1 pl-10px ${wrapStyle} flex-start ${stickStyle}`}
       >
         <Logo />
       </div>
 
       <div
-        className={`grid-in-h3 lg:hidden ${wrapStyle} justify-end ${stickStyle}`}
+        className={`grid-in-h3 pr-10px lg:hidden ${wrapStyle} justify-end ${stickStyle}`}
         data-slot="menu button"
       >
         <MenuButton>
@@ -59,7 +59,7 @@ const Header = () => {
       </div>
 
       <ContactInfo
-        className={`pt-4 grid-in-f2 lg:grid-in-h3 lg:pt-[18px] ${stickStyle}`}
+        className={`pt-4 pr-10px grid-in-f2 lg:grid-in-h3 lg:pt-[18px] ${stickStyle}`}
       />
 
       <header

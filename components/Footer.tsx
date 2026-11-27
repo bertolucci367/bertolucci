@@ -4,7 +4,7 @@ import { LogoFooter } from '~/components/Logo'
 const Footer = () => {
   return (
     <>
-      <div className="hidden grid-in-f1 pb-6 lg:flex justify-center">
+      <div className="hidden grid-in-f1 py-6 lg:flex justify-center">
         <LogoFooter />
       </div>
       <div 

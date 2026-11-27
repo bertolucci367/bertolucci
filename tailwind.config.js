@@ -35,6 +35,7 @@ module.exports = {
       '2px': '2px',
       '4px': '4px',
       '8px': '8px',
+      '10px': '10px',
       logoFooter: '130px',
 
       px: '1px',
@@ -387,8 +388,8 @@ module.exports = {
       7: '7',
     },
     gridTemplateAreas: {
-      slim: ['. h1 h2 h3 .', '. main main main .', '. l l l .', '. f1 f2 f2 .'],
-      wide: ['. h1 h2 h3 .', '. l main r .', '. f1 f2 f3 .'],
+      slim: ['h1 h1 h2 h3 h3', '. main main main .', '. l l l .', '. f1 f2 f2 .'],
+      wide: ['h1 h1 h2 h3 h3', '. l main r .', '. f1 f2 f3 .'],
     },
     gridTemplateColumns: {
       none: 'none',
